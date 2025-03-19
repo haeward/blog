@@ -1,0 +1,26 @@
+---
+import Container from "@components/Container.astro";
+import { SITE } from "@consts";
+import BackToTop from "@components/BackToTop.astro";
+---
+
+<footer class="animate">
+  <Container>
+    <div class="relative">
+      <div class="absolute right-0 -top-20">
+        <BackToTop />
+      </div>
+    </div>
+    <div class="flex justify-between items-center">
+      <div>
+        &copy; 2024 ~ {new Date().getFullYear()}
+        {`|`}
+        <a href="/">{SITE.NAME}</a>
+      </div>
+      <div>
+        Power by 
+        <a href="https://astro.build/">Astro</a>
+      </div>
+    </div>
+  </Container>
+</footer>

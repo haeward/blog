@@ -1,0 +1,99 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { readingTime, wordCount } from "@lib/utils";
+import BackToPrev from "@components/BackToPrev.astro";
+import Twikoo from "@components/Twikoo.astro";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog"))
+    .filter(post => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  
+  return posts.map((post, index) => ({
+    params: { slug: post.slug },
+    props: {
+      post,
+      next: index < posts.length - 1 ? posts[index + 1] : null,
+      prev: index > 0 ? posts[index - 1] : null
+    },
+  }));
+}
+
+type Props = {
+  post: CollectionEntry<"blog">;
+  prev: CollectionEntry<"blog"> | null;
+  next: CollectionEntry<"blog"> | null;
+};
+
+const { post, prev, next } = Astro.props;
+const { Content } = await post.render();
+---
+
+<PageLayout title={post.data.title} description={post.data.description}>
+  <Container>
+    <div class="animate">
+      <BackToPrev href="/blog">
+        Back to blog
+      </BackToPrev>
+    </div>
+
+    <div class="space-y-1 my-10">
+      <div class="animate text-2xl font-semibold text-black dark:text-white">
+        {post.data.title}
+      </div>
+      <div class="animate flex items-center gap-1.5">
+        <div class="font-base text-sm">
+          <FormattedDate date={post.data.date} />
+        </div>
+        &bull;
+        <div class="font-base text-sm">
+          {wordCount(post.body)}
+        </div>
+        &bull;
+        <div class="font-base text-sm">
+          {readingTime(post.body)}
+        </div>
+      </div>
+    </div>
+
+    <article class="animate">
+      <Content />
+    </article>
+
+    <div class="animate mt-12 mb-16 flex justify-between">
+      {prev ? (
+        <a href={`/blog/${prev.slug}`} class="group flex items-center gap-1 px-4 py-2 rounded-lg transition-colors duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-1 transition-transform duration-300">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+          <div>
+            <div class="text-sm truncate max-w-[150px]">{prev.data.title}</div>
+          </div>
+        </a>
+      ) : (
+        <div></div>
+      )}
+      {next ? (
+        <a href={`/blog/${next.slug}`} class="group flex items-center gap-1 px-4 py-2 rounded-lg transition-colors duration-300">
+          <div class="text-right">
+            <div class="text-sm truncate max-w-[150px]">{next.data.title}</div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform duration-300">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </a>
+      ) : (
+        <div></div>
+      )}
+    </div>
+
+    <div class="animate mt-16">
+      <div class="bg-stone-100/45 dark:bg-stone-900/65 p-6 rounded-lg border border-black/10 dark:border-white/10">
+        <Twikoo />
+      </div>
+    </div>
+  </Container>
+</PageLayout>
