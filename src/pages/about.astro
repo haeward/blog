@@ -1,22 +1,18 @@
 ---
-import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import { ABOUT } from "@consts";
-
-const aboutEntries = await getCollection("about");
-const aboutEntry = aboutEntries.find(entry => entry.id === "about.md") || aboutEntries[0];
-const { Content } = await aboutEntry.render();
+import { Content as AboutContent } from "../content/about.md";
 ---
 
 <PageLayout title={ABOUT.TITLE} description={ABOUT.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
       <h1 class="animate font-semibold text-xl text-black dark:text-white">
-        {aboutEntry.data.title}
+        {ABOUT.TITLE}
       </h1>
       <article class="animate prose dark:prose-invert">
-        <Content />
+        <AboutContent />
       </article>
     </div>
   </Container>
