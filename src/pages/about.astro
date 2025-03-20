@@ -1,11 +1,11 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
-import { ABOUT } from "@consts";
+import { SITE, ABOUT } from "@consts";
 import { Content as AboutContent } from "../content/about.md";
 ---
 
-<PageLayout title={ABOUT.TITLE} description={ABOUT.DESCRIPTION}>
+<PageLayout title={`${ABOUT.TITLE} | ${SITE.NAME}`} description={ABOUT.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
       <h1 class="animate font-semibold text-xl text-black dark:text-white">

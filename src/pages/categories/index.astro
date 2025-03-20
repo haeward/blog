@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
-import { CATEGORIES } from "@consts";
+import { CATEGORIES, SITE } from "@consts";
 import ArrowCard from "@components/ArrowCard.astro";
 
 const posts = await getCollection("blog");
@@ -37,7 +37,7 @@ const categories = nonDraftPosts.reduce((acc: CategoryMap, post) => {
 const sortedCategories = Object.keys(categories).sort();
 ---
 
-<PageLayout title={CATEGORIES.TITLE} description={CATEGORIES.DESCRIPTION}>
+<PageLayout title={`${CATEGORIES.TITLE} | ${SITE.NAME}`} description={CATEGORIES.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
       <h1 class="animate font-semibold text-xl text-black dark:text-white">

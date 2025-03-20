@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard.astro";
+import { SITE } from "@consts";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -31,7 +32,7 @@ const { posts, tag } = Astro.props;
 const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<PageLayout title={`Tag: ${tag}`} description={`Articles under The tag ${tag}`}>
+<PageLayout title={`Tag: ${tag} | ${SITE.NAME}`} description={`Articles under The tag ${tag}`}>
   <Container>
     <div class="space-y-10">
       <h1 class="animate font-semibold text-xl text-black dark:text-white">

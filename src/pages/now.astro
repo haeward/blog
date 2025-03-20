@@ -1,11 +1,11 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
-import { NOW } from "@consts";
+import { SITE, NOW } from "@consts";
 import { Content as NowContent } from "../content/now.md";
 ---
 
-<PageLayout title={NOW.TITLE} description={NOW.DESCRIPTION}>
+<PageLayout title={`${NOW.TITLE} | ${SITE.NAME}`} description={NOW.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
       <h1 class="animate font-semibold text-xl text-black dark:text-white">
