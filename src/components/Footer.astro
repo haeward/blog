@@ -12,14 +12,18 @@ import BackToTop from "@components/BackToTop.astro";
       </div>
     </div>
     <div class="flex justify-between items-center">
-      <div>
+      <div class="animate dark:prose-invert">
         &copy; 2024 ~ {new Date().getFullYear()}
         {`|`}
         <a href="/">{SITE.NAME}</a>
       </div>
       <div>
-        Power by 
-        <a href="https://astro.build/">Astro</a>
+        <div class="animate dark:prose-invert">
+          Power by 
+          <a href="https://astro.build/">Astro</a>
+          &
+          <a href="https://github.com/markhorn-dev/astro-nano">Astro Nano</a>
+        </div>
       </div>
     </div>
   </Container>
