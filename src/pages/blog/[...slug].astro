@@ -6,6 +6,7 @@ import FormattedDate from "@components/FormattedDate.astro";
 import { readingTime, wordCount } from "@lib/utils";
 import BackToPrev from "@components/BackToPrev.astro";
 import Twikoo from "@components/Twikoo.astro";
+import { SITE } from "@consts";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog"))
@@ -32,7 +33,7 @@ const { post, prev, next } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<PageLayout title={post.data.title} description={post.data.description}>
+<PageLayout title={`post.data.title | ${SITE.NAME}`} description={post.data.description}>
   <Container>
     <div class="animate">
       <BackToPrev href="/blog">

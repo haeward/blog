@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
-import { TAGS } from "@consts";
+import { SITE, TAGS } from "@consts";
 
 const posts = await getCollection("blog");
 const nonDraftPosts = posts.filter(post => !post.data.draft);
@@ -36,7 +36,7 @@ function calculateFontSize(count: number): number {
 }
 ---
 
-<PageLayout title={TAGS.TITLE} description={TAGS.DESCRIPTION}>
+<PageLayout title={`${TAGS.TITLE} | ${SITE.NAME}`} description={TAGS.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
       <h1 class="animate font-semibold text-xl text-black dark:text-white">
