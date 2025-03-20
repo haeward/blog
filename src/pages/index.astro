@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from 'astro:assets';
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard.astro";
@@ -19,8 +20,22 @@ const blog = (await getCollection("blog"))
       <section>
         <div class="flex justify-center items-center mb-4">
           <div class="relative w-48 h-48">
-            <img src="/programmer-light.svg" class="w-full h-full animate light-only absolute top-0 left-0" />
-            <img src="/programmer-dark.svg" class="w-full h-full animate dark-only hidden absolute top-0 left-0" />
+            <Image
+              src="/programmer-light.svg"
+              alt="programmer"
+              class="w-full h-full animate light-only absolute top-0 left-0"
+              width={192}
+              height={192}
+              loading="eager"
+            />
+            <Image
+              src="/programmer-dark.svg"
+              alt="programmer"
+              class="w-full h-full animate dark-only hidden absolute top-0 left-0"
+              width={192}
+              height={192}
+              loading="eager"
+            />
           </div>
         </div>
         <div class="flex justify-center gap-4 mb-4">
@@ -33,10 +48,13 @@ const blog = (await getCollection("blog"))
               aria-label={social.NAME}
               title={social.NAME}
             >
-              <img 
+              <Image 
                 src={social.ICON}
                 alt={social.NAME}
                 class="w-6 h-6"
+                width={24}
+                height={24}
+                loading="eager"
               />
             </a>
           ))}

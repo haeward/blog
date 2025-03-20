@@ -1,0 +1,51 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import ArrowCard from "@components/ArrowCard.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  const nonDraftPosts = posts.filter(post => !post.data.draft);
+
+  const tags = new Set();
+  nonDraftPosts.forEach(post => {
+    if (post.data.tags && Array.isArray(post.data.tags)) {
+      post.data.tags.forEach(tag => tags.add(tag));
+    }
+  });
+
+  return Array.from(tags).map(tag => {
+    const filteredPosts = nonDraftPosts.filter(post => 
+      post.data.tags && Array.isArray(post.data.tags) && post.data.tags.includes(tag as string)
+    );
+    
+    return {
+      params: { tag },
+      props: { posts: filteredPosts, tag },
+    };
+  });
+}
+
+const { posts, tag } = Astro.props;
+const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<PageLayout title={`Tag: ${tag}`} description={`Articles under The tag ${tag}`}>
+  <Container>
+    <div class="space-y-10">
+      <h1 class="animate font-semibold text-xl text-black dark:text-white">
+        Tag: {tag}
+      </h1>
+      <div>
+        <ul class="flex flex-col gap-4">
+          {sortedPosts.map((post) => (
+            <li>
+              <ArrowCard entry={post}/>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </Container>
+</PageLayout>
