@@ -16,7 +16,7 @@ const envId = import.meta.env.PUBLIC_TWIKOO_ENV_ID;
 
 <div id="tcomment"></div>
 
-<script define:vars={{ envId, el, defaultLanguage, path }}>
+<script is:inline define:vars={{ envId, el, defaultLanguage, path }}>
   let twikooLoaded = false;
 
   function loadTwikoo() {
