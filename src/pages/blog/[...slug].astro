@@ -33,7 +33,7 @@ const { post, prev, next } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<PageLayout title={`post.data.title | ${SITE.NAME}`} description={post.data.description}>
+<PageLayout title={`${post.data.title} | ${SITE.NAME}`} description={post.data.description}>
   <Container>
     <div class="animate">
       <BackToPrev href="/blog">
@@ -42,20 +42,55 @@ const { Content } = await post.render();
     </div>
 
     <div class="space-y-2 my-10">
-      <div class="animate text-2xl font-semibold text-black dark:text-white">
+      <div class="animate text-3xl font-semibold text-black dark:text-white">
         {post.data.title}
       </div>
-      <div class="animate flex items-center gap-1.5">
-        <div class="font-base text-sm">
+
+      <div class="animate flex items-center gap-2 text-sm bg-stone-900 dark:bg-stone-900 text-stone-300 dark:text-stone-300 py-1 px-2 rounded">
+        <div class="flex items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
           <FormattedDate date={post.data.date} />
         </div>
-        &bull;
-        <div class="font-base text-sm">
-          {wordCount(post.body)}
+        
+        <span>|</span>
+        
+        {post.data.category && (
+          <div class="flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"></path>
+            </svg>
+            <a href={`/categories/${post.data.category}`} class="hover:text-white transition-colors">
+              {post.data.category}
+            </a>
+          </div>
+        )}
+        
+        <span>|</span>
+        
+        <div class="flex items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <line x1="10" y1="9" x2="8" y2="9"></line>
+          </svg>
+          <span>{wordCount(post.body)}</span>
         </div>
-        &bull;
-        <div class="font-base text-sm">
-          {readingTime(post.body)}
+        
+        <span>|</span>
+        
+        <div class="flex items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>{readingTime(post.body)}</span>
         </div>
       </div>
     </div>
@@ -63,6 +98,20 @@ const { Content } = await post.render();
     <article class="animate">
       <Content />
     </article>
+
+    <div class="animate flex flex-wrap gap-1 mt-6">
+      {post.data.tags && post.data.tags.length > 0 && (
+        post.data.tags.map((tag: string) => (
+          <a href={`/tag/${tag.toLowerCase()}`} class="inline-flex items-center gap-1 px-3 py-1 text-white-200 dark:text-white-200 rounded-md transition-colors hover:text-black dark:hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+              <line x1="7" y1="7" x2="7.01" y2="7"></line>
+            </svg>
+            {tag}
+          </a>
+        ))
+      )}
+    </div>
 
     <div class="animate mt-12 mb-16 flex justify-between">
       {prev ? (
@@ -93,7 +142,7 @@ const { Content } = await post.render();
 
     <div class="animate mt-16">
       <div class="bg-stone-100/45 dark:bg-stone-900/65 p-6 rounded-lg border border-black/10 dark:border-white/10">
-        <Twikoo />
+        <Twikoo path={Astro.url.pathname} />
       </div>
     </div>
   </Container>
