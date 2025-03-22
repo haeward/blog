@@ -20,7 +20,7 @@ body {
   @apply font-sans antialiased;
   @apply flex flex-col;
   @apply bg-stone-100 dark:bg-stone-900;
-  @apply text-black/50 dark:text-white/75;
+  @apply text-black/75 dark:text-white/75;
 }
 
 header {
@@ -40,12 +40,13 @@ footer {
 article {
   @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
   @apply prose-headings:font-semibold prose-p:font-serif;
-  @apply prose-headings:text-black prose-headings:dark:text-white;
+  @apply prose-headings:text-black/75 prose-headings:dark:text-white/80;
 }
 
 @layer utilities {
   article a {
-    @apply font-sans text-current underline underline-offset-2;
+    @apply font-sans underline underline-offset-2;
+    @apply text-black/75 dark:text-white/80;
     @apply decoration-black/15 dark:decoration-white/30;
     @apply transition-colors duration-300 ease-in-out;
   }

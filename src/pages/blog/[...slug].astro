@@ -7,6 +7,7 @@ import { readingTime, wordCount } from "@lib/utils";
 import BackToPrev from "@components/BackToPrev.astro";
 import Twikoo from "@components/Twikoo.astro";
 import { SITE } from "@consts";
+import RelatedPosts from "@components/RelatedPosts.astro";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog"))
@@ -31,6 +32,8 @@ type Props = {
 
 const { post, prev, next } = Astro.props;
 const { Content } = await post.render();
+const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+
 ---
 
 <PageLayout title={`${post.data.title} | ${SITE.NAME}`} description={post.data.description}>
@@ -56,9 +59,7 @@ const { Content } = await post.render();
           </svg>
           <FormattedDate date={post.data.date} />
         </div>
-        
         <span>|</span>
-        
         {post.data.category && (
           <div class="flex items-center gap-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -69,9 +70,7 @@ const { Content } = await post.render();
             </a>
           </div>
         )}
-        
         <span>|</span>
-        
         <div class="flex items-center gap-1">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -82,9 +81,7 @@ const { Content } = await post.render();
           </svg>
           <span>{wordCount(post.body)}</span>
         </div>
-        
         <span>|</span>
-        
         <div class="flex items-center gap-1">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
@@ -113,7 +110,10 @@ const { Content } = await post.render();
       )}
     </div>
 
-    <div class="animate mt-12 mb-16 flex justify-between">
+    <hr class="animate mt-8 mb-4 border-black/10 dark:border-white/10" />
+    <RelatedPosts currentPost={post} allPosts={allPosts} maxPosts={3} />
+
+    <div class="animate mt-12 mb-8 flex justify-between">
       {prev ? (
         <a href={`/blog/${prev.slug}`} class="group flex items-center gap-1 px-4 py-2 rounded-lg transition-colors duration-300">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-1 transition-transform duration-300">
@@ -140,7 +140,7 @@ const { Content } = await post.render();
       )}
     </div>
 
-    <div class="animate mt-16">
+    <div class="animate mt-12">
       <div class="bg-stone-100/45 dark:bg-stone-900/65 p-6 rounded-lg border border-black/10 dark:border-white/10">
         <Twikoo path={Astro.url.pathname} />
       </div>
