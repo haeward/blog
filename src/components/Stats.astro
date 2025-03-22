@@ -1,0 +1,67 @@
+---
+import { getCollection } from "astro:content";
+import Heatmap from "@components/ui/Heatmap.jsx";
+
+// Get all blog posts that aren't drafts
+const allPosts = (await getCollection("blog")).filter(post => !post.data.draft);
+
+function formatDate(dateObject: Date) {
+  const year = dateObject.getFullYear();
+  const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+  const day = dateObject.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function countWords(text: string): number {
+  return text.split(/\s+/).length;
+}
+
+const postsByDate: Record<string, Array<{title: string, wordCount: number, slug: string}>> = {};
+allPosts.forEach(post => {
+  const dateStr = formatDate(post.data.date);
+  const words = countWords(post.body);
+  
+  if (!postsByDate[dateStr]) {
+    postsByDate[dateStr] = [];
+  }
+  
+  postsByDate[dateStr].push({
+    title: post.data.title,
+    wordCount: words,
+    slug: post.slug
+  });
+});
+
+const values = Object.entries(postsByDate).map(([date, posts]) => {
+  const topPost = [...posts].sort((a, b) => b.wordCount - a.wordCount)[0];
+  
+  return {
+    date,
+    count: topPost.wordCount,
+    title: topPost.title,
+    slug: topPost.slug
+  };
+});
+
+// Calculate date range
+const endDate = new Date();
+const startDate = new Date(endDate.getFullYear() - 1, endDate.getMonth(), endDate.getDate());
+
+// Count total posts
+const totalPosts = allPosts.length;
+
+const totalWords = allPosts.reduce((acc, post) => acc + countWords(post.body), 0);
+---
+
+<Heatmap 
+  client:load
+  startDate={startDate}
+  endDate={endDate}
+  values={values}
+  totalPosts={totalPosts}
+  totalWords={totalWords}
+/>
+
+<style is:global>
+  @import "../styles/heatmap.css";
+</style>
