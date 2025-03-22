@@ -3,6 +3,7 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard.astro";
+import Stats from "@components/Stats.astro";
 import { BLOG, SITE } from "@consts";
 
 const data = (await getCollection("blog"))
@@ -28,9 +29,10 @@ const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
 <PageLayout title={`${BLOG.TITLE} | ${SITE.NAME}`} description={BLOG.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
-      <h1 class="animate font-semibold text-xl text-black dark:text-white">
-        Blog
-      </h1>
+      <section class="animate">
+        <Stats />
+      </section>
+
       <div class="space-y-4">
         {years.map(year => (
           <section class="animate space-y-4">

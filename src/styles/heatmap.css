@@ -1,0 +1,103 @@
+.blog-stats {
+  margin: 1rem 0;
+}
+
+.heatmap-container {
+  margin: 0.5rem 0;
+  overflow: hidden;
+}
+
+.react-calendar-heatmap {
+  width: 100%;
+  height: auto;
+  margin-bottom: -20px;
+}
+
+.react-calendar-heatmap rect {
+  transition: fill 0.2s ease;
+}
+
+.react-calendar-heatmap rect:hover {
+  stroke: var(--color-hover-border);
+  stroke-width: 1px;
+}
+
+.react-calendar-heatmap .color-empty {
+  fill: var(--color-empty);
+}
+
+.react-calendar-heatmap .color-scale-1 {
+  fill: var(--color-scale-1);
+}
+
+.react-calendar-heatmap .color-scale-2 {
+  fill: var(--color-scale-2);
+}
+
+.react-calendar-heatmap .color-scale-3 {
+  fill: var(--color-scale-3);
+}
+
+.react-calendar-heatmap .color-scale-4 {
+  fill: var(--color-scale-4);
+}
+
+/* Month labels */
+.react-calendar-heatmap .react-calendar-heatmap-month-labels {
+  font-size: 0.75rem;
+  transform: translateY(-2px);
+}
+
+.react-calendar-heatmap .react-calendar-heatmap-weekday-labels {
+  font-size: 0.75rem;
+}
+
+.react-calendar-heatmap text {
+  fill: var(--text-color);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.custom-tooltip {
+  z-index: 1000 !important;
+  opacity: 1 !important;
+}
+
+:root {
+  --color-empty: #EBEDF0;
+  --color-scale-1: #9BE9A8;
+  --color-scale-2: #40C463;
+  --color-scale-3: #30A14E;
+  --color-scale-4: #216E39;
+  --color-hover-border: #1A7f37;
+
+  --text-color: #34373B;
+
+  --tooltip-bg: #ffffff;
+  --tooltip-text: #333333;
+  --tooltip-border: #dddddd;
+  --tooltip-title: #3182ce;
+  --tooltip-count: #38a169;
+}
+
+.dark {
+  --color-empty: #2F3032;
+  --color-scale-1: #0E442A;
+  --color-scale-2: #006D32;
+  --color-scale-3: #26A641;
+  --color-scale-4: #39D353;
+  --color-hover-border: #56D364;
+
+  --text-color: #D1D7E0;
+
+  --tooltip-bg: #2d3748;
+  --tooltip-text: #e2e8f0;
+  --tooltip-border: #4a5568;
+  --tooltip-title: #63b3ed;
+  --tooltip-count: #68d391;
+}
+
+/* Stats summary */
+.stats-summary {
+  text-align: center;
+  font-size: 0.75rem;
+}
