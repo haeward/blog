@@ -10,7 +10,7 @@ interface Props {
 let { 
   id,
   type = "track",
-  theme = "0",
+  theme = "1",
   width = "100%",
   height = "152"
 } = Astro.props;
@@ -48,8 +48,9 @@ const src = `https://open.spotify.com/embed/${type}/${spotifyId}?utm_source=gene
 
 <style>
   .spotify-embed {
-    position: relative;
-    width: 100%;
-    margin: 1.5rem 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
   }
 </style>
