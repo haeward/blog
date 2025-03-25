@@ -2,15 +2,11 @@
 interface Props {
   id: string;
   page?: string;
-  width?: string;
-  height?: string;
 }
 
 const { 
   id,
   page = "1",
-  width = "100%",
-  height = "455"
 } = Astro.props;
 
 let src = "//player.bilibili.com/player.html?";
@@ -27,25 +23,43 @@ src += `bvid=${bvid}&page=${page}&danmaku=0&autoplay=0`;
 ---
 
 <div class="bilibili-embed">
-  <iframe 
-    src={src}
-    width={width}
-    height={height}
-    scrolling="no"
-    frameborder="no"
-    allowfullscreen="true"
-    loading="lazy"
-  ></iframe>
+  <div class="bilibili-container">
+    <iframe 
+      src={src}
+      scrolling="no"
+      frameborder="no"
+      allowfullscreen="true"
+      loading="lazy"
+    ></iframe>
+  </div>
 </div>
 
 <style>
   .bilibili-embed {
-    position: relative;
     width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
   }
   
-  .bilibili-embed iframe {
+  .bilibili-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+  }
+  
+  .bilibili-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .bilibili-embed {
+      max-width: 100%;
+    }
   }
 </style>
