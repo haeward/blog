@@ -1,7 +1,7 @@
 ---
 interface Props {
   id: string;
-  type?: "track" | "album" | "playlist" | "artist";
+  type?: "track" | "album" | "playlist" | "artist" | "show" | "episode";
   theme?: "0" | "1";
   width?: string;
   height?: string;
@@ -18,14 +18,14 @@ let {
 let spotifyId = id;
 
 if (id.includes("spotify.com")) {
-  const match = id.match(/spotify\.com\/(track|album|playlist|artist)\/([a-zA-Z0-9]+)/);
+  const match = id.match(/spotify\.com\/(track|album|playlist|artist|show|episode)\/([a-zA-Z0-9]+)/);
   if (match) {
     const extractedType = match[1];
     const extractedId = match[2].split("?")[0];
 
     spotifyId = extractedId;
     if (extractedType) {
-      type = extractedType as "track" | "album" | "playlist" | "artist";
+      type = extractedType as "track" | "album" | "playlist" | "artist" | "show" | "episode";
     }
   }
 }
