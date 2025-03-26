@@ -42,12 +42,16 @@ const embedUrl = `https://www.reddit.com${postPath}`;
   >
     <a href={embedUrl}></a>
   </blockquote>
-  <script is:inline async src="https://embed.reddit.com/widgets.js" charset="UTF-8"></script>
 </div>
 
 <style>
   .reddit-embed {
     position: relative;
     width: 100%;
+    min-height: 200px;
+  }
+
+  .reddit-embed-bq {
+    margin: 0;
   }
 </style>
