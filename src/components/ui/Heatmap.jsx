@@ -92,7 +92,6 @@ const BlogHeatmap = ({ startDate, endDate, values, totalPosts, totalWords }) => 
 
         <ReactTooltip 
           id="heatmap-tooltip" 
-          html={true}
           className="custom-tooltip"
           border="0.5px solid"
           borderColor="var(--tooltip-border, #ddd)"
