@@ -9,8 +9,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans],
-        serif: ["Lora", ...defaultTheme.fontFamily.serif],
+        sans: ["LXGW WenKai", ...defaultTheme.fontFamily.sans],
+        serif: ["LXGW WenKai", ...defaultTheme.fontFamily.serif],
+        mono: ["LXGW WenKai", ...defaultTheme.fontFamily.mono],
       },
     },
   },
