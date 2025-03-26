@@ -96,6 +96,9 @@ const BlogHeatmap = ({ startDate, endDate, values, totalPosts, totalWords }) => 
           border="0.5px solid"
           borderColor="var(--tooltip-border, #ddd)"
           opacity={1}
+          place="top"
+          delayShow={100}
+          delayHide={400}
           style={{
             backgroundColor: 'var(--tooltip-bg, #fff)',
             color: 'var(--tooltip-text, #333)',
@@ -103,7 +106,8 @@ const BlogHeatmap = ({ startDate, endDate, values, totalPosts, totalWords }) => 
             boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
             padding: '0',
             fontSize: '14px',
-            maxWidth: '250px'
+            maxWidth: '250px',
+            zIndex: 9999
           }}
         />
       </div>

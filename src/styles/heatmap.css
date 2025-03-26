@@ -5,16 +5,41 @@
 .heatmap-container {
   margin: 0.5rem 0;
   overflow: hidden;
+  position: relative;
+  isolation: isolate;
+  z-index: 1;
 }
 
 .react-calendar-heatmap {
   width: 100%;
   height: auto;
   margin-bottom: -20px;
+  overflow: visible !important;
 }
 
 .react-calendar-heatmap rect {
   transition: fill 0.2s ease;
+  fill: var(--color-empty);
+}
+
+.react-calendar-heatmap .color-empty {
+  fill: var(--color-empty) !important;
+}
+
+.react-calendar-heatmap .color-scale-1 {
+  fill: var(--color-scale-1) !important;
+}
+
+.react-calendar-heatmap .color-scale-2 {
+  fill: var(--color-scale-2) !important;
+}
+
+.react-calendar-heatmap .color-scale-3 {
+  fill: var(--color-scale-3) !important;
+}
+
+.react-calendar-heatmap .color-scale-4 {
+  fill: var(--color-scale-4) !important;
 }
 
 .react-calendar-heatmap rect:hover {
@@ -58,8 +83,9 @@
 }
 
 .custom-tooltip {
-  z-index: 1000 !important;
+  z-index: 9999 !important;
   opacity: 1 !important;
+  pointer-events: none !important;
 }
 
 :root {
