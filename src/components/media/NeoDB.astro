@@ -30,7 +30,16 @@ if (id.includes('neodb.social/')) {
 
 const fetchNeoDB = async (itemId: string) => {
   try {
-    const response = await fetch(`${apiUrl}${itemId}`);
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+    if (import.meta.env.NEODB_ACCESS_TOKEN) {
+      headers.Authorization = `Bearer ${import.meta.env.NEODB_ACCESS_TOKEN}`;
+    }
+
+    const response = await fetch(`${apiUrl}${itemId}`, {
+      headers
+    });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
