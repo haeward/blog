@@ -199,3 +199,6 @@ const { title, description, image = "/nano.png" } = Astro.props;
   document.addEventListener("astro:after-swap", () => init());
   preloadTheme();
 </script>
+
+// Umami Analytics
+<script is:inline defer src=`${import.meta.env.UMAMI_SCRIPT_URL}` data-website-id=`${import.meta.env.UMAMI_WEBSITE_ID}`></script>
