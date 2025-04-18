@@ -22,5 +22,12 @@ export async function GET(context: Context) {
       pubDate: item.data.date,
       link: `/${item.collection}/${item.slug}/`,
     })),
+
+    customData: `
+      <follow_challenge>
+        <feedId>136093735733238784</feedId>
+        <userId>55205286935703552</userId>
+      </follow_challenge>
+    `,
   });
 }
