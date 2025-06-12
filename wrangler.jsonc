@@ -1,18 +1,9 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "blog",
-	"main": "./dist/_worker.js/index.js",
 	"compatibility_date": "2025-06-12",
-	"compatibility_flags": [
-		"nodejs_compat",
-		"global_fetch_strictly_public"
-	],
-	"assets": {
-		"binding": "ASSETS",
-		"directory": "./dist/client"
-	},
 	"site": {
-		"bucket": "./dist/client"
+		"bucket": "./dist"
 	},
 	"observability": {
 		"enabled": true
