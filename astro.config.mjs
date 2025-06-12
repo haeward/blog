@@ -6,8 +6,6 @@ import embeds from 'astro-embed/integration';
 
 import react from "@astrojs/react";
 
-import cloudflare from "@astrojs/cloudflare";
-
 export default defineConfig({
   site: "https://blog.haeward.com",
 
@@ -19,6 +17,4 @@ export default defineConfig({
     }),
     mdx()
   ],
-
-  adapter: cloudflare(),
 });

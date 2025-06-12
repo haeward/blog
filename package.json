@@ -15,7 +15,6 @@
   "dependencies": {
     "@astro-community/astro-embed-integration": "^0.8.1",
     "@astrojs/check": "^0.9.4",
-    "@astrojs/cloudflare": "^12.5.4",
     "@astrojs/mdx": "^4.2.1",
     "@astrojs/react": "^4.2.1",
     "@astrojs/rss": "^4.0.11",
