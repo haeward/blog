@@ -2,8 +2,9 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "blog",
 	"compatibility_date": "2025-06-12",
-	"site": {
-		"bucket": "./dist"
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./dist"
 	},
 	"observability": {
 		"enabled": true
