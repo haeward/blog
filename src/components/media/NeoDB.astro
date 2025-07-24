@@ -1,0 +1,215 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  id: string;
+  rating?: number;
+  comment?: string;
+}
+
+const { 
+  id,
+  rating,
+  comment = "",
+} = Astro.props;
+
+const site = "https://neodb.social";
+let neodbId = "";
+let apiUrl = "";
+
+if (id.includes('neodb.social/')) {
+  const item = id.split('neodb.social/')[1];
+  apiUrl = `${site}/api/${item}`;
+  if (item.length > 1) {
+    const match = item.match(/([^\/]+)$/);
+    if (match) {
+      neodbId = match[1];
+    }
+  }
+}
+
+const fetchNeoDB = async (itemId: string) => {
+  try {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+    if (import.meta.env.NEODB_ACCESS_TOKEN) {
+      headers.Authorization = `Bearer ${import.meta.env.NEODB_ACCESS_TOKEN}`;
+    }
+
+    const response = await fetch(`${apiUrl}${itemId}`, {
+      headers
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+
+    let normalizedType = data.type;
+    if (normalizedType === 'Edition') {
+      normalizedType = 'Book';
+    } else if (normalizedType === 'TVseason') {
+      normalizedType = 'TV show';
+    } else if (normalizedType === 'Album') {
+      normalizedType = 'Music';
+    }
+
+    return {
+      title: data.title || data.display_title || "",
+      cover: data.cover_image_url || "",
+      url: data.id || `${site}${data.url}`,
+      type: normalizedType,
+    };
+  } catch (error) {
+    console.error("Error fetching NeoDB data:", error);
+    return {
+      title: "Data fetch failed",
+      cover: "",
+      url: site,
+      type: "Unknown",
+    };
+  }
+};
+
+const itemDetail = await fetchNeoDB(neodbId);
+const dbUrl = itemDetail.url;
+---
+
+<div class="neodb-card">
+  <div class="neodb-card-container">
+    <div class="neodb-card-type">{itemDetail.type}</div>
+    <div class="neodb-card-cover">
+      <Image src={itemDetail.cover} alt={itemDetail.title} width={100} height={150} />
+    </div>
+    <div class="neodb-card-content">
+      <div class="neodb-card-title">
+        <a href={dbUrl} class="cute" target="_blank" rel="noreferrer">「{itemDetail.title}」</a>
+      </div>
+      {rating && (
+        <div class="neodb-card-rating">
+          Rate: 
+          <span class="rating">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <span class={`star ${(i + 1) * 2 <= rating ? 'full' : (i * 2 < rating ? 'half' : '')}`}>★</span>
+            ))}
+          </span>
+        </div>
+      )}
+      {comment && (
+        <div class="neodb-card-comment">
+          Comment: 
+          <span class="comment">
+            {comment}
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+
+<style>
+  .neodb-card {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #FDfDfD;
+  }
+  
+  .neodb-card-container {
+    display: flex;
+    padding: 16px;
+    position: relative;
+  }
+  
+  .neodb-card-cover {
+    position: relative;
+    flex-shrink: 0;
+    width: 120px;
+    margin-right: 16px;
+  }
+  
+  .neodb-card-cover img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+  
+  .neodb-card-type {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: #4e9f50;
+    color: #2D2D2D;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    z-index: 1;
+  }
+  
+  .neodb-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .neodb-card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .neodb-card-title a {
+    color: #464646;
+    text-decoration: none;
+  }
+  
+  .neodb-card-title a:hover {
+    text-decoration: underline;
+  }
+  
+  .neodb-card-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: #464646;
+  }
+
+  .rating {
+    color: #DDD;
+    margin-left: 8px;
+  }
+
+  .star {
+    position: relative;
+    display: inline-block;
+  }
+
+  .star.full {
+    color: #F99B03;
+  }
+
+  .star.half::before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+    color: #F99B03;
+  }
+
+  .neodb-card-comment {
+    font-size: 0.9rem;
+    color: #464646;
+    line-height: 1.5;
+  }
+
+  .comment {
+    color: #2D2D2D;
+  }
+</style>

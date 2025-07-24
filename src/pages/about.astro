@@ -1,0 +1,22 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import LinkEnhancer from "@components/LinkEnhancer.astro";
+import { SITE, ABOUT } from "@consts";
+import { Content as AboutContent } from "../content/about.md";
+---
+
+<PageLayout title={`${ABOUT.TITLE} | ${SITE.NAME}`} description={ABOUT.DESCRIPTION}>
+  <Container>
+    <div class="space-y-8">
+      <h1 class="animate font-semibold text-2xl text-black/90 dark:text-white/90">
+        {ABOUT.TITLE}
+      </h1>
+      <article class="animate prose dark:prose-invert max-w-none">
+        <AboutContent />
+      </article>
+    </div>
+  </Container>
+
+  <LinkEnhancer />
+</PageLayout>

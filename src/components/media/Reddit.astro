@@ -1,0 +1,57 @@
+---
+interface Props {
+  id: string;
+  theme?: "light" | "dark" | "auto";
+  height?: string;
+  showMedia?: boolean;
+  showParent?: boolean;
+}
+
+const { 
+  id, 
+  theme = "auto", 
+  height = "316", 
+  showMedia = true,
+  showParent = true
+} = Astro.props;
+
+let postPath = id;
+
+if (id.includes("reddit.com")) {
+  const match = id.match(/reddit\.com(\/r\/[^\/]+\/comments\/[^\/]+\/[^\/]*)/);
+  if (match) {
+    postPath = match[1];
+  }
+}
+
+if (!postPath.startsWith("/")) {
+  postPath = "/" + postPath;
+}
+
+const embedUrl = `https://www.reddit.com${postPath}`;
+---
+
+<div class="reddit-embed">
+  <blockquote 
+    class="reddit-embed-bq" 
+    style={`height:${height}px`} 
+    data-embed-theme={theme}
+    data-embed-height={height}
+    data-embed-showmedia={showMedia ? "true" : "false"}
+    data-embed-showparent={showParent ? "true" : "false"}
+  >
+    <a href={embedUrl}></a>
+  </blockquote>
+</div>
+
+<style>
+  .reddit-embed {
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+  }
+
+  .reddit-embed-bq {
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,83 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from 'astro:assets';
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import ArrowCard from "@components/ArrowCard.astro";
+import Link from "@components/Link.astro";
+import { SITE, SOCIALS } from "@consts";
+
+const blog = (await getCollection("blog"))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0,SITE.NUM_POSTS_ON_HOMEPAGE);
+
+---
+
+<PageLayout title={SITE.NAME} description={SITE.DESC}>
+  <Container>
+    <div class="space-y-16">
+      <section>
+        <div class="flex justify-center items-center mb-4">
+          <div class="relative w-48 h-48">
+            <Image
+              src="/programmer-light.svg"
+              alt="programmer"
+              class="w-full h-full animate light-only absolute top-0 left-0"
+              width={192}
+              height={192}
+              loading="eager"
+            />
+            <Image
+              src="/programmer-dark.svg"
+              alt="programmer"
+              class="w-full h-full animate dark-only hidden absolute top-0 left-0"
+              width={192}
+              height={192}
+              loading="eager"
+            />
+          </div>
+        </div>
+        <div class="flex justify-center animate gap-4 mb-4">
+          {SOCIALS.filter(social => social.ENABLE !== false).map((social) => (
+            <a
+              href={social.HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-black dark:hover:text-white transition-colors duration-300"
+              aria-label={social.NAME}
+              title={social.NAME}
+            >
+              <Image
+                src={social.ICON}
+                alt={social.NAME}
+                class="w-7 h-7"
+                width={28}
+                height={28}
+                loading="eager"
+              />
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h1 class="font-semibold text-black dark:text-white text-xl">
+            Latest posts
+          </h1>
+          <Link href="/blog" class:list={["text-sm"]}>
+            See all posts
+          </Link>
+        </div>
+        <ul class="flex flex-col gap-4">
+          {blog.map(post => (
+            <li>
+              <ArrowCard entry={post} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </Container>
+</PageLayout>

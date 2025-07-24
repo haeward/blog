@@ -1,0 +1,28 @@
+---
+import Container from "@components/Container.astro";
+import { SITE } from "@consts";
+import PageLayout from "@layouts/PageLayout.astro";
+---
+
+<PageLayout title={`404 | ${SITE.NAME}`} description="Page not found.">
+  <Container>
+    <div class="flex flex-col items-center justify-center h-[60vh] text-center px-4">
+      <h1 class="text-9xl font-bold text-black-200 dark:text-black-200 transition-colors">404</h1>
+      <p class="text-xl mb-4">Oops! Page not found</p>
+      <p class="text-lg mb-8">The page you're looking for doesn't exist or has been moved.</p>
+      <a href="/" class="px-6 py-2 border border-current rounded hover:bg-stone hover:text-black dark:hover:bg-white dark:hover:text-black transition-colors">
+        Go Home
+      </a>
+    </div>
+</Container>
+</PageLayout>
+
+<style>
+  div {
+    padding-bottom: 4rem;
+  }
+  h1 {
+    margin: 0;
+    line-height: 1;
+  }
+</style>

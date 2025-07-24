@@ -1,0 +1,258 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  overflow-y: scroll;
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html,
+body {
+  @apply size-full;
+}
+
+body {
+  @apply font-sans antialiased;
+  @apply flex flex-col;
+  @apply bg-stone-100 dark:bg-stone-900;
+  @apply text-black/90 dark:text-white/85;
+}
+
+header {
+  @apply fixed top-0 left-0 right-0 z-50 py-5;
+  @apply bg-stone-100/85 dark:bg-stone-900/25;
+  @apply backdrop-blur;
+}
+
+main {
+  @apply flex-1 py-16;
+}
+
+footer {
+  @apply py-5 text-sm;
+}
+
+article {
+  @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
+  @apply prose-headings:font-semibold prose-p:font-serif;
+  @apply prose-headings:text-black/95 prose-headings:dark:text-white/90;
+  @apply prose-p:text-black/90 prose-p:dark:text-white/85;
+  @apply prose-p:font-semibold;
+  /* Reduce heading margins for tighter spacing */
+  @apply prose-h1:mt-8 prose-h1:mb-4;
+  @apply prose-h2:mt-6 prose-h2:mb-3;
+  @apply prose-h3:mt-5 prose-h3:mb-2;
+  @apply prose-h4:mt-4 prose-h4:mb-2;
+  @apply prose-h5:mt-3 prose-h5:mb-1;
+  @apply prose-h6:mt-3 prose-h6:mb-1;
+}
+
+@layer utilities {
+  /* Base link styles - use !important to override prose styles */
+  .prose a, .prose-invert a, article a {
+    @apply font-bold !important;
+    @apply font-sans !important;
+    @apply no-underline !important;
+    @apply text-blue-700 dark:text-blue-400 !important;
+    @apply transition-colors duration-300 ease-in-out !important;
+  }
+
+  .prose a:hover, .prose-invert a:hover, article a:hover {
+    @apply text-blue-800 dark:text-blue-300 !important;
+    @apply underline !important;
+  }
+
+  /* Enhanced bold text styling */
+  .prose strong, .prose-invert strong, article strong {
+    @apply font-bold !important;
+    @apply bg-lime-100/80 dark:bg-gray-500/25 !important;
+    @apply px-1 py-0.5 !important;
+    @apply rounded !important;
+    @apply transition-colors duration-200 !important;
+  }
+
+  /* Reduced heading spacing */
+  .prose h1, .prose-invert h1, article h1 {
+    @apply mt-6 mb-4 !important;
+  }
+
+  .prose h2, .prose-invert h2, article h2 {
+    @apply mt-5 mb-4 !important;
+  }
+
+  .prose h3, .prose-invert h3, article h3 {
+    @apply mt-4 mb-3 !important;
+  }
+
+  .prose h4, .prose-invert h4, article h4 {
+    @apply mt-3 mb-2 !important;
+  }
+
+  .prose h5, .prose-invert h5, article h5 {
+    @apply mt-2 mb-1 !important;
+  }
+
+  .prose h6, .prose-invert h6, article h6 {
+    @apply mt-2 mb-1 !important;
+  }
+
+  /* Custom blockquote styling */
+  .prose blockquote, .prose-invert blockquote, article blockquote {
+    @apply not-italic !important;
+    @apply border-l-4 border-orange-400 dark:border-orange-500 !important;
+    @apply bg-orange-100 dark:bg-neutral-500/10 !important;
+    @apply mx-1 my-2 !important;
+    @apply text-orange-800 dark:text-orange-200 !important;
+    @apply font-medium !important;
+    @apply rounded-r-md !important;
+    @apply shadow-sm !important;
+  }
+
+  .prose blockquote p, .prose-invert blockquote p, article blockquote p {
+    @apply mb-0 !important;
+    @apply before:content-none !important;
+    @apply after:content-none !important;
+  }
+
+  /* Custom code block styling */
+  .prose pre, .prose-invert pre, article pre {
+    @apply bg-gray-100/90 dark:bg-zinc-800/85 !important;
+    @apply border border-gray-200/75 dark:border-zinc-700/75 !important;
+    @apply rounded-lg !important;
+    @apply p-4 !important;
+    @apply overflow-x-auto !important;
+    @apply text-sm !important;
+    @apply font-normal !important;
+    @apply font-mono !important;
+    @apply my-6 !important;
+    @apply leading-relaxed !important;
+    @apply relative !important;
+  }
+
+  .prose code, .prose-invert code, article code {
+    @apply text-red-600 dark:text-red-400 !important;
+    @apply px-1.5 py-0.5 !important;
+    @apply rounded !important;
+    @apply text-sm !important;
+    @apply font-mono !important;
+  }
+
+  .prose code::before, .prose-invert code::before, article code::before,
+  .prose code::after, .prose-invert code::after, article code::after {
+    @apply content-none !important;
+  }
+
+  .prose pre code, .prose-invert pre code, article pre code {
+    @apply bg-transparent !important;
+    @apply px-0 py-0 !important;
+    @apply leading-relaxed !important;
+  }
+
+  /* Ensure Shiki color variables work properly */
+  .prose pre code *, .prose-invert pre code *, article pre code * {
+    color: var(--shiki-light, inherit) !important;
+  }
+
+  .dark .prose pre code *, .dark .prose-invert pre code *, .dark article pre code * {
+    color: var(--shiki-dark, inherit) !important;
+  }
+
+  /* copy button */
+  .prose pre::after, .prose-invert pre::after, article pre::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    background-image: var(--copy-icon, url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%23333333' class='w-4 h-4'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z' /%3e%3c/svg%3e"));
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px 16px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .prose pre:hover::after, .prose-invert pre:hover::after, article pre:hover::after {
+    opacity: 1;
+  }
+
+  .prose pre:hover::after {
+    background-color: rgba(255, 255, 255, 1);
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .dark .prose pre::after, .dark .prose-invert pre::after, .dark article pre::after {
+    background-image: var(--copy-icon, url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%23ffffff' class='w-4 h-4'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z' /%3e%3c/svg%3e"));
+    background-color: rgba(75, 85, 99, 0.8);
+    border: none;
+  }
+
+  .dark .prose pre:hover::after, .dark .prose-invert pre:hover::after, .dark article pre:hover::after {
+    background-color: rgba(75, 85, 99, 1);
+  }
+}
+
+.animate {
+  @apply opacity-0 translate-y-3;
+  @apply transition-all duration-700 ease-out;
+}
+
+.animate.show {
+  @apply opacity-100 translate-y-0;
+}
+
+html #back-to-top {
+  @apply opacity-0 pointer-events-none;
+}
+
+html.scrolled #back-to-top {
+  @apply opacity-100 pointer-events-auto;
+}
+
+.dark .light-only {
+  display: none;
+}
+
+.dark .dark-only {
+  display: block;
+}
+
+/* Twitter embed center */
+.twitter-tweet {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 550px;
+}
+
+.twitter-tweet blockquote {
+  text-align: center;
+}
+
+figure {
+  margin: 1.5em 0;
+  text-align: center;
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+figcaption {
+  margin-top: 0.5em;
+  @apply text-[#555] dark:text-[#C2C2C0];
+  font-size: 0.8em;
+  text-align: center;
+}

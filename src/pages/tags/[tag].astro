@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import ArrowCard from "@components/ArrowCard.astro";
+import { SITE } from "@consts";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  const nonDraftPosts = posts.filter(post => !post.data.draft);
+
+  const tags = new Set();
+  nonDraftPosts.forEach(post => {
+    if (post.data.tags && Array.isArray(post.data.tags)) {
+      post.data.tags.forEach(tag => tags.add(tag));
+    }
+  });
+
+  return Array.from(tags).map(tag => {
+    const filteredPosts = nonDraftPosts.filter(post => 
+      post.data.tags && Array.isArray(post.data.tags) && post.data.tags.includes(tag as string)
+    );
+    
+    return {
+      params: { tag },
+      props: { posts: filteredPosts, tag },
+    };
+  });
+}
+
+const { posts, tag } = Astro.props;
+const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<PageLayout title={`Tag: ${tag} | ${SITE.NAME}`} description={`Articles under The tag ${tag}`}>
+  <Container>
+    <div class="space-y-10">
+      <div class="animate">
+        <h1 class="font-semibold text-2xl text-black/75 dark:text-white/80 mb-2">
+          Tag: {tag}
+        </h1>
+        <p class="text-stone-600 dark:text-stone-400 text-sm">
+          Found {sortedPosts.length} {sortedPosts.length === 1 ? 'post' : 'posts'} with this tag
+        </p>
+      </div>
+      <div>
+        <ul class="flex flex-col gap-4">
+          {sortedPosts.map((post) => (
+            <li>
+              <ArrowCard entry={post}/>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </Container>
+</PageLayout>

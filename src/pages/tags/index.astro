@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import { SITE, TAGS } from "@consts";
+
+const posts = await getCollection("blog");
+const nonDraftPosts = posts.filter(post => !post.data.draft);
+
+type TagCount = {
+  [tag: string]: number;
+}
+
+const tagCounts = nonDraftPosts.reduce((acc: TagCount, post) => {
+  if (post.data.tags && Array.isArray(post.data.tags)) {
+    post.data.tags.forEach(tag => {
+      if (!acc[tag]) {
+        acc[tag] = 0;
+      }
+      acc[tag]++;
+    });
+  }
+  return acc;
+}, {});
+
+const sortedTags = Object.keys(tagCounts).sort();
+
+---
+
+<PageLayout title={`${TAGS.TITLE} | ${SITE.NAME}`} description={TAGS.DESCRIPTION}>
+  <Container>
+    <div class="space-y-10">
+      <div class="animate">
+        <h1 class="font-semibold text-2xl text-black/75 dark:text-white/80 mb-4">
+          All Tags
+        </h1>
+        <p class="text-stone-600 dark:text-stone-400 text-sm">
+          Found {sortedTags.length} tags across {nonDraftPosts.length} posts
+        </p>
+      </div>
+
+      <div class="animate flex items-center flex-wrap gap-3">
+        {sortedTags.map(tag => (
+          <a
+            href={`/tags/${tag}`}
+            class="group inline-flex items-center gap-1 px-2   py-2 rounded-lg bg-stone-100/75 dark:bg-stone-900/25 backdrop-blur-sm hover:bg-stone-200/75 dark:hover:bg-stone-800/50 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-sm"
+          >
+            <span class="text-lg text-stone-700 dark:text-stone-300 group-hover:text-black dark:group-hover:text-white transition-colors duration-300 font-medium">{tag}</span>
+            <span class="text-xs text-stone-500 dark:text-stone-400 group-hover:text-stone-600 dark:group-hover:text-stone-300 transition-colors duration-300 font-mono px-0.5 py-0.5 rounded">[{tagCounts[tag]}]</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </Container>
+</PageLayout>

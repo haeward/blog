@@ -1,0 +1,65 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import ArrowCard from "@components/ArrowCard.astro";
+import { SITE } from "@consts";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  const nonDraftPosts = posts.filter(post => !post.data.draft);
+
+  const categories = new Set();
+  nonDraftPosts.forEach(post => {
+    if (post.data.category) {
+      const categoryList = typeof post.data.category === 'string' 
+        ? [post.data.category] 
+        : Array.isArray(post.data.category) 
+          ? post.data.category 
+          : [post.data.category];
+      
+      categoryList.forEach(category => categories.add(category));
+    }
+  });
+
+  return Array.from(categories).map(category => {
+    const filteredPosts = nonDraftPosts.filter(post => {
+      if (!post.data.category) return false;
+      
+      const categoryList = typeof post.data.category === 'string' 
+        ? [post.data.category] 
+        : Array.isArray(post.data.category) 
+          ? post.data.category 
+          : [post.data.category];
+      
+      return categoryList.includes(category as string);
+    });
+    
+    return {
+      params: { category },
+      props: { posts: filteredPosts, category },
+    };
+  });
+}
+
+const { posts, category } = Astro.props;
+const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<PageLayout title={`Category: ${category} | ${SITE.NAME}`} description={`Articles in category ${category}`}>
+  <Container>
+    <div class="space-y-10">
+      <h1 class="animate font-semibold text-xl text-black dark:text-white">
+        Category: {category}
+      </h1>
+      
+      <ul class="flex flex-col gap-4">
+        {sortedPosts.map(post => (
+          <li>
+            <ArrowCard entry={post} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Container>
+</PageLayout>
