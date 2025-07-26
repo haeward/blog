@@ -41,8 +41,8 @@ article {
   @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
   @apply prose-headings:font-semibold prose-p:font-serif;
   @apply prose-headings:text-black/95 prose-headings:dark:text-white/90;
-  @apply prose-p:text-black/90 prose-p:dark:text-white/85;
-  @apply prose-p:font-semibold;
+  @apply prose-p:text-black/75 prose-p:dark:text-white/75;
+  @apply prose-p:font-medium;
   /* Reduce heading margins for tighter spacing */
   @apply prose-h1:mt-8 prose-h1:mb-4;
   @apply prose-h2:mt-6 prose-h2:mb-3;
@@ -70,7 +70,7 @@ article {
   /* Enhanced bold text styling */
   .prose strong, .prose-invert strong, article strong {
     @apply font-bold !important;
-    @apply bg-lime-100/80 dark:bg-gray-500/25 !important;
+    @apply text-black dark:text-white !important;
     @apply px-1 py-0.5 !important;
     @apply rounded !important;
     @apply transition-colors duration-200 !important;
@@ -78,27 +78,27 @@ article {
 
   /* Reduced heading spacing */
   .prose h1, .prose-invert h1, article h1 {
-    @apply mt-6 mb-4 !important;
+    @apply mt-8 mb-4 !important;
   }
 
   .prose h2, .prose-invert h2, article h2 {
-    @apply mt-5 mb-4 !important;
+    @apply mt-6 mb-3 !important;
   }
 
   .prose h3, .prose-invert h3, article h3 {
-    @apply mt-4 mb-3 !important;
+    @apply mt-5 mb-2 !important;
   }
 
   .prose h4, .prose-invert h4, article h4 {
-    @apply mt-3 mb-2 !important;
+    @apply mt-4 mb-2 !important;
   }
 
   .prose h5, .prose-invert h5, article h5 {
-    @apply mt-2 mb-1 !important;
+    @apply mt-3 mb-1 !important;
   }
 
   .prose h6, .prose-invert h6, article h6 {
-    @apply mt-2 mb-1 !important;
+    @apply mt-3 mb-1 !important;
   }
 
   /* Custom blockquote styling */
@@ -108,7 +108,7 @@ article {
     @apply bg-orange-100 dark:bg-neutral-500/10 !important;
     @apply mx-1 my-2 !important;
     @apply text-orange-800 dark:text-orange-200 !important;
-    @apply font-medium !important;
+    @apply font-semibold !important;
     @apply rounded-r-md !important;
     @apply shadow-sm !important;
   }
