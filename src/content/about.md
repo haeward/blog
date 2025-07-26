@@ -2,13 +2,17 @@
 title: "About Me"
 ---
 
-Hi, I'm **Haeward**, a programmer who enjoys building things with **Java**, **Python**, and **Go**. I also have some experience with **DevOps**, making sure everything runs smoothly from development to deployment.
+I'm **Haeward**, a software developer with experience in Java, Python, and Go, currently focusing on **Rust**. As an open source enthusiast, I believe in the power of collaborative development and aspire to contribute more meaningfully to the community.
 
-When I'm not writing code, you can usually find me with my nose in a book, exploring new worlds through movies, or hitting the pavement for a run. I'm a firm believer that the best ideas often come when you're away from the keyboard.
+When I'm not coding, I enjoy reading books, watching films and anime, particularly mystery and science fiction genres. I'm fascinated by the intricate logic of detective stories and captivated by the boundless imagination of sci-fi narratives.
 
-Currently, I'm diving deep into **Rust** and learning **Japanese (日本語)**. I'm also a huge fan of productivity tools and the latest electronics that make life a little more efficient and fun.
+I also maintain a consistent running practice, inspired by the anime **風が強く吹いている** (Run with the Wind). As the story beautifully captures:
 
-I love discovering and reading blogs from interesting people. In fact, they're a big part of what inspired me to start my own, so I compiled a list of [The blogs I often read](https://blog.haeward.com/blog/the-blogs-i-often-read).
+> "Why can't we give up running even though it's so painful and hard? Because every cell in our body is restless, wanting to feel the strong wind blowing against us."
+
+I'm passionate about productivity tools and emerging technologies that enhance daily workflows. From automation scripts to the latest development tools, I enjoy exploring solutions that make work more efficient and enjoyable. I also have a keen interest in hardware and gadgets that blend functionality with innovation.
+
+Currently learning **Japanese (日本語)**. I'd love to connect if you're interested in discussing Japanese language or culture.
 
 ---
 
