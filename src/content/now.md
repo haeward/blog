@@ -1,6 +1,6 @@
 ---
 title: "Now"
-updated: "2025-07-23"
+updated: "2025-07-26"
 ---
 
 Here's a snapshot of what I’m focused on at the moment.
