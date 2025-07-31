@@ -29,12 +29,6 @@ export async function GET(context: Context) {
     })),
 
     customData: `
-      <image>
-        <url>${context.site}reflecting.svg</url>
-        <title>${SITE.NAME}</title>
-        <link>${context.site}</link>
-        <description>${SITE.DESC}</description>
-      </image>
       <follow_challenge>
         <feedId>136093735733238784</feedId>
         <userId>55205286935703552</userId>
