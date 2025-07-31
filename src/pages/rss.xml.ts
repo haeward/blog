@@ -1,6 +1,10 @@
 import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
 import { SITE } from "@consts";
+import sanitizeHtml from 'sanitize-html';
+import MarkdownIt from 'markdown-it';
+
+const parser = new MarkdownIt();
 
 type Context = {
   site: string
@@ -19,11 +23,18 @@ export async function GET(context: Context) {
     items: items.map((item) => ({
       title: item.data.title,
       description: item.data.description,
+      content: sanitizeHtml(parser.render(item.body)),
       pubDate: item.data.date,
       link: `/${item.collection}/${item.slug}/`,
     })),
 
     customData: `
+      <image>
+        <url>${context.site}reflecting.svg</url>
+        <title>${SITE.NAME}</title>
+        <link>${context.site}</link>
+        <description>${SITE.DESC}</description>
+      </image>
       <follow_challenge>
         <feedId>136093735733238784</feedId>
         <userId>55205286935703552</userId>
