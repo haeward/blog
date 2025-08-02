@@ -1,9 +1,9 @@
 ---
 title: "My App Defaults 2024"
 description: "A list of my app Defaults in 2024"
-date: 2025-01-15
+date: "2025-01-15"
 draft: false
-category: ["Software"]
+category: "Software"
 tags: ["macOS", "app", "productivity"]
 ---
 

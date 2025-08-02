@@ -1,9 +1,9 @@
 ---
 title: "Voices Worth Following"
 description: "The blogs that shape my thinking and inspire my writing"
-date: 2025-02-05
+date: "2025-02-05"
 draft: false
-category: Reading
+category: "Reading"
 tags: ["blog", "feed"]
 ---
 
