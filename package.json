@@ -34,19 +34,20 @@
     "sanitize-html": "^2.17.0",
     "tailwind-merge": "^2.2.2",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.4.2",
+    "typescript": "5.8.3",
     "vite": "6.2.7"
   },
   "devDependencies": {
     "@eslint/config-array": "^0.19.2",
+    "@eslint/js": "^9.32.0",
     "@eslint/object-schema": "^2.0.1",
     "@types/markdown-it": "^14.1.2",
     "@types/sanitize-html": "^2.16.0",
-    "@typescript-eslint/eslint-plugin": "^7.3.1",
-    "@typescript-eslint/parser": "^7.3.1",
-    "eslint": "^9.0.0",
-    "eslint-plugin-astro": "^0.32.0",
-    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.22.0",
+    "eslint-plugin-astro": "^1.0.0",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
     "sharp": "^0.33.3",
     "vite": "6.2.7"
   }
