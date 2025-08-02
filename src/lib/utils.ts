@@ -14,12 +14,12 @@ export function formatDate(date: Date) {
 }
 
 export function readingTime(html: string) {
-  const withoutScriptAndStyle = html.replace(/<(script|style)\b[^<]*(?:(?!<\/\1>)<[^<]*)*<\/\1>/gi, '');
-  const withoutTags = withoutScriptAndStyle.replace(/<[^>]+>/g, ' ');
+  const withoutScriptAndStyle = html.replace(/<(script|style)\b[^<]*(?:(?!<\/\1>)<[^<]*)*<\/\1>/gi, "");
+  const withoutTags = withoutScriptAndStyle.replace(/<[^>]+>/g, " ");
   const decoded = withoutTags
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&[a-z]+;/gi, ' ')
-    .replace(/\s+/g, ' ')
+    .replace(/&nbsp;/g, " ")
+    .replace(/&[a-z]+;/gi, " ")
+    .replace(/\s+/g, " ")
     .trim();
   const wordCount = decoded.split(/\s+/).filter(word => word.length > 0).length;
   const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 200)).toString();

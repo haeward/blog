@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 interface Props {
   id: string;
@@ -17,11 +17,11 @@ const site = "https://neodb.social";
 let neodbId = "";
 let apiUrl = "";
 
-if (id.includes('neodb.social/')) {
-  const item = id.split('neodb.social/')[1];
+if (id.includes("neodb.social/")) {
+  const item = id.split("neodb.social/")[1];
   apiUrl = `${site}/api/${item}`;
   if (item.length > 1) {
-    const match = item.match(/([^\/]+)$/);
+    const match = item.match(/([^/]+)$/);
     if (match) {
       neodbId = match[1];
     }
@@ -30,8 +30,8 @@ if (id.includes('neodb.social/')) {
 
 const fetchNeoDB = async (itemId: string) => {
   try {
-    const headers: HeadersInit = {
-      'Content-Type': 'application/json',
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
     };
     if (import.meta.env.NEODB_ACCESS_TOKEN) {
       headers.Authorization = `Bearer ${import.meta.env.NEODB_ACCESS_TOKEN}`;
@@ -46,12 +46,12 @@ const fetchNeoDB = async (itemId: string) => {
     const data = await response.json();
 
     let normalizedType = data.type;
-    if (normalizedType === 'Edition') {
-      normalizedType = 'Book';
-    } else if (normalizedType === 'TVseason') {
-      normalizedType = 'TV show';
-    } else if (normalizedType === 'Album') {
-      normalizedType = 'Music';
+    if (normalizedType === "Edition") {
+      normalizedType = "Book";
+    } else if (normalizedType === "TVseason") {
+      normalizedType = "TV show";
+    } else if (normalizedType === "Album") {
+      normalizedType = "Music";
     }
 
     return {
@@ -90,7 +90,7 @@ const dbUrl = itemDetail.url;
           Rate: 
           <span class="rating">
             {Array.from({ length: 5 }).map((_, i) => (
-              <span class={`star ${(i + 1) * 2 <= rating ? 'full' : (i * 2 < rating ? 'half' : '')}`}>★</span>
+              <span class={`star ${(i + 1) * 2 <= rating ? "full" : (i * 2 < rating ? "half" : "")}`}>★</span>
             ))}
           </span>
         </div>
@@ -100,7 +100,7 @@ const dbUrl = itemDetail.url;
           Comment: 
           <span class="comment">
             {comment}
-          </div>
+          </span>
         </div>
       )}
     </div>

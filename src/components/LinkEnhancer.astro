@@ -3,22 +3,22 @@
 ---
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener("DOMContentLoaded", function() {
     enhanceLinks();
   });
 
-  document.addEventListener('astro:page-load', function() {
+  document.addEventListener("astro:page-load", function() {
     enhanceLinks();
   });
 
   function enhanceLinks(): void {
-    const article = document.querySelector('article');
+    const article = document.querySelector("article");
     if (!article) return;
 
-    const links = article.querySelectorAll('a');
+    const links = article.querySelectorAll("a");
 
     links.forEach(link => {
-      const href = link.getAttribute('href');
+      const href = link.getAttribute("href");
       if (!href) return;
 
       processLink(link as HTMLAnchorElement, href);
@@ -26,7 +26,7 @@
   }
 
   function processLink(link: HTMLAnchorElement, href: string): void {
-    if (href.startsWith('http://') || href.startsWith('https://')) {
+    if (href.startsWith("http://") || href.startsWith("https://")) {
       processExternalLink(link);
     }
 
@@ -34,49 +34,49 @@
   }
 
   function processExternalLink(link: HTMLAnchorElement): void {
-    link.setAttribute('target', '_blank');
-    link.setAttribute('rel', 'noopener noreferrer');
+    link.setAttribute("target", "_blank");
+    link.setAttribute("rel", "noopener noreferrer");
   }
 
   function addKeyboardNavigation(link: HTMLAnchorElement): void {
-    if (!link.hasAttribute('tabindex')) {
-      link.setAttribute('tabindex', '0');
+    if (!link.hasAttribute("tabindex")) {
+      link.setAttribute("tabindex", "0");
     }
 
-    link.addEventListener('keydown', function(e: KeyboardEvent) {
-      if (e.key === 'Enter' || e.key === ' ') {
+    link.addEventListener("keydown", function(e: KeyboardEvent) {
+      if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         link.click();
       }
     });
 
-    if (!link.hasAttribute('aria-label') && link.textContent) {
-      const href = link.getAttribute('href');
-      if (href?.startsWith('http')) {
+    if (!link.hasAttribute("aria-label") && link.textContent) {
+      const href = link.getAttribute("href");
+      if (href?.startsWith("http")) {
         try {
           const domain = new URL(href).hostname;
-          link.setAttribute('aria-label', `${link.textContent} - External link to ${domain}`);
-        } catch (e) {
-          link.setAttribute('aria-label', `${link.textContent} - External link`);
+          link.setAttribute("aria-label", `${link.textContent} - External link to ${domain}`);
+        } catch {
+          link.setAttribute("aria-label", `${link.textContent} - External link`);
         }
-      } else if (href?.startsWith('mailto:')) {
-        link.setAttribute('aria-label', `Send email to ${link.textContent}`);
+      } else if (href?.startsWith("mailto:")) {
+        link.setAttribute("aria-label", `Send email to ${link.textContent}`);
       } else {
-        link.setAttribute('aria-label', `Internal link: ${link.textContent}`);
+        link.setAttribute("aria-label", `Internal link: ${link.textContent}`);
       }
     }
   }
 
-  if (typeof MutationObserver !== 'undefined') {
+  if (typeof MutationObserver !== "undefined") {
     const observer = new MutationObserver(function(mutations) {
       mutations.forEach(function(mutation) {
-        if (mutation.type === 'childList') {
+        if (mutation.type === "childList") {
           mutation.addedNodes.forEach(function(node) {
             if (node.nodeType === Node.ELEMENT_NODE) {
               const element = node as Element;
-              const newLinks = element.querySelectorAll ? element.querySelectorAll('a') : [];
+              const newLinks = element.querySelectorAll ? element.querySelectorAll("a") : [];
               newLinks.forEach(link => {
-                const href = link.getAttribute('href');
+                const href = link.getAttribute("href");
                 if (href) {
                   processLink(link as HTMLAnchorElement, href);
                 }
@@ -87,7 +87,7 @@
       });
     });
 
-    const article = document.querySelector('article');
+    const article = document.querySelector("article");
     if (article) {
       observer.observe(article, {
         childList: true,

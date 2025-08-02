@@ -12,7 +12,7 @@ export async function getStaticPaths() {
   const categories = new Set();
   nonDraftPosts.forEach(post => {
     if (post.data.category) {
-      const categoryList = typeof post.data.category === 'string' 
+      const categoryList = typeof post.data.category === "string" 
         ? [post.data.category] 
         : Array.isArray(post.data.category) 
           ? post.data.category 
@@ -26,7 +26,7 @@ export async function getStaticPaths() {
     const filteredPosts = nonDraftPosts.filter(post => {
       if (!post.data.category) return false;
       
-      const categoryList = typeof post.data.category === 'string' 
+      const categoryList = typeof post.data.category === "string" 
         ? [post.data.category] 
         : Array.isArray(post.data.category) 
           ? post.data.category 

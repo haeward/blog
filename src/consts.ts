@@ -19,7 +19,7 @@ export const CATEGORIES: Metadata = {
 export const TAGS: Metadata = {
   TITLE: "Tags",
   DESCRIPTION: "A collection of articles on topics I am passionate about.",
-}
+};
 
 export const ABOUT: Metadata = {
   TITLE: "About",

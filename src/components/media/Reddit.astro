@@ -18,7 +18,7 @@ const {
 let postPath = id;
 
 if (id.includes("reddit.com")) {
-  const match = id.match(/reddit\.com(\/r\/[^\/]+\/comments\/[^\/]+\/[^\/]*)/);
+  const match = id.match(/reddit\.com(\/r\/[^/]+\/comments\/[^/]+\/[^/]*)/);
   if (match) {
     postPath = match[1];
   }

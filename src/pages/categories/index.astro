@@ -17,7 +17,7 @@ type CategoryMap = {
 
 const categories = nonDraftPosts.reduce((acc: CategoryMap, post) => {
   if (post.data.category) {
-    const categoryList = typeof post.data.category === 'string' 
+    const categoryList = typeof post.data.category === "string" 
       ? [post.data.category] 
       : Array.isArray(post.data.category) 
         ? post.data.category 

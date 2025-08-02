@@ -85,7 +85,7 @@ const { title, description, image = "/favicon.png" } = Astro.props;
 
     const themeToggle = document.getElementById("theme-toggle");
     themeToggle?.addEventListener("click", () => {
-      if (document.documentElement.classList.contains('dark')) {
+      if (document.documentElement.classList.contains("dark")) {
         localStorage.setItem("theme", "light");
         toggleTheme(false);
       } else {
@@ -109,28 +109,28 @@ const { title, description, image = "/favicon.png" } = Astro.props;
   }
 
   function addCopyFunctionality() {
-    const codeBlocks = document.querySelectorAll('pre');
+    const codeBlocks = document.querySelectorAll("pre");
 
     codeBlocks.forEach(pre => {
-      pre.addEventListener('click', async (e) => {
+      pre.addEventListener("click", async (e) => {
         const rect = pre.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
         if (x > rect.width - 40 && x < rect.width - 8 && y > 8 && y < 40) {
-          const code = pre.textContent || '';
+          const code = pre.textContent || "";
 
           try {
             await navigator.clipboard.writeText(code);
 
-            pre.style.setProperty('--copy-icon', "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%23ffffff'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7' /%3e%3c/svg%3e\")");
+            pre.style.setProperty("--copy-icon", "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%23ffffff'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7' /%3e%3c/svg%3e\")");
 
             setTimeout(() => {
-              pre.style.removeProperty('--copy-icon');
+              pre.style.removeProperty("--copy-icon");
             }, 2000);
 
           } catch (err) {
-            console.error('copy failed:', err);
+            console.error("copy failed:", err);
           }
         }
       });
@@ -187,7 +187,7 @@ const { title, description, image = "/favicon.png" } = Astro.props;
       document.documentElement.classList.remove("dark");
     }
 
-    window.getComputedStyle(css).opacity;
+    void window.getComputedStyle(css).opacity;
     document.head.removeChild(css);
   }
 
@@ -203,26 +203,26 @@ const { title, description, image = "/favicon.png" } = Astro.props;
 
   // Load Twitter widget
   function loadTwitterWidget() {
-    const oldScript = document.querySelector('script[src="https://platform.twitter.com/widgets.js"]');
+    const oldScript = document.querySelector("script[src=\"https://platform.twitter.com/widgets.js\"]");
     if (oldScript) {
       oldScript.remove();
     }
 
-    const script = document.createElement('script');
-    script.src = 'https://platform.twitter.com/widgets.js';
+    const script = document.createElement("script");
+    script.src = "https://platform.twitter.com/widgets.js";
     script.async = true;
     document.body.appendChild(script);
   }
 
   // Load Reddit widget
   function loadRedditWidget() {
-    const oldScript = document.querySelector('script[src="https://embed.reddit.com/widgets.js"]');
+    const oldScript = document.querySelector("script[src=\"https://embed.reddit.com/widgets.js\"]");
     if (oldScript) {
       oldScript.remove();
     }
 
-    const script = document.createElement('script');
-    script.src = 'https://embed.reddit.com/widgets.js';
+    const script = document.createElement("script");
+    script.src = "https://embed.reddit.com/widgets.js";
     script.async = true;
     document.body.appendChild(script);
   }
