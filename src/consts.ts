@@ -31,6 +31,11 @@ export const NOW: Metadata = {
   DESCRIPTION: "What I am currently doing.",
 };
 
+export const BLOGROLL: Metadata = {
+  TITLE: "Blogroll",
+  DESCRIPTION: "A collection of blogs I follow.",
+};
+
 export const SOCIALS: Socials = [
   {
     NAME: "Github",
