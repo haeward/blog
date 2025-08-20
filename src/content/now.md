@@ -33,3 +33,13 @@ Here's a snapshot of what I’m focused on at the moment.
 
 - [Balatro](https://store.steampowered.com/app/2379780/Balatro/)
 - [Slay the Spire](https://store.steampowered.com/app/646570/Slay_the_Spire/)
+
+---
+
+### Changelog
+
+- 2025-08-20 Add changelog to Now page
+- 2025-07-31 Add Blogroll page and year's progress bar
+- 2025-07-18 Optimize blog post links, add keyboard navigation
+- 2025-07-11 Add previous/next post navigation and related posts
+- 2025-05-24 Add media embed
