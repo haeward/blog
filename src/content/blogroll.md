@@ -1,19 +1,15 @@
 ---
-title: "Voices Worth Following"
-description: "The blogs that shape my thinking and inspire my writing"
-date: "2025-02-05"
-draft: false
-category: "Reading"
-tags: ["blog", "feed"]
+title: "Blogroll"
 ---
 
 Reading thoughtful blogs has become an essential part of my daily routine. These writers, organizations, and communities offer unique perspectives, technical insights, and life reflections that consistently challenge and inspire me. Rather than just bookmarking them, I thought I'd share the voices that have shaped my thinking and might resonate with you too.
 
-## Personal
+### Personal
 
 - [Xuanwo](https://xuanwo.io)
 - [Steph Ango](https://stephango.com)
 - [Raptitude](https://www.raptitude.com)
+- [Matthias Endler](https://endler.dev)
 - [夜天之书](https://www.tisonkun.org)
 - [yihong](https://blog.yihong0618.me)
 - [阮一峰的网络日志](http://www.ruanyifeng.com/blog)
@@ -34,6 +30,7 @@ Reading thoughtful blogs has become an essential part of my daily routine. These
 - [xxchan](https://xxchan.me)
 - [zu1k](https://zu1k.com)
 - [从不说安全词](https://jt26wzz.com)
+- [阿猫的博客](https://ameow.xyz)
 - [Baoyu](https://baoyu.io)
 - [拾月](https://www.skyue.com)
 - [Simon](https://song.al)
@@ -44,7 +41,6 @@ Reading thoughtful blogs has become an essential part of my daily routine. These
 - [So!azy](https://blog.solazy.me)
 - [Another Dayu](https://anotherdayu.com)
 - [Tw93](https://tw93.fun)
-- [極客死亡計劃](https://geedea.pro)
 - [Pseudoyu](https://www.pseudoyu.com)
 - [Reorx's Forge](https://reorx.com)
 - [太隐](https://wangyurui.com)
@@ -57,7 +53,7 @@ Reading thoughtful blogs has become an essential part of my daily routine. These
 - [Jacob Press](https://jacobzuo.github.io/blog)
 - [邓布利多的冥想盆](https://pensieve.wangxindi.org)
 
-## Official & Community
+### Official & Community
 
 - [GitHub Blog](https://github.blog)
 - [Kubernetes Blog](https://kubernetes.io/blog)
@@ -70,10 +66,4 @@ Reading thoughtful blogs has become an essential part of my daily routine. These
 - [Zed Blog](https://zed.dev/blog)
 - [美团技术团队](https://tech.meituan.com)
 
-## Why These Voices Matter
-
 So, why them? I think what's truly worth cherishing is that unvarnished authenticity. Reading their words is like looking through a clean window, directly into another person's mind—seeing their technical explorations, deep thoughts, and bits of life. This kind of direct connection and resonance is hard to find anywhere else.
-
----
-
-*This list continues to evolve as I discover new voices and as these writers explore new directions. I'm always open to recommendations for sources that blend thoughtful reflection with genuine curiosity.*

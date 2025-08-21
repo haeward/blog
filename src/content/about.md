@@ -6,7 +6,7 @@ I'm **Haeward**, a software developer with experience in Java, Python, and Go, c
 
 When I'm not coding, I enjoy reading books, watching films and anime, particularly mystery and science fiction genres. I'm fascinated by the intricate logic of detective stories and captivated by the boundless imagination of sci-fi narratives.
 
-I also maintain a consistent running practice, inspired by the anime **風が強く吹いている** (Run with the Wind). As the story beautifully captures:
+I also maintain a consistent running practice, inspired by the anime **[風が強く吹いている](https://bgm.tv/subject/248154)** (Run with the Wind). As the story beautifully captures:
 
 > "Why can't we give up running even though it's so painful and hard? Because every cell in our body is restless, wanting to feel the strong wind blowing against us."
 
@@ -25,7 +25,5 @@ I'm active on a few other corners of the internet. Let's connect!
 * [Mastodon](https://mas.to/@haeward): My rambling thoughts in a decentralized world.
 * [Letterboxd](https://letterboxd.com/haeward/): Let's talk about films.
 * [Bangumi](https://bgm.tv/user/haeward): Tracking my anime and drama journey.
-
-### Get in Touch 📬
 
 Have a question, a project idea, or just want to say hello? Feel free to reach out via email: [me@haeward.com](mailto:me@haeward.com)
