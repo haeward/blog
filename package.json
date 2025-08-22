@@ -50,5 +50,11 @@
     "eslint-plugin-jsx-a11y": "^6.10.0",
     "sharp": "^0.33.3",
     "vite": "6.2.7"
+  },
+  "pnpm": {
+      "onlyBuiltDependencies": [
+        "esbuild",
+        "sharp"
+      ]
   }
 }
