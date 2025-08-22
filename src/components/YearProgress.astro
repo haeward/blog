@@ -1,0 +1,35 @@
+---
+const now = new Date();
+const year = now.getFullYear();
+const startOfYear = new Date(year, 0, 1);
+const endOfYear = new Date(year + 1, 0, 1);
+const totalDays = (endOfYear.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24);
+const passedDays = Math.round((now.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24));
+const progress = (passedDays / totalDays) * 100;
+
+const progressPercentage = progress.toFixed(2);
+
+// Create 20 squares for the progress bar
+const totalSquares = 20;
+const filledSquares = (progress / 100) * totalSquares;
+---
+
+<div class="flex justify-between items-center">
+  <div class="animate">
+    <div class="flex items-center mb-2 gap-2 text-sm">
+      <span class="font-mono">{year}:</span>
+      <div class="flex gap-1">
+        {Array.from({ length: totalSquares }, (_, i) => (
+          <div
+            class={`w-3 h-3 border border-stone-500 dark:border-stone-300 ${
+              i < filledSquares
+                ? 'bg-stone-600 dark:bg-stone-400'
+                : 'bg-transparent'
+            }`}
+          />
+        ))}
+      </div>
+      <span class="font-mono">{progressPercentage}%</span>
+    </div>
+  </div>
+</div>
