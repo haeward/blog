@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-import embeds from "astro-embed/integration";
+import { remarkSpotifyEmbed } from "./src/lib/remark-spotify-embed.js";
 
 import react from "@astrojs/react";
 
@@ -10,11 +10,6 @@ export default defineConfig({
   site: "https://haeward.com",
 
   integrations: [sitemap(), tailwind(), react(),
-    embeds({
-      services: {
-        LinkPreview: false,
-      }
-    }),
     mdx()
   ],
 
@@ -27,7 +22,10 @@ export default defineConfig({
       },
       defaultColor: false,
       wrap: true,
-    }
+    },
+    remarkPlugins: [
+      remarkSpotifyEmbed,
+    ]
   },
 
   output: "static",

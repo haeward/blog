@@ -74,8 +74,6 @@ const { title, description, image = "/favicon.png" } = Astro.props;
     preloadTheme();
     onScroll();
     animate();
-    loadTwitterWidget();
-    loadRedditWidget();
 
     const backToTop = document.getElementById("back-to-top");
     backToTop?.addEventListener("click", (event) => scrollToTop(event));
@@ -199,32 +197,6 @@ const { title, description, image = "/favicon.png" } = Astro.props;
     } else {
       toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
     }
-  }
-
-  // Load Twitter widget
-  function loadTwitterWidget() {
-    const oldScript = document.querySelector("script[src=\"https://platform.twitter.com/widgets.js\"]");
-    if (oldScript) {
-      oldScript.remove();
-    }
-
-    const script = document.createElement("script");
-    script.src = "https://platform.twitter.com/widgets.js";
-    script.async = true;
-    document.body.appendChild(script);
-  }
-
-  // Load Reddit widget
-  function loadRedditWidget() {
-    const oldScript = document.querySelector("script[src=\"https://embed.reddit.com/widgets.js\"]");
-    if (oldScript) {
-      oldScript.remove();
-    }
-
-    const script = document.createElement("script");
-    script.src = "https://embed.reddit.com/widgets.js";
-    script.async = true;
-    document.body.appendChild(script);
   }
 
   document.addEventListener("DOMContentLoaded", () => init());

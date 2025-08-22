@@ -4,22 +4,14 @@ description: "记录在运城和临汾的旅程"
 date: "2025-08-12"
 draft: false
 category: "Travel"
-tags: ["shanxi", "history", "nature"]
+tags: ["shanxi", "architecture", "nature"]
 ---
-
-import NeoDB from "../../../components/media/NeoDB.astro";
 
 这几天，高中同学在年休，我们便约好在山西一同游玩几天，最终将目的地选在了“关公故里” —— [运城](https://zh.wikipedia.org/wiki/%E8%BF%90%E5%9F%8E%E5%B8%82) 和 "华夏第一都" —— [临汾](https://zh.wikipedia.org/wiki/%E4%B8%B4%E6%B1%BE%E5%B8%82)。
 
 我们 8 月 7 日中午达到西安，晚上 6 点半坐高铁前往运城。时间比较充裕，因此，我们在西安稍作停留，吃了午饭，本来准备去吃一家羊肉馆，到店后发现门口已经排起了长队，果断放弃，在附近找了一家牛肉面馆，面条劲道，份量足，但是稍微有点咸。
 
-户外实在太热，吃完饭后，我们去附近的万达影院看了一部电影 - 《[浪浪山的小妖怪](https://movie.douban.com/subject/36438475/)》，之前看过短片，对第一个故事（[小妖怪的夏天](https://www.bilibili.com/bangumi/media/md28235401)）印象比较深刻。看完后感觉还行，评分：7/10。
-
-<NeoDB
-  id="https://neodb.social/movie/24UfzZSRDEuUOzFUWmAB1b"
-  rating={7}
-  comment="没有通天本领也能踏上取经路？小猪妖决定离开浪浪山，和蛤蟆精、黄鼠狼精、猩猩怪组团取经。西行路上，小妖怪们将遇到怎样的考验？最终他们又能否实现心愿，活成自己喜欢的样子？"
-/>
+户外实在太热，吃完饭后，我们去附近的万达影院看了一部电影 - 《[浪浪山的小妖怪](https://neodb.social/movie/24UfzZSRDEuUOzFUWmAB1b)》，之前看过短片，对第一个故事（[小妖怪的夏天](https://www.bilibili.com/bangumi/media/md28235401)）印象比较深刻。
 
 之后，买了杯咖啡，便前往高铁站，高铁途中看到了漂亮的晚霞，让我对接下来的旅途充满了期待。
 
