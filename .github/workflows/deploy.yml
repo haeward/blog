@@ -29,7 +29,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'pnpm'
 
       - name: Install dependencies 👨‍🔧
         run: pnpm install
@@ -42,6 +41,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: 'blog'
-          directory: 'dist'
+          command: pages deploy ./dist --project-name=blog
+          wranglerVersion: '4'
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
