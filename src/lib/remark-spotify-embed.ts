@@ -1,39 +1,42 @@
 import { visit } from "unist-util-visit";
+import type { Parent } from "unist";
+import type { Root, Paragraph, Text, Link, Html } from "mdast";
+
+interface SpotifyData {
+  type: string;
+  id: string;
+}
 
 export function remarkSpotifyEmbed() {
-  return (tree) => {
-    visit(tree, "paragraph", (node, index, parent) => {
-      // Look for paragraphs that contain only a link
-      if (node.children.length === 1 && node.children[0].type === "link") {
-        const link = node.children[0];
-        const url = link.url;
-        const text = link.children[0]?.value || "";
+  return (tree: Root) => {
+    visit(tree, "paragraph", (node: Paragraph, index: number | undefined, parent: Parent | undefined) => {
+      if (!parent || typeof index !== "number") return;
 
-        // Check if it's a Spotify URL
+      if (node.children.length === 1 && node.children[0].type === "link") {
+        const link = node.children[0] as Link;
+        const url = link.url;
+
         if (isSpotifyUrl(url)) {
-          // Replace the paragraph with a custom media node
-          const mediaNode = {
+          const mediaNode: Html = {
             type: "html",
-            value: generateSpotifyEmbed(url, text)
+            value: generateSpotifyEmbed(url)
           };
 
           parent.children[index] = mediaNode;
         }
       }
 
-      // Also look for text patterns like ::media[url]{options}
       if (node.children.length === 1 && node.children[0].type === "text") {
-        const text = node.children[0].value;
-        const mediaMatch = text.match(/::media\[([^\]]+)\](?:\{([^}]+)\})?/);
+        const text = (node.children[0] as Text).value;
+        const mediaMatch = text.match(/::media\[([^\]]+)\]/);
 
         if (mediaMatch) {
           const url = mediaMatch[1];
-          const options = mediaMatch[2] ? parseOptions(mediaMatch[2]) : {};
 
           if (isSpotifyUrl(url)) {
-            const mediaNode = {
+            const mediaNode: Html = {
               type: "html",
-              value: generateSpotifyEmbed(url, options)
+              value: generateSpotifyEmbed(url)
             };
 
             parent.children[index] = mediaNode;
@@ -44,27 +47,13 @@ export function remarkSpotifyEmbed() {
   };
 }
 
-function isSpotifyUrl(url) {
+function isSpotifyUrl(url: string): boolean {
   return url.includes("spotify.com/");
 }
 
-function parseOptions(optionsStr) {
-  const options = {};
-  const pairs = optionsStr.split(" ");
-
-  pairs.forEach(pair => {
-    const [key, value] = pair.split("=");
-    if (key && value) {
-      options[key] = value.replace(/['"]/g, "");
-    }
-  });
-
-  return options;
-}
-
-function generateSpotifyEmbed(url, options = {}) {
+function generateSpotifyEmbed(url: string): string {
   const spotifyData = extractSpotifyData(url);
-  const height = options.height || "152";
+  const height = getSpotifyHeight(spotifyData.type);
 
   return `<div class="media-embed spotify-embed">
     <iframe
@@ -80,7 +69,7 @@ function generateSpotifyEmbed(url, options = {}) {
   </div>`;
 }
 
-function extractSpotifyData(url) {
+function extractSpotifyData(url: string): SpotifyData {
   const match = url.match(/spotify\.com\/(track|album|playlist|artist|show|episode)\/([a-zA-Z0-9]+)/);
   if (match) {
     return {
@@ -89,4 +78,16 @@ function extractSpotifyData(url) {
     };
   }
   return { type: "track", id: "" };
+}
+
+function getSpotifyHeight(type: string): string {
+  const heights: Record<string, string> = {
+    track: "152",
+    album: "352",
+    playlist: "352",
+    artist: "352",
+    show: "232",
+    episode: "232"
+  };
+  return heights[type] || "152";
 }

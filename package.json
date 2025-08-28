@@ -13,7 +13,6 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@astro-community/astro-embed-integration": "^0.8.1",
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^4.3.4",
     "@astrojs/react": "4.3.0",
@@ -25,7 +24,6 @@
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "astro": "^5.13.2",
-    "astro-icon": "^1.1.5",
     "clsx": "^2.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -39,8 +37,8 @@
     "@eslint/config-array": "^0.19.2",
     "@eslint/js": "^9.32.0",
     "@eslint/object-schema": "^2.0.1",
-    "@types/markdown-it": "^14.1.2",
-    "@types/sanitize-html": "^2.16.0",
+    "@types/mdast": "^4.0.4",
+    "@types/unist": "^3.0.3",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
     "eslint": "^9.22.0",
