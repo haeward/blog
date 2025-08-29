@@ -205,4 +205,6 @@ const { title, description, image = "/favicon.png" } = Astro.props;
 </script>
 
 <!-- Umami Analytics -->
-<script is:inline defer src=`${import.meta.env.UMAMI_SCRIPT_URL}` data-website-id=`${import.meta.env.UMAMI_WEBSITE_ID}`></script>
+{import.meta.env.UMAMI_SCRIPT_URL && import.meta.env.UMAMI_WEBSITE_ID && (
+  <script is:inline defer src={import.meta.env.UMAMI_SCRIPT_URL} data-website-id={import.meta.env.UMAMI_WEBSITE_ID}></script>
+)}
