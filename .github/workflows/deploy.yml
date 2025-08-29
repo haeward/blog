@@ -33,8 +33,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Codecov
+      - name: Run tests
+        run: npx jest --coverage
+
+      - name: Upload Codecov Report
         uses: codecov/codecov-action@v5.5.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Build
         run: pnpm run build
