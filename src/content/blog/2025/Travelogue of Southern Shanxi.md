@@ -133,7 +133,7 @@ tags: ["shanxi", "architecture", "nature"]
 
 ![广胜寺-飞虹塔-檐角](https://webp.haeward.com/2025/08/feihong-tower-eaves-corner.heic)
 
-![广胜寺-飞虹塔-世界证书](https://webp.haeward.com/2025/08/feihong-tower-word-record.heic)
+![广胜寺-飞虹塔-世界纪录证书](https://webp.haeward.com/2025/08/feihong-tower-word-record.heic)
 
 穿过飞虹塔，后面有弥陀殿、大雄宝殿、观音殿、地藏殿等建筑，供奉着各种佛像。
 
@@ -155,9 +155,9 @@ tags: ["shanxi", "architecture", "nature"]
 
 靠近瀑布时，黄河水的咆哮声越来越清晰。奔腾的河水在这里收束成壶口状，然后倾泻而下，掀起漫天水雾，场面蔚为壮观。
 
-![黄河壶口瀑布-1](https://webp.haeward.com/2025/08/yellow-river-1.jpeg)
+![黄河壶口瀑布](https://webp.haeward.com/2025/08/yellow-river-1.jpeg)
 
-![黄河壶口瀑布-2](https://webp.haeward.com/2025/08/yellow-river-2.jpeg)
+![黄河壶口瀑布](https://webp.haeward.com/2025/08/yellow-river-2.jpeg)
 
 > 需要时刻注意脚下，路上都是水，稍不留神就会滑倒。另外，水花会一直往岸上溅，最好备有防水设备，比如：雨衣、鞋套、防水袋和毛巾等。
 

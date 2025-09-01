@@ -3,6 +3,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import { remarkSpotifyEmbed } from "./src/lib/remark-spotify-embed.ts";
+import remarkImageCaption from "./src/lib/remark-image-caption.ts";
 
 import react from "@astrojs/react";
 
@@ -25,6 +26,7 @@ export default defineConfig({
     },
     remarkPlugins: [
       remarkSpotifyEmbed,
+      remarkImageCaption,
     ]
   },
 

@@ -241,18 +241,29 @@ html.scrolled #back-to-top {
 }
 
 figure {
-  margin: 1.5em 0;
-  text-align: center;
+  @apply my-6 text-center;
 }
 
 figure img {
-  max-width: 100%;
-  height: auto;
+  @apply max-w-full h-auto mx-auto rounded-lg shadow-sm;
 }
 
 figcaption {
-  margin-top: 0.5em;
-  @apply text-[#555] dark:text-[#C2C2C0];
-  font-size: 0.8em;
-  text-align: center;
+  @apply mt-3 px-4 text-sm text-gray-600 dark:text-gray-400 text-center font-medium;
+  @apply leading-relaxed;
+  line-height: 1.4;
+}
+
+/* Additional prose image styling */
+.prose figure, .prose-invert figure, article figure {
+  @apply my-8 !important;
+}
+
+.prose figcaption, .prose-invert figcaption, article figcaption {
+  @apply text-sm text-gray-600 dark:text-gray-400 font-medium !important;
+  @apply mt-3 px-2 leading-relaxed !important;
+}
+
+.prose img, .prose-invert img, article img {
+  @apply rounded-lg shadow-sm !important;
 }
