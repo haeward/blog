@@ -13,6 +13,7 @@ Reading thoughtful blogs has become an essential part of my daily routine. These
 - [夜天之书](https://www.tisonkun.org)
 - [yihong](https://blog.yihong0618.me)
 - [阮一峰的网络日志](http://www.ruanyifeng.com/blog)
+- [Armin Ronacher](https://lucumr.pocoo.org)
 - [椒盐豆豉](https://blog.douchi.space)
 - [卡瓦邦噶！](https://www.kawabangga.com)
 - [ArthurChiao](https://arthurchiao.github.io)
@@ -20,6 +21,7 @@ Reading thoughtful blogs has become an essential part of my daily routine. These
 - [piglei](http://www.piglei.com)
 - [思为说](https://siwei.io)
 - [Frost Ming](https://frostming.com)
+- [Guangzhen Li](https://guangzhengli.com/)
 - [GeekPlux](https://geekplux.com)
 - [Vimiix](https://www.vimiix.com)
 - [谢乾坤｜Kingname](https://kingname.info)
@@ -52,6 +54,7 @@ Reading thoughtful blogs has become an essential part of my daily routine. These
 - [Inoki](https://blog.inoki.cc)
 - [Jacob Press](https://jacobzuo.github.io/blog)
 - [邓布利多的冥想盆](https://pensieve.wangxindi.org)
+- [Shi Hai's Blog](https://shihai1991.github.io)
 
 ### Official & Community
 
