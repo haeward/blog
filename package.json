@@ -48,6 +48,9 @@
     "vite": "6.4.1"
   },
   "pnpm": {
+    "overrides": {
+      "lodash": "4.17.23"
+    },
     "onlyBuiltDependencies": [
       "esbuild",
       "sharp"
