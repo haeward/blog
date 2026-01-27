@@ -21,7 +21,7 @@ tags: ["shanxi", "architecture", "nature"]
 
 8 月 7 日晚上 7 点 49 分，到达运城北站，一座巨大的关公雕像映入眼帘，仿佛这座千年英雄在迎接回乡的旅人和远道而来的游客。
 
-![运城北站关公雕像](https://webp.haeward.com/2025/08/yuncheng-north-station.heic)
+![运城北站关公雕像](https://webp.haeward.com/2026/01/yuncheng-north-station.jpeg)
 
 乘出租车到达酒店，酒店不错，非常干净，房间宽敞，居然还有全屋智能系统，性价比拉满，如果下次再来运城，我还是会选择这家酒店的。放下行李后，便决定出门逛逛，顺便吃点东西。忍着燥热漫步在运城的街头，夜晚的运城街头格外宁静，行人稀少，车辆不多，或许运城人民的夜生活比较少，随便吃了点东西便返回酒店。买了景区门票，和司机约好时间便休息了。
 
@@ -29,17 +29,17 @@ tags: ["shanxi", "architecture", "nature"]
 
 ### 关帝庙
 
-在去关帝庙的途中，我们经过“中国死海”盐湖 —— 古称河东盐池，是世界三大硫酸钠型内陆盐湖之一，总面积约132平方公里。观景平台上，郭沫若先生题写的石碑静静伫立，湖水在阳光下泛着微光，远处的中条山倒映其中，形成了一幅天然的山水画。
+在去关帝庙的途中，我们经过“中国死海”盐湖 —— 古称河东盐池，是世界三大硫酸钠型内陆盐湖之一，总面积约 132 平方公里。观景平台上，郭沫若先生题写的石碑静静伫立，湖水在阳光下泛着微光，远处的中条山倒映其中，形成了一幅天然的山水画。
 
-![运城-盐湖观景平台](https://webp.haeward.com/2025/08/yuncheng-yanhu.heic)
+![运城 - 盐湖观景平台](https://webp.haeward.com/2026/01/yuncheng-yanhu.jpeg)
 
 继续出发前往解（hai，四声）州关帝庙 —— 中国最大的关帝庙，被誉为“武庙之祖”。刚进门，从蜀汉武将到忠义象征，从历史人物到神灵化身，关羽的谥号在历代不断加封。这不仅反映了民间对关公信仰的日益强烈，更体现了古代政权如何巧妙地利用关公的忠义形象来强化统治和道德规范。历史与政治，信仰与治理，在这些不断增加的封号中交织融合。
 
-![关公生前职官、殁后历代封谥](https://webp.haeward.com/2025/08/guanyu.heic)
+![关公生前职官、殁后历代封谥](https://webp.haeward.com/2026/01/guanyu.jpeg)
 
 穿过结义园和御书楼，来到主殿崇宁殿。这里因关羽被宋徽宗封为“崇宁真君”而得此殿名，乾隆皇帝钦赐的"神勇"牌匾悬挂在大殿正中，大殿四周环绕着二十六根石雕盘龙廊柱，柱子上雕刻着各种图案，听说有柱子上刻有龙抓乌龟，摸到会有好运，不过我并没有细看。
 
-![崇宁殿 —— “神勇”](https://webp.haeward.com/2025/08/guanyu-shenyong.heic)
+![崇宁殿 —— “神勇”](https://webp.haeward.com/2026/01/guanyu-shenyong.jpeg)
 
 主殿后面还有一些建筑和园林，逛了逛边出景区了，前往永济市游观接下来的景点。
 
@@ -51,15 +51,15 @@ tags: ["shanxi", "architecture", "nature"]
 
 这座建于明嘉靖四十三年（1564 年）的古塔，距今有 460 余年的历史，塔身高 39.5 米，十三层，具有奇特的回音效应，与北京天坛的回音壁、河南三门峡宝轮寺塔、四川潼南县大佛寺的“石蹬琴声”被誉为我国古典园林的四大回音建筑。不过我们只在外面观赏了一会。
 
-![莺莺塔](https://webp.haeward.com/2025/08/yingying-tower.heic)
+![莺莺塔](https://webp.haeward.com/2026/01/yingying-tower.jpeg)
 
 > 普愿天下有情，都成菩提眷属
 
-![普救寺](https://webp.haeward.com/2025/08/pujiu-temple.heic)
+![普救寺](https://webp.haeward.com/2026/01/pujiu-temple.jpeg)
 
 唐开元十二年建造的黄河大铁牛，是古代用来牵拉蒲津渡铁索浮桥的重要设施。我们简单看了看，拍了张照片就走了。
 
-![黄河铁牛](https://webp.haeward.com/2025/08/yellow-river-iron-ox.heic)
+![黄河铁牛](https://webp.haeward.com/2026/01/yellow-river-iron-ox.jpeg)
 
 ### 鹳雀楼
 
@@ -67,7 +67,7 @@ tags: ["shanxi", "architecture", "nature"]
 
 > 白日依山尽，黄河入海流。欲穷千里目，更上一层楼。
 
-![鹳雀楼](https://webp.haeward.com/2025/08/guanquelou.heic)
+![鹳雀楼](https://webp.haeward.com/2026/01/guanquelou.jpeg)
 
 楼上（大概四/五楼）还有摄影展，摆放了一些摄影作品，其中一些自然景观的摄影作品非常不错。
 
@@ -81,23 +81,23 @@ tags: ["shanxi", "architecture", "nature"]
 
 三清殿是永乐宫最重要的殿宇，也称为无极殿，供奉着道教至高神三清道祖 —— 玉清元始天尊、上清灵宝天尊、太清道德天尊。
 
-![永乐宫-三清殿](https://webp.haeward.com/2025/08/yonglegong-sanqingdian.jpeg)
+![永乐宫 - 三清殿](https://webp.haeward.com/2025/08/yonglegong-sanqingdian.jpeg)
 
 该殿内保存古代壁画巨制《朝元图》，描绘了道教 290 位天神地祇朝拜最高尊神元始天尊的盛大场景，人物形象生动，色彩绚丽依然。有网友申报后拍了一组照片，可以访问查看：[永乐宫不能拍照的遗憾，我来为大家弥补！ —— 乌鱼呀哈](http://xhslink.com/n/5NR2fUhrfos)，我还在网上找到一张图，可以参考：
 
-![永乐宫-朝元图](https://webp.haeward.com/2025/08/yonglegong-chaoyuantu.jpg)
+![永乐宫 - 朝元图](https://webp.haeward.com/2025/08/yonglegong-chaoyuantu.jpg)
 
-三清殿后面是纯阳殿，也称为混成殿、吕祖殿，供奉道教全真教祖师吕洞宾，该殿内东、北、西三壁绘有《纯阳帝君神游显化图》，描述了道教祖师吕洞宾的生平故事。再后面是重阳殿，因供奉全真派创教祖师王重阳和他的七位弟子，也称为“七真殿”，殿内壁画上描述了王重阳及其弟子传教布道的49幅故事。
+三清殿后面是纯阳殿，也称为混成殿、吕祖殿，供奉道教全真教祖师吕洞宾，该殿内东、北、西三壁绘有《纯阳帝君神游显化图》，描述了道教祖师吕洞宾的生平故事。再后面是重阳殿，因供奉全真派创教祖师王重阳和他的七位弟子，也称为“七真殿”，殿内壁画上描述了王重阳及其弟子传教布道的 49 幅故事。
 
 ### 关帝圣像
 
 在回运城的路上，司机大哥说恰好经过关帝圣像景区，我们决定去看看这座世界最高的关公铜像。临近景区，远远就望见了关帝圣像巍然屹立，十分高大雄伟。后来了解到关帝圣像高达 80 米，其中铜体高 61 米象征关羽 61 岁的人生历程，19 米底座对应其 19 岁成家立业的节点。
 
-![关帝圣像](https://webp.haeward.com/2025/08/guandishenxiang.heic)
+![关帝圣像](https://webp.haeward.com/2026/01/guandishenxiang.jpeg)
 
 距离关园还有点时间，山也不高，只有 500 米，所以我们决定步行登山，然后乘观光车下山。登上铜像底座，向山下远远望去，盐湖就出现在我们眼前，可惜天气不好，我们刚登顶就出现了雷阵雨，差点淋成了落汤鸡，不一会就下山了。下山途中，令人非常惊奇的是，山体上居然有“关羽”字样。
 
-![关帝圣像-盐湖景观](https://webp.haeward.com/2025/08/guandishenxiang-landscape.heic)
+![关帝圣像 - 盐湖景观](https://webp.haeward.com/2026/01/guandishenxiang-landscape.jpeg)
 
 运城之行真的是首尾呼应，初到时看到高铁站的关公像，离别前又瞻仰了关帝圣像，真是缘分。
 
@@ -109,31 +109,31 @@ tags: ["shanxi", "architecture", "nature"]
 
 ### 广胜寺
 
-广胜寺始建于东汉桓帝建和元年（147年），原名俱庐舍寺，亦称育王塔院，唐代改称广胜寺。广胜寺有“三绝”：飞虹塔、赵城金藏和水神庙元代壁画，赵城金藏现藏于国家图书馆，是四大镇馆之宝之一，此行没有见到，甚是遗憾。
+广胜寺始建于东汉桓帝建和元年（147 年），原名俱庐舍寺，亦称育王塔院，唐代改称广胜寺。广胜寺有“三绝”：飞虹塔、赵城金藏和水神庙元代壁画，赵城金藏现藏于国家图书馆，是四大镇馆之宝之一，此行没有见到，甚是遗憾。
 
-![广胜寺碑](https://webp.haeward.com/2025/08/guangshengsibei.heic)
+![广胜寺碑](https://webp.haeward.com/2026/01/guangshengsibei.jpeg)
 
 到了广胜寺，才知道有下寺和上寺之别，由广胜上寺、广胜下寺和水神庙三组建筑组成。山下为水神庙和下寺，原本在殿内绘满了壁画，现仅有水神庙残存的 16 平方米壁画，大部分壁画在 1928 年被盗卖出国，存于美国堪萨斯城纳尔逊艺术馆。不过我们在旁边的展厅看到了一些壁画的复印品，依旧可以感受到古代匠人的精湛技艺。
 
-![广胜寺-水神庙](https://webp.haeward.com/2025/08/guangshengsi-shuishenmiao.jpeg)
+![广胜寺 - 水神庙](https://webp.haeward.com/2025/08/guangshengsi-shuishenmiao.jpeg)
 
-![广胜寺-水神庙-祈雨图](https://webp.haeward.com/2025/08/guangshengsi-qiyutu.jpeg)
+![广胜寺 - 水神庙 - 祈雨图](https://webp.haeward.com/2025/08/guangshengsi-qiyutu.jpeg)
 
-![广胜寺-下寺大雄宝殿-炽盛光佛佛会图](https://webp.haeward.com/2025/08/guangshengsi-fohuitu.jpeg)
+![广胜寺 - 下寺大雄宝殿 - 炽盛光佛佛会图](https://webp.haeward.com/2025/08/guangshengsi-fohuitu.jpeg)
 
 逛完了下寺和水神庙，前往上寺，依旧选择步行上山、乘车下山。
 
-![广胜寺-上山途中](https://webp.haeward.com/2025/08/guangshengsi-mountain-climbing.jpeg)
+![广胜寺 - 上山途中](https://webp.haeward.com/2025/08/guangshengsi-mountain-climbing.jpeg)
 
-上寺的飞虹塔是广胜寺的标志性建筑，是五座佛祖舍利塔和中国现存四座古塔之一，也是迄今为止发现的唯一留有工匠题款、最大最完整的琉璃塔，塔身八角十三层，高 47.31 米，外壁用多彩琉璃装饰，美轮美奂。塔旁还有一块世界纪录的立牌，被确认为“世界最高的多彩琉璃塔”。同时，飞虹塔也是 86 版《西游记》中 《扫塔辨奇冤》章节的取景地，承载着大多数人的童年记忆。
+上寺的飞虹塔是广胜寺的标志性建筑，是五座佛祖舍利塔和中国现存四座古塔之一，也是迄今为止发现的唯一留有工匠题款、最大最完整的琉璃塔，塔身八角十三层，高 47.31 米，外壁用多彩琉璃装饰，美轮美奂。塔旁还有一块世界纪录的立牌，被确认为“世界最高的多彩琉璃塔”。同时，飞虹塔也是 86 版《西游记》中《扫塔辨奇冤》章节的取景地，承载着大多数人的童年记忆。
 
-![广胜寺-飞虹塔](https://webp.haeward.com/2025/08/feihong-tower.heic)
+![广胜寺 - 飞虹塔](https://webp.haeward.com/2026/01/feihong-tower.jpeg)
 
-![广胜寺-飞虹塔-塔身](https://webp.haeward.com/2025/08/feihong-tower-body.heic)
+![广胜寺 - 飞虹塔 - 塔身](https://webp.haeward.com/2026/01/feihong-tower-body.jpeg)
 
-![广胜寺-飞虹塔-檐角](https://webp.haeward.com/2025/08/feihong-tower-eaves-corner.heic)
+![广胜寺 - 飞虹塔 - 檐角](https://webp.haeward.com/2026/01/feihong-tower-eaves-corner.jpeg)
 
-![广胜寺-飞虹塔-世界纪录证书](https://webp.haeward.com/2025/08/feihong-tower-word-record.heic)
+![广胜寺 - 飞虹塔 - 世界纪录证书](https://webp.haeward.com/2026/01/feihong-tower-word-record.jpeg)
 
 穿过飞虹塔，后面有弥陀殿、大雄宝殿、观音殿、地藏殿等建筑，供奉着各种佛像。
 
@@ -147,7 +147,7 @@ tags: ["shanxi", "architecture", "nature"]
 
 下来后，在景区门口买了隰县的特色“玉露香梨”，汁水很足，味道不错，也算是给我们的小西天之旅带来一丝慰藉。在前往下一站的路上，在网上看了些大雄宝殿悬塑的照片，确实不错，我在这里也放一个链接：[隰县小西天｜闻罢隰山苌楚歌，身登梵境法森罗 —— 宣和子](http://xhslink.com/n/4i66ptsQXs7)。
 
-![小西天-大雄宝殿](https://webp.haeward.com/2025/08/xiaoxitian.jpg)
+![小西天 - 大雄宝殿](https://webp.haeward.com/2025/08/xiaoxitian.jpg)
 
 ### 黄河壶口瀑布
 
