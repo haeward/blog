@@ -248,6 +248,113 @@ figure img {
   @apply max-w-full h-auto mx-auto rounded-lg shadow-sm;
 }
 
+html.image-lightbox-open {
+  overflow: hidden;
+}
+
+.blog-article img {
+  cursor: zoom-in;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  will-change: transform;
+}
+
+.blog-article img:hover {
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+}
+
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.image-lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transition-duration: 140ms;
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.image-lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.image-lightbox__figure {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  max-width: min(92vw, 1200px);
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(6px) scale(0.98);
+  transition: transform 240ms cubic-bezier(0.2, 0.6, 0.2, 1), opacity 240ms cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.image-lightbox.is-open .image-lightbox__figure {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-duration: 160ms;
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.image-lightbox__img {
+  max-width: 92vw;
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transform: scale(0.98);
+  transition: transform 260ms cubic-bezier(0.2, 0.6, 0.2, 1), opacity 260ms cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.image-lightbox.is-ready .image-lightbox__img {
+  opacity: 1;
+  transform: scale(1);
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.image-lightbox__caption {
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 80vw;
+}
+
+.image-lightbox.is-loading .image-lightbox__figure::after {
+  content: "";
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: rgba(255, 255, 255, 0.9);
+  animation: image-lightbox-spin 0.8s linear infinite;
+}
+
+@keyframes image-lightbox-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 figcaption {
   @apply mt-3 px-4 text-sm text-gray-600 dark:text-gray-400 text-center font-medium;
   @apply leading-relaxed;

@@ -93,7 +93,7 @@ const allPosts = await getCollection("blog", ({ data }) => !data.draft);
       </div>
     </div>
 
-    <article class="animate mt-10">
+    <article class="animate mt-10 blog-article">
       <Content />
     </article>
 
@@ -147,4 +147,85 @@ const allPosts = await getCollection("blog", ({ data }) => !data.draft);
   </Container>
 
   <LinkEnhancer />
+
+  <div id="image-lightbox" class="image-lightbox" aria-hidden="true">
+    <div class="image-lightbox__backdrop" data-close="true"></div>
+    <figure class="image-lightbox__figure" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <img class="image-lightbox__img" alt="" data-close="true" />
+      <figcaption class="image-lightbox__caption" hidden></figcaption>
+    </figure>
+  </div>
+
+  <script is:inline>
+    (() => {
+      const article = document.querySelector(".blog-article");
+      const overlay = document.getElementById("image-lightbox");
+      if (!article || !overlay) return;
+
+      const overlayImg = overlay.querySelector(".image-lightbox__img");
+      const overlayCaption = overlay.querySelector(".image-lightbox__caption");
+
+      const open = (img) => {
+        const src = img.currentSrc || img.src;
+        if (!src) return;
+        overlayImg.alt = img.alt || "";
+        overlay.classList.add("is-loading");
+        overlay.classList.remove("is-ready", "is-error");
+        overlayImg.onload = () => {
+          overlay.classList.add("is-ready");
+          overlay.classList.remove("is-loading");
+        };
+        overlayImg.onerror = () => {
+          overlay.classList.remove("is-loading");
+          overlay.classList.add("is-error");
+        };
+        overlayImg.src = src;
+        if (overlayCaption) {
+          const text = img.alt?.trim();
+          overlayCaption.textContent = text || "";
+          overlayCaption.hidden = !text;
+        }
+        overlay.classList.add("is-open");
+        overlay.setAttribute("aria-hidden", "false");
+        document.documentElement.classList.add("image-lightbox-open");
+      };
+
+      const close = () => {
+        overlay.classList.remove("is-open");
+        overlay.setAttribute("aria-hidden", "true");
+        document.documentElement.classList.remove("image-lightbox-open");
+        overlay.classList.remove("is-ready", "is-loading", "is-error");
+        overlayImg.src = "";
+        overlayImg.alt = "";
+        overlayImg.onload = null;
+        overlayImg.onerror = null;
+        if (overlayCaption) {
+          overlayCaption.textContent = "";
+          overlayCaption.hidden = true;
+        }
+      };
+
+      article.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLImageElement)) return;
+        if (target.closest("a")) return;
+        if (target.dataset.noZoom === "true") return;
+        event.preventDefault();
+        open(target);
+      });
+
+      overlay.addEventListener("click", (event) => {
+        const target = event.target;
+        if (target instanceof HTMLElement && target.dataset.close === "true") {
+          close();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && overlay.classList.contains("is-open")) {
+          close();
+        }
+      });
+    })();
+  </script>
 </PageLayout>
