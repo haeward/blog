@@ -157,10 +157,12 @@ const allPosts = await getCollection("blog", ({ data }) => !data.draft);
   </div>
 
   <script is:inline>
-    (() => {
+    const setupImageLightbox = () => {
       const article = document.querySelector(".blog-article");
       const overlay = document.getElementById("image-lightbox");
       if (!article || !overlay) return;
+      if (article.dataset.lightboxBound === "true") return;
+      article.dataset.lightboxBound = "true";
 
       const overlayImg = overlay.querySelector(".image-lightbox__img");
       const overlayCaption = overlay.querySelector(".image-lightbox__caption");
@@ -226,6 +228,9 @@ const allPosts = await getCollection("blog", ({ data }) => !data.draft);
           close();
         }
       });
-    })();
+    };
+
+    document.addEventListener("DOMContentLoaded", setupImageLightbox);
+    document.addEventListener("astro:page-load", setupImageLightbox);
   </script>
 </PageLayout>
