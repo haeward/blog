@@ -1,0 +1,41 @@
+name: douban
+
+on: 
+  schedule:
+  - cron: "0 0,12 * * *"
+  watch:
+    types: [started]
+
+jobs:
+  douban:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    name: Douban mark data sync
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v5
+
+    - name: movies sync
+      uses: lizheming/doumark-action@0.2.0
+      with:
+        id: mithrasu
+        type: movie
+        format: json
+        dir: data/douban
+
+    - name: books sync
+      uses: lizheming/doumark-action@0.2.0
+      with:
+        id: mithrasu
+        type: book
+        format: json
+        dir: ./data/douban
+
+    - name: Commit
+      uses: EndBug/add-and-commit@v9
+      with:
+        message: 'chore: update douban data'
+        add: './data/douban'
