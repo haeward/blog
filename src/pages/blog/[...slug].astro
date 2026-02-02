@@ -3,7 +3,6 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
-import RelatedPosts from "@components/RelatedPosts.astro";
 import LinkEnhancer from "@components/LinkEnhancer.astro";
 import { readingTime, wordCount } from "@lib/utils";
 import { SITE } from "@consts";
@@ -78,8 +77,6 @@ const allPosts = await getCollection("blog", ({ data }) => !data.draft);
     <article class="animate mt-10 blog-article">
       <Content />
     </article>
-
-    <RelatedPosts currentPost={post} allPosts={allPosts} maxPosts={3} />
 
     {(prev || next) && (
       <>
