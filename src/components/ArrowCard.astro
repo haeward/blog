@@ -11,13 +11,6 @@ const { entry } = Astro.props;
     <div class="font-semibold text-sky-700 dark:text-sky-300">
       {entry.data.title}
     </div>
-    <div class="flex flex-wrap gap-1 mt-1">
-      {entry.collection === "blog" && entry.data.tags && entry.data.tags.map((tag: string) => (
-        <span class="text-xs px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10 text-black/85 dark:text-white/75">
-          {tag}
-        </span>
-      ))}
-    </div>
   </div>
   <div class="flex items-center gap-2">
     <div class="text-sm text-black/85 dark:text-white/75 whitespace-nowrap">

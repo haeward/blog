@@ -11,16 +11,6 @@ export const BLOG: Metadata = {
   DESCRIPTION: "A collection of articles on topics I am passionate about.",
 };
 
-export const CATEGORIES: Metadata = {
-  TITLE: "Categories",
-  DESCRIPTION: "A collection of articles on topics I am passionate about.",
-};
-
-export const TAGS: Metadata = {
-  TITLE: "Tags",
-  DESCRIPTION: "A collection of articles on topics I am passionate about.",
-};
-
 export const ABOUT: Metadata = {
   TITLE: "About",
   DESCRIPTION: "Who I am and what I do.",

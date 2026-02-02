@@ -16,26 +16,9 @@ function getRelatedPosts(
   otherPosts: CollectionEntry<"blog">[],
   maxPosts: number
 ): CollectionEntry<"blog">[] {
-  const currentTags = post.data.tags || [];
-  const scoredPosts = otherPosts.map(otherPost => {
-    const otherTags = otherPost.data.tags || [];
-    const commonTags = currentTags.filter(tag =>
-      otherTags.includes(tag)
-    ).length;
-    const categoryBonus =
-      otherPost.data.category === post.data.category ? 2 : 0;
-
-    return {
-      post: otherPost,
-      score: commonTags + categoryBonus
-    };
-  });
-
-  return scoredPosts
-    .filter(item => item.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, maxPosts)
-    .map(item => item.post);
+  return otherPosts
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .slice(0, maxPosts);
 }
 
 const relatedPosts = getRelatedPosts(currentPost, otherPosts, maxPosts);
