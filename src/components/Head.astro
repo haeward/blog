@@ -74,6 +74,7 @@ const { title, description, image = "/favicon.png" } = Astro.props;
   const siteState = window.__siteState || (window.__siteState = { bound: false });
 
   function init() {
+  preloadTheme();
     onScroll();
     animate();
   }
@@ -234,7 +235,6 @@ const { title, description, image = "/favicon.png" } = Astro.props;
     document.addEventListener("astro:after-swap", init);
   }
 
-  preloadTheme();
   bindOnce();
   bindInitListeners();
 
