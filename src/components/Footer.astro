@@ -3,6 +3,8 @@ import Container from "@components/Container.astro";
 import { SITE } from "@consts";
 import BackToTop from "@components/BackToTop.astro";
 import YearProgress from "@components/YearProgress.astro";
+
+const currentYear = new Date().getFullYear();
 ---
 
 <footer class="animate">
@@ -19,7 +21,7 @@ import YearProgress from "@components/YearProgress.astro";
       <div class="animate">
         <a href="/" class="font-bold text-stone-800 dark:text-stone-300">{SITE.NAME}</a>
         {`|`}
-        &copy; 2024 ~ <span id="year"></span>
+        &copy; 2024 ~ {currentYear}
         {" · "}
         <a href="/rss.xml" class="font-bold text-cyan-600 dark:text-cyan-300 underline">RSS</a>
       </div>

@@ -2,7 +2,6 @@ import js from "@eslint/js";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsparser from "@typescript-eslint/parser";
 import astro from "eslint-plugin-astro";
-import jsxA11y from "eslint-plugin-jsx-a11y";
 
 export default [
   // Base ESLint recommended rules
@@ -87,17 +86,6 @@ export default [
       "@typescript-eslint/triple-slash-reference": "off",
       "@typescript-eslint/no-unused-vars": "warn",
       "@typescript-eslint/no-unused-expressions": "warn",
-    },
-  },
-
-  // JSX accessibility for React components
-  {
-    files: ["**/*.{jsx,tsx}"],
-    plugins: {
-      "jsx-a11y": jsxA11y,
-    },
-    rules: {
-      ...jsxA11y.configs.recommended.rules,
     },
   },
 

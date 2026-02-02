@@ -5,14 +5,11 @@ import tailwind from "@astrojs/tailwind";
 import { remarkSpotifyEmbed } from "./src/lib/remark-spotify-embed.ts";
 import remarkImageCaption from "./src/lib/remark-image-caption.ts";
 
-import react from "@astrojs/react";
 
 export default defineConfig({
   site: "https://haeward.com",
 
-  integrations: [sitemap(), tailwind(), react(),
-    mdx()
-  ],
+  integrations: [sitemap(), tailwind(), mdx()],
 
   markdown: {
     syntaxHighlight: "shiki",

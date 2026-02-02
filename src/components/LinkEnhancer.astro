@@ -3,14 +3,6 @@
 ---
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    enhanceLinks();
-  });
-
-  document.addEventListener("astro:page-load", function() {
-    enhanceLinks();
-  });
-
   function enhanceLinks(): void {
     const article = document.querySelector("article");
     if (!article) return;
@@ -30,7 +22,23 @@
       processExternalLink(link);
     }
 
-    addKeyboardNavigation(link);
+    if (!link.hasAttribute("aria-label")) {
+      const text = link.textContent?.trim();
+      if (text) {
+        if (href.startsWith("http")) {
+          try {
+            const domain = new URL(href).hostname;
+            link.setAttribute("aria-label", `${text} - External link to ${domain}`);
+          } catch {
+            link.setAttribute("aria-label", `${text} - External link`);
+          }
+        } else if (href.startsWith("mailto:")) {
+          link.setAttribute("aria-label", `Send email to ${text}`);
+        } else {
+          link.setAttribute("aria-label", `Internal link: ${text}`);
+        }
+      }
+    }
   }
 
   function processExternalLink(link: HTMLAnchorElement): void {
@@ -38,63 +46,15 @@
     link.setAttribute("rel", "noopener noreferrer");
   }
 
-  function addKeyboardNavigation(link: HTMLAnchorElement): void {
-    if (!link.hasAttribute("tabindex")) {
-      link.setAttribute("tabindex", "0");
-    }
-
-    link.addEventListener("keydown", function(e: KeyboardEvent) {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        link.click();
-      }
-    });
-
-    if (!link.hasAttribute("aria-label") && link.textContent) {
-      const href = link.getAttribute("href");
-      if (href?.startsWith("http")) {
-        try {
-          const domain = new URL(href).hostname;
-          link.setAttribute("aria-label", `${link.textContent} - External link to ${domain}`);
-        } catch {
-          link.setAttribute("aria-label", `${link.textContent} - External link`);
-        }
-      } else if (href?.startsWith("mailto:")) {
-        link.setAttribute("aria-label", `Send email to ${link.textContent}`);
-      } else {
-        link.setAttribute("aria-label", `Internal link: ${link.textContent}`);
-      }
-    }
+  const globalWindow = window as Window & { __linkEnhancerState?: { bound: boolean } };
+  const linkEnhancerState = globalWindow.__linkEnhancerState || (globalWindow.__linkEnhancerState = { bound: false });
+  if (!linkEnhancerState.bound) {
+    linkEnhancerState.bound = true;
+    document.addEventListener("DOMContentLoaded", enhanceLinks);
+    document.addEventListener("astro:page-load", enhanceLinks);
   }
 
-  if (typeof MutationObserver !== "undefined") {
-    const observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        if (mutation.type === "childList") {
-          mutation.addedNodes.forEach(function(node) {
-            if (node.nodeType === Node.ELEMENT_NODE) {
-              const element = node as Element;
-              const newLinks = element.querySelectorAll ? element.querySelectorAll("a") : [];
-              newLinks.forEach(link => {
-                const href = link.getAttribute("href");
-                if (href) {
-                  processLink(link as HTMLAnchorElement, href);
-                }
-              });
-            }
-          });
-        }
-      });
-    });
-
-    const article = document.querySelector("article");
-    if (article) {
-      observer.observe(article, {
-        childList: true,
-        subtree: true
-      });
-    }
-  }
+  enhanceLinks();
 </script>
 
 <style>

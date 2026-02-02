@@ -29,6 +29,7 @@ const stars = Math.max(0, Math.min(5, Math.round(item.myRating ?? 0)));
             <img
               src={item.cover}
               alt={item.title}
+              loading="lazy"
               decoding="async"
               width="320"
               height="480"
@@ -72,6 +73,7 @@ const stars = Math.max(0, Math.min(5, Math.round(item.myRating ?? 0)));
           <img
             src={item.cover}
             alt={item.title}
+            loading="lazy"
             decoding="async"
             width="320"
             height="480"

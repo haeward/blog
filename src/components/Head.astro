@@ -71,19 +71,40 @@ const { title, description, image = "/favicon.png" } = Astro.props;
 </script>
 
 <script is:inline>
+  const siteState = window.__siteState || (window.__siteState = { bound: false });
+
   function init() {
-    preloadTheme();
     onScroll();
     animate();
+  }
 
-    const backToTop = document.getElementById("back-to-top");
-    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+  function bindOnce() {
+    if (siteState.bound) return;
+    siteState.bound = true;
 
-    const backToPrev = document.getElementById("back-to-prev");
-    backToPrev?.addEventListener("click", () => window.history.back());
+    document.addEventListener("click", handleDocumentClick);
+    window.addEventListener("scroll", onScroll, { passive: true });
 
-    const themeToggle = document.getElementById("theme-toggle");
-    themeToggle?.addEventListener("click", () => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleSchemeChange = (event) => {
+      if (localStorage.theme === "system" || !localStorage.theme) {
+        toggleTheme(event.matches);
+      }
+    };
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleSchemeChange);
+    } else if ("onchange" in mediaQuery) {
+      mediaQuery.onchange = handleSchemeChange;
+    }
+  }
+
+  function handleDocumentClick(event) {
+    if (!(event.target instanceof Element)) return;
+
+    const themeToggle = event.target.closest("#theme-toggle");
+    if (themeToggle) {
+      event.preventDefault();
       if (document.documentElement.classList.contains("dark")) {
         localStorage.setItem("theme", "light");
         toggleTheme(false);
@@ -91,53 +112,60 @@ const { title, description, image = "/favicon.png" } = Astro.props;
         localStorage.setItem("theme", "dark");
         toggleTheme(true);
       }
-    });
+      return;
+    }
 
-    // add code block copy functionality
-    addCopyFunctionality();
+    const backToTop = event.target.closest("#back-to-top");
+    if (backToTop) {
+      event.preventDefault();
+      scrollToTop();
+      return;
+    }
 
-    window.matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", event => {
-        if (localStorage.theme === "system" || !localStorage.theme) {
-          toggleTheme(event.matches);
-        }
-      }
-    );
+    const backToPrev = event.target.closest("#back-to-prev");
+    if (backToPrev) {
+      event.preventDefault();
+      window.history.back();
+      return;
+    }
 
-    document.addEventListener("scroll", onScroll);
+    const pre = event.target.closest("pre");
+    if (pre) {
+      void tryCopyCode(pre, event);
+    }
   }
 
-  function addCopyFunctionality() {
-    const codeBlocks = document.querySelectorAll("pre");
+  async function tryCopyCode(pre, event) {
+    if (!(event instanceof MouseEvent)) return;
+    if (!navigator?.clipboard?.writeText) return;
 
-    codeBlocks.forEach(pre => {
-      pre.addEventListener("click", async (e) => {
-        const rect = pre.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+    const rect = pre.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
 
-        if (x > rect.width - 40 && x < rect.width - 8 && y > 8 && y < 40) {
-          const code = pre.textContent || "";
+    if (x > rect.width - 40 && x < rect.width - 8 && y > 8 && y < 40) {
+      const code = pre.textContent || "";
+      if (!code) return;
 
-          try {
-            await navigator.clipboard.writeText(code);
+      try {
+        await navigator.clipboard.writeText(code);
 
-            pre.style.setProperty("--copy-icon", "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%23ffffff'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7' /%3e%3c/svg%3e\")");
+        pre.style.setProperty(
+          "--copy-icon",
+          "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%23ffffff'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7' /%3e%3c/svg%3e\")"
+        );
 
-            setTimeout(() => {
-              pre.style.removeProperty("--copy-icon");
-            }, 2000);
-
-          } catch (err) {
-            console.error("copy failed:", err);
-          }
-        }
-      });
-    });
+        setTimeout(() => {
+          pre.style.removeProperty("--copy-icon");
+        }, 2000);
+      } catch (err) {
+        console.error("copy failed:", err);
+      }
+    }
   }
 
   function animate() {
-    const animateElements = document.querySelectorAll(".animate");
+    const animateElements = document.querySelectorAll(".animate:not(.show)");
 
     animateElements.forEach((element, index) => {
       setTimeout(() => {
@@ -154,8 +182,7 @@ const { title, description, image = "/favicon.png" } = Astro.props;
     }
   }
 
-  function scrollToTop(event) {
-    event.preventDefault();
+  function scrollToTop() {
     window.scrollTo({
       top: 0,
       behavior: "smooth"
@@ -174,7 +201,7 @@ const { title, description, image = "/favicon.png" } = Astro.props;
              -ms-transition: none !important;
              transition: none !important;
           }
-        `,
+        `
       )
     );
 
@@ -200,7 +227,18 @@ const { title, description, image = "/favicon.png" } = Astro.props;
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => init());
-  document.addEventListener("astro:after-swap", () => init());
+  function bindInitListeners() {
+    if (siteState.initBound) return;
+    siteState.initBound = true;
+    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("astro:after-swap", init);
+  }
+
   preloadTheme();
+  bindOnce();
+  bindInitListeners();
+
+  if (document.readyState !== "loading") {
+    init();
+  }
 </script>
