@@ -3,8 +3,6 @@ title: "晋南游记"
 description: "记录在运城和临汾的旅程"
 date: "2025-08-12"
 draft: false
-category: "Travel"
-tags: ["shanxi", "architecture", "nature"]
 ---
 
 这几天，高中同学在年休，我们便约好在山西一同游玩几天，最终将目的地选在了“关公故里” —— [运城](https://zh.wikipedia.org/wiki/%E8%BF%90%E5%9F%8E%E5%B8%82) 和 "华夏第一都" —— [临汾](https://zh.wikipedia.org/wiki/%E4%B8%B4%E6%B1%BE%E5%B8%82)。

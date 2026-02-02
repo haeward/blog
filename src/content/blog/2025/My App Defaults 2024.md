@@ -3,8 +3,6 @@ title: "My App Defaults 2024"
 description: "A list of my app Defaults in 2024"
 date: "2025-01-15"
 draft: false
-category: "Software"
-tags: ["macOS", "app", "productivity"]
 ---
 
 As a bit of an app geek, I'm always trying out all sorts of new stuff. In 2024, I've played around with a bunch of cool new apps, but I've also stuck with some of my old favorites. They might not have all the latest bells and whistles, but you just can't beat them for reliability.
