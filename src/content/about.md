@@ -16,7 +16,7 @@ Currently learning **Japanese (日本語)**. I'd love to connect if you're inter
 
 ---
 
-### Find Me on the Web 🌐
+## Find Me on the Web 🌐
 
 I'm active on a few other corners of the internet. Let's connect!
 
@@ -27,3 +27,13 @@ I'm active on a few other corners of the internet. Let's connect!
 * [Bangumi](https://bgm.tv/user/haeward): Tracking my anime and drama journey.
 
 Have a question, a project idea, or just want to say hello? Feel free to reach out via email: [me@haeward.com](mailto:me@haeward.com)
+
+---
+
+## Changelog
+
+* 2025-08-20 Add changelog to Now page
+* 2025-07-31 Add Blogroll page and year's progress bar
+* 2025-07-18 Optimize blog post links, add keyboard navigation
+* 2025-07-11 Add previous/next post navigation and related posts
+* 2025-05-24 Add media embed

@@ -22,6 +22,7 @@ const { title, description, image = "/favicon.png" } = Astro.props;
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="referrer" content="no-referrer" />
 <link rel="icon" type="image/svg+xml" href="/reflecting.svg">
 <link rel="icon" type="image/x-icon" href="/reflecting.svg">
 <meta name="generator" content={Astro.generator} />
@@ -203,8 +204,3 @@ const { title, description, image = "/favicon.png" } = Astro.props;
   document.addEventListener("astro:after-swap", () => init());
   preloadTheme();
 </script>
-
-<!-- Umami Analytics -->
-{import.meta.env.UMAMI_SCRIPT_URL && import.meta.env.UMAMI_WEBSITE_ID && (
-  <script is:inline defer src={import.meta.env.UMAMI_SCRIPT_URL} data-website-id={import.meta.env.UMAMI_WEBSITE_ID}></script>
-)}

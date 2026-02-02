@@ -31,15 +31,12 @@ const sortedTags = Object.keys(tagCounts).sort();
   <Container>
     <div class="space-y-10">
       <div class="animate">
-        <h1 class="font-semibold text-2xl text-black/75 dark:text-white/80 mb-4">
-          All Tags
-        </h1>
         <p class="text-stone-600 dark:text-stone-400 text-sm">
           Found {sortedTags.length} tags across {nonDraftPosts.length} posts
         </p>
       </div>
 
-      <div class="animate flex items-center flex-wrap gap-3">
+      <div class="animate flex items-center flex-wrap gap-2">
         {sortedTags.map(tag => (
           <a
             href={`/tags/${tag}`}

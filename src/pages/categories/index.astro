@@ -40,13 +40,10 @@ const sortedCategories = Object.keys(categories).sort();
 <PageLayout title={`${CATEGORIES.TITLE} | ${SITE.NAME}`} description={CATEGORIES.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
-      <h1 class="animate font-semibold text-xl text-black dark:text-white">
-        All Categories
-      </h1>
       <div class="space-y-8">
         {sortedCategories.map(category => (
           <section class="animate">
-            <h2 class="font-semibold text-lg text-black dark:text-white mb-4">
+            <h2 class="font-semibold text-lg text-black dark:text-white mb-2">
               {category}
             </h2>
             <ul class="space-y-2">
