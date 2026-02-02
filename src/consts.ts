@@ -26,9 +26,9 @@ export const ABOUT: Metadata = {
   DESCRIPTION: "Who I am and what I do.",
 };
 
-export const NOW: Metadata = {
-  TITLE: "Now",
-  DESCRIPTION: "What I am currently doing.",
+export const MEDIA: Metadata = {
+  TITLE: "Media",
+  DESCRIPTION: "Movies and books I track.",
 };
 
 export const BLOGROLL: Metadata = {

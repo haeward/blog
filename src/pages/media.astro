@@ -1,0 +1,193 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import MediaCard from "@components/MediaCard.astro";
+import { SITE, MEDIA } from "@consts";
+import { existsSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+import movieData from "../../data/douban/movie.json";
+import bookData from "../../data/douban/book.json";
+
+type DoubanRating = {
+  max?: number;
+  value?: number;
+  star_count?: number;
+  count?: number;
+};
+
+type DoubanSubject = {
+  title?: string;
+  url?: string;
+  sharing_url?: string;
+  pic?: {
+    normal?: string;
+    large?: string;
+  };
+  cover_url?: string;
+  card_subtitle?: string;
+  rating?: DoubanRating;
+};
+
+type DoubanItem = {
+  comment?: string;
+  rating?: DoubanRating;
+  create_time?: string;
+  status?: string;
+  is_private?: boolean;
+  sharing_url?: string;
+  subject?: DoubanSubject;
+};
+
+type NormalizedItem = {
+  title: string;
+  url?: string;
+  cover?: string;
+  subtitle?: string;
+  comment?: string;
+  createdAt?: Date;
+  myRating?: number;
+};
+
+const publicDir = fileURLToPath(new URL("../../public", import.meta.url));
+const movies = normalizeItems(movieData as DoubanItem[], 5, "movie");
+const books = normalizeItems(bookData as DoubanItem[], 5, "book");
+const lastUpdated = getLastUpdated([...movies, ...books]);
+
+function parseDate(value?: string): Date | undefined {
+  if (!value) return;
+  const normalized = value.replace(" ", "T");
+  const parsed = new Date(normalized);
+  if (Number.isNaN(parsed.valueOf())) return;
+  return parsed;
+}
+
+function formatRating(rating?: DoubanRating, fallbackMax = 5): number | undefined {
+  if (!rating || typeof rating.value !== "number") return;
+  const max = typeof rating.max === "number" ? rating.max : fallbackMax;
+  if (max <= 0) return;
+  const value = Math.max(0, Math.min(rating.value, max));
+  return value;
+}
+
+function normalizeItems(items: DoubanItem[], fallbackMax: number, kind: "movie" | "book"): NormalizedItem[] {
+  return items
+    .filter(item => item.status === "done" && !item.is_private)
+    .sort((a, b) => {
+      const aTime = parseDate(a.create_time)?.valueOf() ?? 0;
+      const bTime = parseDate(b.create_time)?.valueOf() ?? 0;
+      return bTime - aTime;
+    })
+    .map((item) => {
+      const subject = item.subject ?? {};
+      const title = subject.title ?? "Untitled";
+      const url = subject.url ?? subject.sharing_url ?? item.sharing_url;
+      const subjectId = getSubjectId(subject.url ?? subject.sharing_url ?? item.sharing_url);
+      const remoteCover = subject.pic?.normal ?? subject.cover_url;
+      const cover = resolveLocalCover(kind, subjectId, remoteCover);
+      const subtitle = subject.card_subtitle;
+      const comment = item.comment?.trim() || undefined;
+      const createdAt = parseDate(item.create_time);
+      const myRating = formatRating(item.rating, fallbackMax);
+
+      return {
+        title,
+        url,
+        cover,
+        subtitle,
+        comment,
+        createdAt,
+        myRating,
+      };
+    });
+}
+
+function getLastUpdated(items: NormalizedItem[]): Date | undefined {
+  return items
+    .map(item => item.createdAt)
+    .filter((item): item is Date => Boolean(item))
+    .sort((a, b) => b.valueOf() - a.valueOf())[0];
+}
+
+function getSubjectId(value?: string): string | undefined {
+  if (!value) return;
+  const match = value.match(/subject\/(\d+)/);
+  return match?.[1];
+}
+
+function getImageExtension(url?: string): string {
+  if (!url) return ".jpg";
+  try {
+    const pathname = new URL(url).pathname;
+    const ext = path.extname(pathname);
+    return ext || ".jpg";
+  } catch {
+    return ".jpg";
+  }
+}
+
+function resolveLocalCover(kind: "movie" | "book", subjectId?: string, imageUrl?: string): string | undefined {
+  if (!subjectId) return;
+  const ext = getImageExtension(imageUrl);
+  const relativePath = `/douban/${kind}/${subjectId}${ext}`;
+  const fullPath = path.join(publicDir, "douban", kind, `${subjectId}${ext}`);
+  return existsSync(fullPath) ? relativePath : undefined;
+}
+---
+
+<PageLayout title={`${MEDIA.TITLE} | ${SITE.NAME}`} description={MEDIA.DESCRIPTION}>
+  <Container>
+    <div class="space-y-10">
+      <div class="animate space-y-2">
+        <h1 class="font-semibold text-2xl text-black/90 dark:text-white/90">
+          {MEDIA.TITLE}
+        </h1>
+        <p class="text-sm text-stone-700/85 dark:text-stone-300/75">
+          {MEDIA.DESCRIPTION}
+        </p>
+        <nav class="flex flex-wrap gap-2 text-sm">
+          <a href="#movies" class="px-3 py-1 rounded-full border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 transition-colors">
+            Movies
+          </a>
+          <a href="#books" class="px-3 py-1 rounded-full border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 transition-colors">
+            Books
+          </a>
+        </nav>
+        <div class="text-xs text-stone-600/85 dark:text-stone-300/70 flex flex-wrap gap-3">
+          <span>{movies.length} movies</span>
+          <span>{books.length} books</span>
+          {lastUpdated && (
+            <span>
+              Last updated <FormattedDate date={lastUpdated} />
+            </span>
+          )}
+        </div>
+      </div>
+
+      <section id="movies" class="space-y-4 scroll-mt-24">
+        <h2 class="animate font-semibold text-lg text-black/90 dark:text-white/90">
+          Movies
+        </h2>
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {movies.map((item) => (
+            <MediaCard item={item} />
+          ))}
+        </ul>
+      </section>
+
+      <section id="books" class="space-y-4 scroll-mt-24">
+        <h2 class="animate font-semibold text-lg text-black/90 dark:text-white/90">
+          Books
+        </h2>
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {books.map((item) => (
+            <MediaCard item={item} />
+          ))}
+        </ul>
+      </section>
+    </div>
+  </Container>
+
+</PageLayout>

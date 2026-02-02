@@ -3,9 +3,6 @@ name: douban
 on: 
   schedule:
     - cron: "0 0,12 * * *"
-  push:
-    branches:
-      - main
   watch:
     types: [started]
 
@@ -20,6 +17,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v5
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
 
     - name: movies sync
       uses: lizheming/doumark-action@0.2.0
@@ -27,7 +28,7 @@ jobs:
         id: mithrasu
         type: movie
         format: json
-        dir: data/douban
+        dir: ./data/douban
 
     - name: books sync
       uses: lizheming/doumark-action@0.2.0
@@ -37,8 +38,11 @@ jobs:
         format: json
         dir: ./data/douban
 
+    - name: Download covers
+      run: node scripts/sync-douban-covers.mjs
+
     - name: Commit
       uses: EndBug/add-and-commit@v9
       with:
         message: 'chore: update douban data'
-        add: './data/douban'
+        add: './data/douban ./public/douban'
