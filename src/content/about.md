@@ -4,7 +4,7 @@ title: "About Me"
 
 I'm **Haeward**, a software developer with experience in Java, Python, and Go, currently focusing on **Rust**. As an open source enthusiast, I believe in the power of collaborative development and aspire to contribute more meaningfully to the community.
 
-When I'm not coding, I enjoy reading books, watching films and anime, particularly mystery and science fiction genres. I'm fascinated by the intricate logic of detective stories and captivated by the boundless imagination of sci-fi narratives.
+When I'm not coding, I enjoy reading books, watching films and anime, particularly mystery and science fiction genres. I'm fascinated by the intricate logic of detective stories and captivated by the boundless imagination of sci-fi narratives. You can see my recent watching and reading on the [Media](/media) page.
 
 I also maintain a consistent running practice, inspired by the anime **[風が強く吹いている](https://bgm.tv/subject/248154)** (Run with the Wind). As the story beautifully captures:
 
@@ -32,6 +32,7 @@ Have a question, a project idea, or just want to say hello? Feel free to reach o
 
 ## Changelog
 
+* 2026-02-02 Add Media Page and remove Now page
 * 2025-08-20 Add changelog to Now page
 * 2025-07-31 Add Blogroll page and year's progress bar
 * 2025-07-18 Optimize blog post links, add keyboard navigation
