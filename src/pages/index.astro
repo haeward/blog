@@ -70,7 +70,7 @@ const blog = (await getCollection("blog"))
             See all posts
           </Link>
         </div>
-        <ul class="flex flex-col gap-4">
+        <ul class="flex flex-col gap-1">
           {blog.map(post => (
             <li>
               <ArrowCard entry={post} />
