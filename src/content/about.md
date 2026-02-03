@@ -23,7 +23,7 @@ I'm active on a few other corners of the internet. Let's connect!
 * [GitHub](https://github.com/haeward): See what I'm currently building.
 * [Twitter/X](https://x.com/haewyu): Sharing my thoughts and experiences.
 * [Mastodon](https://mas.to/@haeward): My rambling thoughts in a decentralized world.
-* [Letterboxd](https://letterboxd.com/haeward/): Let's talk about films.
+* [Douban](https://movie.douban.com/people/mithrasu/): My films, series, anime, and reading log.
 * [Bangumi](https://bgm.tv/user/haeward): Tracking my anime and drama journey.
 
 Have a question, a project idea, or just want to say hello? Feel free to reach out via email: [me@haeward.com](mailto:me@haeward.com)
