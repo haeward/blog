@@ -1,7 +1,6 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
-import FormattedDate from "@components/FormattedDate.astro";
 import MediaCard from "@components/MediaCard.astro";
 import { SITE, MEDIA } from "@consts";
 import { existsSync } from "node:fs";
@@ -29,6 +28,9 @@ type DoubanSubject = {
   cover_url?: string;
   card_subtitle?: string;
   rating?: DoubanRating;
+  type?: string;
+  subtype?: string;
+  genres?: string[];
 };
 
 type DoubanItem = {
@@ -49,12 +51,18 @@ type NormalizedItem = {
   comment?: string;
   createdAt?: Date;
   myRating?: number;
+  subjectType?: string;
+  genres?: string[];
 };
 
 const publicDir = fileURLToPath(new URL("../../public", import.meta.url));
-const movies = normalizeItems(movieData as DoubanItem[], 5, "movie");
+const movieEntries = normalizeItems(movieData as DoubanItem[], 5, "movie");
 const books = normalizeItems(bookData as DoubanItem[], 5, "book");
-const lastUpdated = getLastUpdated([...movies, ...books]);
+
+const isAnimation = (item: NormalizedItem) => item.genres?.includes("动画") ?? false;
+const movieItems = movieEntries.filter((item) => !isAnimation(item) && item.subjectType !== "tv");
+const seriesItems = movieEntries.filter((item) => !isAnimation(item) && item.subjectType === "tv");
+const animeItems = movieEntries.filter((item) => isAnimation(item));
 
 function parseDate(value?: string): Date | undefined {
   if (!value) return;
@@ -91,6 +99,8 @@ function normalizeItems(items: DoubanItem[], fallbackMax: number, kind: "movie" 
       const comment = item.comment?.trim() || undefined;
       const createdAt = parseDate(item.create_time);
       const myRating = formatRating(item.rating, fallbackMax);
+      const subjectType = subject.subtype ?? subject.type;
+      const genres = subject.genres ?? [];
 
       return {
         title,
@@ -100,15 +110,10 @@ function normalizeItems(items: DoubanItem[], fallbackMax: number, kind: "movie" 
         comment,
         createdAt,
         myRating,
+        subjectType,
+        genres,
       };
     });
-}
-
-function getLastUpdated(items: NormalizedItem[]): Date | undefined {
-  return items
-    .map(item => item.createdAt)
-    .filter((item): item is Date => Boolean(item))
-    .sort((a, b) => b.valueOf() - a.valueOf())[0];
 }
 
 function getSubjectId(value?: string): string | undefined {
@@ -140,47 +145,84 @@ function resolveLocalCover(kind: "movie" | "book", subjectId?: string, imageUrl?
 <PageLayout title={`${MEDIA.TITLE} | ${SITE.NAME}`} description={MEDIA.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
-      <div class="animate space-y-2">
-        <h1 class="font-semibold text-2xl text-black/90 dark:text-white/90">
-          {MEDIA.TITLE}
-        </h1>
-        <p class="text-sm text-stone-700/85 dark:text-stone-300/75">
-          {MEDIA.DESCRIPTION}
-        </p>
-        <nav class="flex flex-wrap gap-2 text-sm">
-          <a href="#movies" class="px-3 py-1 rounded-full border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 transition-colors">
+      <div class="animate space-y-3">
+        <nav id="media-tabs" class="flex flex-wrap gap-5 text-sm justify-start" role="tablist" aria-label="Media categories">
+          <button
+            type="button"
+            id="media-tab-movies"
+            role="tab"
+            aria-controls="movies"
+            aria-selected="true"
+            data-tab="movies"
+            data-active="true"
+            class="group px-0 py-1 text-base text-stone-600 dark:text-stone-300 hover:text-black dark:hover:text-white transition-colors border-b border-transparent data-[active=true]:border-black/60 data-[active=true]:text-black data-[active=true]:dark:border-white/60 data-[active=true]:dark:text-white"
+          >
             Movies
-          </a>
-          <a href="#books" class="px-3 py-1 rounded-full border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 transition-colors">
+          </button>
+          <button
+            type="button"
+            id="media-tab-series"
+            role="tab"
+            aria-controls="series"
+            aria-selected="false"
+            data-tab="series"
+            data-active="false"
+            class="group px-0 py-1 text-base text-stone-600 dark:text-stone-300 hover:text-black dark:hover:text-white transition-colors border-b border-transparent data-[active=true]:border-black/60 data-[active=true]:text-black data-[active=true]:dark:border-white/60 data-[active=true]:dark:text-white"
+          >
+            Series
+          </button>
+          <button
+            type="button"
+            id="media-tab-anime"
+            role="tab"
+            aria-controls="anime"
+            aria-selected="false"
+            data-tab="anime"
+            data-active="false"
+            class="group px-0 py-1 text-base text-stone-600 dark:text-stone-300 hover:text-black dark:hover:text-white transition-colors border-b border-transparent data-[active=true]:border-black/60 data-[active=true]:text-black data-[active=true]:dark:border-white/60 data-[active=true]:dark:text-white"
+          >
+            Anime
+          </button>
+          <button
+            type="button"
+            id="media-tab-books"
+            role="tab"
+            aria-controls="books"
+            aria-selected="false"
+            data-tab="books"
+            data-active="false"
+            class="group px-0 py-1 text-base text-stone-600 dark:text-stone-300 hover:text-black dark:hover:text-white transition-colors border-b border-transparent data-[active=true]:border-black/60 data-[active=true]:text-black data-[active=true]:dark:border-white/60 data-[active=true]:dark:text-white"
+          >
             Books
-          </a>
+          </button>
         </nav>
-        <div class="text-xs text-stone-600/85 dark:text-stone-300/70 flex flex-wrap gap-3">
-          <span>{movies.length} movies</span>
-          <span>{books.length} books</span>
-          {lastUpdated && (
-            <span>
-              Last updated <FormattedDate date={lastUpdated} />
-            </span>
-          )}
-        </div>
       </div>
 
-      <section id="movies" class="space-y-4 scroll-mt-24">
-        <h2 class="animate font-semibold text-lg text-black/90 dark:text-white/90">
-          Movies
-        </h2>
+      <section id="movies" data-tab-panel="movies" role="tabpanel" aria-labelledby="media-tab-movies" class="space-y-4 scroll-mt-24">
         <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {movies.map((item) => (
+          {movieItems.map((item) => (
             <MediaCard item={item} />
           ))}
         </ul>
       </section>
 
-      <section id="books" class="space-y-4 scroll-mt-24">
-        <h2 class="animate font-semibold text-lg text-black/90 dark:text-white/90">
-          Books
-        </h2>
+      <section id="series" data-tab-panel="series" role="tabpanel" aria-labelledby="media-tab-series" class="space-y-4 scroll-mt-24" hidden>
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {seriesItems.map((item) => (
+            <MediaCard item={item} />
+          ))}
+        </ul>
+      </section>
+
+      <section id="anime" data-tab-panel="anime" role="tabpanel" aria-labelledby="media-tab-anime" class="space-y-4 scroll-mt-24" hidden>
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {animeItems.map((item) => (
+            <MediaCard item={item} />
+          ))}
+        </ul>
+      </section>
+
+      <section id="books" data-tab-panel="books" role="tabpanel" aria-labelledby="media-tab-books" class="space-y-4 scroll-mt-24" hidden>
         <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {books.map((item) => (
             <MediaCard item={item} />
@@ -190,4 +232,55 @@ function resolveLocalCover(kind: "movie" | "book", subjectId?: string, imageUrl?
     </div>
   </Container>
 
+  <script is:inline>
+    const initMediaTabs = () => {
+      const tablist = document.getElementById("media-tabs");
+      if (!tablist) return;
+      if (tablist.dataset.bound === "true") return;
+      tablist.dataset.bound = "true";
+
+      const tabs = Array.from(tablist.querySelectorAll("[data-tab]"));
+      const panels = Array.from(document.querySelectorAll("[data-tab-panel]"));
+      if (!tabs.length || !panels.length) return;
+      const tabNames = tabs
+        .map((tab) => tab.getAttribute("data-tab"))
+        .filter(Boolean);
+      const tabSet = new Set(tabNames);
+
+      const activate = (name, options = { updateHash: false }) => {
+        tabs.forEach((tab) => {
+          const active = tab.getAttribute("data-tab") === name;
+          tab.setAttribute("aria-selected", active ? "true" : "false");
+          tab.setAttribute("data-active", active ? "true" : "false");
+        });
+
+        panels.forEach((panel) => {
+          const active = panel.getAttribute("data-tab-panel") === name;
+          panel.toggleAttribute("hidden", !active);
+        });
+
+        if (options.updateHash) {
+          const nextHash = `#${name}`;
+          if (window.location.hash !== nextHash) {
+            history.replaceState(null, "", nextHash);
+          }
+        }
+      };
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", (event) => {
+          event.preventDefault();
+          const name = tab.getAttribute("data-tab");
+          if (name) activate(name, { updateHash: true });
+        });
+      });
+
+      const hashName = window.location.hash.replace("#", "");
+      const initial = tabSet.has(hashName) ? hashName : "movies";
+      activate(initial, { updateHash: false });
+    };
+
+    document.addEventListener("DOMContentLoaded", initMediaTabs);
+    document.addEventListener("astro:page-load", initMediaTabs);
+  </script>
 </PageLayout>
