@@ -73,8 +73,11 @@ const { title, description, image = "/favicon.png" } = Astro.props;
 <script is:inline>
   const siteState = window.__siteState || (window.__siteState = { bound: false });
 
-  function init() {
+  // Apply theme ASAP to avoid flash on hard reloads.
   preloadTheme();
+
+  function init() {
+    preloadTheme();
     onScroll();
     animate();
   }
