@@ -31,7 +31,7 @@ jobs:
       with:
         id: mithrasu
         type: movie
-        format: json
+        format: csv
         dir: ./data/douban
 
     - name: books sync
@@ -39,11 +39,11 @@ jobs:
       with:
         id: mithrasu
         type: book
-        format: json
+        format: csv
         dir: ./data/douban
 
-    - name: Download covers
-      run: node scripts/sync-douban-covers.mjs
+#    - name: Download covers
+#      run: node scripts/sync-douban-covers.mjs
 
     - name: Commit
       uses: EndBug/add-and-commit@v9
