@@ -4,6 +4,234 @@
 		"rating": {
 			"count": 1,
 			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
+		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/movie/36185502 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/36185502/interest/4782874663",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-02-28 20:59:49",
+		"status": "done",
+		"id": 4782874663,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 481845,
+				"max": 10,
+				"star_count": 4,
+				"value": 7.5
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2025-07-18(中国大陆)"
+			],
+			"pic": {
+				"large": "https://img9.doubanio.com/view/photo/m_ratio_poster/public/p2926288464.jpg",
+				"normal": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2926288464.jpg"
+			},
+			"honor_infos": [
+				{
+					"kind": "movie",
+					"uri": "douban://douban.com/subject_collection/ECE472UNY?type=rank&category=movie&rank_type=year",
+					"rank": 7,
+					"title": "豆瓣2025评分最高华语电影"
+				}
+			],
+			"is_show": false,
+			"vendor_icons": [
+				"https://img9.doubanio.com/f/frodo/fbc90f355fc45d5d2056e0d88c697f9414b56b44/pics/vendors/tencent.png",
+				"https://img2.doubanio.com/f/frodo/8e1b7f8b48804cf759fc411e75d62c5ffd4f8f42/pics/vendors/migu_video.png",
+				"https://img9.doubanio.com/f/frodo/6c7b857e6b2255201e73bf83732d95d572f3f9f7/pics/vendors/iqiyi.png"
+			],
+			"year": "2025",
+			"card_subtitle": "2025 / 中国大陆 / 剧情 喜剧 古装 / 大鹏 / 大鹏 白客",
+			"id": "36185502",
+			"genres": [
+				"剧情",
+				"喜剧",
+				"古装"
+			],
+			"title": "长安的荔枝",
+			"is_released": true,
+			"actors": [
+				{
+					"name": "大鹏"
+				},
+				{
+					"name": "白客"
+				},
+				{
+					"name": "庄达菲"
+				},
+				{
+					"name": "刘俊谦"
+				},
+				{
+					"name": "刘德华"
+				},
+				{
+					"name": "杨幂"
+				},
+				{
+					"name": "常远"
+				},
+				{
+					"name": "魏翔"
+				},
+				{
+					"name": "王迅"
+				},
+				{
+					"name": "孙阳"
+				},
+				{
+					"name": "林雪"
+				},
+				{
+					"name": "宋小宝"
+				},
+				{
+					"name": "付航"
+				},
+				{
+					"name": "张若昀"
+				},
+				{
+					"name": "杨环宇"
+				},
+				{
+					"name": "刘旸"
+				},
+				{
+					"name": "金广发"
+				},
+				{
+					"name": "闫佩伦"
+				},
+				{
+					"name": "童漠男"
+				},
+				{
+					"name": "衣云鹤"
+				},
+				{
+					"name": "梁植"
+				},
+				{
+					"name": "刘仁铖"
+				},
+				{
+					"name": "罗圣灯"
+				},
+				{
+					"name": "苗若芃"
+				},
+				{
+					"name": "梁超"
+				},
+				{
+					"name": "贾樟柯"
+				},
+				{
+					"name": "樊登"
+				},
+				{
+					"name": "孙悦"
+				},
+				{
+					"name": "大冰"
+				},
+				{
+					"name": "王雨甜"
+				},
+				{
+					"name": "王梓尘"
+				},
+				{
+					"name": "严丰"
+				},
+				{
+					"name": "王议伟"
+				},
+				{
+					"name": "郭丰周"
+				},
+				{
+					"name": "刘占奎"
+				},
+				{
+					"name": "冯力宪"
+				},
+				{
+					"name": "易佳莫"
+				},
+				{
+					"name": "孙睿"
+				},
+				{
+					"name": "顾有利"
+				},
+				{
+					"name": "肖涵齐"
+				},
+				{
+					"name": "王艺龙"
+				},
+				{
+					"name": "马伯庸"
+				},
+				{
+					"name": "毛方圆"
+				},
+				{
+					"name": "李冠言昕"
+				}
+			],
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "646472",
+				"_base_color": [
+					0.6666666666666666,
+					0.12,
+					0.19607843137254902
+				],
+				"secondary_color": "f4f4f9",
+				"_avg_color": [
+					0.00347222222222221,
+					0.4485981308411215,
+					0.4196078431372549
+				],
+				"primary_color_dark": "43434c"
+			},
+			"type": "movie",
+			"has_linewatch": true,
+			"vendor_desc": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/36185502.jpg",
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/36185502",
+			"url": "https://movie.douban.com/subject/36185502/",
+			"release_date": null,
+			"uri": "douban://douban.com/movie/36185502",
+			"subtype": "movie",
+			"directors": [
+				{
+					"name": "大鹏"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"null_rating_reason": ""
+		},
+		"star_time": "2026-02-28 20:59:49"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
 			"star_count": 4,
 			"value": 4
 		},
