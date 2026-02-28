@@ -55,6 +55,13 @@ type NormalizedItem = {
   genres?: string[];
 };
 
+type MediaTabKey = "movies" | "series" | "anime" | "books";
+type MediaTab = {
+  key: MediaTabKey;
+  label: string;
+  count: number;
+};
+
 const publicDir = fileURLToPath(new URL("../../public", import.meta.url));
 const movieEntries = normalizeItems(movieData as DoubanItem[], 5, "movie");
 const books = normalizeItems(bookData as DoubanItem[], 5, "book");
@@ -63,6 +70,12 @@ const isAnimation = (item: NormalizedItem) => item.genres?.includes("动画") ??
 const movieItems = movieEntries.filter((item) => !isAnimation(item) && item.subjectType !== "tv");
 const seriesItems = movieEntries.filter((item) => !isAnimation(item) && item.subjectType === "tv");
 const animeItems = movieEntries.filter((item) => isAnimation(item));
+const mediaTabs: MediaTab[] = [
+  { key: "movies", label: "Movies", count: movieItems.length },
+  { key: "series", label: "Series", count: seriesItems.length },
+  { key: "anime", label: "Anime", count: animeItems.length },
+  { key: "books", label: "Books", count: books.length },
+];
 
 function parseDate(value?: string): Date | undefined {
   if (!value) return;
@@ -145,56 +158,22 @@ function resolveLocalCover(kind: "movie" | "book", subjectId?: string, imageUrl?
 <PageLayout title={`${MEDIA.TITLE} | ${SITE.NAME}`} description={MEDIA.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
-      <div class="animate space-y-3">
+      <div class="animate space-y-2">
         <nav id="media-tabs" class="flex flex-wrap gap-5 text-sm justify-start" role="tablist" aria-label="Media categories">
-          <button
-            type="button"
-            id="media-tab-movies"
-            role="tab"
-            aria-controls="movies"
-            aria-selected="true"
-            data-tab="movies"
-            data-active="true"
-            class="group px-0 py-1 text-base text-stone-600 dark:text-stone-300 hover:text-black dark:hover:text-white transition-colors border-b border-transparent data-[active=true]:border-black/60 data-[active=true]:text-black data-[active=true]:dark:border-white/60 data-[active=true]:dark:text-white"
-          >
-            Movies
-          </button>
-          <button
-            type="button"
-            id="media-tab-series"
-            role="tab"
-            aria-controls="series"
-            aria-selected="false"
-            data-tab="series"
-            data-active="false"
-            class="group px-0 py-1 text-base text-stone-600 dark:text-stone-300 hover:text-black dark:hover:text-white transition-colors border-b border-transparent data-[active=true]:border-black/60 data-[active=true]:text-black data-[active=true]:dark:border-white/60 data-[active=true]:dark:text-white"
-          >
-            Series
-          </button>
-          <button
-            type="button"
-            id="media-tab-anime"
-            role="tab"
-            aria-controls="anime"
-            aria-selected="false"
-            data-tab="anime"
-            data-active="false"
-            class="group px-0 py-1 text-base text-stone-600 dark:text-stone-300 hover:text-black dark:hover:text-white transition-colors border-b border-transparent data-[active=true]:border-black/60 data-[active=true]:text-black data-[active=true]:dark:border-white/60 data-[active=true]:dark:text-white"
-          >
-            Anime
-          </button>
-          <button
-            type="button"
-            id="media-tab-books"
-            role="tab"
-            aria-controls="books"
-            aria-selected="false"
-            data-tab="books"
-            data-active="false"
-            class="group px-0 py-1 text-base text-stone-600 dark:text-stone-300 hover:text-black dark:hover:text-white transition-colors border-b border-transparent data-[active=true]:border-black/60 data-[active=true]:text-black data-[active=true]:dark:border-white/60 data-[active=true]:dark:text-white"
-          >
-            Books
-          </button>
+          {mediaTabs.map((tab) => (
+            <button
+              type="button"
+              id={`media-tab-${tab.key}`}
+              role="tab"
+              aria-controls={tab.key}
+              aria-selected={tab.key === "movies" ? "true" : "false"}
+              data-tab={tab.key}
+              data-active={tab.key === "movies" ? "true" : "false"}
+              class="group px-0 py-1 text-base text-stone-600 dark:text-stone-300 hover:text-black dark:hover:text-white transition-colors border-b border-transparent data-[active=true]:border-black/60 data-[active=true]:text-black data-[active=true]:dark:border-white/60 data-[active=true]:dark:text-white"
+            >
+              {tab.label} <span class="text-stone-500 dark:text-stone-400">({tab.count})</span>
+            </button>
+          ))}
         </nav>
       </div>
 
