@@ -14,13 +14,13 @@
     "sync:douban-covers": "node scripts/sync-douban-covers.mjs"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.4",
-    "@astrojs/rss": "4.0.12",
-    "@astrojs/sitemap": "^3.5.0",
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/rss": "4.0.15",
+    "@astrojs/sitemap": "^3.7.0",
     "@astrojs/tailwind": "6.0.2",
     "@fontsource/lxgw-wenkai": "^5.2.5",
     "@tailwindcss/typography": "^0.5.10",
-    "astro": "^5.15.9",
+    "astro": "^5.18.0",
     "clsx": "^2.1.0",
     "tailwind-merge": "^2.2.2",
     "tailwindcss": "^3.4.1",
@@ -28,7 +28,7 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.4",
+    "@astrojs/check": "^0.9.6",
     "@eslint/config-array": "^0.19.2",
     "@eslint/js": "^9.32.0",
     "@eslint/object-schema": "^2.0.1",
