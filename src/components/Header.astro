@@ -6,10 +6,10 @@ import { SITE } from "@consts";
 
 <header class="py-4">
   <Container>
-    <div class="flex flex-wrap gap-y-2 justify-between items-center">
-      <div class="flex items-center gap-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex items-center justify-between gap-4 sm:justify-start sm:gap-8">
         <Link href="/" underline={false}>
-          <div class="font-semibold text-2xl">
+          <div class="font-semibold text-xl sm:text-2xl">
             {SITE.NAME}
           </div>
         </Link>
@@ -58,20 +58,11 @@ import { SITE } from "@consts";
           </button>
         </div>
       </div>
-      <nav class="flex gap-1">
-        <Link href="/blog"> Archive </Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/media"> Media </Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/about"> About </Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/blogroll"> Blogroll </Link>
+      <nav class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm sm:text-base">
+        <Link href="/blog" class="whitespace-nowrap"> Archive </Link>
+        <Link href="/media" class="whitespace-nowrap"> Media </Link>
+        <Link href="/about" class="whitespace-nowrap"> About </Link>
+        <Link href="/blogroll" class="whitespace-nowrap"> Blogroll </Link>
       </nav>
     </div>
   </Container>

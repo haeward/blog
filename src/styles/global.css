@@ -24,13 +24,13 @@ body {
 }
 
 header {
-  @apply fixed top-0 left-0 right-0 z-50 py-5;
+  @apply fixed top-0 left-0 right-0 z-50 py-3 sm:py-5;
   @apply bg-stone-100/85 dark:bg-stone-900/25;
   @apply backdrop-blur;
 }
 
 main {
-  @apply flex-1 py-16;
+  @apply flex-1 py-12 sm:py-16;
 }
 
 footer {
@@ -43,6 +43,8 @@ article {
   @apply prose-headings:text-black/95 prose-headings:dark:text-white/90;
   @apply prose-p:text-black/75 prose-p:dark:text-white/75;
   @apply prose-p:font-medium;
+  @apply break-words;
+  overflow-wrap: anywhere;
   /* Reduce heading margins for tighter spacing */
   @apply prose-h1:mt-8 prose-h1:mb-4;
   @apply prose-h2:mt-6 prose-h2:mb-3;
