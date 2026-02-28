@@ -27,23 +27,23 @@ jobs:
         node-version: 20
 
     - name: movies sync
-      uses: lizheming/doumark-action@0.2.0
+      uses: haeward/doumark@v2.0.0
       with:
         id: mithrasu
         type: movie
-        format: csv
+        format: json
         dir: ./data/douban
 
     - name: books sync
-      uses: lizheming/doumark-action@0.2.0
+      uses: haeward/doumark@v2.0.0
       with:
         id: mithrasu
         type: book
-        format: csv
+        format: json
         dir: ./data/douban
 
-#    - name: Download covers
-#      run: node scripts/sync-douban-covers.mjs
+    - name: Download covers
+      run: node scripts/sync-douban-covers.mjs
 
     - name: Commit
       uses: EndBug/add-and-commit@v9
