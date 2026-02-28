@@ -23,7 +23,7 @@ const stars = Math.max(0, Math.min(5, Math.round(item.myRating ?? 0)));
       rel="noopener noreferrer"
       class="block h-full rounded-lg shadow-sm hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/30 transition-all duration-300"
     >
-      <div class="p-3 flex h-full flex-col">
+      <div class="p-2.5 sm:p-3 flex h-full flex-col">
         <div class="relative aspect-[2/3] overflow-hidden rounded-lg bg-black/5 dark:bg-white/5">
           {item.cover ? (
             <img
@@ -41,9 +41,9 @@ const stars = Math.max(0, Math.min(5, Math.round(item.myRating ?? 0)));
             </div>
           )}
         </div>
-        <div class="pt-3 space-y-2">
+        <div class="pt-2 sm:pt-3 space-y-1.5 sm:space-y-2">
           <div
-            class="text-xs font-semibold text-black/90 dark:text-white/90 leading-snug"
+            class="text-[11px] sm:text-xs font-semibold text-black/90 dark:text-white/90 leading-snug"
             style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;"
           >
             {item.title}
@@ -51,7 +51,7 @@ const stars = Math.max(0, Math.min(5, Math.round(item.myRating ?? 0)));
           <div class="flex items-center gap-0.5 text-amber-300 dark:text-amber-200">
             {[1, 2, 3, 4, 5].map((star) => (
               <svg
-                class="size-3"
+                class="size-2.5 sm:size-3"
                 viewBox="0 0 20 20"
                 fill={star <= stars ? "currentColor" : "none"}
                 stroke="currentColor"
@@ -67,7 +67,7 @@ const stars = Math.max(0, Math.min(5, Math.round(item.myRating ?? 0)));
       </div>
     </a>
   ) : (
-    <div class="rounded-lg shadow-sm hover:shadow-2xl hover:shadow-black/30 p-3 flex h-full flex-col">
+    <div class="rounded-lg shadow-sm hover:shadow-2xl hover:shadow-black/30 p-2.5 sm:p-3 flex h-full flex-col">
       <div class="relative aspect-[2/3] overflow-hidden rounded-lg bg-black/5 dark:bg-white/5">
         {item.cover ? (
           <img
@@ -85,9 +85,9 @@ const stars = Math.max(0, Math.min(5, Math.round(item.myRating ?? 0)));
           </div>
         )}
       </div>
-      <div class="pt-3 space-y-2">
+      <div class="pt-2 sm:pt-3 space-y-1.5 sm:space-y-2">
         <div
-          class="text-xs font-semibold text-black/90 dark:text-white/90 leading-snug"
+          class="text-[11px] sm:text-xs font-semibold text-black/90 dark:text-white/90 leading-snug"
           style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;"
         >
           {item.title}
@@ -95,7 +95,7 @@ const stars = Math.max(0, Math.min(5, Math.round(item.myRating ?? 0)));
         <div class="flex items-center gap-0.5 text-amber-300 dark:text-amber-200">
           {[1, 2, 3, 4, 5].map((star) => (
             <svg
-              class="size-3"
+              class="size-2.5 sm:size-3"
               viewBox="0 0 20 20"
               fill={star <= stars ? "currentColor" : "none"}
               stroke="currentColor"

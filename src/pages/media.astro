@@ -199,7 +199,7 @@ function resolveLocalCover(kind: "movie" | "book", subjectId?: string, imageUrl?
       </div>
 
       <section id="movies" data-tab-panel="movies" role="tabpanel" aria-labelledby="media-tab-movies" class="space-y-4 scroll-mt-24">
-        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <ul class="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 xl:grid-cols-4">
           {movieItems.map((item) => (
             <MediaCard item={item} />
           ))}
@@ -207,7 +207,7 @@ function resolveLocalCover(kind: "movie" | "book", subjectId?: string, imageUrl?
       </section>
 
       <section id="series" data-tab-panel="series" role="tabpanel" aria-labelledby="media-tab-series" class="space-y-4 scroll-mt-24" hidden>
-        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <ul class="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 xl:grid-cols-4">
           {seriesItems.map((item) => (
             <MediaCard item={item} />
           ))}
@@ -215,7 +215,7 @@ function resolveLocalCover(kind: "movie" | "book", subjectId?: string, imageUrl?
       </section>
 
       <section id="anime" data-tab-panel="anime" role="tabpanel" aria-labelledby="media-tab-anime" class="space-y-4 scroll-mt-24" hidden>
-        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <ul class="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 xl:grid-cols-4">
           {animeItems.map((item) => (
             <MediaCard item={item} />
           ))}
@@ -223,7 +223,7 @@ function resolveLocalCover(kind: "movie" | "book", subjectId?: string, imageUrl?
       </section>
 
       <section id="books" data-tab-panel="books" role="tabpanel" aria-labelledby="media-tab-books" class="space-y-4 scroll-mt-24" hidden>
-        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <ul class="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 xl:grid-cols-4">
           {books.map((item) => (
             <MediaCard item={item} />
           ))}
