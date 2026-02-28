@@ -45,8 +45,22 @@ jobs:
     - name: Download covers
       run: node scripts/sync-douban-covers.mjs
 
-    - name: Commit
-      uses: EndBug/add-and-commit@v9
+    - name: Import GPG key
+      uses: crazy-max/ghaction-import-gpg@v6
       with:
-        message: 'chore: update douban data'
-        add: './data/douban ./public/douban'
+        gpg_private_key: ${{ secrets.CI_GPG_PRIVATE_KEY }}
+        passphrase: ${{ secrets.CI_GPG_PASSPHRASE }}
+        git_user_signingkey: true
+        git_commit_gpgsign: true
+
+    - name: Commit
+      run: |
+        git config user.name "${{ secrets.CI_GIT_USER_NAME }}"
+        git config user.email "${{ secrets.CI_GIT_USER_EMAIL }}"
+        git add ./data/douban ./public/douban
+        if git diff --cached --quiet; then
+          echo "No changes to commit."
+          exit 0
+        fi
+        git commit -S -m "chore: update douban data"
+        git push
