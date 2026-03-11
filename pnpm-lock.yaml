@@ -58,8 +58,8 @@ importers:
         specifier: ^9.32.0
         version: 9.32.0
       '@eslint/object-schema':
-        specifier: ^2.0.1
-        version: 2.1.7
+        specifier: ^3.0.0
+        version: 3.0.3
       '@types/mdast':
         specifier: ^4.0.4
         version: 4.0.4
