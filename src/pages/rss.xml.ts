@@ -1,5 +1,5 @@
 import rss from "@astrojs/rss";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { SITE } from "@consts";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { getContainerRenderer as getMDXRenderer } from "@astrojs/mdx";
@@ -20,7 +20,7 @@ export async function GET(context: Context) {
 
   const items = await Promise.all(
     posts.map(async (post) => {
-      const { Content } = await post.render();
+      const { Content } = await render(post);
       const html = await container.renderToString(Content);
 
       return {
@@ -28,7 +28,7 @@ export async function GET(context: Context) {
         description: post.data.description,
         content: html,
         pubDate: post.data.date,
-        link: `/${post.collection}/${post.slug}/`,
+        link: `/${post.collection}/${post.id}/`,
       };
     })
   );

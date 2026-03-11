@@ -6,7 +6,7 @@ type Props = { entry: CollectionEntry<"blog">; }
 const { entry } = Astro.props;
 ---
 
-<a href={`/${entry.collection}/${entry.slug}`} class="relative group flex flex-wrap items-center gap-x-2 gap-y-1 py-2 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
+<a href={`/${entry.collection}/${entry.id}`} class="relative group flex flex-wrap items-center gap-x-2 gap-y-1 py-2 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
   <div class="flex min-w-0 flex-col flex-1">
     <div class="font-semibold text-sky-700 dark:text-sky-300">
       {entry.data.title}
