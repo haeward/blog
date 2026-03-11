@@ -31,7 +31,7 @@
     "@astrojs/check": "^0.9.6",
     "@eslint/config-array": "^0.19.2",
     "@eslint/js": "^9.32.0",
-    "@eslint/object-schema": "^2.0.1",
+    "@eslint/object-schema": "^3.0.0",
     "@types/mdast": "^4.0.4",
     "@types/unist": "^3.0.3",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
