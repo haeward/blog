@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import { remarkSpotifyEmbed } from "./src/lib/remark-spotify-embed.ts";
 import remarkImageCaption from "./src/lib/remark-image-caption.ts";
 
@@ -9,7 +9,11 @@ import remarkImageCaption from "./src/lib/remark-image-caption.ts";
 export default defineConfig({
   site: "https://haeward.com",
 
-  integrations: [sitemap(), tailwind(), mdx()],
+  integrations: [sitemap(), mdx()],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 
   markdown: {
     syntaxHighlight: "shiki",

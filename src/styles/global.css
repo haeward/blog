@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.mjs";
+@plugin "@tailwindcss/typography";
 
 html {
   overflow-y: scroll;
@@ -40,8 +40,8 @@ footer {
 article {
   @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
   @apply prose-headings:font-semibold prose-p:font-serif;
-  @apply prose-headings:text-black/95 prose-headings:dark:text-white/90;
-  @apply prose-p:text-black/75 prose-p:dark:text-white/75;
+  @apply prose-headings:text-black/95 dark:prose-headings:text-white/90;
+  @apply prose-p:text-black/75 dark:prose-p:text-white/75;
   @apply prose-p:font-medium;
   @apply break-words;
   overflow-wrap: anywhere;
@@ -55,104 +55,104 @@ article {
 }
 
 @layer utilities {
-  /* Base link styles - use !important to override prose styles */
+  /* Base link styles - use important utilities to override prose styles */
   .prose a, .prose-invert a, article a {
-    @apply font-bold !important;
-    @apply font-sans !important;
-    @apply no-underline !important;
-    @apply text-blue-700 dark:text-blue-400 !important;
-    @apply transition-colors duration-300 ease-in-out !important;
+    @apply !font-bold;
+    @apply !font-sans;
+    @apply !no-underline;
+    @apply !text-blue-700 dark:!text-blue-400;
+    @apply !transition-colors !duration-300 !ease-in-out;
   }
 
   .prose a:hover, .prose-invert a:hover, article a:hover {
-    @apply text-blue-800 dark:text-blue-300 !important;
-    @apply underline !important;
+    @apply !text-blue-800 dark:!text-blue-300;
+    @apply !underline;
   }
 
   /* Enhanced bold text styling */
   .prose strong, .prose-invert strong, article strong {
-    @apply font-bold !important;
-    @apply text-black dark:text-white !important;
-    @apply px-1 py-0.5 !important;
-    @apply rounded !important;
-    @apply transition-colors duration-200 !important;
+    @apply !font-bold;
+    @apply !text-black dark:!text-white;
+    @apply !px-1 !py-0.5;
+    @apply !rounded;
+    @apply !transition-colors !duration-200;
   }
 
   /* Reduced heading spacing */
   .prose h1, .prose-invert h1, article h1 {
-    @apply mt-8 mb-4 !important;
+    @apply !mt-8 !mb-4;
   }
 
   .prose h2, .prose-invert h2, article h2 {
-    @apply mt-6 mb-3 !important;
+    @apply !mt-6 !mb-3;
   }
 
   .prose h3, .prose-invert h3, article h3 {
-    @apply mt-5 mb-2 !important;
+    @apply !mt-5 !mb-2;
   }
 
   .prose h4, .prose-invert h4, article h4 {
-    @apply mt-4 mb-2 !important;
+    @apply !mt-4 !mb-2;
   }
 
   .prose h5, .prose-invert h5, article h5 {
-    @apply mt-3 mb-1 !important;
+    @apply !mt-3 !mb-1;
   }
 
   .prose h6, .prose-invert h6, article h6 {
-    @apply mt-3 mb-1 !important;
+    @apply !mt-3 !mb-1;
   }
 
   /* Custom blockquote styling */
   .prose blockquote, .prose-invert blockquote, article blockquote {
-    @apply not-italic !important;
-    @apply border-l-4 border-orange-400 dark:border-orange-500 !important;
-    @apply bg-orange-100 dark:bg-neutral-500/10 !important;
-    @apply mx-1 my-2 !important;
-    @apply text-orange-800 dark:text-orange-200 !important;
-    @apply font-semibold !important;
-    @apply rounded-r-md !important;
-    @apply shadow-sm !important;
+    @apply !not-italic;
+    @apply !border-l-4 !border-orange-400 dark:!border-orange-500;
+    @apply !bg-orange-100 dark:!bg-neutral-500/10;
+    @apply !mx-1 !my-2;
+    @apply !text-orange-800 dark:!text-orange-200;
+    @apply !font-semibold;
+    @apply !rounded-r-md;
+    @apply !shadow-sm;
   }
 
   .prose blockquote p, .prose-invert blockquote p, article blockquote p {
-    @apply mb-0 !important;
-    @apply before:content-none !important;
-    @apply after:content-none !important;
+    @apply !mb-0;
+    @apply before:!content-none;
+    @apply after:!content-none;
   }
 
   /* Custom code block styling */
   .prose pre, .prose-invert pre, article pre {
-    @apply bg-gray-100/90 dark:bg-zinc-800/85 !important;
-    @apply border border-gray-200/75 dark:border-zinc-700/75 !important;
-    @apply rounded-lg !important;
-    @apply p-4 !important;
-    @apply overflow-x-auto !important;
-    @apply text-sm !important;
-    @apply font-normal !important;
-    @apply font-mono !important;
-    @apply my-6 !important;
-    @apply leading-relaxed !important;
-    @apply relative !important;
+    @apply !bg-gray-100/90 dark:!bg-zinc-800/85;
+    @apply !border !border-gray-200/75 dark:!border-zinc-700/75;
+    @apply !rounded-lg;
+    @apply !p-4;
+    @apply !overflow-x-auto;
+    @apply !text-sm;
+    @apply !font-normal;
+    @apply !font-mono;
+    @apply !my-6;
+    @apply !leading-relaxed;
+    @apply !relative;
   }
 
   .prose code, .prose-invert code, article code {
-    @apply text-red-600 dark:text-red-400 !important;
-    @apply px-1.5 py-0.5 !important;
-    @apply rounded !important;
-    @apply text-sm !important;
-    @apply font-mono !important;
+    @apply !text-red-600 dark:!text-red-400;
+    @apply !px-1.5 !py-0.5;
+    @apply !rounded;
+    @apply !text-sm;
+    @apply !font-mono;
   }
 
   .prose code::before, .prose-invert code::before, article code::before,
   .prose code::after, .prose-invert code::after, article code::after {
-    @apply content-none !important;
+    @apply !content-none;
   }
 
   .prose pre code, .prose-invert pre code, article pre code {
-    @apply bg-transparent !important;
-    @apply px-0 py-0 !important;
-    @apply leading-relaxed !important;
+    @apply !bg-transparent;
+    @apply !px-0 !py-0;
+    @apply !leading-relaxed;
   }
 
   /* Ensure Shiki color variables work properly */
@@ -365,14 +365,14 @@ figcaption {
 
 /* Additional prose image styling */
 .prose figure, .prose-invert figure, article figure {
-  @apply my-8 !important;
+  @apply !my-8;
 }
 
 .prose figcaption, .prose-invert figcaption, article figcaption {
-  @apply text-sm text-gray-600 dark:text-gray-400 font-medium !important;
-  @apply mt-3 px-2 leading-relaxed !important;
+  @apply !text-sm !text-gray-600 dark:!text-gray-400 !font-medium;
+  @apply !mt-3 !px-2 !leading-relaxed;
 }
 
 .prose img, .prose-invert img, article img {
-  @apply rounded-lg shadow-sm !important;
+  @apply !rounded-lg !shadow-sm;
 }
