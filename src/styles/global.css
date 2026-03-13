@@ -46,7 +46,8 @@ footer {
 }
 
 .blog-post-toc-rail {
-  @apply hidden xl:block absolute left-full top-1/2 ml-24 w-48 -translate-y-1/2;
+  @apply hidden xl:block fixed top-1/2 w-48 -translate-y-1/2;
+  left: min(calc(50% + 29rem), calc(100vw - 14rem));
 }
 
 article {
@@ -404,7 +405,7 @@ figcaption {
 }
 
 .blog-toc--desktop {
-  @apply max-h-[calc(100vh-8rem)] overflow-auto px-3 py-3;
+  @apply max-h-[calc(100vh-7rem)] overflow-auto px-3 py-3;
 }
 
 .blog-toc__summary,
