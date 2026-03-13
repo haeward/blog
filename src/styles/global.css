@@ -29,6 +29,10 @@ header {
   @apply backdrop-blur;
 }
 
+header.header--divider {
+  @apply border-b border-black/8 dark:border-white/8;
+}
+
 main {
   @apply flex-1 py-12 sm:py-16;
 }
