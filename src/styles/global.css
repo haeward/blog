@@ -470,11 +470,11 @@ figcaption {
 }
 
 .blog-toc__link--depth-3 {
-  @apply pl-4 text-[0.78rem];
+  @apply pl-6 text-[0.78rem];
 }
 
 .blog-toc__link--depth-4 {
-  @apply pl-6 text-[0.76rem];
+  @apply pl-9 text-[0.76rem];
 }
 
 @media (min-width: 640px) {
