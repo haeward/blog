@@ -1,0 +1,77 @@
+---
+import type { MarkdownHeading } from "astro";
+
+type Props = {
+  headings: MarkdownHeading[];
+  variant?: "mobile" | "desktop";
+  title?: string;
+};
+
+const {
+  headings,
+  variant = "desktop",
+  title = "On this page",
+} = Astro.props;
+
+const tocHeadings = headings.filter(({ depth }) => depth >= 2 && depth <= 4);
+
+if (tocHeadings.length === 0) {
+  return null;
+}
+
+const listClass = variant === "mobile" ? "blog-toc__list blog-toc__list--mobile" : "blog-toc__list";
+const depthClasses = {
+  2: "blog-toc__link",
+  3: "blog-toc__link blog-toc__link--depth-3",
+  4: "blog-toc__link blog-toc__link--depth-4",
+} as const;
+---
+
+{variant === "mobile" ? (
+  <details class="blog-toc blog-toc--mobile animate lg:hidden">
+    <summary class="blog-toc__summary">
+      <span>{title}</span>
+      <svg
+        class="blog-toc__chevron"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="m6 9 6 6 6-6"></path>
+      </svg>
+    </summary>
+    <nav class="blog-toc__body" aria-label="Table of contents">
+      <ul class={listClass}>
+        {tocHeadings.map((heading) => (
+          <li>
+            <a href={`#${heading.slug}`} class={depthClasses[heading.depth as 2 | 3 | 4]}>
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </details>
+) : (
+  <aside class="blog-toc blog-toc--desktop animate hidden lg:block" aria-label="Table of contents">
+    <div class="blog-toc__title">{title}</div>
+    <nav class="blog-toc__body">
+      <ul class={listClass}>
+        {tocHeadings.map((heading) => (
+          <li>
+            <a href={`#${heading.slug}`} class={depthClasses[heading.depth as 2 | 3 | 4]}>
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </aside>
+)}

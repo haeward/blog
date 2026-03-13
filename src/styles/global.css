@@ -37,6 +37,18 @@ footer {
   @apply py-5 text-sm;
 }
 
+.blog-post-layout {
+  @apply flex flex-col gap-8;
+}
+
+.blog-post-layout--with-toc {
+  @apply lg:grid lg:grid-cols-[minmax(0,1fr)_17rem] lg:items-start lg:gap-10;
+}
+
+.blog-post-main {
+  @apply min-w-0 w-full max-w-screen-md;
+}
+
 article {
   @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
   @apply prose-headings:font-semibold prose-p:font-serif;
@@ -254,6 +266,10 @@ html.image-lightbox-open {
   overflow: hidden;
 }
 
+.blog-article :is(h2, h3, h4) {
+  scroll-margin-top: 6.5rem;
+}
+
 .blog-article img {
   cursor: zoom-in;
   transition: transform 160ms ease, box-shadow 160ms ease;
@@ -375,4 +391,71 @@ figcaption {
 
 .prose img, .prose-invert img, article img {
   @apply !rounded-lg !shadow-sm;
+}
+
+.blog-toc {
+  @apply rounded-2xl border border-black/10 bg-white/65 text-sm text-black/70 shadow-sm;
+  @apply dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70;
+  @apply backdrop-blur-sm;
+}
+
+.blog-toc--mobile {
+  @apply mt-8 overflow-hidden;
+}
+
+.blog-toc--desktop {
+  @apply sticky top-24 max-h-[calc(100vh-7rem)] overflow-auto p-4;
+}
+
+.blog-toc__summary,
+.blog-toc__title {
+  @apply flex items-center justify-between gap-3 font-semibold text-black/80 dark:text-white/85;
+}
+
+.blog-toc__summary {
+  @apply cursor-pointer list-none p-4;
+}
+
+.blog-toc__summary::-webkit-details-marker {
+  display: none;
+}
+
+.blog-toc__chevron {
+  @apply shrink-0 transition-transform duration-200 ease-out;
+}
+
+.blog-toc--mobile[open] .blog-toc__chevron {
+  transform: rotate(180deg);
+}
+
+.blog-toc__body {
+  @apply px-4 pb-4;
+}
+
+.blog-toc__list {
+  @apply flex flex-col gap-1.5;
+}
+
+.blog-toc__list--mobile {
+  @apply pt-1;
+}
+
+.blog-toc__link {
+  @apply block rounded-md px-2 py-1.5 text-sm leading-relaxed text-black/65 transition-colors duration-200;
+  @apply hover:bg-black/[0.04] hover:text-black/90 dark:text-white/65 dark:hover:bg-white/[0.05] dark:hover:text-white/90;
+  overflow-wrap: anywhere;
+}
+
+.blog-toc__link--depth-3 {
+  @apply pl-5 text-[0.92rem];
+}
+
+.blog-toc__link--depth-4 {
+  @apply pl-8 text-[0.9rem];
+}
+
+@media (min-width: 640px) {
+  .blog-article :is(h2, h3, h4) {
+    scroll-margin-top: 7rem;
+  }
 }
