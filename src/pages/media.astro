@@ -3,9 +3,8 @@ import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import MediaCard from "@components/MediaCard.astro";
 import { SITE, MEDIA } from "@consts";
-import { existsSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
 import movieData from "../../data/douban/movie.json";
 import bookData from "../../data/douban/book.json";
@@ -62,9 +61,12 @@ type MediaTab = {
   count: number;
 };
 
-const publicDir = fileURLToPath(new URL("../../public", import.meta.url));
-const movieEntries = normalizeItems(movieData as DoubanItem[], 5, "movie");
-const books = normalizeItems(bookData as DoubanItem[], 5, "book");
+type MediaKind = "movie" | "book";
+
+const movieCoverIndex = createLocalCoverIndex("movie");
+const bookCoverIndex = createLocalCoverIndex("book");
+const movieEntries = normalizeItems(movieData as DoubanItem[], 5, movieCoverIndex);
+const books = normalizeItems(bookData as DoubanItem[], 5, bookCoverIndex);
 
 const isAnimation = (item: NormalizedItem) => item.genres?.includes("动画") ?? false;
 const movieItems = movieEntries.filter((item) => !isAnimation(item) && item.subjectType !== "tv");
@@ -93,7 +95,11 @@ function formatRating(rating?: DoubanRating, fallbackMax = 5): number | undefine
   return value;
 }
 
-function normalizeItems(items: DoubanItem[], fallbackMax: number, kind: "movie" | "book"): NormalizedItem[] {
+function normalizeItems(
+  items: DoubanItem[],
+  fallbackMax: number,
+  localCoverIndex: Map<string, string>,
+): NormalizedItem[] {
   return items
     .filter(item => item.status === "done" && !item.is_private)
     .sort((a, b) => {
@@ -107,7 +113,7 @@ function normalizeItems(items: DoubanItem[], fallbackMax: number, kind: "movie" 
       const url = subject.url ?? subject.sharing_url ?? item.sharing_url;
       const subjectId = getSubjectId(subject.url ?? subject.sharing_url ?? item.sharing_url);
       const remoteCover = subject.pic?.normal ?? subject.cover_url;
-      const cover = resolveLocalCover(kind, subjectId, remoteCover);
+      const cover = resolveCover(localCoverIndex, subjectId, remoteCover);
       const subtitle = subject.card_subtitle;
       const comment = item.comment?.trim() || undefined;
       const createdAt = parseDate(item.create_time);
@@ -135,23 +141,28 @@ function getSubjectId(value?: string): string | undefined {
   return match?.[1];
 }
 
-function getImageExtension(url?: string): string {
-  if (!url) return ".jpg";
-  try {
-    const pathname = new URL(url).pathname;
-    const ext = path.extname(pathname);
-    return ext || ".jpg";
-  } catch {
-    return ".jpg";
-  }
+function createLocalCoverIndex(kind: MediaKind): Map<string, string> {
+  const dir = path.resolve("public", "douban", kind);
+  if (!existsSync(dir)) return new Map();
+
+  return new Map(
+    readdirSync(dir, { withFileTypes: true })
+      .filter((entry) => entry.isFile())
+      .map((entry) => [path.parse(entry.name).name, `/douban/${kind}/${entry.name}`]),
+  );
 }
 
-function resolveLocalCover(kind: "movie" | "book", subjectId?: string, imageUrl?: string): string | undefined {
-  if (!subjectId) return;
-  const ext = getImageExtension(imageUrl);
-  const relativePath = `/douban/${kind}/${subjectId}${ext}`;
-  const fullPath = path.join(publicDir, "douban", kind, `${subjectId}${ext}`);
-  return existsSync(fullPath) ? relativePath : undefined;
+function resolveCover(
+  localCoverIndex: Map<string, string>,
+  subjectId?: string,
+  remoteCover?: string,
+): string | undefined {
+  if (subjectId) {
+    const localCover = localCoverIndex.get(subjectId);
+    if (localCover) return localCover;
+  }
+
+  return remoteCover;
 }
 ---
 
