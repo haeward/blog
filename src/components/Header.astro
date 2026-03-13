@@ -3,11 +3,10 @@ import Link from "@components/Link.astro";
 import { SITE } from "@consts";
 
 type Props = {
-  variant?: "default" | "article";
   showDivider?: boolean;
 };
 
-const { variant = "default", showDivider = false } = Astro.props;
+const { showDivider = false } = Astro.props;
 ---
 
 <header class:list={["py-4", showDivider && "header--divider"]}>
@@ -16,9 +15,7 @@ const { variant = "default", showDivider = false } = Astro.props;
       <div
         class:list={[
           "flex flex-col gap-3",
-          variant === "article"
-            ? "sm:flex-row sm:items-center sm:justify-start sm:gap-10"
-            : "sm:flex-row sm:items-center sm:justify-between"
+          "sm:flex-row sm:items-center sm:justify-between"
         ]}
       >
         <div class="flex items-center justify-between gap-4 sm:justify-start sm:gap-8">
