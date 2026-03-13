@@ -395,9 +395,9 @@ figcaption {
 }
 
 .blog-toc {
-  @apply rounded-xl border border-black/8 bg-white/45 text-sm text-black/55;
-  @apply dark:border-white/8 dark:bg-white/[0.025] dark:text-white/55;
-  @apply backdrop-blur-sm;
+  @apply rounded-xl border border-black/6 bg-white/28 text-sm text-black/46;
+  @apply dark:border-white/6 dark:bg-white/[0.015] dark:text-white/42;
+  @apply backdrop-blur-[2px];
 }
 
 .blog-toc--mobile {
@@ -410,7 +410,7 @@ figcaption {
 
 .blog-toc__summary,
 .blog-toc__title {
-  @apply flex items-center justify-between gap-3 font-medium text-black/72 dark:text-white/72;
+  @apply flex items-center justify-between gap-3 text-black/56 dark:text-white/52;
 }
 
 .blog-toc__summary {
@@ -418,15 +418,23 @@ figcaption {
 }
 
 .blog-toc__title {
-  @apply px-2 text-[0.72rem] uppercase tracking-[0.18em];
+  @apply px-2 pb-2 text-[0.82rem];
 }
 
 .blog-toc__summary::-webkit-details-marker {
   display: none;
 }
 
+.blog-toc__heading {
+  @apply inline-flex items-center gap-2 font-medium;
+}
+
+.blog-toc__heading-icon {
+  @apply shrink-0 opacity-60;
+}
+
 .blog-toc__chevron {
-  @apply shrink-0 transition-transform duration-200 ease-out;
+  @apply shrink-0 opacity-55 transition-transform duration-200 ease-out;
 }
 
 .blog-toc--mobile[open] .blog-toc__chevron {
@@ -434,7 +442,7 @@ figcaption {
 }
 
 .blog-toc__body {
-  @apply px-2 pb-1.5;
+  @apply px-2 pb-1.5 pt-0.5;
 }
 
 .blog-toc__list {
@@ -442,13 +450,23 @@ figcaption {
 }
 
 .blog-toc__list--mobile {
-  @apply px-2 pb-1.5 pt-0.5;
+  @apply px-2 pb-1 pt-0.75;
 }
 
 .blog-toc__link {
-  @apply block rounded-md px-2 py-0.75 text-[0.8rem] leading-snug text-black/52 transition-colors duration-200;
-  @apply hover:bg-black/[0.035] hover:text-black/78 dark:text-white/52 dark:hover:bg-white/[0.04] dark:hover:text-white/78;
+  @apply block rounded-md border-l border-transparent px-2 py-0.75 text-[0.8rem] leading-snug text-black/42 transition-colors duration-200;
+  @apply hover:bg-black/[0.02] hover:text-black/58 dark:text-white/40 dark:hover:bg-white/[0.025] dark:hover:text-white/60;
   overflow-wrap: anywhere;
+}
+
+.blog-toc__link[data-active="true"] {
+  @apply border-black/20 bg-black/[0.035] font-medium text-black/80;
+  @apply dark:border-white/20 dark:bg-white/[0.04] dark:text-white/82;
+}
+
+.blog-toc__link:focus-visible {
+  @apply border-black/22 bg-black/[0.025] text-black/70 outline-none;
+  @apply dark:border-white/22 dark:bg-white/[0.03] dark:text-white/72;
 }
 
 .blog-toc__link--depth-3 {

@@ -227,8 +227,120 @@ const hasToc = tocHeadings.length > 0;
       });
     };
 
+    const syncTableOfContents = () => {
+      window.__blogTocCleanup?.();
+
+      const article = document.querySelector(".blog-article");
+      if (!article) return;
+
+      const headings = Array.from(article.querySelectorAll("h2[id], h3[id], h4[id]"));
+      const tocLinks = Array.from(document.querySelectorAll("[data-toc-link='true']"));
+      if (headings.length === 0 || tocLinks.length === 0) {
+        return;
+      }
+
+      let activeSlug = "";
+      let frameId = 0;
+      let observer;
+
+      const setActiveSlug = (slug) => {
+        if (slug === activeSlug) return;
+        activeSlug = slug;
+
+        tocLinks.forEach((link) => {
+          if (!(link instanceof HTMLElement)) return;
+          link.setAttribute("data-active", link.dataset.slug === slug ? "true" : "false");
+        });
+      };
+
+      const getActiveSlugFromViewport = () => {
+        const activationOffset = 140;
+        let candidate = null;
+
+        for (const heading of headings) {
+          const top = heading.getBoundingClientRect().top;
+          if (top - activationOffset <= 0) {
+            candidate = heading;
+            continue;
+          }
+
+          if (!candidate && top <= window.innerHeight * 0.6) {
+            candidate = heading;
+          }
+          break;
+        }
+
+        if (!candidate) {
+          return headings[0]?.id ?? "";
+        }
+
+        return candidate.id;
+      };
+
+      const setActiveSlugFromHash = () => {
+        const hashSlug = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+        if (!hashSlug) return false;
+
+        const hashedHeading = headings.find((heading) => heading.id === hashSlug);
+        if (!hashedHeading) return false;
+
+        setActiveSlug(hashedHeading.id);
+        return true;
+      };
+
+      const updateActiveHeading = () => {
+        frameId = 0;
+        setActiveSlug(getActiveSlugFromViewport());
+      };
+
+      const handleHashChange = () => {
+        if (setActiveSlugFromHash()) {
+          window.setTimeout(() => {
+            requestUpdate();
+          }, 80);
+        }
+      };
+
+      const requestUpdate = () => {
+        if (frameId) return;
+        frameId = window.requestAnimationFrame(updateActiveHeading);
+      };
+
+      observer = new IntersectionObserver(
+        () => {
+          requestUpdate();
+        },
+        {
+          rootMargin: "-15% 0px -55% 0px",
+          threshold: [0, 1],
+        }
+      );
+
+      headings.forEach((heading) => observer.observe(heading));
+      window.addEventListener("hashchange", handleHashChange);
+      window.addEventListener("resize", requestUpdate);
+      window.addEventListener("scroll", requestUpdate, { passive: true });
+
+      if (!setActiveSlugFromHash()) {
+        requestUpdate();
+      }
+
+      window.__blogTocCleanup = () => {
+        if (frameId) {
+          window.cancelAnimationFrame(frameId);
+          frameId = 0;
+        }
+        observer?.disconnect();
+        window.removeEventListener("hashchange", handleHashChange);
+        window.removeEventListener("resize", requestUpdate);
+        window.removeEventListener("scroll", requestUpdate);
+      };
+    };
+
     bindGlobalLightboxClose();
     document.addEventListener("DOMContentLoaded", setupImageLightbox);
     document.addEventListener("astro:page-load", setupImageLightbox);
+    document.addEventListener("DOMContentLoaded", syncTableOfContents);
+    document.addEventListener("astro:page-load", syncTableOfContents);
   </script>
 </PageLayout>

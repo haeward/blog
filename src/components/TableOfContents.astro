@@ -10,7 +10,7 @@ type Props = {
 const {
   headings,
   variant = "desktop",
-  title = "On this page",
+  title = "Contents",
 } = Astro.props;
 
 const tocHeadings = headings.filter(({ depth }) => depth >= 2 && depth <= 4);
@@ -30,7 +30,29 @@ const depthClasses = {
 {variant === "mobile" ? (
   <details class="blog-toc blog-toc--mobile animate xl:hidden">
     <summary class="blog-toc__summary">
-      <span>{title}</span>
+      <span class="blog-toc__heading">
+        <svg
+          class="blog-toc__heading-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="8" y1="6" x2="21" y2="6"></line>
+          <line x1="8" y1="12" x2="21" y2="12"></line>
+          <line x1="8" y1="18" x2="21" y2="18"></line>
+          <circle cx="4" cy="6" r="1"></circle>
+          <circle cx="4" cy="12" r="1"></circle>
+          <circle cx="4" cy="18" r="1"></circle>
+        </svg>
+        <span>{title}</span>
+      </span>
       <svg
         class="blog-toc__chevron"
         xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +73,13 @@ const depthClasses = {
       <ul class={listClass}>
         {tocHeadings.map((heading) => (
           <li>
-            <a href={`#${heading.slug}`} class={depthClasses[heading.depth as 2 | 3 | 4]}>
+            <a
+              href={`#${heading.slug}`}
+              class={depthClasses[heading.depth as 2 | 3 | 4]}
+              data-toc-link="true"
+              data-slug={heading.slug}
+              data-active="false"
+            >
               {heading.text}
             </a>
           </li>
@@ -61,12 +89,42 @@ const depthClasses = {
   </details>
 ) : (
   <aside class="blog-toc blog-toc--desktop animate hidden xl:block" aria-label="Table of contents">
-    <div class="blog-toc__title">{title}</div>
+    <div class="blog-toc__title">
+      <span class="blog-toc__heading">
+        <svg
+          class="blog-toc__heading-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="8" y1="6" x2="21" y2="6"></line>
+          <line x1="8" y1="12" x2="21" y2="12"></line>
+          <line x1="8" y1="18" x2="21" y2="18"></line>
+          <circle cx="4" cy="6" r="1"></circle>
+          <circle cx="4" cy="12" r="1"></circle>
+          <circle cx="4" cy="18" r="1"></circle>
+        </svg>
+        <span>{title}</span>
+      </span>
+    </div>
     <nav class="blog-toc__body">
       <ul class={listClass}>
         {tocHeadings.map((heading) => (
           <li>
-            <a href={`#${heading.slug}`} class={depthClasses[heading.depth as 2 | 3 | 4]}>
+            <a
+              href={`#${heading.slug}`}
+              class={depthClasses[heading.depth as 2 | 3 | 4]}
+              data-toc-link="true"
+              data-slug={heading.slug}
+              data-active="false"
+            >
               {heading.text}
             </a>
           </li>
