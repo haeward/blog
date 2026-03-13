@@ -5,6 +5,8 @@ import tailwindcss from "@tailwindcss/vite";
 import { remarkSpotifyEmbed } from "./src/lib/remark-spotify-embed.ts";
 import remarkImageCaption from "./src/lib/remark-image-caption.ts";
 
+const astroCommand = globalThis.process?.argv.includes("dev") ? "dev" : "build";
+const viteCacheDir = `node_modules/.vite/${astroCommand}`;
 
 export default defineConfig({
   site: "https://haeward.com",
@@ -12,6 +14,7 @@ export default defineConfig({
   integrations: [sitemap(), mdx()],
 
   vite: {
+    cacheDir: viteCacheDir,
     plugins: [tailwindcss()],
   },
 
