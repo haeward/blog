@@ -46,7 +46,7 @@ footer {
 }
 
 .blog-post-toc-rail {
-  @apply hidden xl:block absolute left-full top-0 ml-10 w-48;
+  @apply hidden xl:block absolute left-full top-1/2 ml-24 w-48 -translate-y-1/2;
 }
 
 article {
@@ -404,7 +404,7 @@ figcaption {
 }
 
 .blog-toc--desktop {
-  @apply sticky top-24 max-h-[calc(100vh-7rem)] overflow-auto px-3 py-3;
+  @apply max-h-[calc(100vh-8rem)] overflow-auto px-3 py-3;
 }
 
 .blog-toc__summary,
@@ -433,19 +433,19 @@ figcaption {
 }
 
 .blog-toc__body {
-  @apply px-2 pb-2;
+  @apply px-2 pb-1.5;
 }
 
 .blog-toc__list {
-  @apply flex flex-col gap-1;
+  @apply flex flex-col gap-0.5;
 }
 
 .blog-toc__list--mobile {
-  @apply px-2 pb-2 pt-1;
+  @apply px-2 pb-1.5 pt-0.5;
 }
 
 .blog-toc__link {
-  @apply block rounded-md px-2 py-1 text-[0.8rem] leading-relaxed text-black/52 transition-colors duration-200;
+  @apply block rounded-md px-2 py-0.75 text-[0.8rem] leading-snug text-black/52 transition-colors duration-200;
   @apply hover:bg-black/[0.035] hover:text-black/78 dark:text-white/52 dark:hover:bg-white/[0.04] dark:hover:text-white/78;
   overflow-wrap: anywhere;
 }
