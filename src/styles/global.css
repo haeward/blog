@@ -37,6 +37,19 @@ footer {
   @apply py-5 text-sm;
 }
 
+.blog-post-shell {
+  @apply relative mx-auto max-w-screen-md;
+}
+
+.blog-post-main {
+  @apply min-w-0 w-full;
+}
+
+.blog-post-toc-rail {
+  @apply hidden xl:block fixed top-1/2 w-48 -translate-y-1/2;
+  left: min(calc(50% + 29rem), calc(100vw - 14rem));
+}
+
 article {
   @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
   @apply prose-headings:font-semibold prose-p:font-serif;
@@ -254,6 +267,10 @@ html.image-lightbox-open {
   overflow: hidden;
 }
 
+.blog-article :is(h2, h3, h4) {
+  scroll-margin-top: 6.5rem;
+}
+
 .blog-article img {
   cursor: zoom-in;
   transition: transform 160ms ease, box-shadow 160ms ease;
@@ -375,4 +392,93 @@ figcaption {
 
 .prose img, .prose-invert img, article img {
   @apply !rounded-lg !shadow-sm;
+}
+
+.blog-toc {
+  @apply rounded-xl border border-black/6 bg-white/28 text-sm text-black/46;
+  @apply dark:border-white/6 dark:bg-white/[0.015] dark:text-white/42;
+  @apply backdrop-blur-[2px];
+}
+
+.blog-toc--mobile {
+  @apply mt-8 overflow-hidden;
+}
+
+.blog-toc--desktop {
+  @apply max-h-[calc(100vh-7rem)] overflow-auto px-3 py-3;
+}
+
+.blog-toc__summary,
+.blog-toc__title {
+  @apply flex items-center justify-between gap-3 text-black/56 dark:text-white/52;
+}
+
+.blog-toc__summary {
+  @apply cursor-pointer list-none p-4;
+}
+
+.blog-toc__title {
+  @apply px-2 pb-2 text-[0.82rem];
+}
+
+.blog-toc__summary::-webkit-details-marker {
+  display: none;
+}
+
+.blog-toc__heading {
+  @apply inline-flex items-center gap-2 font-medium;
+}
+
+.blog-toc__heading-icon {
+  @apply shrink-0 opacity-60;
+}
+
+.blog-toc__chevron {
+  @apply shrink-0 opacity-55 transition-transform duration-200 ease-out;
+}
+
+.blog-toc--mobile[open] .blog-toc__chevron {
+  transform: rotate(180deg);
+}
+
+.blog-toc__body {
+  @apply px-2 pb-1.5 pt-0.5;
+}
+
+.blog-toc__list {
+  @apply flex flex-col gap-0.5;
+}
+
+.blog-toc__list--mobile {
+  @apply px-2 pb-1 pt-0.75;
+}
+
+.blog-toc__link {
+  @apply block rounded-md border-l border-transparent px-2 py-0.75 text-[0.8rem] leading-snug text-black/42 transition-colors duration-200;
+  @apply hover:bg-black/[0.02] hover:text-black/58 dark:text-white/40 dark:hover:bg-white/[0.025] dark:hover:text-white/60;
+  overflow-wrap: anywhere;
+}
+
+.blog-toc__link[data-active="true"] {
+  @apply border-black/20 bg-black/[0.035] font-medium text-black/80;
+  @apply dark:border-white/20 dark:bg-white/[0.04] dark:text-white/82;
+}
+
+.blog-toc__link:focus-visible {
+  @apply border-black/22 bg-black/[0.025] text-black/70 outline-none;
+  @apply dark:border-white/22 dark:bg-white/[0.03] dark:text-white/72;
+}
+
+.blog-toc__link--depth-3 {
+  @apply pl-6 text-[0.78rem];
+}
+
+.blog-toc__link--depth-4 {
+  @apply pl-9 text-[0.76rem];
+}
+
+@media (min-width: 640px) {
+  .blog-article :is(h2, h3, h4) {
+    scroll-margin-top: 7rem;
+  }
 }
