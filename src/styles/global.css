@@ -30,7 +30,7 @@ header {
 }
 
 header.header--divider {
-  @apply border-b border-black/8 dark:border-white/8;
+  @apply border-b border-black/10 dark:border-white/8;
 }
 
 main {
