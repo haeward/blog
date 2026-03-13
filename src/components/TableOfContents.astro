@@ -28,7 +28,7 @@ const depthClasses = {
 ---
 
 {variant === "mobile" ? (
-  <details class="blog-toc blog-toc--mobile animate lg:hidden">
+  <details class="blog-toc blog-toc--mobile animate xl:hidden">
     <summary class="blog-toc__summary">
       <span>{title}</span>
       <svg
@@ -60,7 +60,7 @@ const depthClasses = {
     </nav>
   </details>
 ) : (
-  <aside class="blog-toc blog-toc--desktop animate hidden lg:block" aria-label="Table of contents">
+  <aside class="blog-toc blog-toc--desktop animate hidden xl:block" aria-label="Table of contents">
     <div class="blog-toc__title">{title}</div>
     <nav class="blog-toc__body">
       <ul class={listClass}>

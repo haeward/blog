@@ -37,16 +37,16 @@ footer {
   @apply py-5 text-sm;
 }
 
-.blog-post-layout {
-  @apply flex flex-col gap-8;
-}
-
-.blog-post-layout--with-toc {
-  @apply lg:grid lg:grid-cols-[minmax(0,1fr)_17rem] lg:items-start lg:gap-10;
+.blog-post-shell {
+  @apply relative mx-auto max-w-screen-md;
 }
 
 .blog-post-main {
-  @apply min-w-0 w-full max-w-screen-md;
+  @apply min-w-0 w-full;
+}
+
+.blog-post-toc-rail {
+  @apply hidden xl:block absolute left-full top-0 ml-10 w-48;
 }
 
 article {
@@ -394,8 +394,8 @@ figcaption {
 }
 
 .blog-toc {
-  @apply rounded-2xl border border-black/10 bg-white/65 text-sm text-black/70 shadow-sm;
-  @apply dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70;
+  @apply rounded-xl border border-black/8 bg-white/45 text-sm text-black/55;
+  @apply dark:border-white/8 dark:bg-white/[0.025] dark:text-white/55;
   @apply backdrop-blur-sm;
 }
 
@@ -404,16 +404,20 @@ figcaption {
 }
 
 .blog-toc--desktop {
-  @apply sticky top-24 max-h-[calc(100vh-7rem)] overflow-auto p-4;
+  @apply sticky top-24 max-h-[calc(100vh-7rem)] overflow-auto px-3 py-3;
 }
 
 .blog-toc__summary,
 .blog-toc__title {
-  @apply flex items-center justify-between gap-3 font-semibold text-black/80 dark:text-white/85;
+  @apply flex items-center justify-between gap-3 font-medium text-black/72 dark:text-white/72;
 }
 
 .blog-toc__summary {
   @apply cursor-pointer list-none p-4;
+}
+
+.blog-toc__title {
+  @apply px-2 text-[0.72rem] uppercase tracking-[0.18em];
 }
 
 .blog-toc__summary::-webkit-details-marker {
@@ -429,29 +433,29 @@ figcaption {
 }
 
 .blog-toc__body {
-  @apply px-4 pb-4;
+  @apply px-2 pb-2;
 }
 
 .blog-toc__list {
-  @apply flex flex-col gap-1.5;
+  @apply flex flex-col gap-1;
 }
 
 .blog-toc__list--mobile {
-  @apply pt-1;
+  @apply px-2 pb-2 pt-1;
 }
 
 .blog-toc__link {
-  @apply block rounded-md px-2 py-1.5 text-sm leading-relaxed text-black/65 transition-colors duration-200;
-  @apply hover:bg-black/[0.04] hover:text-black/90 dark:text-white/65 dark:hover:bg-white/[0.05] dark:hover:text-white/90;
+  @apply block rounded-md px-2 py-1 text-[0.8rem] leading-relaxed text-black/52 transition-colors duration-200;
+  @apply hover:bg-black/[0.035] hover:text-black/78 dark:text-white/52 dark:hover:bg-white/[0.04] dark:hover:text-white/78;
   overflow-wrap: anywhere;
 }
 
 .blog-toc__link--depth-3 {
-  @apply pl-5 text-[0.92rem];
+  @apply pl-4 text-[0.78rem];
 }
 
 .blog-toc__link--depth-4 {
-  @apply pl-8 text-[0.9rem];
+  @apply pl-6 text-[0.76rem];
 }
 
 @media (min-width: 640px) {

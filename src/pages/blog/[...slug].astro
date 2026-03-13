@@ -32,17 +32,13 @@ type Props = {
 const { post, prev, next } = Astro.props;
 const { Content, headings } = await render(post);
 const postBody = post.body ?? "";
-const hasToc = headings.some((heading) => heading.depth >= 2 && heading.depth <= 4);
+const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 4);
+const hasToc = tocHeadings.length > 0;
 ---
 
 <PageLayout title={`${post.data.title} | ${SITE.NAME}`} description={post.data.description}>
-  <div class="mx-auto max-w-screen-xl px-5">
-    <div
-      class:list={[
-        "blog-post-layout",
-        hasToc && "blog-post-layout--with-toc",
-      ]}
-    >
+  <div class="px-5">
+    <div class="blog-post-shell">
       <div class="blog-post-main">
         <div class="space-y-2 my-6">
           <div class="animate text-xl sm:text-2xl font-semibold text-black/75 dark:text-white">
@@ -81,7 +77,7 @@ const hasToc = headings.some((heading) => heading.depth >= 2 && heading.depth <=
           </div>
         </div>
 
-        {hasToc && <TableOfContents headings={headings} variant="mobile" />}
+        {hasToc && <TableOfContents headings={tocHeadings} variant="mobile" />}
 
         <article class="animate mt-10 blog-article">
           <Content />
@@ -120,7 +116,11 @@ const hasToc = headings.some((heading) => heading.depth >= 2 && heading.depth <=
         )}
       </div>
 
-      {hasToc && <TableOfContents headings={headings} />}
+      {hasToc && (
+        <div class="blog-post-toc-rail">
+          <TableOfContents headings={tocHeadings} />
+        </div>
+      )}
     </div>
   </div>
 
