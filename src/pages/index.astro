@@ -4,7 +4,6 @@ import { Image } from "astro:assets";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard.astro";
-import Link from "@components/Link.astro";
 import { SITE, SOCIALS } from "@consts";
 
 const blog = (await getCollection("blog"))
@@ -62,13 +61,10 @@ const blog = (await getCollection("blog"))
       </section>
 
       <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+        <div>
           <h1 class="font-semibold text-black dark:text-white text-xl">
             Latest posts
           </h1>
-          <Link href="/blog" class:list={["text-sm"]}>
-            See all posts
-          </Link>
         </div>
         <ul class="flex flex-col gap-1">
           {blog.map(post => (
