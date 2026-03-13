@@ -4,15 +4,23 @@ import Link from "@components/Link.astro";
 import { SITE } from "@consts";
 
 type Props = {
+  variant?: "default" | "article";
   showDivider?: boolean;
 };
 
-const { showDivider = false } = Astro.props;
+const { variant = "default", showDivider = false } = Astro.props;
 ---
 
 <header class:list={["py-4", showDivider && "header--divider"]}>
   <Container>
-    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <div
+      class:list={[
+        "flex flex-col gap-3",
+        variant === "article"
+          ? "sm:flex-row sm:items-center sm:justify-start sm:gap-10"
+          : "sm:flex-row sm:items-center sm:justify-between"
+      ]}
+    >
       <div class="flex items-center justify-between gap-4 sm:justify-start sm:gap-8">
         <Link href="/" underline={false}>
           <div class="font-semibold text-xl sm:text-2xl">

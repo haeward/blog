@@ -6,12 +6,14 @@ import Footer from "@components/Footer.astro";
 type Props = {
   title: string;
   description: string;
+  headerVariant?: "default" | "article";
   headerDivider?: boolean;
 };
 
 const {
   title,
   description,
+  headerVariant = "default",
   headerDivider = false,
 } = Astro.props;
 ---
@@ -22,7 +24,7 @@ const {
     <Head title={`${title}`} description={description} />
   </head>
   <body>
-    <Header showDivider={headerDivider} />
+    <Header variant={headerVariant} showDivider={headerDivider} />
     <main class="mt-12 sm:mt-6">
       <slot />
     </main>
