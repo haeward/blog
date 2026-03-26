@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.0",
-    "@astrojs/rss": "4.0.17",
+    "@astrojs/rss": "4.0.18",
     "@astrojs/sitemap": "^3.7.0",
     "@fontsource/lxgw-wenkai": "^5.2.5",
     "@tailwindcss/typography": "^0.5.10",
