@@ -7,6 +7,179 @@
 			"star_count": 4,
 			"value": 4
 		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/movie/35010610 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/35010610/interest/4811669040",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-05 18:50:12",
+		"status": "done",
+		"id": 4811669040,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 284055,
+				"max": 10,
+				"star_count": 4.5,
+				"value": 8.5
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2026-03-20(美国/中国大陆)"
+			],
+			"pic": {
+				"large": "https://img9.doubanio.com/view/photo/m_ratio_poster/public/p2930195706.jpg",
+				"normal": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2930195706.jpg"
+			},
+			"honor_infos": [
+				{
+					"kind": "movie",
+					"uri": "douban://douban.com/subject_collection/ECGRADN5Q?type=rank&category=movie&rank_type=year",
+					"rank": 7,
+					"title": "豆瓣2026最值得期待外语电影"
+				}
+			],
+			"is_show": false,
+			"vendor_icons": [],
+			"year": "2026",
+			"card_subtitle": "2026 / 美国 / 剧情 科幻 惊悚 / 菲尔·罗德 克里斯托弗·米勒 / 瑞恩·高斯林 桑德拉·惠勒",
+			"id": "35010610",
+			"genres": [
+				"剧情",
+				"科幻",
+				"惊悚"
+			],
+			"title": "挽救计划",
+			"is_released": true,
+			"actors": [
+				{
+					"name": "瑞恩·高斯林"
+				},
+				{
+					"name": "桑德拉·惠勒"
+				},
+				{
+					"name": "詹姆斯·奥尔蒂斯"
+				},
+				{
+					"name": "莱昂内尔·博伊斯"
+				},
+				{
+					"name": "梁振邦"
+				},
+				{
+					"name": "米拉娜·薇恩翠"
+				},
+				{
+					"name": "普里亚·坎萨"
+				},
+				{
+					"name": "利兹·金斯曼"
+				},
+				{
+					"name": "马拉基·卡比"
+				},
+				{
+					"name": "梅丽尔·斯特里普"
+				},
+				{
+					"name": "尤妮斯·胡特哈特"
+				},
+				{
+					"name": "雷·波特"
+				},
+				{
+					"name": "达米安·德·弗罗贝维尔"
+				},
+				{
+					"name": "米娅·索特里乌"
+				},
+				{
+					"name": "亚伦·尼尔"
+				},
+				{
+					"name": "奥赖恩·李"
+				},
+				{
+					"name": "迈克尔·阿金绥尔"
+				},
+				{
+					"name": "安妮勒·奥拉莱"
+				},
+				{
+					"name": "玛雅·伊娃·侯赛因"
+				},
+				{
+					"name": "巴斯蒂安·安东尼奥·富恩特斯"
+				},
+				{
+					"name": "爱丽丝·布里塔因"
+				},
+				{
+					"name": "特拉维斯·杰"
+				},
+				{
+					"name": "杰弗里·兰布"
+				},
+				{
+					"name": "保罗·兰伯特"
+				},
+				{
+					"name": "米歇尔·格里尼奇"
+				},
+				{
+					"name": "伯恩哈德·舒茨"
+				}
+			],
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "725b3c",
+				"_base_color": [
+					0.09444444444444446,
+					0.46875,
+					0.25098039215686274
+				],
+				"secondary_color": "f9f7f4",
+				"_avg_color": [
+					0.07627118644067797,
+					0.48360655737704916,
+					0.47843137254901963
+				],
+				"primary_color_dark": "4c3c28"
+			},
+			"type": "movie",
+			"has_linewatch": false,
+			"vendor_desc": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/35010610.jpg",
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/35010610",
+			"url": "https://movie.douban.com/subject/35010610/",
+			"release_date": null,
+			"uri": "douban://douban.com/movie/35010610",
+			"subtype": "movie",
+			"directors": [
+				{
+					"name": "菲尔·罗德"
+				},
+				{
+					"name": "克里斯托弗·米勒"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"null_rating_reason": ""
+		},
+		"star_time": "2026-04-05 18:50:12"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
 		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/movie/2124703 来自@豆瓣App",
 		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/2124703/interest/4783077546",
 		"tags": [],
