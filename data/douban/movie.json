@@ -7,6 +7,142 @@
 			"star_count": 4,
 			"value": 4
 		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/movie/3813779 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/3813779/interest/4816276515",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-11 11:03:38",
+		"status": "done",
+		"id": 4816276515,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 253340,
+				"max": 10,
+				"star_count": 4,
+				"value": 7.7
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2010-09-28(中国大陆)"
+			],
+			"pic": {
+				"large": "https://img1.doubanio.com/view/photo/m_ratio_poster/public/p636665128.jpg",
+				"normal": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p636665128.jpg"
+			},
+			"honor_infos": [
+				{
+					"kind": "movie",
+					"uri": "douban://douban.com/subject_collection/EC6YOLGQQ?type=rank&category=movie&rank_type=film_genre",
+					"rank": 5,
+					"title": "中国大陆武侠片榜"
+				}
+			],
+			"is_show": false,
+			"vendor_icons": [
+				"https://img9.doubanio.com/f/frodo/6c7b857e6b2255201e73bf83732d95d572f3f9f7/pics/vendors/iqiyi.png"
+			],
+			"year": "2010",
+			"card_subtitle": "2010 / 中国大陆 中国香港 中国台湾 / 动作 爱情 武侠 古装 / 苏照彬 / 杨紫琼 郑雨盛",
+			"id": "3813779",
+			"genres": [
+				"动作",
+				"爱情",
+				"武侠"
+			],
+			"title": "剑雨",
+			"is_released": true,
+			"actors": [
+				{
+					"name": "杨紫琼"
+				},
+				{
+					"name": "郑雨盛"
+				},
+				{
+					"name": "王学圻"
+				},
+				{
+					"name": "徐熙媛"
+				},
+				{
+					"name": "余文乐"
+				},
+				{
+					"name": "戴立忍"
+				},
+				{
+					"name": "鲍起静"
+				},
+				{
+					"name": "林熙蕾"
+				},
+				{
+					"name": "郭晓东"
+				},
+				{
+					"name": "江一燕"
+				},
+				{
+					"name": "吴佩慈"
+				},
+				{
+					"name": "李宗翰"
+				},
+				{
+					"name": "金士杰"
+				},
+				{
+					"name": "吴飞霞"
+				}
+			],
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "4f5872",
+				"_base_color": [
+					0.625,
+					0.3076923076923077,
+					0.10196078431372549
+				],
+				"secondary_color": "f4f6f9",
+				"_avg_color": [
+					0.6428571428571429,
+					0.14583333333333326,
+					0.18823529411764706
+				],
+				"primary_color_dark": "343a4c"
+			},
+			"type": "movie",
+			"has_linewatch": true,
+			"vendor_desc": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/3813779.jpg",
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/3813779",
+			"url": "https://movie.douban.com/subject/3813779/",
+			"release_date": null,
+			"uri": "douban://douban.com/movie/3813779",
+			"subtype": "movie",
+			"directors": [
+				{
+					"name": "苏照彬"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"null_rating_reason": ""
+		},
+		"star_time": "2026-04-11 11:03:38"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
 		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/movie/35010610 来自@豆瓣App",
 		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/35010610/interest/4811669040",
 		"tags": [],
