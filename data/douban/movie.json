@@ -7,6 +7,161 @@
 			"star_count": 4,
 			"value": 4
 		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/movie/5348089 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/5348089/interest/4819340152",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-15 00:23:56",
+		"status": "done",
+		"id": 4819340152,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 265022,
+				"max": 10,
+				"star_count": 4,
+				"value": 7.6
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2025-12-19(美国/中国大陆)"
+			],
+			"pic": {
+				"large": "https://img9.doubanio.com/view/photo/m_ratio_poster/public/p2925983114.jpg",
+				"normal": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2925983114.jpg"
+			},
+			"honor_infos": [
+				{
+					"kind": "movie",
+					"uri": "douban://douban.com/subject_collection/ECDAO6XZI?type=rank&category=movie&rank_type=film_genre",
+					"rank": 42,
+					"title": "美国科幻片榜"
+				}
+			],
+			"is_show": false,
+			"vendor_icons": [],
+			"year": "2025",
+			"card_subtitle": "2025 / 美国 / 动作 科幻 惊悚 奇幻 冒险 / 詹姆斯·卡梅隆 / 萨姆·沃辛顿 佐伊·索尔达娜",
+			"id": "5348089",
+			"genres": [
+				"动作",
+				"科幻",
+				"惊悚"
+			],
+			"title": "阿凡达：火与烬",
+			"is_released": true,
+			"actors": [
+				{
+					"name": "萨姆·沃辛顿"
+				},
+				{
+					"name": "佐伊·索尔达娜"
+				},
+				{
+					"name": "西格妮·韦弗"
+				},
+				{
+					"name": "史蒂芬·朗"
+				},
+				{
+					"name": "奥娜·卓别林"
+				},
+				{
+					"name": "凯特·温斯莱特"
+				},
+				{
+					"name": "克利夫·柯蒂斯"
+				},
+				{
+					"name": "乔·大卫·摩尔 "
+				},
+				{
+					"name": "希·庞德"
+				},
+				{
+					"name": "埃迪·法可"
+				},
+				{
+					"name": "大卫·休里斯"
+				},
+				{
+					"name": "杰梅奈·克莱门特"
+				},
+				{
+					"name": "吉奥瓦尼·瑞比西"
+				},
+				{
+					"name": "布里顿·达尔顿"
+				},
+				{
+					"name": "杰克·尚皮永"
+				},
+				{
+					"name": "周睿初"
+				},
+				{
+					"name": "布伦丹·考威尔"
+				},
+				{
+					"name": "贝利·巴斯"
+				},
+				{
+					"name": "杰米·福雷特斯"
+				},
+				{
+					"name": "菲利普·盖廖"
+				},
+				{
+					"name": "杜恩·埃文斯"
+				}
+			],
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "a58596",
+				"_base_color": [
+					0.9102564102564102,
+					0.1940298507462687,
+					0.2627450980392157
+				],
+				"secondary_color": "f9f4f7",
+				"_avg_color": [
+					0.041666666666666685,
+					0.3030303030303031,
+					0.5176470588235295
+				],
+				"primary_color_dark": "7f6674"
+			},
+			"type": "movie",
+			"has_linewatch": false,
+			"vendor_desc": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/5348089.jpg",
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/5348089",
+			"url": "https://movie.douban.com/subject/5348089/",
+			"release_date": null,
+			"uri": "douban://douban.com/movie/5348089",
+			"subtype": "movie",
+			"directors": [
+				{
+					"name": "詹姆斯·卡梅隆"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"null_rating_reason": ""
+		},
+		"star_time": "2026-04-15 00:23:56"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
 		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/movie/36999793 来自@豆瓣App",
 		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/36999793/interest/4818865889",
 		"tags": [],
