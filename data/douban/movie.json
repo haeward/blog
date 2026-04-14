@@ -7,6 +7,164 @@
 			"star_count": 4,
 			"value": 4
 		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/movie/36999793 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/36999793/interest/4818865889",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-14 13:12:43",
+		"status": "done",
+		"id": 4818865889,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 83228,
+				"max": 10,
+				"star_count": 3.5,
+				"value": 7.4
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2026-03-20(中国大陆)"
+			],
+			"pic": {
+				"large": "https://img2.doubanio.com/view/photo/m_ratio_poster/public/p2929759261.jpg",
+				"normal": "https://img2.doubanio.com/view/photo/s_ratio_poster/public/p2929759261.jpg"
+			},
+			"honor_infos": [
+				{
+					"kind": "movie",
+					"uri": "douban://douban.com/subject_collection/movie_weekly_best?type=rank&category=movie&rank_type=weekly",
+					"rank": 5,
+					"title": "一周口碑电影榜"
+				}
+			],
+			"is_show": false,
+			"vendor_icons": [],
+			"year": "2026",
+			"card_subtitle": "2026 / 美国 / 喜剧 科幻 动画 / 丹尼尔·钟 / 佩珀·柯达 鲍比·莫尼汉",
+			"id": "36999793",
+			"genres": [
+				"喜剧",
+				"科幻",
+				"动画"
+			],
+			"title": "河狸变身计划",
+			"is_released": true,
+			"actors": [
+				{
+					"name": "佩珀·柯达"
+				},
+				{
+					"name": "鲍比·莫尼汉"
+				},
+				{
+					"name": "乔恩·哈姆"
+				},
+				{
+					"name": "凯茜·纳基麦"
+				},
+				{
+					"name": "戴夫·弗兰科"
+				},
+				{
+					"name": "爱德华多·弗兰科"
+				},
+				{
+					"name": "梅丽莎·维亚西诺尔"
+				},
+				{
+					"name": "托马斯·劳"
+				},
+				{
+					"name": "梅丽尔·斯特里普"
+				},
+				{
+					"name": "瓦妮莎·贝尔"
+				},
+				{
+					"name": "阿帕娜·南切拉"
+				},
+				{
+					"name": "山姆·理查森"
+				},
+				{
+					"name": "小伊塞亚·维特洛克"
+				},
+				{
+					"name": "史蒂夫·波赛尔"
+				},
+				{
+					"name": "艾戈·乌迪姆"
+				},
+				{
+					"name": "妮可拉·布鲁姆"
+				},
+				{
+					"name": "凯伦·惠伊"
+				},
+				{
+					"name": "莉拉·刘"
+				},
+				{
+					"name": "埃曼·阿卜杜勒-拉扎克"
+				},
+				{
+					"name": "乔·斯帕诺"
+				},
+				{
+					"name": "罗里·艾伦"
+				},
+				{
+					"name": "迪米特利·马丁"
+				}
+			],
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "4f7261",
+				"_base_color": [
+					0.41919191919191917,
+					0.308411214953271,
+					0.4196078431372549
+				],
+				"secondary_color": "f4f9f7",
+				"_avg_color": [
+					0.40277777777777785,
+					0.2,
+					0.47058823529411764
+				],
+				"primary_color_dark": "344c41"
+			},
+			"type": "movie",
+			"has_linewatch": false,
+			"vendor_desc": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/36999793.jpg",
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/36999793",
+			"url": "https://movie.douban.com/subject/36999793/",
+			"release_date": null,
+			"uri": "douban://douban.com/movie/36999793",
+			"subtype": "movie",
+			"directors": [
+				{
+					"name": "丹尼尔·钟"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"null_rating_reason": ""
+		},
+		"star_time": "2026-04-14 13:12:43"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
 		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/movie/3813779 来自@豆瓣App",
 		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/3813779/interest/4816276515",
 		"tags": [],
