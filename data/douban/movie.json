@@ -4,6 +4,118 @@
 		"rating": {
 			"count": 1,
 			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
+		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/movie/36700715 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/36700715/interest/4738928568",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-16 13:39:16",
+		"status": "done",
+		"id": 4738928568,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 56240,
+				"max": 10,
+				"star_count": 4,
+				"value": 7.5
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2025-12-17(中国大陆)"
+			],
+			"pic": {
+				"large": "https://img9.doubanio.com/view/photo/m_ratio_poster/public/p2928164956.jpg",
+				"normal": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2928164956.jpg"
+			},
+			"honor_infos": [
+				{
+					"kind": "tv",
+					"uri": "douban://douban.com/subject_collection/EC74443FY?type=rank&category=movie&rank_type=tv_genre",
+					"rank": 15,
+					"title": "近期热门大陆剧榜"
+				}
+			],
+			"is_show": false,
+			"vendor_icons": [
+				"https://img9.doubanio.com/f/frodo/6c7b857e6b2255201e73bf83732d95d572f3f9f7/pics/vendors/iqiyi.png"
+			],
+			"year": "2025",
+			"card_subtitle": "2025 / 中国大陆 / 动作 悬疑 奇幻 古装 / 郭世民 / 杨旭文 杨志刚",
+			"id": "36700715",
+			"genres": [
+				"动作",
+				"悬疑",
+				"奇幻"
+			],
+			"title": "唐诡奇谭",
+			"is_released": true,
+			"actors": [
+				{
+					"name": "杨旭文"
+				},
+				{
+					"name": "杨志刚"
+				},
+				{
+					"name": "郜思雯"
+				},
+				{
+					"name": "陈创"
+				},
+				{
+					"name": "孙雪宁"
+				},
+				{
+					"name": "石悦安鑫"
+				}
+			],
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "724436",
+				"_base_color": [
+					0.03787878787878788,
+					0.5238095238095238,
+					0.16470588235294117
+				],
+				"secondary_color": "f9f6f4",
+				"_avg_color": [
+					0.038461538461538436,
+					0.5571428571428572,
+					0.27450980392156865
+				],
+				"primary_color_dark": "4c2d24"
+			},
+			"type": "tv",
+			"has_linewatch": true,
+			"vendor_desc": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/36700715.jpg",
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/36700715",
+			"url": "https://movie.douban.com/subject/36700715/",
+			"release_date": null,
+			"uri": "douban://douban.com/tv/36700715",
+			"subtype": "tv",
+			"directors": [
+				{
+					"name": "郭世民"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"null_rating_reason": ""
+		},
+		"star_time": "2026-04-16 13:39:16"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
 			"star_count": 4,
 			"value": 4
 		},
