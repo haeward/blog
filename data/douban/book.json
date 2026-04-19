@@ -191,8 +191,8 @@
 		"rating": {
 			"count": 1,
 			"max": 5,
-			"star_count": 4,
-			"value": 4
+			"star_count": 3,
+			"value": 3
 		},
 		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/book/37393807 来自@豆瓣App",
 		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/37393807/interest/4644352975",
@@ -210,7 +210,7 @@
 				"count": 772,
 				"max": 10,
 				"star_count": 3,
-				"value": 8
+				"value": 6
 			},
 			"controversy_reason": "",
 			"pubdate": [
