@@ -26,6 +26,11 @@ export const BLOGROLL: Metadata = {
   DESCRIPTION: "A collection of blogs I follow.",
 };
 
+export const CHANGELOG: Metadata = {
+  TITLE: "Changelog",
+  DESCRIPTION: "A timeline of major updates to the site.",
+};
+
 export const SOCIALS: Socials = [
   {
     NAME: "Github",
