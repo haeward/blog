@@ -98,7 +98,7 @@ const hasToc = tocHeadings.length > 0;
                     <path d="m15 18-6-6 6-6"/>
                   </svg>
                   <div class="min-w-0">
-                    <div class="serif-reading-title text-sm max-w-full break-words sm:max-w-[300px] sm:truncate" data-language-scan="true" lang={prev.data.lang}>{prev.data.title}</div>
+                    <div class="font-sans text-sm max-w-full break-words sm:max-w-[300px] sm:truncate" data-language-scan="true" lang={prev.data.lang}>{prev.data.title}</div>
                   </div>
                 </a>
               ) : (
@@ -107,7 +107,7 @@ const hasToc = tocHeadings.length > 0;
               {next ? (
                 <a href={`/blog/${next.id}`} class="group flex w-full items-center justify-between gap-1 px-4 py-2 rounded-lg transition-colors duration-300 sm:w-auto sm:justify-end">
                   <div class="text-left sm:text-right">
-                    <div class="serif-reading-title text-sm max-w-full break-words sm:max-w-[300px] sm:truncate" data-language-scan="true" lang={next.data.lang}>{next.data.title}</div>
+                    <div class="font-sans text-sm max-w-full break-words sm:max-w-[300px] sm:truncate" data-language-scan="true" lang={next.data.lang}>{next.data.title}</div>
                   </div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform duration-300">
                     <path d="m9 18 6-6-6-6"/>
@@ -235,6 +235,25 @@ const hasToc = tocHeadings.length > 0;
     const syncTableOfContents = () => {
       window.__blogTocCleanup?.();
 
+      const tocContainers = Array.from(document.querySelectorAll("[data-toc-root='true']"));
+      const tocProgressRows = Array.from(document.querySelectorAll("[data-toc-progress='true']"));
+      const tocProgressLabels = Array.from(document.querySelectorAll("[data-toc-progress-label='true']"));
+
+      tocContainers.forEach((container) => {
+        if (!(container instanceof HTMLElement)) return;
+        container.setAttribute("data-toc-visible", "false");
+      });
+
+      tocProgressRows.forEach((row) => {
+        if (!(row instanceof HTMLElement)) return;
+        row.style.setProperty("--blog-toc-progress", "0%");
+        row.setAttribute("data-progress", "0");
+      });
+
+      tocProgressLabels.forEach((label) => {
+        label.textContent = "0%";
+      });
+
       const article = document.querySelector(".blog-article");
       if (!article) return;
 
@@ -245,6 +264,7 @@ const hasToc = tocHeadings.length > 0;
       }
 
       let activeSlug = "";
+      let activeProgress = -1;
       let frameId = 0;
       let observer;
 
@@ -293,9 +313,46 @@ const hasToc = tocHeadings.length > 0;
         return true;
       };
 
-      const updateActiveHeading = () => {
+      const getArticleProgress = () => {
+        const articleRect = article.getBoundingClientRect();
+        const scrollSpan = articleRect.height - window.innerHeight;
+
+        if (scrollSpan <= 0) {
+          return articleRect.bottom <= window.innerHeight ? 100 : 0;
+        }
+
+        const consumedDistance = Math.min(Math.max(-articleRect.top, 0), scrollSpan);
+        return (consumedDistance / scrollSpan) * 100;
+      };
+
+      const setArticleProgress = (nextProgress) => {
+        const roundedProgress = Math.round(nextProgress);
+        if (roundedProgress === activeProgress) return;
+
+        activeProgress = roundedProgress;
+        const progressValue = `${roundedProgress}%`;
+        const isTocVisible = roundedProgress >= 1;
+
+        tocContainers.forEach((container) => {
+          if (!(container instanceof HTMLElement)) return;
+          container.setAttribute("data-toc-visible", isTocVisible ? "true" : "false");
+        });
+
+        tocProgressRows.forEach((row) => {
+          if (!(row instanceof HTMLElement)) return;
+          row.style.setProperty("--blog-toc-progress", progressValue);
+          row.setAttribute("data-progress", String(roundedProgress));
+        });
+
+        tocProgressLabels.forEach((label) => {
+          label.textContent = progressValue;
+        });
+      };
+
+      const updateTableOfContentsState = () => {
         frameId = 0;
         setActiveSlug(getActiveSlugFromViewport());
+        setArticleProgress(getArticleProgress());
       };
 
       const handleHashChange = () => {
@@ -308,7 +365,7 @@ const hasToc = tocHeadings.length > 0;
 
       const requestUpdate = () => {
         if (frameId) return;
-        frameId = window.requestAnimationFrame(updateActiveHeading);
+        frameId = window.requestAnimationFrame(updateTableOfContentsState);
       };
 
       observer = new IntersectionObserver(

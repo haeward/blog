@@ -30,8 +30,14 @@ const depthClasses = {
 ---
 
 {variant === "mobile" ? (
-  <nav class="blog-toc blog-toc--mobile animate xl:hidden serif-reading-surface" data-language-scan="true" lang={lang} aria-label={title}>
+  <nav class="blog-toc blog-toc--mobile animate xl:hidden serif-reading-surface" data-language-scan="true" data-toc-root="true" data-toc-visible="false" lang={lang} aria-label={title}>
     <div class="blog-toc__body">
+      <div class="blog-toc__progress" data-toc-progress="true" style="--blog-toc-progress: 0%;">
+        <div class="blog-toc__progress-track" aria-hidden="true">
+          <span class="blog-toc__progress-fill" data-toc-progress-fill="true"></span>
+        </div>
+        <span class="blog-toc__progress-label" data-toc-progress-label="true">0%</span>
+      </div>
       <ul class={listClass}>
         {tocHeadings.map((heading) => (
           <li>
@@ -51,8 +57,14 @@ const depthClasses = {
     </div>
   </nav>
 ) : (
-  <aside class="blog-toc blog-toc--desktop animate hidden xl:block serif-reading-surface" data-language-scan="true" lang={lang} aria-label={title}>
+  <aside class="blog-toc blog-toc--desktop animate hidden xl:block serif-reading-surface" data-language-scan="true" data-toc-root="true" data-toc-visible="false" lang={lang} aria-label={title}>
     <nav class="blog-toc__body">
+      <div class="blog-toc__progress" data-toc-progress="true" style="--blog-toc-progress: 0%;">
+        <div class="blog-toc__progress-track" aria-hidden="true">
+          <span class="blog-toc__progress-fill" data-toc-progress-fill="true"></span>
+        </div>
+        <span class="blog-toc__progress-label" data-toc-progress-label="true">0%</span>
+      </div>
       <ul class={listClass}>
         {tocHeadings.map((heading) => (
           <li>
