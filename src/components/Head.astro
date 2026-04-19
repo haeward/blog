@@ -50,6 +50,13 @@ const { title, description, image = "/favicon.png" } = Astro.props;
 
 <script is:inline>
   const siteState = window.__siteState || (window.__siteState = { bound: false });
+  const themeModes = ["system", "light", "dark"];
+  const themeLabels = {
+    system: "System",
+    light: "Light",
+    dark: "Dark",
+  };
+  const colorSchemeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
   const languageSurfaceSelector = "[data-language-scan='true']";
   const excludedLanguageTags = new Set([
     "BUTTON",
@@ -206,17 +213,16 @@ const { title, description, image = "/favicon.png" } = Astro.props;
     document.addEventListener("click", handleDocumentClick);
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleSchemeChange = (event) => {
-      if (localStorage.theme === "system" || !localStorage.theme) {
-        toggleTheme(event.matches);
+      if (getStoredTheme() === "system") {
+        syncTheme("system", event.matches);
       }
     };
 
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener("change", handleSchemeChange);
-    } else if ("onchange" in mediaQuery) {
-      mediaQuery.onchange = handleSchemeChange;
+    if (colorSchemeMediaQuery.addEventListener) {
+      colorSchemeMediaQuery.addEventListener("change", handleSchemeChange);
+    } else if ("onchange" in colorSchemeMediaQuery) {
+      colorSchemeMediaQuery.onchange = handleSchemeChange;
     }
   }
 
@@ -226,13 +232,9 @@ const { title, description, image = "/favicon.png" } = Astro.props;
     const themeToggle = event.target.closest("#theme-toggle");
     if (themeToggle) {
       event.preventDefault();
-      if (document.documentElement.classList.contains("dark")) {
-        localStorage.setItem("theme", "light");
-        toggleTheme(false);
-      } else {
-        localStorage.setItem("theme", "dark");
-        toggleTheme(true);
-      }
+      const nextTheme = getNextTheme(getStoredTheme());
+      localStorage.setItem("theme", nextTheme);
+      syncTheme(nextTheme);
       return;
     }
 
@@ -338,14 +340,42 @@ const { title, description, image = "/favicon.png" } = Astro.props;
     document.head.removeChild(css);
   }
 
-  function preloadTheme() {
-    const userTheme = localStorage.theme;
+  function getStoredTheme() {
+    const userTheme = localStorage.getItem("theme");
+    return themeModes.includes(userTheme) ? userTheme : "system";
+  }
 
-    if (userTheme === "light" || userTheme === "dark") {
-      toggleTheme(userTheme === "dark");
-    } else {
-      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    }
+  function getNextTheme(theme) {
+    const themeIndex = themeModes.indexOf(theme);
+    return themeModes[(themeIndex + 1) % themeModes.length];
+  }
+
+  function resolveTheme(theme, systemPrefersDark = colorSchemeMediaQuery.matches) {
+    if (theme === "dark") return true;
+    if (theme === "light") return false;
+    return systemPrefersDark;
+  }
+
+  function updateThemeToggle(theme) {
+    const themeToggle = document.getElementById("theme-toggle");
+    if (!(themeToggle instanceof HTMLElement)) return;
+
+    const nextTheme = getNextTheme(theme);
+    const nextLabel = themeLabels[nextTheme];
+
+    themeToggle.dataset.themeMode = theme;
+    themeToggle.setAttribute("aria-label", `Switch theme to ${nextLabel}`);
+    themeToggle.setAttribute("title", `Switch theme to ${nextLabel}`);
+  }
+
+  function syncTheme(theme = getStoredTheme(), systemPrefersDark = colorSchemeMediaQuery.matches) {
+    document.documentElement.dataset.themeMode = theme;
+    toggleTheme(resolveTheme(theme, systemPrefersDark));
+    updateThemeToggle(theme);
+  }
+
+  function preloadTheme() {
+    syncTheme(getStoredTheme());
   }
 
   function bindInitListeners() {

@@ -361,6 +361,16 @@ html.scrolled #back-to-top {
   display: block;
 }
 
+.theme-toggle__icon {
+  display: none;
+}
+
+html[data-theme-mode="system"] .theme-toggle__icon--light,
+html[data-theme-mode="light"] .theme-toggle__icon--dark,
+html[data-theme-mode="dark"] .theme-toggle__icon--system {
+  display: block;
+}
+
 /* Twitter embed center */
 .twitter-tweet {
   display: block;
