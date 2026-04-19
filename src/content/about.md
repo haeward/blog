@@ -20,11 +20,11 @@ Currently learning **Japanese**. I'd love to connect if you're interested in dis
 
 I'm active on a few other corners of the internet. Let's connect!
 
-* [GitHub](https://github.com/haeward): See what I'm currently building.
-* [Twitter/X](https://x.com/haewyu): Sharing my thoughts and experiences.
-* [Mastodon](https://mas.to/@haeward): My rambling thoughts in a decentralized world.
-* [Douban](https://movie.douban.com/people/mithrasu/): My films, series, anime, and reading log.
-* [Bangumi](https://bgm.tv/user/haeward): Tracking my anime and drama journey.
+* [GitHub](https://github.com/haeward)
+* [Twitter/X](https://x.com/haewyu)
+* [Mastodon](https://mas.to/@haeward)
+* [Douban](https://movie.douban.com/people/mithrasu)
+* [Bangumi](https://bgm.tv/user/haeward)
 
 Have a question, a project idea, or just want to say hello? Feel free to reach out via email: [me@haeward.com](mailto:me@haeward.com)
 
