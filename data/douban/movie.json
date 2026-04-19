@@ -4,6 +4,133 @@
 		"rating": {
 			"count": 1,
 			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
+		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/movie/36806351 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/36806351/interest/4822932450",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-19 22:09:23",
+		"status": "done",
+		"id": 4822932450,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 36438,
+				"max": 10,
+				"star_count": 3.5,
+				"value": 7
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2026-04-03(中国大陆)"
+			],
+			"pic": {
+				"large": "https://img3.doubanio.com/view/photo/m_ratio_poster/public/p2930472372.jpg",
+				"normal": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2930472372.jpg"
+			},
+			"honor_infos": [],
+			"is_show": false,
+			"vendor_icons": [],
+			"year": "2026",
+			"card_subtitle": "2026 / 日本 美国 / 喜剧 动画 奇幻 冒险 / 亚伦·霍瓦斯 迈克尔·杰勒尼克 / 克里斯·帕拉特 安雅·泰勒-乔伊",
+			"id": "36806351",
+			"genres": [
+				"喜剧",
+				"动画",
+				"奇幻"
+			],
+			"title": "超级马力欧银河大电影",
+			"is_released": true,
+			"actors": [
+				{
+					"name": "克里斯·帕拉特"
+				},
+				{
+					"name": "安雅·泰勒-乔伊"
+				},
+				{
+					"name": "查理·戴"
+				},
+				{
+					"name": "杰克·布莱克"
+				},
+				{
+					"name": "布丽·拉尔森"
+				},
+				{
+					"name": "本·萨弗迪"
+				},
+				{
+					"name": "唐纳德·格洛弗"
+				},
+				{
+					"name": "科甘-迈克尔·凯"
+				},
+				{
+					"name": "伊萨·雷"
+				},
+				{
+					"name": "凯文·迈克尔·理查德森"
+				},
+				{
+					"name": "路易斯·古兹曼"
+				},
+				{
+					"name": "格伦·鲍威尔"
+				},
+				{
+					"name": "萝珊娜·奥德嘉"
+				}
+			],
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "6770a5",
+				"_base_color": [
+					0.6413043478260869,
+					0.3770491803278689,
+					0.47843137254901963
+				],
+				"secondary_color": "f4f5f9",
+				"_avg_color": [
+					0.7619047619047619,
+					0.20588235294117646,
+					0.5333333333333333
+				],
+				"primary_color_dark": "4f567f"
+			},
+			"type": "movie",
+			"has_linewatch": false,
+			"vendor_desc": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/36806351.jpg",
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/36806351",
+			"url": "https://movie.douban.com/subject/36806351/",
+			"release_date": null,
+			"uri": "douban://douban.com/movie/36806351",
+			"subtype": "movie",
+			"directors": [
+				{
+					"name": "亚伦·霍瓦斯"
+				},
+				{
+					"name": "迈克尔·杰勒尼克"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"null_rating_reason": ""
+		},
+		"star_time": "2026-04-19 22:09:23"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
 			"star_count": 4,
 			"value": 4
 		},
