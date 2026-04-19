@@ -6,10 +6,10 @@ import { SITE, BLOGROLL } from "@consts";
 import { Content as BlogrollContent } from "../content/blogroll.md";
 ---
 
-<PageLayout title={`${BLOGROLL.TITLE} | ${SITE.NAME}`} description={BLOGROLL.DESCRIPTION}>
+<PageLayout title={`${BLOGROLL.TITLE} | ${SITE.NAME}`} description={BLOGROLL.DESCRIPTION} lang="en">
   <Container>
     <div class="space-y-8">
-      <article class="animate prose dark:prose-invert max-w-none">
+      <article class="animate serif-reading-surface prose dark:prose-invert max-w-none" data-language-scan="true" lang="en">
         <BlogrollContent />
       </article>
     </div>

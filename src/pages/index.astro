@@ -13,9 +13,9 @@ const blog = (await getCollection("blog"))
 
 ---
 
-<PageLayout title={SITE.NAME} description={SITE.DESC}>
+<PageLayout title={SITE.NAME} description={SITE.DESC} lang="en">
   <Container>
-    <div class="space-y-16">
+    <div class="space-y-12 sm:space-y-14">
       <section>
         <div class="flex justify-center items-center mb-4">
           <div class="relative w-48 h-48">
@@ -60,11 +60,13 @@ const blog = (await getCollection("blog"))
         </div>
       </section>
 
-      <section class="animate space-y-6">
-        <div>
-          <h1 class="font-semibold text-black dark:text-white text-xl">
-            Latest posts
-          </h1>
+      <section class="animate px-1 py-2 sm:px-0 sm:py-3">
+        <div class="mb-4 flex items-end justify-between gap-4">
+          <div>
+            <h1 class="serif-reading-title text-[1.08rem] sm:text-[1.14rem] font-semibold text-black/96 dark:text-white/96">
+              Latest posts
+            </h1>
+          </div>
         </div>
         <ul class="flex flex-col gap-1">
           {blog.map(post => (

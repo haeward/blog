@@ -5,12 +5,14 @@ type Props = {
   headings: MarkdownHeading[];
   variant?: "mobile" | "desktop";
   title?: string;
+  lang?: string;
 };
 
 const {
   headings,
   variant = "desktop",
   title = "Contents",
+  lang = "en",
 } = Astro.props;
 
 const tocHeadings = headings.filter(({ depth }) => depth >= 2 && depth <= 4);
@@ -28,7 +30,7 @@ const depthClasses = {
 ---
 
 {variant === "mobile" ? (
-  <details class="blog-toc blog-toc--mobile animate xl:hidden">
+  <details class="blog-toc blog-toc--mobile animate xl:hidden serif-reading-surface" data-language-scan="true" lang={lang}>
     <summary class="blog-toc__summary">
       <span class="blog-toc__heading">
         <svg
@@ -88,7 +90,7 @@ const depthClasses = {
     </nav>
   </details>
 ) : (
-  <aside class="blog-toc blog-toc--desktop animate hidden xl:block" aria-label="Table of contents">
+  <aside class="blog-toc blog-toc--desktop animate hidden xl:block serif-reading-surface" data-language-scan="true" lang={lang} aria-label="Table of contents">
     <div class="blog-toc__title">
       <span class="blog-toc__heading">
         <svg

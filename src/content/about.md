@@ -12,7 +12,7 @@ I also maintain a consistent running practice, inspired by the anime **[風が�
 
 I'm passionate about productivity tools and emerging technologies that enhance daily workflows. From automation scripts to the latest development tools, I enjoy exploring solutions that make work more efficient and enjoyable. I also have a keen interest in hardware and gadgets that blend functionality with innovation.
 
-Currently learning **Japanese (日本語)**. I'd love to connect if you're interested in discussing Japanese language or culture.
+Currently learning **Japanese** (<span lang="ja">日本語</span>). I'd love to connect if you're interested in discussing Japanese language or culture.
 
 ---
 

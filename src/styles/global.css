@@ -2,6 +2,86 @@
 @config "../../tailwind.config.mjs";
 @plugin "@tailwindcss/typography";
 
+@font-face {
+  font-family: "Noto Sans";
+  src: url("/fonts/NotoSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url("/fonts/NotoSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Serif";
+  src: url("/fonts/NotoSerif-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Serif";
+  src: url("/fonts/NotoSerif-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Serif SC";
+  src: url("/fonts/NotoSerifSC-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Serif SC";
+  src: url("/fonts/NotoSerifSC-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Serif JP";
+  src: url("/fonts/NotoSerifJP-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Serif JP";
+  src: url("/fonts/NotoSerifJP-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 html {
   overflow-y: scroll;
   color-scheme: light;
@@ -20,7 +100,7 @@ body {
   @apply font-sans antialiased;
   @apply flex flex-col;
   @apply bg-stone-100 dark:bg-stone-900;
-  @apply text-black/90 dark:text-white/85;
+  @apply text-black/95 dark:text-white/90;
 }
 
 header {
@@ -41,6 +121,27 @@ footer {
   @apply py-5 text-sm;
 }
 
+.serif-reading-surface,
+.serif-reading-title {
+  font-family: "Noto Serif", ui-serif, Georgia, serif;
+  font-synthesis: none;
+  letter-spacing: 0.012em;
+}
+
+.serif-reading-surface:lang(zh),
+.serif-reading-surface :lang(zh),
+.serif-reading-title:lang(zh),
+.serif-reading-title :lang(zh) {
+  font-family: "Noto Serif SC", "Noto Serif", ui-serif, Georgia, serif;
+}
+
+.serif-reading-surface:lang(ja),
+.serif-reading-surface :lang(ja),
+.serif-reading-title:lang(ja),
+.serif-reading-title :lang(ja) {
+  font-family: "Noto Serif JP", "Noto Serif", ui-serif, Georgia, serif;
+}
+
 .blog-post-shell {
   @apply relative mx-auto max-w-screen-md;
 }
@@ -56,10 +157,15 @@ footer {
 
 article {
   @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
-  @apply prose-headings:font-semibold prose-p:font-serif;
-  @apply prose-headings:text-black/95 dark:prose-headings:text-white/90;
-  @apply prose-p:text-black/75 dark:prose-p:text-white/75;
-  @apply prose-p:font-medium;
+  @apply text-[1.04rem] leading-8;
+  @apply font-serif prose-headings:font-bold prose-headings:font-serif;
+  @apply prose-headings:tracking-[0.01em];
+  @apply prose-headings:text-black dark:prose-headings:text-white/95;
+  @apply prose-p:text-black/85 dark:prose-p:text-white/85;
+  @apply prose-li:text-black/84 dark:prose-li:text-white/84;
+  @apply prose-p:text-[1.06rem] prose-p:leading-8 prose-p:font-medium prose-p:tracking-[0.014em];
+  @apply prose-li:text-[1.04rem] prose-li:leading-8 prose-li:font-medium prose-li:tracking-[0.012em];
+  @apply prose-blockquote:text-[1.06rem] prose-blockquote:font-medium prose-blockquote:tracking-[0.014em];
   @apply break-words;
   overflow-wrap: anywhere;
   /* Reduce heading margins for tighter spacing */
@@ -75,14 +181,13 @@ article {
   /* Base link styles - use important utilities to override prose styles */
   .prose a, .prose-invert a, article a {
     @apply !font-bold;
-    @apply !font-sans;
     @apply !no-underline;
-    @apply !text-blue-700 dark:!text-blue-400;
+    @apply !text-sky-700 dark:!text-sky-300;
     @apply !transition-colors !duration-300 !ease-in-out;
   }
 
   .prose a:hover, .prose-invert a:hover, article a:hover {
-    @apply !text-blue-800 dark:!text-blue-300;
+    @apply !text-sky-800 dark:!text-sky-200;
     @apply !underline;
   }
 
@@ -123,19 +228,27 @@ article {
   /* Custom blockquote styling */
   .prose blockquote, .prose-invert blockquote, article blockquote {
     @apply !not-italic;
-    @apply !border-l-4 !border-orange-400 dark:!border-orange-500;
+    @apply !border-l-3 !border-orange-400/85 dark:!border-orange-500/85;
     @apply !bg-orange-100 dark:!bg-neutral-500/10;
-    @apply !mx-1 !my-2;
+    @apply !mx-1 !my-2 !px-4 !py-3;
     @apply !text-orange-800 dark:!text-orange-200;
-    @apply !font-semibold;
+    @apply !text-[1.02rem] !font-bold;
     @apply !rounded-r-md;
     @apply !shadow-sm;
   }
 
   .prose blockquote p, .prose-invert blockquote p, article blockquote p {
-    @apply !mb-0;
+    @apply !m-0;
     @apply before:!content-none;
     @apply after:!content-none;
+    color: inherit;
+    font: inherit;
+    margin-block: 0 !important;
+  }
+
+  .prose blockquote > :first-child, .prose-invert blockquote > :first-child, article blockquote > :first-child,
+  .prose blockquote > :last-child, .prose-invert blockquote > :last-child, article blockquote > :last-child {
+    margin-block: 0 !important;
   }
 
   /* Custom code block styling */
@@ -379,7 +492,7 @@ html.image-lightbox-open {
 }
 
 figcaption {
-  @apply mt-3 px-4 text-sm text-gray-600 dark:text-gray-400 text-center font-medium;
+  @apply mt-3 px-4 text-sm text-gray-700 dark:text-gray-300 text-center font-medium;
   @apply leading-relaxed;
   line-height: 1.4;
 }
@@ -390,7 +503,7 @@ figcaption {
 }
 
 .prose figcaption, .prose-invert figcaption, article figcaption {
-  @apply !text-sm !text-gray-600 dark:!text-gray-400 !font-medium;
+  @apply !text-sm !text-gray-700 dark:!text-gray-300 !font-medium;
   @apply !mt-3 !px-2 !leading-relaxed;
 }
 
@@ -399,8 +512,8 @@ figcaption {
 }
 
 .blog-toc {
-  @apply rounded-xl border border-black/6 bg-white/28 text-sm text-black/46;
-  @apply dark:border-white/6 dark:bg-white/[0.015] dark:text-white/42;
+  @apply rounded-xl border border-black/8 bg-white/32 text-sm text-black/68;
+  @apply dark:border-white/8 dark:bg-white/[0.02] dark:text-white/62;
   @apply backdrop-blur-[2px];
 }
 
@@ -414,7 +527,7 @@ figcaption {
 
 .blog-toc__summary,
 .blog-toc__title {
-  @apply flex items-center justify-between gap-3 text-black/56 dark:text-white/52;
+  @apply flex items-center justify-between gap-3 text-black/72 dark:text-white/68;
 }
 
 .blog-toc__summary {
@@ -458,8 +571,8 @@ figcaption {
 }
 
 .blog-toc__link {
-  @apply block rounded-md border-l border-transparent px-2 py-0.75 text-[0.8rem] leading-snug text-black/42 transition-colors duration-200;
-  @apply hover:bg-black/[0.02] hover:text-black/58 dark:text-white/40 dark:hover:bg-white/[0.025] dark:hover:text-white/60;
+  @apply block rounded-md border-l border-transparent px-2 py-0.75 text-[0.8rem] leading-snug text-black/60 transition-colors duration-200;
+  @apply hover:bg-black/[0.02] hover:text-black/76 dark:text-white/56 dark:hover:bg-white/[0.025] dark:hover:text-white/74;
   overflow-wrap: anywhere;
 }
 

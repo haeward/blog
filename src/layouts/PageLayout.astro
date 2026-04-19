@@ -7,17 +7,19 @@ type Props = {
   title: string;
   description: string;
   headerDivider?: boolean;
+  lang?: string;
 };
 
 const {
   title,
   description,
   headerDivider = true,
+  lang = "en",
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <Head title={`${title}`} description={description} />
   </head>

@@ -40,16 +40,17 @@ const hasToc = tocHeadings.length > 0;
   title={`${post.data.title} | ${SITE.NAME}`}
   description={post.data.description}
   headerDivider={true}
+  lang={post.data.lang}
 >
   <div class="px-5">
     <div class="blog-post-shell">
       <div class="blog-post-main">
-        <div class="space-y-2 my-6">
-          <div class="animate text-xl sm:text-2xl font-semibold text-black/75 dark:text-white">
+        <div class="space-y-4 my-6">
+          <div class="animate serif-reading-title text-xl sm:text-2xl font-bold text-black/90 dark:text-white/95" data-language-scan="true" lang={post.data.lang}>
             {post.data.title}
           </div>
 
-          <div class="animate flex flex-wrap items-center gap-x-3 gap-y-1 text-sm bg-stone-100 dark:bg-stone-900 text-black/75 dark:text-white/80 py-1 px-2 rounded">
+          <div class="animate flex flex-wrap items-center gap-x-3 gap-y-1 text-sm bg-stone-100 dark:bg-stone-900 text-black/85 dark:text-white/84 py-1 px-2 rounded">
             <div class="flex items-center gap-1 whitespace-nowrap">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -60,7 +61,7 @@ const hasToc = tocHeadings.length > 0;
               <FormattedDate date={post.data.date} />
             </div>
             <div class="flex items-center gap-1 whitespace-nowrap">
-              <span class="text-black/35 dark:text-white/35" aria-hidden="true">·</span>
+              <span class="text-black/50 dark:text-white/48" aria-hidden="true">·</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
@@ -71,7 +72,7 @@ const hasToc = tocHeadings.length > 0;
               <span>{wordCount(postBody)}</span>
             </div>
             <div class="flex items-center gap-1 whitespace-nowrap">
-              <span class="text-black/35 dark:text-white/35" aria-hidden="true">·</span>
+              <span class="text-black/50 dark:text-white/48" aria-hidden="true">·</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
@@ -81,9 +82,9 @@ const hasToc = tocHeadings.length > 0;
           </div>
         </div>
 
-        {hasToc && <TableOfContents headings={tocHeadings} variant="mobile" />}
+        {hasToc && <TableOfContents headings={tocHeadings} variant="mobile" lang={post.data.lang} />}
 
-        <article class="animate mt-10 blog-article">
+        <article class="animate mt-10 blog-article serif-reading-surface" data-language-scan="true" lang={post.data.lang}>
           <Content />
         </article>
 
@@ -97,7 +98,7 @@ const hasToc = tocHeadings.length > 0;
                     <path d="m15 18-6-6 6-6"/>
                   </svg>
                   <div class="min-w-0">
-                    <div class="text-sm max-w-full break-words sm:max-w-[300px] sm:truncate">{prev.data.title}</div>
+                    <div class="serif-reading-title text-sm max-w-full break-words sm:max-w-[300px] sm:truncate" data-language-scan="true" lang={prev.data.lang}>{prev.data.title}</div>
                   </div>
                 </a>
               ) : (
@@ -106,7 +107,7 @@ const hasToc = tocHeadings.length > 0;
               {next ? (
                 <a href={`/blog/${next.id}`} class="group flex w-full items-center justify-between gap-1 px-4 py-2 rounded-lg transition-colors duration-300 sm:w-auto sm:justify-end">
                   <div class="text-left sm:text-right">
-                    <div class="text-sm max-w-full break-words sm:max-w-[300px] sm:truncate">{next.data.title}</div>
+                    <div class="serif-reading-title text-sm max-w-full break-words sm:max-w-[300px] sm:truncate" data-language-scan="true" lang={next.data.lang}>{next.data.title}</div>
                   </div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform duration-300">
                     <path d="m9 18 6-6-6-6"/>
@@ -122,7 +123,7 @@ const hasToc = tocHeadings.length > 0;
 
       {hasToc && (
         <div class="blog-post-toc-rail">
-          <TableOfContents headings={tocHeadings} />
+          <TableOfContents headings={tocHeadings} lang={post.data.lang} />
         </div>
       )}
     </div>

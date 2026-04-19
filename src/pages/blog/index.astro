@@ -26,7 +26,7 @@ const posts = data.reduce((acc: Acc, post) => {
 const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
 ---
 
-<PageLayout title={`${BLOG.TITLE} | ${SITE.NAME}`} description={BLOG.DESCRIPTION}>
+<PageLayout title={`${BLOG.TITLE} | ${SITE.NAME}`} description={BLOG.DESCRIPTION} lang="en">
   <Container>
     <div class="space-y-10">
       <div class="space-y-4">

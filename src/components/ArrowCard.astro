@@ -1,19 +1,28 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
-type Props = { entry: CollectionEntry<"blog">; }
+type Props = {
+  entry: CollectionEntry<"blog">;
+};
 
-const { entry } = Astro.props;
+const {
+  entry,
+} = Astro.props;
+
+const cardClasses = "relative group flex flex-wrap items-center gap-x-2 gap-y-1 py-2 px-3 hover:-translate-y-px hover:text-black dark:hover:text-white transition-all duration-300 ease-in-out";
+const titleClasses = "serif-reading-title text-[1.08rem] sm:text-[1.14rem] font-semibold text-current";
+const dateClasses = "text-xs sm:text-sm text-black/72 dark:text-white/66 whitespace-nowrap";
+const arrowClasses = "size-5 shrink-0 stroke-2 fill-none stroke-current";
 ---
 
-<a href={`/${entry.collection}/${entry.id}`} class="relative group flex flex-wrap items-center gap-x-2 gap-y-1 py-2 px-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
+<a href={`/${entry.collection}/${entry.id}`} class={cardClasses}>
   <div class="flex min-w-0 flex-col flex-1">
-    <div class="font-semibold text-sky-700 dark:text-sky-300">
+    <div class={titleClasses} data-language-scan="true" lang={entry.data.lang}>
       {entry.data.title}
     </div>
   </div>
   <div class="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-start">
-    <div class="text-xs sm:text-sm text-black/85 dark:text-white/75 whitespace-nowrap">
+    <div class={dateClasses}>
       {entry.data.date.toLocaleDateString("en-US", {
         year: "numeric",
         month: "short",
@@ -23,7 +32,7 @@ const { entry } = Astro.props;
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      class="size-5 shrink-0 stroke-2 fill-none stroke-current">
+      class={arrowClasses}>
       <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out" />
       <polyline points="12 5 19 12 12 19" class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out" />
     </svg>
