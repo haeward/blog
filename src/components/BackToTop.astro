@@ -1,12 +1,16 @@
-<button id="back-to-top" class="relative group w-fit flex pl-8 pr-3 py-1.5 mt-2 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
+<button
+  id="back-to-top"
+  type="button"
+  aria-label="Back to top"
+  class="group fixed right-4 bottom-4 z-50 inline-flex size-12 items-center justify-center rounded-lg border border-black/12 text-stone-600 hover:text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/70 dark:border-white/12 dark:text-stone-300 dark:hover:text-white sm:right-6 sm:bottom-6"
+>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current rotate-90">
+    aria-hidden="true"
+    class="size-5 stroke-2 fill-none stroke-current rotate-90 drop-shadow-[0_1px_1px_rgba(255,255,255,0.18)] dark:drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)]"
+  >
     <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out" />
     <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out" />
   </svg>
-  <div class="text-sm">
-    Back to top
-  </div>
 </button>

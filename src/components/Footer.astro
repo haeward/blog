@@ -1,7 +1,6 @@
 ---
 import Container from "@components/Container.astro";
 import { SITE } from "@consts";
-import BackToTop from "@components/BackToTop.astro";
 import YearProgress from "@components/YearProgress.astro";
 
 const currentYear = new Date().getFullYear();
@@ -9,12 +8,6 @@ const currentYear = new Date().getFullYear();
 
 <footer class="animate">
   <Container>
-    <div class="relative mb-4 sm:mb-0">
-      <div class="flex justify-end sm:absolute sm:right-0 sm:-top-20">
-        <BackToTop />
-      </div>
-    </div>
-
     <YearProgress />
 
     <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

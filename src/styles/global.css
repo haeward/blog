@@ -345,11 +345,12 @@ article {
 }
 
 html #back-to-top {
-  @apply opacity-0 pointer-events-none;
+  @apply opacity-0 pointer-events-none translate-y-2 scale-95;
+  @apply transition-all duration-300 ease-out;
 }
 
 html.scrolled #back-to-top {
-  @apply opacity-100 pointer-events-auto;
+  @apply opacity-100 pointer-events-auto translate-y-0 scale-100;
 }
 
 .dark .light-only {
