@@ -82,8 +82,6 @@ const hasToc = tocHeadings.length > 0;
           </div>
         </div>
 
-        {hasToc && <TableOfContents headings={tocHeadings} variant="mobile" lang={post.data.lang} />}
-
         <article class="animate mt-10 blog-article serif-reading-surface" data-language-scan="true" lang={post.data.lang}>
           <Content />
         </article>
