@@ -806,6 +806,19 @@ figure img {
   @apply max-w-full h-auto mx-auto rounded-lg shadow-sm;
 }
 
+.blog-figure {
+  @apply my-8;
+}
+
+.blog-figure__image {
+  width: min(100%, 46rem);
+}
+
+.blog-figure__caption {
+  max-width: min(100%, 44rem);
+  margin-inline: auto;
+}
+
 html.image-lightbox-open {
   overflow: hidden;
 }

@@ -33,8 +33,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build
-        run: pnpm run build
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Smoke check
+        run: pnpm run smoke
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3

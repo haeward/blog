@@ -32,7 +32,7 @@ jobs:
         id: mithrasu
         type: movie
         format: json
-        dir: ./data/douban
+        dir: ./src/data/douban
 
     - name: books sync
       uses: haeward/doumark@v2.0.0
@@ -40,10 +40,10 @@ jobs:
         id: mithrasu
         type: book
         format: json
-        dir: ./data/douban
+        dir: ./src/data/douban
 
     - name: Download covers
-      run: node scripts/sync-douban-covers.mjs
+      run: node scripts/douban/sync-covers.mjs
 
     - name: Import GPG key
       uses: crazy-max/ghaction-import-gpg@v7
@@ -57,7 +57,7 @@ jobs:
       run: |
         git config user.name "${{ secrets.CI_GIT_USER_NAME }}"
         git config user.email "${{ secrets.CI_GIT_USER_EMAIL }}"
-        git add ./data/douban ./public/douban
+        git add ./src/data/douban ./public/douban
         if git diff --cached --quiet; then
           echo "No changes to commit."
           exit 0

@@ -31,8 +31,9 @@ const stars = Math.max(0, Math.min(5, Math.round(item.myRating ?? 0)));
               alt={item.title}
               loading="lazy"
               decoding="async"
-              width="320"
-              height="480"
+              fetchpriority="low"
+              width="240"
+              height="360"
               class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
             />
           ) : (
@@ -77,8 +78,9 @@ const stars = Math.max(0, Math.min(5, Math.round(item.myRating ?? 0)));
             alt={item.title}
             loading="lazy"
             decoding="async"
-            width="320"
-            height="480"
+            fetchpriority="low"
+            width="240"
+            height="360"
             class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
           />
         ) : (
