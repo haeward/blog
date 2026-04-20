@@ -18,20 +18,20 @@ const { showDivider = false } = Astro.props;
           "sm:flex-row sm:items-center sm:justify-between"
         ]}
       >
-        <div class="flex items-center justify-between gap-4 sm:justify-start sm:gap-8">
+        <div class="flex items-center gap-4 sm:gap-8">
           <Link href="/" underline={false}>
             <div class="font-semibold text-xl sm:text-2xl">
               {SITE.NAME}
             </div>
           </Link>
-          <div class="flex flex-wrap gap-1 items-center">
+          <div class="flex flex-wrap items-center gap-3 sm:gap-6">
             <button
               id="theme-toggle"
               type="button"
               data-theme-mode="system"
               aria-label="Switch theme to Light"
               title="Switch theme to Light"
-              class="group size-6 flex items-center justify-center rounded-full"
+              class="header-action group size-6 flex items-center justify-center rounded-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -84,6 +84,33 @@ const { showDivider = false } = Astro.props;
                 class="theme-toggle__icon theme-toggle__icon--dark group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
               >
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </button>
+            <button
+              id="search-trigger"
+              type="button"
+              data-search-trigger="true"
+              aria-label="Search articles"
+              title="Search articles"
+              aria-haspopup="dialog"
+              aria-controls="site-search"
+              class="header-action group size-6 flex items-center justify-center rounded-full"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="transition-colors duration-300 ease-in-out group-hover:stroke-black group-hover:dark:stroke-white"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m20 20-3.5-3.5"></path>
               </svg>
             </button>
           </div>

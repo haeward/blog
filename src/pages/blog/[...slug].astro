@@ -34,6 +34,7 @@ const { Content, headings } = await render(post);
 const postBody = post.body ?? "";
 const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 4);
 const hasToc = tocHeadings.length > 0;
+const pagefindDate = post.data.date.toISOString().slice(0, 10);
 ---
 
 <PageLayout
@@ -46,6 +47,8 @@ const hasToc = tocHeadings.length > 0;
     <div class="blog-post-shell">
       <div class="blog-post-main">
         <div class="space-y-4 my-6">
+          <span data-pagefind-meta={`date:${pagefindDate}`} hidden aria-hidden="true"></span>
+
           <div class="animate serif-reading-title text-xl sm:text-2xl font-bold text-black/90 dark:text-white/95" data-language-scan="true" lang={post.data.lang}>
             {post.data.title}
           </div>
@@ -82,7 +85,12 @@ const hasToc = tocHeadings.length > 0;
           </div>
         </div>
 
-        <article class="animate mt-10 blog-article serif-reading-surface" data-language-scan="true" lang={post.data.lang}>
+        <article
+          class="animate mt-10 blog-article serif-reading-surface"
+          data-language-scan="true"
+          data-pagefind-body
+          lang={post.data.lang}
+        >
           <Content />
         </article>
 
