@@ -310,12 +310,6 @@
     },
     {
       "category": "videos",
-      "title": "堂吉诃德拉曼查的英豪",
-      "url": "https://space.bilibili.com/341376543",
-      "platform": "Bilibili"
-    },
-    {
-      "category": "videos",
       "title": "李永乐老师",
       "url": "https://space.bilibili.com/508452265",
       "platform": "Bilibili"
@@ -336,6 +330,12 @@
       "category": "videos",
       "title": "三体动画版",
       "url": "https://space.bilibili.com/508452265",
+      "platform": "Bilibili"
+    },
+    {
+      "category": "videos",
+      "title": "堂吉诃德拉曼查的英豪",
+      "url": "https://space.bilibili.com/341376543",
       "platform": "Bilibili"
     },
     {
