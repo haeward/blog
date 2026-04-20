@@ -3,6 +3,12 @@ name: links
 on:
   schedule:
     - cron: "30 20 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - "src/data/links/**"
+      - "public/assets/images/links/**"
   workflow_dispatch:
 
 jobs:
