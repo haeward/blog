@@ -37,7 +37,7 @@ const statusLabel =
       <span
         class:list={[
           "absolute top-2.5 right-2.5 size-1.5 rounded-full",
-          item.status === "up" ? "bg-emerald-500" : item.status === "limited" ? "bg-stone-400 dark:bg-stone-500" : "bg-rose-500",
+          item.status === "down" ? "bg-rose-500" : "bg-emerald-500",
         ]}
         data-link-status={item.status}
         aria-label={statusLabel}
