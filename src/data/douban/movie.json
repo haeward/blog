@@ -4,6 +4,142 @@
 		"rating": {
 			"count": 1,
 			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/movie/4861422 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/4861422/interest/4823145648",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-20 21:24:12",
+		"status": "done",
+		"id": 4823145648,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 82927,
+				"max": 10,
+				"star_count": 4.5,
+				"value": 8.5
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2010-12-22(中国大陆)"
+			],
+			"pic": {
+				"large": "https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2552455218.jpg",
+				"normal": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2552455218.jpg"
+			},
+			"honor_infos": [],
+			"is_show": false,
+			"vendor_icons": [
+				"https://img2.doubanio.com/f/frodo/8e1b7f8b48804cf759fc411e75d62c5ffd4f8f42/pics/vendors/migu_video.png",
+				"https://img3.doubanio.com/f/frodo/6fa5caade3ca480ccd95f455ee4d195ee342eb90/pics/vendors/youku.png"
+			],
+			"year": "2010",
+			"card_subtitle": "2010 / 中国大陆 / 剧情 喜剧 武侠 古装 / 李国立 吴锦源 游达志 梁胜权 / 霍建华 刘诗诗",
+			"id": "4861422",
+			"genres": [
+				"剧情",
+				"喜剧",
+				"武侠"
+			],
+			"title": "怪侠一枝梅",
+			"is_released": true,
+			"actors": [
+				{
+					"name": "霍建华"
+				},
+				{
+					"name": "刘诗诗"
+				},
+				{
+					"name": "马天宇"
+				},
+				{
+					"name": "释彦能"
+				},
+				{
+					"name": "萧正楠"
+				},
+				{
+					"name": "佟丽娅"
+				},
+				{
+					"name": "郑皓原"
+				},
+				{
+					"name": "姚奕辰"
+				},
+				{
+					"name": "袁姗姗"
+				},
+				{
+					"name": "戴春荣"
+				},
+				{
+					"name": "关晓彤"
+				},
+				{
+					"name": "吕一"
+				},
+				{
+					"name": "廖启智"
+				}
+			],
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "626072",
+				"_base_color": [
+					0.6875,
+					0.16,
+					0.19607843137254902
+				],
+				"secondary_color": "f5f4f9",
+				"_avg_color": [
+					0.9333333333333333,
+					0.16129032258064505,
+					0.36470588235294116
+				],
+				"primary_color_dark": "41404c"
+			},
+			"type": "tv",
+			"has_linewatch": true,
+			"vendor_desc": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/4861422.jpg",
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/4861422",
+			"url": "https://movie.douban.com/subject/4861422/",
+			"release_date": null,
+			"uri": "douban://douban.com/tv/4861422",
+			"subtype": "tv",
+			"directors": [
+				{
+					"name": "李国立"
+				},
+				{
+					"name": "吴锦源"
+				},
+				{
+					"name": "游达志"
+				},
+				{
+					"name": "梁胜权"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"null_rating_reason": ""
+		},
+		"star_time": "2026-04-20 21:24:12"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
 			"star_count": 3,
 			"value": 3
 		},
