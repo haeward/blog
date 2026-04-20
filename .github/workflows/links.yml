@@ -6,9 +6,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "src/data/links/**"
-      - "public/assets/images/links/**"
   workflow_dispatch:
 
 jobs:
