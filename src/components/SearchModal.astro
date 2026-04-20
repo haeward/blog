@@ -100,6 +100,7 @@
     pagefind: null,
     pagefindPromise: null,
     missingIndex: false,
+    mergedLanguages: [],
   });
 
   function clearSuppressedTriggerFocus() {
@@ -254,15 +255,20 @@
     searchModalState.pagefindPromise = (async () => {
       try {
         const imported = await import("/pagefind/pagefind.js");
-        const pagefind = imported?.default ?? imported;
+        const pagefindModule = imported?.default ?? imported;
+        const pagefind = typeof pagefindModule.createInstance === "function"
+          ? pagefindModule.createInstance()
+          : pagefindModule;
+        const languages = await loadPagefindLanguages();
 
         if (typeof pagefind.init === "function") {
           await pagefind.init();
         }
 
+        await mergePagefindLanguages(pagefind, languages);
         searchModalState.pagefind = pagefind;
         return pagefind;
-      } catch (_error) {
+      } catch {
         searchModalState.missingIndex = true;
         if (!searchModalState.query) {
           searchModalState.view = "unavailable";
@@ -275,6 +281,52 @@
     })();
 
     return searchModalState.pagefindPromise;
+  }
+
+  async function loadPagefindLanguages() {
+    const response = await fetch("/pagefind/pagefind-entry.json", {
+      headers: { "Accept": "application/json" },
+    });
+
+    if (!response.ok) {
+      throw new Error("Pagefind entry unavailable");
+    }
+
+    const entry = await response.json();
+    return entry?.languages && typeof entry.languages === "object"
+      ? entry.languages
+      : {};
+  }
+
+  async function mergePagefindLanguages(pagefind, languages) {
+    if (typeof pagefind.mergeIndex !== "function") return;
+
+    const languageKeys = Object.keys(languages);
+    if (languageKeys.length <= 1) {
+      searchModalState.mergedLanguages = [];
+      return;
+    }
+
+    const primaryLanguage = getPrimaryPagefindLanguage(languages);
+    const bundlePath = new URL("/pagefind/", window.location.origin).href;
+    const languagesToMerge = languageKeys.filter((language) => language !== primaryLanguage);
+
+    await Promise.all(languagesToMerge.map((language) => pagefind.mergeIndex(bundlePath, { language })));
+    searchModalState.mergedLanguages = languagesToMerge;
+  }
+
+  function getPrimaryPagefindLanguage(languages) {
+    const languageKeys = Object.keys(languages);
+    const pageLanguage = (document.documentElement.getAttribute("lang") || "unknown").toLowerCase();
+
+    if (languages[pageLanguage]) return pageLanguage;
+
+    const baseLanguage = pageLanguage.split("-")[0];
+    if (languages[baseLanguage]) return baseLanguage;
+
+    return languageKeys
+      .slice()
+      .sort((left, right) => (languages[right]?.page_count || 0) - (languages[left]?.page_count || 0))[0];
   }
 
   async function searchArticles(term) {
