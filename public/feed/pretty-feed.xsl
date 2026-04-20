@@ -12,12 +12,12 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title><xsl:value-of select="rss/channel/title"/> | RSS Feed</title>
-        <link rel="icon" type="image/svg+xml" href="/reflecting.svg"/>
-        <link rel="icon" type="image/x-icon" href="/reflecting.svg"/>
+        <link rel="icon" type="image/svg+xml" href="/assets/images/site/reflecting.svg"/>
+        <link rel="icon" type="image/x-icon" href="/assets/images/site/reflecting.svg"/>
         <style><![CDATA[
           @font-face {
             font-family: "Noto Sans";
-            src: url("/fonts/NotoSans-Regular.ttf") format("truetype");
+            src: url("/assets/fonts/NotoSans-Regular.ttf") format("truetype");
             font-weight: 400;
             font-style: normal;
             font-display: swap;
@@ -25,7 +25,7 @@
 
           @font-face {
             font-family: "Noto Sans";
-            src: url("/fonts/NotoSans-Bold.ttf") format("truetype");
+            src: url("/assets/fonts/NotoSans-Bold.ttf") format("truetype");
             font-weight: 700;
             font-style: normal;
             font-display: swap;
@@ -33,7 +33,7 @@
 
           @font-face {
             font-family: "JetBrains Mono";
-            src: url("/fonts/JetBrainsMono-Regular.ttf") format("truetype");
+            src: url("/assets/fonts/JetBrainsMono-Regular.ttf") format("truetype");
             font-weight: 400;
             font-style: normal;
             font-display: swap;
@@ -41,7 +41,7 @@
 
           @font-face {
             font-family: "JetBrains Mono";
-            src: url("/fonts/JetBrainsMono-Bold.ttf") format("truetype");
+            src: url("/assets/fonts/JetBrainsMono-Bold.ttf") format("truetype");
             font-weight: 700;
             font-style: normal;
             font-display: swap;

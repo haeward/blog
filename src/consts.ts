@@ -21,9 +21,9 @@ export const MEDIA: Metadata = {
   DESCRIPTION: "Movies and books I track.",
 };
 
-export const BLOGROLL: Metadata = {
-  TITLE: "Blogroll",
-  DESCRIPTION: "A collection of blogs I follow.",
+export const LINKS: Metadata = {
+  TITLE: "Links",
+  DESCRIPTION: "A directory of blogs and video creators I keep returning to.",
 };
 
 export const CHANGELOG: Metadata = {
@@ -35,61 +35,61 @@ export const SOCIALS: Socials = [
   {
     NAME: "Github",
     HREF: "https://github.com/haeward",
-    ICON: "/icons/github.svg",
+    ICON: "/assets/icons/social/github.svg",
     ENABLE: true
   },
   {
     NAME: "Twitter",
     HREF: "https://x.com/haewyu",
-    ICON: "/icons/twitter.svg",
+    ICON: "/assets/icons/social/twitter.svg",
     ENABLE: true
   },
   {
     NAME: "Mastodon",
     HREF: "https://m.cmx.im/@haeward",
-    ICON: "/icons/mastodon.svg",
+    ICON: "/assets/icons/social/mastodon.svg",
     ENABLE: true
   },
   {
     NAME: "Telegram",
     HREF: "https://t.me/haeward",
-    ICON: "/icons/telegram.svg",
+    ICON: "/assets/icons/social/telegram.svg",
     ENABLE: true
   },
   {
     NAME: "Reddit",
     HREF: "https://www.reddit.com/user/haewardy",
-    ICON: "/icons/reddit.svg",
+    ICON: "/assets/icons/social/reddit.svg",
     ENABLE: false
   },
   {
     NAME: "Instagram",
     HREF: "https://instagram.com/haewyu",
-    ICON: "/icons/instagram.svg",
+    ICON: "/assets/icons/social/instagram.svg",
     ENABLE: false
   },
   {
     NAME: "YouTube",
     HREF: "https://youtube.com/@haewyu",
-    ICON: "/icons/youtube.svg",
+    ICON: "/assets/icons/social/youtube.svg",
     ENABLE: false
   },
   {
     NAME: "Spotify",
     HREF: "https://open.spotify.com/user/31lkcldiugm7ppmax5ghzshgzfhy",
-    ICON: "/icons/spotify.svg",
+    ICON: "/assets/icons/social/spotify.svg",
     ENABLE: false
   },
   {
     NAME: "Email",
     HREF: "mailto:me@haeward.com",
-    ICON: "/icons/email.svg",
+    ICON: "/assets/icons/social/email.svg",
     ENABLE: true
   },
   {
     NAME: "RSS",
     HREF: "/rss.xml",
-    ICON: "/icons/rss.svg",
+    ICON: "/assets/icons/social/rss.svg",
     ENABLE: true
   }
 ];

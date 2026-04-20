@@ -9,12 +9,12 @@ import path from "node:path";
 const tasks = [
   {
     kind: "movie",
-    input: "data/douban/movie.json",
+    input: "src/data/douban/movie.json",
     refererFallback: "https://movie.douban.com/",
   },
   {
     kind: "book",
-    input: "data/douban/book.json",
+    input: "src/data/douban/book.json",
     refererFallback: "https://book.douban.com/",
   },
 ];

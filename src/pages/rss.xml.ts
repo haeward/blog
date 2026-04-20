@@ -37,7 +37,7 @@ export async function GET(context: APIContext) {
     description: SITE.DESC,
     site: siteUrl,
     items: items,
-    stylesheet: "/pretty-feed.xsl",
+    stylesheet: "/feed/pretty-feed.xsl",
     xmlns: {
       atom: "http://www.w3.org/2005/Atom",
     },
