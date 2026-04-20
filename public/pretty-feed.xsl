@@ -470,7 +470,7 @@
             </a>
 
             <div class="intro">
-              <p>This is a web feed, also known as an RSS feed. Subscribe by copying the URL from the address bar into your newsreader.</p>
+              <p><b>This is a web feed</b> (RSS), also known as an RSS feed. Subscribe by copying the URL from the address bar into your newsreader.</p>
               <p>Visit <a href="https://aboutfeeds.com/">About Feeds</a> to get started with newsreaders and subscribing. It’s free.</p>
             </div>
           </div>
@@ -487,7 +487,6 @@
                   <xsl:attribute name="data-copy"><xsl:value-of select="rss/channel/atom:link[@rel='self']/@href"/></xsl:attribute>
                   <span class="feed-copy__value" id="feed-copy-value"><xsl:value-of select="rss/channel/atom:link[@rel='self']/@href"/></span>
                   <span class="feed-copy__meta">
-                    <span class="feed-copy__hint">Click to copy</span>
                     <span class="feed-copy__status">Copied</span>
                   </span>
                 </button>
