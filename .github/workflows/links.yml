@@ -2,7 +2,15 @@ name: links
 
 on:
   schedule:
-    - cron: "30 20 * * *"
+    - cron: "30 8,20 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - "src/data/links/links.json"
+      - "scripts/links/**"
+      - "package.json"
+      - ".github/workflows/links.yml"
   workflow_dispatch:
 
 jobs:
@@ -30,6 +38,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Sort links source
+        run: pnpm run sort:links
 
       - name: Sync link assets
         run: pnpm run sync:links-assets
