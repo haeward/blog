@@ -1,0 +1,58 @@
+name: links
+
+on:
+  schedule:
+    - cron: "30 20 * * *"
+  workflow_dispatch:
+
+jobs:
+  links:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    name: Links assets and status sync
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 10.33.0
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Sync link assets
+        run: pnpm run sync:links-assets
+
+      - name: Sync link status
+        run: pnpm run sync:links-status
+
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v7
+        with:
+          gpg_private_key: ${{ secrets.CI_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.CI_GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
+      - name: Commit
+        run: |
+          git config user.name "${{ secrets.CI_GIT_USER_NAME }}"
+          git config user.email "${{ secrets.CI_GIT_USER_EMAIL }}"
+          git add ./src/data/links ./public/assets/images/links
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -S -m "chore: update links data"
+          git push

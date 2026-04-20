@@ -26,7 +26,7 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   },
   {
     date: "2025-07-31",
-    content: "Add Blogroll page and year progress bar",
+    content: "Add Links page and year progress bar",
   },
   {
     date: "2025-07-18",

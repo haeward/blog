@@ -16,7 +16,9 @@
     "astro": "astro",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "sync:douban-covers": "node scripts/douban/sync-covers.mjs"
+    "sync:douban-covers": "node scripts/douban/sync-covers.mjs",
+    "sync:links-assets": "node scripts/links/sync-assets.mjs",
+    "sync:links-status": "node scripts/links/sync-status.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.0",

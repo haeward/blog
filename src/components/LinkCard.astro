@@ -1,0 +1,82 @@
+---
+import type { LinkEntry } from "@types";
+
+interface Props {
+  item: LinkEntry;
+}
+
+const { item } = Astro.props;
+
+function getHostLabel(url: string): string {
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, "");
+    return host;
+  } catch {
+    return url;
+  }
+}
+
+const meta = item.platform ?? getHostLabel(item.url).toLowerCase();
+const placeholder = item.title.trim().slice(0, 1).toUpperCase();
+---
+
+<li class="group h-full" data-link-card="true">
+  <a
+    href={item.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="relative flex h-full min-h-14 items-center gap-3 rounded-lg border border-black/5 bg-white/35 px-3 py-2.5 transition-colors duration-300 hover:border-black/10 hover:bg-white/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-100 dark:border-white/7 dark:bg-white/[0.025] dark:hover:border-white/12 dark:hover:bg-white/[0.045] dark:focus-visible:ring-white/16 dark:focus-visible:ring-offset-stone-900"
+  >
+    {item.status && (
+      <span
+        class:list={[
+          "absolute top-2.5 right-2.5 size-1.5 rounded-full",
+          item.status === "up" ? "bg-emerald-500" : "bg-rose-500",
+        ]}
+        data-link-status={item.status}
+        aria-label={item.status === "up" ? "Site reachable" : "Site unreachable"}
+        title={item.status === "up" ? "Site reachable" : "Site unreachable"}
+      />
+    )}
+
+    <div class="flex size-6 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-transparent">
+      {item.image ? (
+        <>
+          <img
+            src={item.image}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            width="24"
+            height="24"
+            class="size-full object-cover"
+            onerror="this.setAttribute('hidden', ''); this.nextElementSibling?.removeAttribute('hidden');"
+          />
+          <span
+            hidden
+            class="serif-reading-title text-[0.62rem] font-semibold text-black/45 dark:text-white/42"
+            aria-hidden="true"
+          >
+            {placeholder}
+          </span>
+        </>
+      ) : (
+        <span class="serif-reading-title text-[0.62rem] font-semibold text-black/45 dark:text-white/42" aria-hidden="true">
+          {placeholder}
+        </span>
+      )}
+    </div>
+
+    <div class="min-w-0 space-y-0.5">
+      <div
+        class="serif-reading-title truncate pr-3 text-[0.84rem] font-semibold leading-tight text-black/86 dark:text-white/86"
+        data-language-scan="true"
+      >
+        {item.title}
+      </div>
+      <div class="truncate text-[0.66rem] font-medium leading-tight text-black/45 dark:text-white/40">
+        {meta}
+      </div>
+    </div>
+  </a>
+</li>
