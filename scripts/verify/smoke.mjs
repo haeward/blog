@@ -145,6 +145,7 @@ async function run() {
     await assertStatus(baseUrl, "/about/", 200);
     await assertStatus(baseUrl, "/blog/", 200);
     await assertStatus(baseUrl, ARTICLE_SLUG, 200);
+    await assertStatus(baseUrl, "/links/", 200);
     await assertStatus(baseUrl, "/media/", 200);
     await assertStatus(baseUrl, "/rss.xml", 200);
     await assertStatus(baseUrl, "/robots.txt", 200);
@@ -155,6 +156,15 @@ async function run() {
     const assertNoErrors = bindPageDiagnostics(page, "desktop");
 
     await assertOk(page, `${baseUrl}/`, "Home");
+    await assertOk(page, `${baseUrl}/links/`, "Links");
+    await page.waitForSelector('[data-links-section="blogroll"] [data-link-card="true"]');
+    await page.waitForSelector('[data-links-section="videos"] [data-link-card="true"]');
+
+    const blogrollCount = await page.locator('[data-links-section="blogroll"] [data-link-card="true"]').count();
+    const videoCount = await page.locator('[data-links-section="videos"] [data-link-card="true"]').count();
+    if (blogrollCount === 0 || videoCount === 0) {
+      fail(`Expected Links page to render both blogroll and video entries, received ${blogrollCount} and ${videoCount}.`);
+    }
 
     const themeToggle = page.locator("#theme-toggle");
     await themeToggle.click();

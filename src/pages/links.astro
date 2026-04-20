@@ -1,0 +1,66 @@
+---
+import Container from "@components/Container.astro";
+import LinkCard from "@components/LinkCard.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import { LINKS, SITE } from "@consts";
+import { BLOGROLL_LINKS, VIDEO_LINKS } from "../data/links";
+import type { LinkEntry } from "@types";
+
+type LinkSection = {
+  key: string;
+  title: string;
+  items: LinkEntry[];
+};
+
+const sections: LinkSection[] = [
+  {
+    key: "blogroll",
+    title: "Blogroll",
+    items: BLOGROLL_LINKS,
+  },
+  {
+    key: "videos",
+    title: "Videos",
+    items: VIDEO_LINKS,
+  },
+];
+---
+
+<PageLayout title={`${LINKS.TITLE} | ${SITE.NAME}`} description={LINKS.DESCRIPTION} lang="en">
+  <Container>
+    <section class="space-y-10 sm:space-y-12">
+      <div class="animate max-w-2xl space-y-3">
+        <h1 class="serif-reading-title text-3xl font-bold tracking-[0.01em] text-black dark:text-white/95 sm:text-4xl">
+          Links
+        </h1>
+        <p class="serif-reading-surface text-[1.03rem] leading-8 font-medium tracking-[0.014em] text-black/74 dark:text-white/72">
+          A quiet directory of people, publications, and channels I keep returning to when I want better ideas,
+          sharper taste, or just a different angle on the world.
+        </p>
+      </div>
+
+      <div class="space-y-10 sm:space-y-12">
+        {sections.map((section) => (
+          <section
+            class="animate space-y-4"
+            aria-labelledby={`links-section-${section.key}`}
+            data-links-section={section.key}
+          >
+            <h2
+              id={`links-section-${section.key}`}
+              class="serif-reading-title text-xl font-bold tracking-[0.01em] text-black dark:text-white/95 sm:text-2xl"
+            >
+              {section.title}
+            </h2>
+
+            <ul class="grid grid-cols-1 gap-x-4 gap-y-3.5 sm:grid-cols-2 md:grid-cols-3">
+              {section.items.map((item) => (
+                <LinkCard item={item} />
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </section>
+  </Container>
+</PageLayout>
