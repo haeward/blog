@@ -228,25 +228,26 @@ function resolveCover(
             class="space-y-4 scroll-mt-24"
             hidden={!isDefault}
           >
-            <div class="flex items-center justify-between gap-4 text-sm text-stone-500 dark:text-stone-400">
-              <p data-media-summary>
-                {initialCount > 0 ? `Showing ${initialCount} of ${tab.count}` : `Showing 0 of ${tab.count}`}
-              </p>
-            </div>
-
             <ul class="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 xl:grid-cols-4" data-media-grid>
               {initialItems.map((item) => (
                 <MediaCard item={item} />
               ))}
             </ul>
 
-            <div class="flex justify-center" data-media-more-wrapper hidden={remainingCount === 0}>
+            <div class="flex justify-center pt-10 sm:pt-12" data-media-more-wrapper hidden={remainingCount === 0}>
               <button
                 type="button"
-                class="inline-flex items-center justify-center rounded-full border border-black/10 px-4 py-2 text-sm font-medium text-stone-700 transition-colors hover:border-black/20 hover:text-black dark:border-white/12 dark:text-stone-200 dark:hover:border-white/25 dark:hover:text-white"
+                aria-label="Load more"
+                class="group inline-flex min-h-11 min-w-32 items-center justify-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-medium text-stone-700 transition-all duration-200 hover:-translate-y-0.5 hover:text-black active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/12 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-100 dark:text-stone-200 dark:hover:text-white dark:focus-visible:ring-white/20 dark:focus-visible:ring-offset-stone-900 sm:text-base"
                 data-media-more
               >
-                More{remainingCount > 0 ? ` (${remainingCount} left)` : ""}
+                <span>Load more</span>
+                <span
+                  aria-hidden="true"
+                  class="text-sm leading-none text-current opacity-70 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:opacity-85"
+                >
+                  &rarr;
+                </span>
               </button>
             </div>
           </section>
@@ -285,7 +286,7 @@ function resolveCover(
           .replaceAll("&", "&amp;")
           .replaceAll("<", "&lt;")
           .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;")
+          .replaceAll("\"", "&quot;")
           .replaceAll("'", "&#39;");
 
       const renderStars = (stars) =>
@@ -333,21 +334,10 @@ function resolveCover(
       };
 
       const updatePanelMeta = (panel, loadedCount, totalCount) => {
-        const summary = panel.querySelector("[data-media-summary]");
         const moreWrapper = panel.querySelector("[data-media-more-wrapper]");
-        const moreButton = panel.querySelector("[data-media-more]");
-
-        if (summary instanceof HTMLElement) {
-          summary.textContent = `Showing ${loadedCount} of ${totalCount}`;
-        }
 
         if (moreWrapper instanceof HTMLElement) {
           moreWrapper.hidden = loadedCount >= totalCount;
-        }
-
-        if (moreButton instanceof HTMLButtonElement) {
-          const remaining = Math.max(totalCount - loadedCount, 0);
-          moreButton.textContent = remaining > 0 ? `More (${remaining} left)` : "More";
         }
       };
 
