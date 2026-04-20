@@ -18,6 +18,12 @@ function getHostLabel(url: string): string {
 
 const meta = item.platform ?? getHostLabel(item.url).toLowerCase();
 const placeholder = item.title.trim().slice(0, 1).toUpperCase();
+const statusLabel =
+  item.status === "up"
+    ? "Site reachable"
+    : item.status === "limited"
+      ? "Site reachable with request limits"
+      : "Site unreachable";
 ---
 
 <li class="group h-full" data-link-card="true">
@@ -31,11 +37,11 @@ const placeholder = item.title.trim().slice(0, 1).toUpperCase();
       <span
         class:list={[
           "absolute top-2.5 right-2.5 size-1.5 rounded-full",
-          item.status === "up" ? "bg-emerald-500" : "bg-rose-500",
+          item.status === "up" ? "bg-emerald-500" : item.status === "limited" ? "bg-stone-400 dark:bg-stone-500" : "bg-rose-500",
         ]}
         data-link-status={item.status}
-        aria-label={item.status === "up" ? "Site reachable" : "Site unreachable"}
-        title={item.status === "up" ? "Site reachable" : "Site unreachable"}
+        aria-label={statusLabel}
+        title={statusLabel}
       />
     )}
 

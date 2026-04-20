@@ -10,7 +10,7 @@ export type Metadata = {
 };
 
 export type LinkCategory = "blogroll" | "videos";
-export type LinkStatus = "up" | "down";
+export type LinkStatus = "up" | "limited" | "down";
 
 export type LinkEntry = {
   category: LinkCategory;
@@ -20,12 +20,18 @@ export type LinkEntry = {
   image?: string;
   status?: LinkStatus;
   checkedAt?: string;
+  httpCode?: number;
+  reason?: string;
+  failCount?: number;
 };
 
 export type LinkGeneratedEntry = {
   image?: string;
   status?: LinkStatus;
   checkedAt?: string;
+  httpCode?: number;
+  reason?: string;
+  failCount?: number;
 };
 
 export type LinkGeneratedMap = Record<string, LinkGeneratedEntry>;

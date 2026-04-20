@@ -6,6 +6,7 @@ const inputPath = path.resolve("src/data/links/links.json");
 const outputPath = path.resolve("src/data/links/generated.json");
 const userAgent =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+const limitedStatusCodes = new Set([401, 403, 405, 429]);
 
 const source = JSON.parse(readFileSync(inputPath, "utf-8"));
 const checkedAt = new Date().toISOString();
@@ -15,11 +16,18 @@ const currentUrls = getCurrentUrls(source);
 pruneGeneratedOutput(output, currentUrls);
 
 for (const item of source.blogroll ?? []) {
-  const reachable = await probeReachability(item.url);
+  const previous = output[item.url] ?? {};
+  const probe = await probeReachability(item.url);
+  const failCount = probe.status === "down" ? (previous.failCount ?? 0) + 1 : 0;
+  const status = shouldPreservePreviousStatus(previous.status, probe.status, failCount) ? previous.status : probe.status;
+
   output[item.url] = {
-    ...output[item.url],
-    status: reachable ? "up" : "down",
+    ...previous,
+    status,
     checkedAt,
+    httpCode: probe.httpCode,
+    reason: probe.reason,
+    failCount,
   };
 }
 
@@ -50,11 +58,56 @@ function pruneGeneratedOutput(output, currentUrls) {
 }
 
 async function probeReachability(url) {
-  const headStatus = await requestStatus(url, "HEAD");
-  if (isUpStatus(headStatus)) return true;
+  const headResult = await requestStatus(url, "HEAD");
+  if (classifyStatus(headResult).status === "up") {
+    return classifyStatus(headResult);
+  }
 
-  const getStatus = await requestStatus(url, "GET");
-  return isUpStatus(getStatus);
+  const getResult = await requestStatus(url, "GET");
+  const getProbe = classifyStatus(getResult);
+  if (getProbe.status === "up") return getProbe;
+
+  const headProbe = classifyStatus(headResult);
+  if (getProbe.status === "limited") return getProbe;
+  if (headProbe.status === "limited") return headProbe;
+
+  return getProbe.httpCode || getProbe.reason !== "request_failed" ? getProbe : headProbe;
+}
+
+function shouldPreservePreviousStatus(previousStatus, nextStatus, failCount) {
+  return nextStatus === "down" && failCount < 2 && Boolean(previousStatus) && previousStatus !== "down";
+}
+
+function classifyStatus(result) {
+  if (result.httpCode >= 200 && result.httpCode < 400) {
+    return {
+      status: "up",
+      httpCode: result.httpCode,
+      reason: `http_${result.httpCode}`,
+    };
+  }
+
+  if (limitedStatusCodes.has(result.httpCode)) {
+    return {
+      status: "limited",
+      httpCode: result.httpCode,
+      reason: `http_${result.httpCode}`,
+    };
+  }
+
+  if (result.httpCode >= 400) {
+    return {
+      status: "down",
+      httpCode: result.httpCode,
+      reason: `http_${result.httpCode}`,
+    };
+  }
+
+  return {
+    status: "down",
+    httpCode: 0,
+    reason: classifyCurlExitCode(result.exitCode),
+  };
 }
 
 function requestStatus(url, method) {
@@ -68,12 +121,13 @@ function requestStatus(url, method) {
       "%{http_code}",
       "--retry",
       "2",
+      "--retry-all-errors",
       "--retry-delay",
       "2",
       "--connect-timeout",
-      "10",
+      "15",
       "--max-time",
-      "20",
+      "30",
       "-A",
       userAgent,
       url,
@@ -92,17 +146,22 @@ function requestStatus(url, method) {
       stdout += chunk.toString();
     });
 
-    child.on("error", () => resolve(0));
+    child.on("error", () => resolve({ httpCode: 0, exitCode: -1 }));
     child.on("close", (code) => {
-      if (code !== 0) {
-        resolve(0);
-        return;
-      }
-      resolve(Number.parseInt(stdout.trim(), 10) || 0);
+      resolve({
+        httpCode: Number.parseInt(stdout.trim(), 10) || 0,
+        exitCode: code ?? 0,
+      });
     });
   });
 }
 
-function isUpStatus(code) {
-  return code >= 200 && code < 400;
+function classifyCurlExitCode(code) {
+  if (code === 6) return "dns_error";
+  if (code === 7) return "connection_failed";
+  if (code === 28) return "timeout";
+  if (code === 35) return "tls_error";
+  if (code === 47) return "too_many_redirects";
+  if (code === 56) return "connection_reset";
+  return "request_failed";
 }
