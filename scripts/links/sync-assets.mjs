@@ -99,11 +99,13 @@ async function syncBlogrollAsset(item) {
 
 async function syncVideoAsset(item) {
   const fileBase = createKey(item.url);
+  const bilibiliMid = getBilibiliSpaceMid(item.url);
   const existing = findExistingAsset(videosDir, fileBase);
-  if (existing) return toPublicPath(existing);
+  if (existing && (!bilibiliMid || !isLikelyFallbackFavicon(existing))) return toPublicPath(existing);
 
   const downloaded = await downloadFirstAvailableAsset(
     [
+      bilibiliMid ? await findBilibiliAvatar(item.url, bilibiliMid) : undefined,
       await findOgImage(item.url),
       await findDeclaredIcon(item.url),
       await findNamedImage(item.url),
@@ -115,6 +117,7 @@ async function syncVideoAsset(item) {
     item.url,
   );
   if (downloaded) return toPublicPath(downloaded);
+  if (existing) return toPublicPath(existing);
   return undefined;
 }
 
@@ -137,8 +140,74 @@ function findExistingAsset(dir, fileBase) {
   return match ? path.join(dir, match) : undefined;
 }
 
+function isLikelyFallbackFavicon(filePath) {
+  return path.extname(filePath).toLowerCase() === ".ico";
+}
+
 function toPublicPath(filePath) {
   return `/${path.relative(path.resolve("public"), filePath).split(path.sep).join("/")}`;
+}
+
+async function findBilibiliAvatar(pageUrl, mid) {
+  return (await findBilibiliAvatarFromCard(pageUrl, mid)) ?? (await findBilibiliAvatarFromPage(pageUrl));
+}
+
+async function findBilibiliAvatarFromCard(pageUrl, mid) {
+  const apiUrl = `https://api.bilibili.com/x/web-interface/card?mid=${encodeURIComponent(mid)}`;
+  const json = await fetchText(apiUrl, { referer: pageUrl });
+  if (!json) return undefined;
+
+  try {
+    const data = JSON.parse(json);
+    const face = data?.data?.card?.face;
+    if (typeof face === "string" && isBilibiliFaceUrl(face)) {
+      return resolveUrl(pageUrl, face);
+    }
+  } catch {
+    // Fall back to the rendered page metadata below.
+  }
+
+  return undefined;
+}
+
+async function findBilibiliAvatarFromPage(pageUrl) {
+  const html = await fetchText(pageUrl);
+  if (!html) return undefined;
+
+  for (const tag of findTags(html, "link")) {
+    const rel = getAttribute(tag, "rel")?.toLowerCase() ?? "";
+    if (!rel.includes("apple-touch-icon")) continue;
+
+    const href = getAttribute(tag, "href");
+    if (!href) continue;
+
+    const imageUrl = resolveUrl(pageUrl, href);
+    if (isBilibiliFaceUrl(imageUrl)) return imageUrl;
+  }
+
+  return undefined;
+}
+
+function getBilibiliSpaceMid(pageUrl) {
+  try {
+    const parsed = new URL(pageUrl);
+    if (parsed.hostname !== "space.bilibili.com") return undefined;
+
+    const mid = parsed.pathname.split("/").filter(Boolean).at(0);
+    if (!mid || !/^\d+$/.test(mid)) return undefined;
+    return mid;
+  } catch {
+    return undefined;
+  }
+}
+
+function isBilibiliFaceUrl(value) {
+  try {
+    const parsed = new URL(value, "https://space.bilibili.com");
+    return /^i\d+\.hdslb\.com$/i.test(parsed.hostname) && parsed.pathname.startsWith("/bfs/face/");
+  } catch {
+    return false;
+  }
 }
 
 async function findDeclaredIcon(pageUrl) {
@@ -327,7 +396,7 @@ function buildFaviconServiceUrl(pageUrl) {
   return `https://www.google.com/s2/favicons?domain_url=${encodeURIComponent(pageUrl)}&sz=64`;
 }
 
-function fetchText(url) {
+function fetchText(url, options = {}) {
   return new Promise((resolve) => {
     const args = [
       "-L",
@@ -345,6 +414,9 @@ function fetchText(url) {
       userAgent,
       url,
     ];
+    if (options.referer) {
+      args.splice(-1, 0, "-e", options.referer);
+    }
 
     const child = spawn("curl", args, { stdio: ["ignore", "pipe", "pipe"] });
     let stdout = "";
