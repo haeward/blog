@@ -2,10 +2,7 @@ name: links
 
 on:
   schedule:
-    - cron: "30 8,20 * * *"
-  push:
-    branches:
-      - main
+    - cron: "30 20 * * *"
   workflow_dispatch:
 
 jobs:
