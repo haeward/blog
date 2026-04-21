@@ -8,10 +8,14 @@ import sharp from "sharp";
 const IMAGE_WIDTH = 1200;
 const IMAGE_HEIGHT = 630;
 const DEFAULT_IMAGE = "/assets/images/site/share-default.jpg";
+const AVATAR_IMAGE = "/assets/images/site/favicon.png";
+const AVATAR_SIZE = 46;
+const AVATAR_LEFT = 822;
+const AVATAR_TOP = 531;
 const PUBLIC_DIR = path.resolve(process.cwd(), "public");
 const FONT_DIR = path.join(PUBLIC_DIR, "assets/fonts");
-const TITLE_FONT_PATH = path.join(FONT_DIR, "NotoSerifSC-Bold.ttf");
-const META_FONT_PATH = path.join(FONT_DIR, "NotoSans-Bold.ttf");
+const TITLE_FONT_PATH = path.join(FONT_DIR, "NotoSans-Regular.ttf");
+const META_FONT_PATH = path.join(FONT_DIR, "NotoSans-Regular.ttf");
 const TITLE_FONT_URL = pathToFileURL(TITLE_FONT_PATH).href;
 const META_FONT_URL = pathToFileURL(META_FONT_PATH).href;
 
@@ -42,21 +46,36 @@ export async function GET({ props }: { props: Props }) {
 
 async function generateShareImage(post: CollectionEntry<"blog">): Promise<Buffer> {
     const background = await getBackgroundImage(post.data.image);
+    const avatar = await getAvatarImage();
     const base = await sharp(background)
         .resize(IMAGE_WIDTH, IMAGE_HEIGHT, { fit: "cover", position: "center" })
         .jpeg({ quality: 88, mozjpeg: true })
         .toBuffer();
 
-    return sharp(base)
-        .composite([
+    const layers: sharp.OverlayOptions[] = [
+        {
+            input: Buffer.from(getOverlaySvg(post)),
+            left: 0,
+            top: 0,
+        },
+    ];
+
+    if (avatar) {
+        layers.push(
             {
-                input: Buffer.from(getOverlaySvg(post)),
+                input: avatar,
+                left: AVATAR_LEFT,
+                top: AVATAR_TOP,
+            },
+            {
+                input: Buffer.from(getAvatarRingSvg()),
                 left: 0,
                 top: 0,
             },
-        ])
-        .jpeg({ quality: 86, mozjpeg: true })
-        .toBuffer();
+        );
+    }
+
+    return sharp(base).composite(layers).jpeg({ quality: 86, mozjpeg: true }).toBuffer();
 }
 
 async function getBackgroundImage(image?: string): Promise<Buffer> {
@@ -91,6 +110,28 @@ async function tryLoadImage(image: string): Promise<Buffer | null> {
     }
 }
 
+async function getAvatarImage(): Promise<Buffer | null> {
+    const avatarPath = resolvePublicImagePath(AVATAR_IMAGE);
+    if (!avatarPath) return null;
+
+    try {
+        const avatar = await readFile(avatarPath);
+        const mask = Buffer.from(
+            `<svg width="${AVATAR_SIZE}" height="${AVATAR_SIZE}" viewBox="0 0 ${AVATAR_SIZE} ${AVATAR_SIZE}" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="${AVATAR_SIZE / 2}" cy="${AVATAR_SIZE / 2}" r="${AVATAR_SIZE / 2}" fill="#ffffff"/>
+</svg>`,
+        );
+
+        return sharp(avatar)
+            .resize(AVATAR_SIZE, AVATAR_SIZE, { fit: "cover", position: "center" })
+            .composite([{ input: mask, blend: "dest-in" }])
+            .png()
+            .toBuffer();
+    } catch {
+        return null;
+    }
+}
+
 function resolvePublicImagePath(image: string): string | null {
     try {
         const siteOrigin = new URL(import.meta.env.SITE).origin;
@@ -108,11 +149,11 @@ function resolvePublicImagePath(image: string): string | null {
 }
 
 function getOverlaySvg(post: CollectionEntry<"blog">): string {
-    const titleLines = wrapText(post.data.title, 1020, 62, 2);
-    const metaText = formatDate(post.data.date, post.data.lang);
-    const titleStartY = titleLines.length === 1 ? 415 : 382;
-    const titleLineHeight = 72;
-    const metaY = titleStartY + titleLineHeight * titleLines.length + 44;
+    const titleFontSize = 40;
+    const titleLines = wrapText(post.data.title, 790, titleFontSize, 2);
+    const metaText = formatDate(post.data.date);
+    const titleStartY = titleLines.length === 1 ? 462 : 416;
+    const titleLineHeight = 50;
 
     return `<svg width="${IMAGE_WIDTH}" height="${IMAGE_HEIGHT}" viewBox="0 0 ${IMAGE_WIDTH} ${IMAGE_HEIGHT}" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -120,35 +161,41 @@ function getOverlaySvg(post: CollectionEntry<"blog">): string {
       @font-face {
         font-family: "ShareTitle";
         src: url("${TITLE_FONT_URL}") format("truetype");
-        font-weight: 700;
+        font-weight: 400;
       }
       @font-face {
         font-family: "ShareMeta";
         src: url("${META_FONT_URL}") format("truetype");
-        font-weight: 700;
+        font-weight: 400;
       }
     </style>
-    <linearGradient id="scrim" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#000000" stop-opacity="0.12"/>
-      <stop offset="40%" stop-color="#000000" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.58"/>
-    </linearGradient>
-    <linearGradient id="textPanel" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#000000" stop-opacity="0.18"/>
-      <stop offset="28%" stop-color="#000000" stop-opacity="0.78"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.86"/>
+    <filter id="textShadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.46"/>
+    </filter>
+    <linearGradient id="bottomScrim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="46%" stop-color="#000000" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.46"/>
     </linearGradient>
   </defs>
-  <rect width="${IMAGE_WIDTH}" height="${IMAGE_HEIGHT}" fill="url(#scrim)"/>
-  <rect y="230" width="${IMAGE_WIDTH}" height="400" fill="url(#textPanel)"/>
-  <text x="74" y="315" fill="#ffffff" font-family="ShareMeta, Noto Sans, sans-serif" font-size="30" font-weight="700" letter-spacing="0.5">${escapeXml(SITE.NAME)}</text>
+  <rect y="365" width="${IMAGE_WIDTH}" height="265" fill="url(#bottomScrim)"/>
   ${titleLines
       .map(
           (line, index) =>
-              `<text x="72" y="${titleStartY + titleLineHeight * index}" fill="#ffffff" font-family="ShareTitle, Noto Serif SC, serif" font-size="62" font-weight="700">${escapeXml(line)}</text>`,
+              `<text x="64" y="${titleStartY + titleLineHeight * index}" fill="#ffffff" font-family="ShareTitle, Noto Sans, sans-serif" font-size="${titleFontSize}" font-weight="400" filter="url(#textShadow)">${escapeXml(line)}</text>`,
       )
       .join("")}
-  <text x="74" y="${metaY}" fill="rgba(255,255,255,0.78)" font-family="ShareMeta, Noto Sans, sans-serif" font-size="27" font-weight="700">${escapeXml(metaText)}</text>
+  <text x="888" y="561" fill="rgba(255,255,255,0.94)" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="400" filter="url(#textShadow)">${escapeXml(SITE.NAME)}</text>
+  <text x="986" y="561" fill="rgba(255,255,255,0.68)" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="400" filter="url(#textShadow)">–</text>
+  <text x="1012" y="561" fill="rgba(255,255,255,0.84)" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="400" filter="url(#textShadow)">${escapeXml(metaText)}</text>
+</svg>`;
+}
+
+function getAvatarRingSvg(): string {
+    const center = AVATAR_SIZE / 2;
+
+    return `<svg width="${IMAGE_WIDTH}" height="${IMAGE_HEIGHT}" viewBox="0 0 ${IMAGE_WIDTH} ${IMAGE_HEIGHT}" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="${AVATAR_LEFT + center}" cy="${AVATAR_TOP + center}" r="${center - 0.75}" fill="none" stroke="rgba(255,255,255,0.58)" stroke-width="1.5"/>
 </svg>`;
 }
 
@@ -247,10 +294,8 @@ function getCharWidth(char: string): number {
     return 0.58;
 }
 
-function formatDate(date: Date, lang: string): string {
-    const locale = lang.startsWith("zh") ? "zh-CN" : lang.startsWith("ja") ? "ja-JP" : "en-US";
-
-    return new Intl.DateTimeFormat(locale, {
+function formatDate(date: Date): string {
+    return new Intl.DateTimeFormat("en-US", {
         day: "numeric",
         month: "short",
         timeZone: "UTC",
