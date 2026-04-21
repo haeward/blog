@@ -5,6 +5,10 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     {
+        date: "2026-04-21",
+        content: "Integrate Pagefind and redesign Links page",
+    },
+    {
         date: "2026-04-20",
         content: "Add changelog page and beautify RSS feed",
     },
