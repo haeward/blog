@@ -1,31 +1,43 @@
 ---
 import Container from "@components/Container.astro";
-import { SITE } from "@consts";
 import YearProgress from "@components/YearProgress.astro";
+import { SITE } from "@consts";
 
 const currentYear = new Date().getFullYear();
 ---
 
 <footer class="animate">
-  <Container>
-    <YearProgress />
+    <Container>
+        <YearProgress />
 
-    <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-      <div class="animate leading-relaxed">
-        <a href="/" class="font-bold text-stone-800 dark:text-stone-300">{SITE.NAME}</a>
-        {" | "}
-        &copy; 2024 ~ {currentYear}
-        {" · "}
-        <a href="/changelog" class="font-bold text-cyan-600 dark:text-cyan-300 underline">Changelog</a>
-        {" · "}
-        <a href="/rss.xml" class="font-bold text-cyan-600 dark:text-cyan-300 underline">RSS</a>
-      </div>
-      <div class="animate leading-relaxed sm:text-right">
-        Power by{" "}
-        <a href="https://astro.build/" class="font-bold text-base text-emerald-700 dark:text-emerald-200">Astro</a>
-        {" & "}
-        <a href="https://github.com/markhorn-dev/astro-nano" class="font-bold text-base text-emerald-700 dark:text-emerald-200">Astro Nano</a>
-      </div>
-    </div>
-  </Container>
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <div class="animate leading-relaxed">
+                <a href="/" class="font-bold text-stone-800 dark:text-stone-300">{SITE.NAME}</a>
+                {" | "}
+                &copy; 2024 ~ {currentYear}
+                {" · "}
+                <a href="/changelog" class="font-bold text-cyan-600 dark:text-cyan-300 underline"
+                    >Changelog</a
+                >
+                {" · "}
+                <a href="/rss.xml" class="font-bold text-cyan-600 dark:text-cyan-300 underline"
+                    >RSS</a
+                >
+            </div>
+            <div class="animate leading-relaxed sm:text-right">
+                Power by{" "}
+                <a
+                    href="https://astro.build/"
+                    class="font-bold text-base text-emerald-700 dark:text-emerald-200"
+                    >Astro</a
+                >
+                {" & "}
+                <a
+                    href="https://github.com/markhorn-dev/astro-nano"
+                    class="font-bold text-base text-emerald-700 dark:text-emerald-200"
+                    >Astro Nano</a
+                >
+            </div>
+        </div>
+    </Container>
 </footer>

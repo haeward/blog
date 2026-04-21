@@ -1,66 +1,65 @@
 ---
-import PageLayout from "@layouts/PageLayout.astro";
-import Container from "@components/Container.astro";
-import MediaCard from "@components/MediaCard.astro";
-import { SITE, MEDIA } from "@consts";
 import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
-
-import movieData from "../data/douban/movie.json";
+import Container from "@components/Container.astro";
+import MediaCard from "@components/MediaCard.astro";
+import { MEDIA, SITE } from "@consts";
+import PageLayout from "@layouts/PageLayout.astro";
 import bookData from "../data/douban/book.json";
+import movieData from "../data/douban/movie.json";
 
 type DoubanRating = {
-  max?: number;
-  value?: number;
-  star_count?: number;
-  count?: number;
+    max?: number;
+    value?: number;
+    star_count?: number;
+    count?: number;
 };
 
 type DoubanSubject = {
-  title?: string;
-  url?: string;
-  sharing_url?: string;
-  pic?: {
-    normal?: string;
-    large?: string;
-  };
-  cover_url?: string;
-  card_subtitle?: string;
-  rating?: DoubanRating;
-  type?: string;
-  subtype?: string;
-  genres?: string[];
+    title?: string;
+    url?: string;
+    sharing_url?: string;
+    pic?: {
+        normal?: string;
+        large?: string;
+    };
+    cover_url?: string;
+    card_subtitle?: string;
+    rating?: DoubanRating;
+    type?: string;
+    subtype?: string;
+    genres?: string[];
 };
 
 type DoubanItem = {
-  comment?: string;
-  rating?: DoubanRating;
-  create_time?: string;
-  status?: string;
-  is_private?: boolean;
-  sharing_url?: string;
-  subject?: DoubanSubject;
+    comment?: string;
+    rating?: DoubanRating;
+    create_time?: string;
+    status?: string;
+    is_private?: boolean;
+    sharing_url?: string;
+    subject?: DoubanSubject;
 };
 
 type NormalizedItem = {
-  title: string;
-  url?: string;
-  cover?: string;
-  subtitle?: string;
-  comment?: string;
-  createdAt?: Date;
-  myRating?: number;
-  subjectType?: string;
-  genres?: string[];
+    title: string;
+    url?: string;
+    cover?: string;
+    subtitle?: string;
+    comment?: string;
+    createdAt?: Date;
+    myRating?: number;
+    subjectType?: string;
+    genres?: string[];
 };
 
 type ClientMediaItem = Pick<NormalizedItem, "title" | "url" | "cover" | "myRating">;
 
 type MediaTabKey = "movies" | "series" | "anime" | "books";
 type MediaTab = {
-  key: MediaTabKey;
-  label: string;
-  count: number;
+    key: MediaTabKey;
+    label: string;
+    count: number;
 };
 
 type MediaKind = "movie" | "book";
@@ -79,124 +78,129 @@ const seriesItems = movieEntries.filter((item) => !isAnimation(item) && item.sub
 const animeItems = movieEntries.filter((item) => isAnimation(item));
 
 const mediaItemsByTab: Record<MediaTabKey, ClientMediaItem[]> = {
-  movies: movieItems.map(toClientMediaItem),
-  series: seriesItems.map(toClientMediaItem),
-  anime: animeItems.map(toClientMediaItem),
-  books: books.map(toClientMediaItem),
+    movies: movieItems.map(toClientMediaItem),
+    series: seriesItems.map(toClientMediaItem),
+    anime: animeItems.map(toClientMediaItem),
+    books: books.map(toClientMediaItem),
 };
 
 const mediaTabs: MediaTab[] = [
-  { key: "movies", label: "Movies", count: mediaItemsByTab.movies.length },
-  { key: "series", label: "Series", count: mediaItemsByTab.series.length },
-  { key: "anime", label: "Anime", count: mediaItemsByTab.anime.length },
-  { key: "books", label: "Books", count: mediaItemsByTab.books.length },
+    { key: "movies", label: "Movies", count: mediaItemsByTab.movies.length },
+    { key: "series", label: "Series", count: mediaItemsByTab.series.length },
+    { key: "anime", label: "Anime", count: mediaItemsByTab.anime.length },
+    { key: "books", label: "Books", count: mediaItemsByTab.books.length },
 ];
 
 const defaultItems = mediaItemsByTab[DEFAULT_TAB].slice(0, PAGE_SIZE);
 const serializedMediaData = JSON.stringify(mediaItemsByTab).replace(/</g, "\\u003c");
 
 function parseDate(value?: string): Date | undefined {
-  if (!value) return;
-  const normalized = value.replace(" ", "T");
-  const parsed = new Date(normalized);
-  if (Number.isNaN(parsed.valueOf())) return;
-  return parsed;
+    if (!value) return;
+    const normalized = value.replace(" ", "T");
+    const parsed = new Date(normalized);
+    if (Number.isNaN(parsed.valueOf())) return;
+    return parsed;
 }
 
 function formatRating(rating?: DoubanRating, fallbackMax = 5): number | undefined {
-  if (!rating || typeof rating.value !== "number") return;
-  const max = typeof rating.max === "number" ? rating.max : fallbackMax;
-  if (max <= 0) return;
-  const value = Math.max(0, Math.min(rating.value, max));
-  return value;
+    if (!rating || typeof rating.value !== "number") return;
+    const max = typeof rating.max === "number" ? rating.max : fallbackMax;
+    if (max <= 0) return;
+    const value = Math.max(0, Math.min(rating.value, max));
+    return value;
 }
 
 function normalizeItems(
-  items: DoubanItem[],
-  fallbackMax: number,
-  localCoverIndex: Map<string, string>,
+    items: DoubanItem[],
+    fallbackMax: number,
+    localCoverIndex: Map<string, string>,
 ): NormalizedItem[] {
-  return items
-    .filter(item => item.status === "done" && !item.is_private)
-    .sort((a, b) => {
-      const aTime = parseDate(a.create_time)?.valueOf() ?? 0;
-      const bTime = parseDate(b.create_time)?.valueOf() ?? 0;
-      return bTime - aTime;
-    })
-    .map((item) => {
-      const subject = item.subject ?? {};
-      const title = subject.title ?? "Untitled";
-      const url = subject.url ?? subject.sharing_url ?? item.sharing_url;
-      const subjectId = getSubjectId(subject.url ?? subject.sharing_url ?? item.sharing_url);
-      const remoteCover = subject.pic?.normal ?? subject.cover_url;
-      const cover = resolveCover(localCoverIndex, subjectId, remoteCover);
-      const subtitle = subject.card_subtitle;
-      const comment = item.comment?.trim() || undefined;
-      const createdAt = parseDate(item.create_time);
-      const myRating = formatRating(item.rating, fallbackMax);
-      const subjectType = subject.subtype ?? subject.type;
-      const genres = subject.genres ?? [];
+    return items
+        .filter((item) => item.status === "done" && !item.is_private)
+        .sort((a, b) => {
+            const aTime = parseDate(a.create_time)?.valueOf() ?? 0;
+            const bTime = parseDate(b.create_time)?.valueOf() ?? 0;
+            return bTime - aTime;
+        })
+        .map((item) => {
+            const subject = item.subject ?? {};
+            const title = subject.title ?? "Untitled";
+            const url = subject.url ?? subject.sharing_url ?? item.sharing_url;
+            const subjectId = getSubjectId(subject.url ?? subject.sharing_url ?? item.sharing_url);
+            const remoteCover = subject.pic?.normal ?? subject.cover_url;
+            const cover = resolveCover(localCoverIndex, subjectId, remoteCover);
+            const subtitle = subject.card_subtitle;
+            const comment = item.comment?.trim() || undefined;
+            const createdAt = parseDate(item.create_time);
+            const myRating = formatRating(item.rating, fallbackMax);
+            const subjectType = subject.subtype ?? subject.type;
+            const genres = subject.genres ?? [];
 
-      return {
-        title,
-        url,
-        cover,
-        subtitle,
-        comment,
-        createdAt,
-        myRating,
-        subjectType,
-        genres,
-      };
-    });
+            return {
+                title,
+                url,
+                cover,
+                subtitle,
+                comment,
+                createdAt,
+                myRating,
+                subjectType,
+                genres,
+            };
+        });
 }
 
 function toClientMediaItem(item: NormalizedItem): ClientMediaItem {
-  return {
-    title: item.title,
-    url: item.url,
-    cover: item.cover,
-    myRating: item.myRating,
-  };
+    return {
+        title: item.title,
+        url: item.url,
+        cover: item.cover,
+        myRating: item.myRating,
+    };
 }
 
 function getSubjectId(value?: string): string | undefined {
-  if (!value) return;
-  const match = value.match(/subject\/(\d+)/);
-  return match?.[1];
+    if (!value) return;
+    const match = value.match(/subject\/(\d+)/);
+    return match?.[1];
 }
 
 function createLocalCoverIndex(kind: MediaKind): Map<string, string> {
-  const dir = path.resolve("public", "douban", kind);
-  if (!existsSync(dir)) return new Map();
+    const dir = path.resolve("public", "douban", kind);
+    if (!existsSync(dir)) return new Map();
 
-  return new Map(
-    readdirSync(dir, { withFileTypes: true })
-      .filter((entry) => entry.isFile())
-      .map((entry) => [path.parse(entry.name).name, `/douban/${kind}/${entry.name}`]),
-  );
+    return new Map(
+        readdirSync(dir, { withFileTypes: true })
+            .filter((entry) => entry.isFile())
+            .map((entry) => [path.parse(entry.name).name, `/douban/${kind}/${entry.name}`]),
+    );
 }
 
 function resolveCover(
-  localCoverIndex: Map<string, string>,
-  subjectId?: string,
-  remoteCover?: string,
+    localCoverIndex: Map<string, string>,
+    subjectId?: string,
+    remoteCover?: string,
 ): string | undefined {
-  if (subjectId) {
-    const localCover = localCoverIndex.get(subjectId);
-    if (localCover) return localCover;
-  }
+    if (subjectId) {
+        const localCover = localCoverIndex.get(subjectId);
+        if (localCover) return localCover;
+    }
 
-  return remoteCover;
+    return remoteCover;
 }
 ---
 
 <PageLayout title={`${MEDIA.TITLE} | ${SITE.NAME}`} description={MEDIA.DESCRIPTION}>
-  <Container>
-    <div class="space-y-10">
-      <div class="animate space-y-2">
-        <nav id="media-tabs" class="flex flex-wrap gap-5 text-sm justify-start" role="tablist" aria-label="Media categories">
-          {mediaTabs.map((tab) => (
+    <Container>
+        <div class="space-y-10">
+            <div class="animate space-y-2">
+                <nav
+                    id="media-tabs"
+                    class="flex flex-wrap gap-5 text-sm justify-start"
+                    role="tablist"
+                    aria-label="Media categories"
+                >
+                    {mediaTabs.map((tab) => (
             <button
               type="button"
               id={`media-tab-${tab.key}`}
@@ -210,10 +214,10 @@ function resolveCover(
               {tab.label} <span class="text-stone-500 dark:text-stone-400">({tab.count})</span>
             </button>
           ))}
-        </nav>
-      </div>
+                </nav>
+            </div>
 
-      {mediaTabs.map((tab) => {
+            {mediaTabs.map((tab) => {
         const isDefault = tab.key === DEFAULT_TAB;
         const initialItems = isDefault ? defaultItems : [];
         const initialCount = initialItems.length;
@@ -253,57 +257,64 @@ function resolveCover(
           </section>
         );
       })}
-    </div>
-  </Container>
+        </div>
+    </Container>
 
-  <script id="media-data" type="application/json" data-page-size={PAGE_SIZE} is:inline set:html={serializedMediaData}></script>
+    <script
+        id="media-data"
+        type="application/json"
+        data-page-size={PAGE_SIZE}
+        is:inline
+        set:html={serializedMediaData}
+    ></script>
 
-  <script is:inline>
+    <script is:inline>
     const initMediaTabs = () => {
-      const tablist = document.getElementById("media-tabs");
-      const dataNode = document.getElementById("media-data");
-      if (!tablist || !dataNode) return;
-      if (tablist.dataset.bound === "true") return;
-      tablist.dataset.bound = "true";
+        const tablist = document.getElementById("media-tabs");
+        const dataNode = document.getElementById("media-data");
+        if (!tablist || !dataNode) return;
+        if (tablist.dataset.bound === "true") return;
+        tablist.dataset.bound = "true";
 
-      const tabs = Array.from(tablist.querySelectorAll("[data-tab]"));
-      const panels = Array.from(document.querySelectorAll("[data-tab-panel]"));
-      if (!tabs.length || !panels.length) return;
+        const tabs = Array.from(tablist.querySelectorAll("[data-tab]"));
+        const panels = Array.from(document.querySelectorAll("[data-tab-panel]"));
+        if (!tabs.length || !panels.length) return;
 
-      const tabNames = tabs
-        .map((tab) => tab.getAttribute("data-tab"))
-        .filter(Boolean);
-      const tabSet = new Set(tabNames);
-      const tabData = JSON.parse(dataNode.textContent || "{}");
-      const pageSize = Number.parseInt(dataNode.dataset.pageSize || "100", 10);
-      const defaultTab = "movies";
-      const loadedCounts = Object.fromEntries(
-        tabNames.map((name) => [name, name === defaultTab ? Math.min(pageSize, tabData[name]?.length ?? 0) : 0]),
-      );
+        const tabNames = tabs.map((tab) => tab.getAttribute("data-tab")).filter(Boolean);
+        const tabSet = new Set(tabNames);
+        const tabData = JSON.parse(dataNode.textContent || "{}");
+        const pageSize = Number.parseInt(dataNode.dataset.pageSize || "100", 10);
+        const defaultTab = "movies";
+        const loadedCounts = Object.fromEntries(
+            tabNames.map((name) => [
+                name,
+                name === defaultTab ? Math.min(pageSize, tabData[name]?.length ?? 0) : 0,
+            ]),
+        );
 
-      const escapeHtml = (value) =>
-        String(value)
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll("\"", "&quot;")
-          .replaceAll("'", "&#39;");
+        const escapeHtml = (value) =>
+            String(value)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#39;");
 
-      const renderStars = (stars) =>
-        Array.from({ length: 5 }, (_, index) => {
-          const filled = index < stars;
-          return `<svg class="size-2.5 sm:size-3" viewBox="0 0 20 20" fill="${filled ? "currentColor" : "none"}" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+        const renderStars = (stars) =>
+            Array.from({ length: 5 }, (_, index) => {
+                const filled = index < stars;
+                return `<svg class="size-2.5 sm:size-3" viewBox="0 0 20 20" fill="${filled ? "currentColor" : "none"}" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.96a1 1 0 0 0 .95.69h4.163c.969 0 1.371 1.24.588 1.81l-3.368 2.447a1 1 0 0 0-.364 1.118l1.287 3.96c.3.921-.755 1.688-1.54 1.118l-3.368-2.447a1 1 0 0 0-1.176 0l-3.368 2.447c-.784.57-1.838-.197-1.539-1.118l1.287-3.96a1 1 0 0 0-.364-1.118L2.048 9.387c-.784-.57-.38-1.81.588-1.81h4.163a1 1 0 0 0 .95-.69l1.3-3.96z" />
                   </svg>`;
-        }).join("");
+            }).join("");
 
-      const renderCard = (item) => {
-        const title = escapeHtml(item.title || "Untitled");
-        const stars = Math.max(0, Math.min(5, Math.round(item.myRating || 0)));
-        const cover = item.cover
-          ? `<img src="${escapeHtml(item.cover)}" alt="${title}" loading="lazy" decoding="async" fetchpriority="low" width="240" height="360" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" />`
-          : `<div class="h-full w-full flex items-center justify-center text-xs text-stone-500 dark:text-stone-400">No cover</div>`;
-        const body = `<div class="flex h-full flex-col">
+        const renderCard = (item) => {
+            const title = escapeHtml(item.title || "Untitled");
+            const stars = Math.max(0, Math.min(5, Math.round(item.myRating || 0)));
+            const cover = item.cover
+                ? `<img src="${escapeHtml(item.cover)}" alt="${title}" loading="lazy" decoding="async" fetchpriority="low" width="240" height="360" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" />`
+                : `<div class="h-full w-full flex items-center justify-center text-xs text-stone-500 dark:text-stone-400">No cover</div>`;
+            const body = `<div class="flex h-full flex-col">
                         <div class="relative aspect-[2/3] overflow-hidden rounded-lg bg-black/5 dark:bg-white/5">
                           ${cover}
                         </div>
@@ -318,129 +329,132 @@ function resolveCover(
                         </div>
                       </div>`;
 
-        if (item.url) {
-          return `<li class="group h-full">
+            if (item.url) {
+                return `<li class="group h-full">
                     <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" class="flex h-full flex-col rounded-lg p-2.5 sm:p-3 shadow-sm ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-100 dark:ring-white/10 dark:hover:shadow-[0_18px_34px_-22px_rgba(0,0,0,0.72)] dark:hover:ring-white/18 dark:focus-visible:ring-white/20 dark:focus-visible:ring-offset-stone-900">
                       ${body}
                     </a>
                   </li>`;
-        }
+            }
 
-        return `<li class="group h-full">
+            return `<li class="group h-full">
                   <div class="flex h-full flex-col rounded-lg p-2.5 sm:p-3 shadow-sm ring-1 ring-black/5 transition-all duration-300 hover:shadow-2xl hover:shadow-black/12 dark:ring-white/10 dark:hover:shadow-[0_18px_34px_-22px_rgba(0,0,0,0.72)] dark:hover:ring-white/18">
                     ${body}
                   </div>
                 </li>`;
-      };
+        };
 
-      const updatePanelMeta = (panel, loadedCount, totalCount) => {
-        const moreWrapper = panel.querySelector("[data-media-more-wrapper]");
+        const updatePanelMeta = (panel, loadedCount, totalCount) => {
+            const moreWrapper = panel.querySelector("[data-media-more-wrapper]");
 
-        if (moreWrapper instanceof HTMLElement) {
-          moreWrapper.hidden = loadedCount >= totalCount;
-        }
-      };
+            if (moreWrapper instanceof HTMLElement) {
+                moreWrapper.hidden = loadedCount >= totalCount;
+            }
+        };
 
-      const renderPanel = (name) => {
-        const panel = document.querySelector(`[data-tab-panel="${name}"]`);
-        if (!(panel instanceof HTMLElement)) return;
+        const renderPanel = (name) => {
+            const panel = document.querySelector(`[data-tab-panel="${name}"]`);
+            if (!(panel instanceof HTMLElement)) return;
 
-        const items = tabData[name] ?? [];
-        const loadedCount = loadedCounts[name] ?? 0;
-        const grid = panel.querySelector("[data-media-grid]");
+            const items = tabData[name] ?? [];
+            const loadedCount = loadedCounts[name] ?? 0;
+            const grid = panel.querySelector("[data-media-grid]");
 
-        if (grid instanceof HTMLElement) {
-          grid.innerHTML = items.slice(0, loadedCount).map(renderCard).join("");
-        }
+            if (grid instanceof HTMLElement) {
+                grid.innerHTML = items.slice(0, loadedCount).map(renderCard).join("");
+            }
 
-        updatePanelMeta(panel, loadedCount, items.length);
-      };
+            updatePanelMeta(panel, loadedCount, items.length);
+        };
 
-      const appendToPanel = (name, startIndex, endIndex) => {
-        const panel = document.querySelector(`[data-tab-panel="${name}"]`);
-        if (!(panel instanceof HTMLElement)) return;
+        const appendToPanel = (name, startIndex, endIndex) => {
+            const panel = document.querySelector(`[data-tab-panel="${name}"]`);
+            if (!(panel instanceof HTMLElement)) return;
 
-        const items = tabData[name] ?? [];
-        const grid = panel.querySelector("[data-media-grid]");
-        if (grid instanceof HTMLElement) {
-          grid.insertAdjacentHTML("beforeend", items.slice(startIndex, endIndex).map(renderCard).join(""));
-        }
+            const items = tabData[name] ?? [];
+            const grid = panel.querySelector("[data-media-grid]");
+            if (grid instanceof HTMLElement) {
+                grid.insertAdjacentHTML(
+                    "beforeend",
+                    items.slice(startIndex, endIndex).map(renderCard).join(""),
+                );
+            }
 
-        updatePanelMeta(panel, endIndex, items.length);
-      };
+            updatePanelMeta(panel, endIndex, items.length);
+        };
 
-      const clearInactivePanels = (activeName) => {
-        panels.forEach((panel) => {
-          const panelName = panel.getAttribute("data-tab-panel");
-          if (!panelName || panelName === activeName) return;
-          const grid = panel.querySelector("[data-media-grid]");
-          if (grid instanceof HTMLElement) {
-            grid.innerHTML = "";
-          }
-        });
-      };
+        const clearInactivePanels = (activeName) => {
+            panels.forEach((panel) => {
+                const panelName = panel.getAttribute("data-tab-panel");
+                if (!panelName || panelName === activeName) return;
+                const grid = panel.querySelector("[data-media-grid]");
+                if (grid instanceof HTMLElement) {
+                    grid.innerHTML = "";
+                }
+            });
+        };
 
-      const activate = (name, options = { updateHash: false }) => {
+        const activate = (name, options = { updateHash: false }) => {
+            tabs.forEach((tab) => {
+                const active = tab.getAttribute("data-tab") === name;
+                tab.setAttribute("aria-selected", active ? "true" : "false");
+                tab.setAttribute("data-active", active ? "true" : "false");
+            });
+
+            panels.forEach((panel) => {
+                const active = panel.getAttribute("data-tab-panel") === name;
+                panel.toggleAttribute("hidden", !active);
+            });
+
+            if ((loadedCounts[name] ?? 0) === 0) {
+                loadedCounts[name] = Math.min(pageSize, tabData[name]?.length ?? 0);
+            }
+
+            clearInactivePanels(name);
+            renderPanel(name);
+
+            if (options.updateHash) {
+                const nextHash = `#${name}`;
+                if (window.location.hash !== nextHash) {
+                    history.replaceState(null, "", nextHash);
+                }
+            }
+        };
+
         tabs.forEach((tab) => {
-          const active = tab.getAttribute("data-tab") === name;
-          tab.setAttribute("aria-selected", active ? "true" : "false");
-          tab.setAttribute("data-active", active ? "true" : "false");
+            tab.addEventListener("click", () => {
+                const name = tab.getAttribute("data-tab");
+                if (!name) return;
+                activate(name, { updateHash: true });
+            });
         });
 
         panels.forEach((panel) => {
-          const active = panel.getAttribute("data-tab-panel") === name;
-          panel.toggleAttribute("hidden", !active);
+            const name = panel.getAttribute("data-tab-panel");
+            const moreButton = panel.querySelector("[data-media-more]");
+            if (!name || !(moreButton instanceof HTMLButtonElement)) return;
+
+            moreButton.addEventListener("click", () => {
+                const items = tabData[name] ?? [];
+                const currentCount = loadedCounts[name] ?? 0;
+                const nextCount = Math.min(currentCount + pageSize, items.length);
+                if (nextCount === currentCount) return;
+                loadedCounts[name] = nextCount;
+                appendToPanel(name, currentCount, nextCount);
+            });
         });
 
-        if ((loadedCounts[name] ?? 0) === 0) {
-          loadedCounts[name] = Math.min(pageSize, tabData[name]?.length ?? 0);
-        }
+        const syncFromHash = () => {
+            const requested = window.location.hash.replace(/^#/, "");
+            const fallback = tabSet.has(defaultTab) ? defaultTab : tabNames[0];
+            activate(tabSet.has(requested) ? requested : fallback, { updateHash: false });
+        };
 
-        clearInactivePanels(name);
-        renderPanel(name);
-
-        if (options.updateHash) {
-          const nextHash = `#${name}`;
-          if (window.location.hash !== nextHash) {
-            history.replaceState(null, "", nextHash);
-          }
-        }
-      };
-
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          const name = tab.getAttribute("data-tab");
-          if (!name) return;
-          activate(name, { updateHash: true });
-        });
-      });
-
-      panels.forEach((panel) => {
-        const name = panel.getAttribute("data-tab-panel");
-        const moreButton = panel.querySelector("[data-media-more]");
-        if (!name || !(moreButton instanceof HTMLButtonElement)) return;
-
-        moreButton.addEventListener("click", () => {
-          const items = tabData[name] ?? [];
-          const currentCount = loadedCounts[name] ?? 0;
-          const nextCount = Math.min(currentCount + pageSize, items.length);
-          if (nextCount === currentCount) return;
-          loadedCounts[name] = nextCount;
-          appendToPanel(name, currentCount, nextCount);
-        });
-      });
-
-      const syncFromHash = () => {
-        const requested = window.location.hash.replace(/^#/, "");
-        const fallback = tabSet.has(defaultTab) ? defaultTab : tabNames[0];
-        activate(tabSet.has(requested) ? requested : fallback, { updateHash: false });
-      };
-
-      window.addEventListener("hashchange", syncFromHash);
-      syncFromHash();
+        window.addEventListener("hashchange", syncFromHash);
+        syncFromHash();
     };
 
     document.addEventListener("DOMContentLoaded", initMediaTabs);
     document.addEventListener("astro:page-load", initMediaTabs);
-  </script>
+    </script>
 </PageLayout>

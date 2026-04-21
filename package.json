@@ -1,63 +1,67 @@
 {
-  "name": "astro-nano",
-  "type": "module",
-  "version": "1.0.1",
-  "packageManager": "pnpm@10.33.0",
-  "scripts": {
-    "dev": "astro dev",
-    "dev:network": "astro dev --host",
-    "build:site": "astro check && astro build",
-    "build:search": "pnpm exec pagefind --site dist",
-    "build": "pnpm run build:site && pnpm run build:search",
-    "smoke": "pnpm run build && node scripts/verify/smoke.mjs",
-    "smoke:install": "pnpm exec playwright install --with-deps chromium",
-    "preview": "pnpm run build && astro preview",
-    "preview:network": "pnpm run build && astro preview --host",
-    "astro": "astro",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "sort:links": "node scripts/links/sort-links.mjs",
-    "sync:douban-covers": "node scripts/douban/sync-covers.mjs",
-    "sync:links-assets": "node scripts/links/sync-assets.mjs",
-    "sync:links-status": "node scripts/links/sync-status.mjs"
-  },
-  "dependencies": {
-    "@astrojs/mdx": "^5.0.0",
-    "@astrojs/rss": "4.0.18",
-    "@astrojs/sitemap": "^3.7.0",
-    "@tailwindcss/typography": "^0.5.10",
-    "@tailwindcss/vite": "^4.0.0",
-    "astro": "^6.0.0",
-    "clsx": "^2.1.0",
-    "tailwind-merge": "^3.0.0",
-    "tailwindcss": "^4.0.0",
-    "typescript": "6.0.3",
-    "unist-util-visit": "^5.0.0"
-  },
-  "devDependencies": {
-    "@astrojs/check": "^0.9.6",
-    "@eslint/config-array": "^0.23.0",
-    "@eslint/js": "^10.0.0",
-    "@eslint/object-schema": "^3.0.0",
-    "@types/mdast": "^4.0.4",
-    "@types/unist": "^3.0.3",
-    "@typescript-eslint/eslint-plugin": "^8.0.0",
-    "@typescript-eslint/parser": "^8.0.0",
-    "eslint": "^10.0.0",
-    "eslint-plugin-astro": "^1.0.0",
-    "pagefind": "^1.5.2",
-    "playwright": "^1.59.1",
-    "sharp": "^0.34.0",
-    "vite": "7.3.2"
-  },
-  "pnpm": {
-    "overrides": {
-      "fast-xml-parser": "5.7.1",
-      "lodash": "4.18.1"
+    "name": "astro-nano",
+    "type": "module",
+    "version": "1.0.1",
+    "packageManager": "pnpm@10.33.0",
+    "scripts": {
+        "dev": "astro dev",
+        "dev:network": "astro dev --host",
+        "build:site": "astro check && astro build",
+        "build:search": "pnpm exec pagefind --site dist",
+        "build": "pnpm run build:site && pnpm run build:search",
+        "smoke": "pnpm run build && node scripts/verify/smoke.mjs",
+        "smoke:install": "pnpm exec playwright install --with-deps chromium",
+        "preview": "pnpm run build && astro preview",
+        "preview:network": "pnpm run build && astro preview --host",
+        "astro": "astro",
+        "prepare": "husky",
+        "lint": "biome lint .",
+        "format": "biome format --write .",
+        "check": "biome check .",
+        "check:fix": "biome check --write .",
+        "md:lint": "markdownlint-cli2 \"**/*.{md,mdx}\"",
+        "secrets:lint": "secretlint \"**/*\"",
+        "sort:links": "node scripts/links/sort-links.mjs",
+        "sync:douban-covers": "node scripts/douban/sync-covers.mjs",
+        "sync:links-assets": "node scripts/links/sync-assets.mjs",
+        "sync:links-status": "node scripts/links/sync-status.mjs"
     },
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp"
-    ]
-  }
+    "dependencies": {
+        "@astrojs/mdx": "^5.0.0",
+        "@astrojs/rss": "4.0.18",
+        "@astrojs/sitemap": "^3.7.0",
+        "@tailwindcss/typography": "^0.5.10",
+        "@tailwindcss/vite": "^4.0.0",
+        "astro": "^6.0.0",
+        "clsx": "^2.1.0",
+        "tailwind-merge": "^3.0.0",
+        "tailwindcss": "^4.0.0",
+        "typescript": "6.0.3",
+        "unist-util-visit": "^5.0.0"
+    },
+    "devDependencies": {
+        "@astrojs/check": "^0.9.6",
+        "@biomejs/biome": "2.4.10",
+        "@secretlint/secretlint-rule-preset-recommend": "^12.1.0",
+        "@types/mdast": "^4.0.4",
+        "@types/unist": "^3.0.3",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.4.0",
+        "markdownlint-cli2": "^0.22.0",
+        "pagefind": "^1.5.2",
+        "playwright": "^1.59.1",
+        "secretlint": "^12.1.0",
+        "sharp": "^0.34.0",
+        "vite": "7.3.2"
+    },
+    "pnpm": {
+        "overrides": {
+            "fast-xml-parser": "5.7.1",
+            "lodash": "4.18.1"
+        },
+        "onlyBuiltDependencies": [
+            "esbuild",
+            "sharp"
+        ]
+    }
 }

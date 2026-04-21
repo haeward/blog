@@ -15,10 +15,10 @@ const filledSquares = (progress / 100) * totalSquares;
 ---
 
 <div class="animate mb-2">
-  <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm">
-    <span class="font-mono shrink-0">{year}:</span>
-    <div class="flex flex-wrap gap-1">
-      {Array.from({ length: totalSquares }, (_, i) => (
+    <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm">
+        <span class="font-mono shrink-0">{year}:</span>
+        <div class="flex flex-wrap gap-1">
+            {Array.from({ length: totalSquares }, (_, i) => (
         <div
           class={`h-2.5 w-2.5 border border-stone-500 dark:border-stone-300 sm:h-3 sm:w-3 ${
             i < filledSquares
@@ -27,7 +27,7 @@ const filledSquares = (progress / 100) * totalSquares;
           }`}
         />
       ))}
+        </div>
+        <span class="font-mono shrink-0">{progressPercentage}%</span>
     </div>
-    <span class="font-mono shrink-0">{progressPercentage}%</span>
-  </div>
 </div>

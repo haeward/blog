@@ -1,33 +1,42 @@
 ---
-import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
-import { SITE, CHANGELOG } from "@consts";
+import { CHANGELOG, SITE } from "@consts";
+import PageLayout from "@layouts/PageLayout.astro";
 import { CHANGELOG_ENTRIES } from "../data/changelog";
 
-const changelogByYear = CHANGELOG_ENTRIES.reduce<Record<string, typeof CHANGELOG_ENTRIES>>((groups, entry) => {
-  const year = entry.date.slice(0, 4);
-  groups[year] ??= [];
-  groups[year].push(entry);
-  return groups;
-}, {});
+const changelogByYear = CHANGELOG_ENTRIES.reduce<Record<string, typeof CHANGELOG_ENTRIES>>(
+    (groups, entry) => {
+        const year = entry.date.slice(0, 4);
+        groups[year] ??= [];
+        groups[year].push(entry);
+        return groups;
+    },
+    {},
+);
 
 const changelogYears = Object.keys(changelogByYear).sort((a, b) => Number(b) - Number(a));
 ---
 
-<PageLayout title={`${CHANGELOG.TITLE} | ${SITE.NAME}`} description={CHANGELOG.DESCRIPTION} lang="en">
-  <Container>
-    <section class="space-y-8 sm:space-y-10">
-      <div class="animate max-w-2xl space-y-4">
-        <p class="changelog-page__eyebrow">Site journal</p>
-        <div class="space-y-3">
-          <h1 class="serif-reading-title text-3xl font-bold tracking-[0.01em] text-black dark:text-white/95 sm:text-4xl">
-            Changelog
-          </h1>
-        </div>
-      </div>
+<PageLayout
+    title={`${CHANGELOG.TITLE} | ${SITE.NAME}`}
+    description={CHANGELOG.DESCRIPTION}
+    lang="en"
+>
+    <Container>
+        <section class="space-y-8 sm:space-y-10">
+            <div class="animate max-w-2xl space-y-4">
+                <p class="changelog-page__eyebrow">Site journal</p>
+                <div class="space-y-3">
+                    <h1
+                        class="serif-reading-title text-3xl font-bold tracking-[0.01em] text-black dark:text-white/95 sm:text-4xl"
+                    >
+                        Changelog
+                    </h1>
+                </div>
+            </div>
 
-      <div class="space-y-10 sm:space-y-12">
-        {changelogYears.map((year) => (
+            <div class="space-y-10 sm:space-y-12">
+                {changelogYears.map((year) => (
           <section class="animate changelog-year" aria-labelledby={`changelog-year-${year}`}>
             <div class="changelog-year__header">
               <h2 id={`changelog-year-${year}`} class="serif-reading-title changelog-year__title">
@@ -45,7 +54,7 @@ const changelogYears = Object.keys(changelogByYear).sort((a, b) => Number(b) - N
             </ol>
           </section>
         ))}
-      </div>
-    </section>
-  </Container>
+            </div>
+        </section>
+    </Container>
 </PageLayout>

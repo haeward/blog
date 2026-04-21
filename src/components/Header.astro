@@ -3,125 +3,126 @@ import Link from "@components/Link.astro";
 import { SITE } from "@consts";
 
 type Props = {
-  showDivider?: boolean;
+    showDivider?: boolean;
 };
 
 const { showDivider = false } = Astro.props;
 ---
 
 <header class:list={["py-4", showDivider && "header--divider"]}>
-  <div class="px-5">
-    <div class="mx-auto max-w-screen-md">
-      <div
-        class:list={[
+    <div class="px-5">
+        <div class="mx-auto max-w-screen-md">
+            <div
+                class:list={[
           "flex flex-col gap-3",
           "sm:flex-row sm:items-center sm:justify-between"
         ]}
-      >
-        <div class="flex items-center gap-4 sm:gap-8">
-          <Link href="/" underline={false}>
-            <div class="font-semibold text-xl sm:text-2xl">
-              {SITE.NAME}
+            >
+                <div class="flex items-center gap-4 sm:gap-8">
+                    <Link href="/" underline={false}>
+                        <div class="font-semibold text-xl sm:text-2xl">{SITE.NAME}</div>
+                    </Link>
+                    <div class="flex flex-wrap items-center gap-3 sm:gap-6">
+                        <button
+                            id="theme-toggle"
+                            type="button"
+                            data-theme-mode="system"
+                            aria-label="Switch theme to Light"
+                            title="Switch theme to Light"
+                            class="header-action group size-6 flex items-center justify-center rounded-full"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="theme-toggle__icon theme-toggle__icon--system group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
+                                aria-hidden="true"
+                            >
+                                <rect x="3" y="4" width="18" height="12" rx="2"></rect>
+                                <path d="M8 20h8"></path>
+                                <path d="M12 16v4"></path>
+                            </svg>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="theme-toggle__icon theme-toggle__icon--light group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
+                                aria-hidden="true"
+                            >
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="theme-toggle__icon theme-toggle__icon--dark group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
+                                aria-hidden="true"
+                            >
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                            </svg>
+                        </button>
+                        <button
+                            id="search-trigger"
+                            type="button"
+                            data-search-trigger="true"
+                            aria-label="Search articles"
+                            title="Search articles"
+                            aria-haspopup="dialog"
+                            aria-controls="site-search"
+                            class="header-action group size-6 flex items-center justify-center rounded-full"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.75"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="transition-colors duration-300 ease-in-out group-hover:stroke-black group-hover:dark:stroke-white"
+                                aria-hidden="true"
+                            >
+                                <circle cx="11" cy="11" r="7"></circle>
+                                <path d="m20 20-3.5-3.5"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <nav class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm sm:text-base">
+                    <Link href="/blog" class="whitespace-nowrap"> Archive </Link>
+                    <Link href="/media" class="whitespace-nowrap"> Media </Link>
+                    <Link href="/about" class="whitespace-nowrap"> About </Link>
+                    <Link href="/links" class="whitespace-nowrap"> Links </Link>
+                </nav>
             </div>
-          </Link>
-          <div class="flex flex-wrap items-center gap-3 sm:gap-6">
-            <button
-              id="theme-toggle"
-              type="button"
-              data-theme-mode="system"
-              aria-label="Switch theme to Light"
-              title="Switch theme to Light"
-              class="header-action group size-6 flex items-center justify-center rounded-full"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="theme-toggle__icon theme-toggle__icon--system group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
-              >
-                <rect x="3" y="4" width="18" height="12" rx="2"></rect>
-                <path d="M8 20h8"></path>
-                <path d="M12 16v4"></path>
-              </svg>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="theme-toggle__icon theme-toggle__icon--light group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
-              >
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-              </svg>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="theme-toggle__icon theme-toggle__icon--dark group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
-              >
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-              </svg>
-            </button>
-            <button
-              id="search-trigger"
-              type="button"
-              data-search-trigger="true"
-              aria-label="Search articles"
-              title="Search articles"
-              aria-haspopup="dialog"
-              aria-controls="site-search"
-              class="header-action group size-6 flex items-center justify-center rounded-full"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.75"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="transition-colors duration-300 ease-in-out group-hover:stroke-black group-hover:dark:stroke-white"
-                aria-hidden="true"
-              >
-                <circle cx="11" cy="11" r="7"></circle>
-                <path d="m20 20-3.5-3.5"></path>
-              </svg>
-            </button>
-          </div>
         </div>
-        <nav class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm sm:text-base">
-          <Link href="/blog" class="whitespace-nowrap"> Archive </Link>
-          <Link href="/media" class="whitespace-nowrap"> Media </Link>
-          <Link href="/about" class="whitespace-nowrap"> About </Link>
-          <Link href="/links" class="whitespace-nowrap"> Links </Link>
-        </nav>
-      </div>
     </div>
-  </div>
 </header>

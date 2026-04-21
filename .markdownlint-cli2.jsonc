@@ -1,0 +1,12 @@
+{
+    "config": {
+        "default": true,
+        "first-line-heading": false,
+        "line-length": false,
+        "no-inline-html": false
+    },
+    "globs": ["**/*.{md,mdx}"],
+    "ignores": ["node_modules", "dist", ".astro"],
+    "gitignore": true,
+    "fix": false
+}
