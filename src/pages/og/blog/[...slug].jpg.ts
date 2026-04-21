@@ -10,8 +10,20 @@ const IMAGE_HEIGHT = 630;
 const DEFAULT_IMAGE = "/assets/images/site/share-default.jpg";
 const AVATAR_IMAGE = "/assets/images/site/favicon.png";
 const AVATAR_SIZE = 46;
-const AVATAR_LEFT = 822;
-const AVATAR_TOP = 531;
+const AVATAR_LEFT = 64;
+const AVATAR_TOP = 548;
+const TITLE_LEFT = 64;
+const TITLE_MAX_WIDTH = 790;
+const TITLE_FONT_SIZE = 40;
+const TITLE_LINE_HEIGHT = 50;
+const META_TEXT_LEFT = AVATAR_LEFT + AVATAR_SIZE + 18;
+const META_BASELINE = AVATAR_TOP + 31;
+const META_AUTHOR_WIDTH = 94;
+const SCRIM_TOP = 315;
+const SCRIM_HEIGHT = IMAGE_HEIGHT - SCRIM_TOP;
+const SCRIM_MIDPOINT = 0.38;
+const SCRIM_MID_OPACITY = 0.2;
+const SCRIM_BOTTOM_OPACITY = 0.62;
 const PUBLIC_DIR = path.resolve(process.cwd(), "public");
 const FONT_DIR = path.join(PUBLIC_DIR, "assets/fonts");
 const TITLE_FONT_PATH = path.join(FONT_DIR, "NotoSans-Regular.ttf");
@@ -21,6 +33,26 @@ const META_FONT_URL = pathToFileURL(META_FONT_PATH).href;
 
 type Props = {
     post: CollectionEntry<"blog">;
+};
+
+type OverlayLayout = {
+    metaText: string;
+    titleLines: string[];
+    titleStartY: number;
+};
+
+type TextPalette = {
+    primary: string;
+    secondary: string;
+    separator: string;
+    shadowColor: string;
+    shadowOpacity: number;
+    avatarRing: string;
+};
+
+type OverlayTheme = {
+    meta: TextPalette;
+    title: TextPalette;
 };
 
 export async function getStaticPaths() {
@@ -51,10 +83,12 @@ async function generateShareImage(post: CollectionEntry<"blog">): Promise<Buffer
         .resize(IMAGE_WIDTH, IMAGE_HEIGHT, { fit: "cover", position: "center" })
         .jpeg({ quality: 88, mozjpeg: true })
         .toBuffer();
+    const layout = getOverlayLayout(post);
+    const theme = await getOverlayTheme(base, layout);
 
     const layers: sharp.OverlayOptions[] = [
         {
-            input: Buffer.from(getOverlaySvg(post)),
+            input: Buffer.from(getOverlaySvg(layout, theme)),
             left: 0,
             top: 0,
         },
@@ -68,7 +102,7 @@ async function generateShareImage(post: CollectionEntry<"blog">): Promise<Buffer
                 top: AVATAR_TOP,
             },
             {
-                input: Buffer.from(getAvatarRingSvg()),
+                input: Buffer.from(getAvatarRingSvg(theme.meta)),
                 left: 0,
                 top: 0,
             },
@@ -148,13 +182,17 @@ function resolvePublicImagePath(image: string): string | null {
     }
 }
 
-function getOverlaySvg(post: CollectionEntry<"blog">): string {
-    const titleFontSize = 40;
-    const titleLines = wrapText(post.data.title, 790, titleFontSize, 2);
-    const metaText = formatDate(post.data.date);
-    const titleStartY = titleLines.length === 1 ? 462 : 416;
-    const titleLineHeight = 50;
+function getOverlayLayout(post: CollectionEntry<"blog">): OverlayLayout {
+    const titleLines = wrapText(post.data.title, TITLE_MAX_WIDTH, TITLE_FONT_SIZE, 2);
 
+    return {
+        metaText: formatDate(post.data.date),
+        titleLines,
+        titleStartY: titleLines.length === 1 ? 456 : 412,
+    };
+}
+
+function getOverlaySvg(layout: OverlayLayout, theme: OverlayTheme): string {
     return `<svg width="${IMAGE_WIDTH}" height="${IMAGE_HEIGHT}" viewBox="0 0 ${IMAGE_WIDTH} ${IMAGE_HEIGHT}" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <style>
@@ -169,34 +207,124 @@ function getOverlaySvg(post: CollectionEntry<"blog">): string {
         font-weight: 400;
       }
     </style>
-    <filter id="textShadow" x="-20%" y="-20%" width="140%" height="160%">
-      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.46"/>
+    <filter id="titleShadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="${theme.title.shadowColor}" flood-opacity="${theme.title.shadowOpacity}"/>
+    </filter>
+    <filter id="metaShadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="${theme.meta.shadowColor}" flood-opacity="${theme.meta.shadowOpacity}"/>
     </filter>
     <linearGradient id="bottomScrim" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
-      <stop offset="46%" stop-color="#000000" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.46"/>
+      <stop offset="${SCRIM_MIDPOINT * 100}%" stop-color="#000000" stop-opacity="${SCRIM_MID_OPACITY}"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="${SCRIM_BOTTOM_OPACITY}"/>
     </linearGradient>
   </defs>
-  <rect y="365" width="${IMAGE_WIDTH}" height="265" fill="url(#bottomScrim)"/>
-  ${titleLines
+  <rect y="${SCRIM_TOP}" width="${IMAGE_WIDTH}" height="${SCRIM_HEIGHT}" fill="url(#bottomScrim)"/>
+  ${layout.titleLines
       .map(
           (line, index) =>
-              `<text x="64" y="${titleStartY + titleLineHeight * index}" fill="#ffffff" font-family="ShareTitle, Noto Sans, sans-serif" font-size="${titleFontSize}" font-weight="400" filter="url(#textShadow)">${escapeXml(line)}</text>`,
+              `<text x="${TITLE_LEFT}" y="${layout.titleStartY + TITLE_LINE_HEIGHT * index}" fill="${theme.title.primary}" font-family="ShareTitle, Noto Sans, sans-serif" font-size="${TITLE_FONT_SIZE}" font-weight="400" filter="url(#titleShadow)">${escapeXml(line)}</text>`,
       )
       .join("")}
-  <text x="888" y="561" fill="rgba(255,255,255,0.94)" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="400" filter="url(#textShadow)">${escapeXml(SITE.NAME)}</text>
-  <text x="986" y="561" fill="rgba(255,255,255,0.68)" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="400" filter="url(#textShadow)">–</text>
-  <text x="1012" y="561" fill="rgba(255,255,255,0.84)" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="400" filter="url(#textShadow)">${escapeXml(metaText)}</text>
+  <text x="${META_TEXT_LEFT}" y="${META_BASELINE}" fill="${theme.meta.primary}" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="400" filter="url(#metaShadow)">${escapeXml(SITE.NAME)}</text>
+  <text x="${META_TEXT_LEFT + META_AUTHOR_WIDTH}" y="${META_BASELINE}" fill="${theme.meta.separator}" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="400" filter="url(#metaShadow)">–</text>
+  <text x="${META_TEXT_LEFT + META_AUTHOR_WIDTH + 26}" y="${META_BASELINE}" fill="${theme.meta.secondary}" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="400" filter="url(#metaShadow)">${escapeXml(layout.metaText)}</text>
 </svg>`;
 }
 
-function getAvatarRingSvg(): string {
+function getAvatarRingSvg(palette: TextPalette): string {
     const center = AVATAR_SIZE / 2;
 
     return `<svg width="${IMAGE_WIDTH}" height="${IMAGE_HEIGHT}" viewBox="0 0 ${IMAGE_WIDTH} ${IMAGE_HEIGHT}" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="${AVATAR_LEFT + center}" cy="${AVATAR_TOP + center}" r="${center - 0.75}" fill="none" stroke="rgba(255,255,255,0.58)" stroke-width="1.5"/>
+  <circle cx="${AVATAR_LEFT + center}" cy="${AVATAR_TOP + center}" r="${center - 0.75}" fill="none" stroke="${palette.avatarRing}" stroke-width="1.5"/>
 </svg>`;
+}
+
+async function getOverlayTheme(base: Buffer, layout: OverlayLayout): Promise<OverlayTheme> {
+    const titleLuminance = await getAdjustedRegionLuminance(base, {
+        height: TITLE_LINE_HEIGHT * layout.titleLines.length + 16,
+        left: TITLE_LEFT,
+        top: Math.max(0, layout.titleStartY - TITLE_FONT_SIZE - 8),
+        width: TITLE_MAX_WIDTH,
+    });
+    const metaLuminance = await getAdjustedRegionLuminance(base, {
+        height: 36,
+        left: META_TEXT_LEFT,
+        top: AVATAR_TOP + 6,
+        width: 330,
+    });
+
+    return {
+        meta: getTextPalette(metaLuminance),
+        title: getTextPalette(titleLuminance),
+    };
+}
+
+async function getAdjustedRegionLuminance(
+    base: Buffer,
+    region: { height: number; left: number; top: number; width: number },
+): Promise<number> {
+    const width = Math.min(region.width, IMAGE_WIDTH - region.left);
+    const height = Math.min(region.height, IMAGE_HEIGHT - region.top);
+    const { data, info } = await sharp(base)
+        .extract({ height, left: region.left, top: region.top, width })
+        .raw()
+        .toBuffer({ resolveWithObject: true });
+
+    let luminance = 0;
+    let samples = 0;
+    const sampleStep = 4;
+
+    for (let y = 0; y < info.height; y += sampleStep) {
+        const scrimOpacity = getBottomScrimOpacity(region.top + y);
+        for (let x = 0; x < info.width; x += sampleStep) {
+            const offset = (y * info.width + x) * info.channels;
+            const red = data[offset] ?? 0;
+            const green = data[offset + 1] ?? 0;
+            const blue = data[offset + 2] ?? 0;
+            luminance += (0.2126 * red + 0.7152 * green + 0.0722 * blue) * (1 - scrimOpacity);
+            samples += 1;
+        }
+    }
+
+    return samples > 0 ? luminance / samples : 0;
+}
+
+function getBottomScrimOpacity(y: number): number {
+    if (y <= SCRIM_TOP) return 0;
+
+    const progress = Math.min((y - SCRIM_TOP) / SCRIM_HEIGHT, 1);
+    if (progress <= SCRIM_MIDPOINT) {
+        return (progress / SCRIM_MIDPOINT) * SCRIM_MID_OPACITY;
+    }
+
+    return (
+        SCRIM_MID_OPACITY +
+        ((progress - SCRIM_MIDPOINT) / (1 - SCRIM_MIDPOINT)) *
+            (SCRIM_BOTTOM_OPACITY - SCRIM_MID_OPACITY)
+    );
+}
+
+function getTextPalette(luminance: number): TextPalette {
+    if (luminance > 158) {
+        return {
+            avatarRing: "rgba(24, 24, 24, 0.24)",
+            primary: "rgba(22, 24, 27, 0.88)",
+            secondary: "rgba(22, 24, 27, 0.72)",
+            separator: "rgba(22, 24, 27, 0.52)",
+            shadowColor: "#ffffff",
+            shadowOpacity: 0.38,
+        };
+    }
+
+    return {
+        avatarRing: "rgba(255, 255, 255, 0.58)",
+        primary: "rgba(255, 255, 255, 0.94)",
+        secondary: "rgba(255, 255, 255, 0.82)",
+        separator: "rgba(255, 255, 255, 0.62)",
+        shadowColor: "#000000",
+        shadowOpacity: 0.48,
+    };
 }
 
 function getFallbackBackgroundSvg(): string {
