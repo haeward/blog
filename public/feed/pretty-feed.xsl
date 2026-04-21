@@ -12,8 +12,7 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title><xsl:value-of select="rss/channel/title"/> | RSS Feed</title>
-        <link rel="icon" type="image/svg+xml" href="/assets/images/site/reflecting.svg"/>
-        <link rel="icon" type="image/x-icon" href="/assets/images/site/reflecting.svg"/>
+        <link rel="icon" type="image/png" href="/assets/images/site/favicon.png"/>
         <style><![CDATA[
           @font-face {
             font-family: "Noto Sans";

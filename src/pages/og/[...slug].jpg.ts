@@ -7,27 +7,27 @@ import sharp from "sharp";
 
 const IMAGE_WIDTH = 1200;
 const IMAGE_HEIGHT = 630;
-const DEFAULT_IMAGE = "/assets/images/site/share-default.jpg";
+const DEFAULT_IMAGE = "/assets/images/site/default-og.jpg";
 const AVATAR_IMAGE = "/assets/images/site/favicon.png";
 const AVATAR_SIZE = 46;
 const AVATAR_LEFT = 64;
-const AVATAR_TOP = 548;
+const AVATAR_TOP = 462;
 const TITLE_LEFT = 64;
-const TITLE_MAX_WIDTH = 790;
-const TITLE_FONT_SIZE = 40;
-const TITLE_LINE_HEIGHT = 50;
+const TITLE_MAX_WIDTH = 840;
+const TITLE_FONT_SIZE = 48;
+const TITLE_LINE_HEIGHT = 58;
 const META_TEXT_LEFT = AVATAR_LEFT + AVATAR_SIZE + 18;
 const META_BASELINE = AVATAR_TOP + 31;
 const META_AUTHOR_WIDTH = 94;
-const SCRIM_TOP = 315;
+const SCRIM_TOP = AVATAR_TOP - 10;
 const SCRIM_HEIGHT = IMAGE_HEIGHT - SCRIM_TOP;
-const SCRIM_MIDPOINT = 0.38;
-const SCRIM_MID_OPACITY = 0.2;
-const SCRIM_BOTTOM_OPACITY = 0.62;
+const SCRIM_MIDPOINT = 0.32;
+const SCRIM_MID_OPACITY = 0.28;
+const SCRIM_BOTTOM_OPACITY = 0.68;
 const PUBLIC_DIR = path.resolve(process.cwd(), "public");
 const FONT_DIR = path.join(PUBLIC_DIR, "assets/fonts");
-const TITLE_FONT_PATH = path.join(FONT_DIR, "NotoSans-Regular.ttf");
-const META_FONT_PATH = path.join(FONT_DIR, "NotoSans-Regular.ttf");
+const TITLE_FONT_PATH = path.join(FONT_DIR, "NotoSans-Bold.ttf");
+const META_FONT_PATH = path.join(FONT_DIR, "NotoSans-Bold.ttf");
 const TITLE_FONT_URL = pathToFileURL(TITLE_FONT_PATH).href;
 const META_FONT_URL = pathToFileURL(META_FONT_PATH).href;
 
@@ -188,7 +188,7 @@ function getOverlayLayout(post: CollectionEntry<"blog">): OverlayLayout {
     return {
         metaText: formatDate(post.data.date),
         titleLines,
-        titleStartY: titleLines.length === 1 ? 456 : 412,
+        titleStartY: titleLines.length === 1 ? 390 : 338,
     };
 }
 
@@ -199,12 +199,12 @@ function getOverlaySvg(layout: OverlayLayout, theme: OverlayTheme): string {
       @font-face {
         font-family: "ShareTitle";
         src: url("${TITLE_FONT_URL}") format("truetype");
-        font-weight: 400;
+        font-weight: 700;
       }
       @font-face {
         font-family: "ShareMeta";
         src: url("${META_FONT_URL}") format("truetype");
-        font-weight: 400;
+        font-weight: 700;
       }
     </style>
     <filter id="titleShadow" x="-20%" y="-20%" width="140%" height="160%">
@@ -223,12 +223,12 @@ function getOverlaySvg(layout: OverlayLayout, theme: OverlayTheme): string {
   ${layout.titleLines
       .map(
           (line, index) =>
-              `<text x="${TITLE_LEFT}" y="${layout.titleStartY + TITLE_LINE_HEIGHT * index}" fill="${theme.title.primary}" font-family="ShareTitle, Noto Sans, sans-serif" font-size="${TITLE_FONT_SIZE}" font-weight="400" filter="url(#titleShadow)">${escapeXml(line)}</text>`,
+              `<text x="${TITLE_LEFT}" y="${layout.titleStartY + TITLE_LINE_HEIGHT * index}" fill="${theme.title.primary}" font-family="ShareTitle, Noto Sans, sans-serif" font-size="${TITLE_FONT_SIZE}" font-weight="700" filter="url(#titleShadow)">${escapeXml(line)}</text>`,
       )
       .join("")}
-  <text x="${META_TEXT_LEFT}" y="${META_BASELINE}" fill="${theme.meta.primary}" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="400" filter="url(#metaShadow)">${escapeXml(SITE.NAME)}</text>
-  <text x="${META_TEXT_LEFT + META_AUTHOR_WIDTH}" y="${META_BASELINE}" fill="${theme.meta.separator}" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="400" filter="url(#metaShadow)">–</text>
-  <text x="${META_TEXT_LEFT + META_AUTHOR_WIDTH + 26}" y="${META_BASELINE}" fill="${theme.meta.secondary}" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="400" filter="url(#metaShadow)">${escapeXml(layout.metaText)}</text>
+  <text x="${META_TEXT_LEFT}" y="${META_BASELINE}" fill="${theme.meta.primary}" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="700" filter="url(#metaShadow)">${escapeXml(SITE.NAME)}</text>
+  <text x="${META_TEXT_LEFT + META_AUTHOR_WIDTH}" y="${META_BASELINE}" fill="${theme.meta.separator}" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="700" filter="url(#metaShadow)">–</text>
+  <text x="${META_TEXT_LEFT + META_AUTHOR_WIDTH + 26}" y="${META_BASELINE}" fill="${theme.meta.secondary}" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="700" filter="url(#metaShadow)">${escapeXml(layout.metaText)}</text>
 </svg>`;
 }
 
@@ -236,7 +236,7 @@ function getAvatarRingSvg(palette: TextPalette): string {
     const center = AVATAR_SIZE / 2;
 
     return `<svg width="${IMAGE_WIDTH}" height="${IMAGE_HEIGHT}" viewBox="0 0 ${IMAGE_WIDTH} ${IMAGE_HEIGHT}" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="${AVATAR_LEFT + center}" cy="${AVATAR_TOP + center}" r="${center - 0.75}" fill="none" stroke="${palette.avatarRing}" stroke-width="1.5"/>
+  <circle cx="${AVATAR_LEFT + center}" cy="${AVATAR_TOP + center}" r="${center - 0.75}" fill="none" stroke="${palette.avatarRing}" stroke-width="0.75"/>
 </svg>`;
 }
 
@@ -308,7 +308,7 @@ function getBottomScrimOpacity(y: number): number {
 function getTextPalette(luminance: number): TextPalette {
     if (luminance > 158) {
         return {
-            avatarRing: "rgba(24, 24, 24, 0.24)",
+            avatarRing: "rgba(24, 24, 24, 0.14)",
             primary: "rgba(22, 24, 27, 0.88)",
             secondary: "rgba(22, 24, 27, 0.72)",
             separator: "rgba(22, 24, 27, 0.52)",
@@ -318,7 +318,7 @@ function getTextPalette(luminance: number): TextPalette {
     }
 
     return {
-        avatarRing: "rgba(255, 255, 255, 0.58)",
+        avatarRing: "rgba(255, 255, 255, 0.24)",
         primary: "rgba(255, 255, 255, 0.94)",
         secondary: "rgba(255, 255, 255, 0.82)",
         separator: "rgba(255, 255, 255, 0.62)",

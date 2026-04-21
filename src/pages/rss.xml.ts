@@ -11,6 +11,8 @@ export async function GET(context: APIContext) {
     const container = await AstroContainer.create({ renderers });
     const siteUrl = context.site ?? new URL(context.request.url).origin;
     const feedUrl = new URL("/rss.xml", siteUrl).href;
+    const feedImageUrl = new URL("/assets/images/site/favicon.png", siteUrl).href;
+    const homeUrl = new URL("/", siteUrl).href;
 
     const blog = (await getCollection("blog")).filter((post) => !post.data.draft);
 
@@ -45,6 +47,13 @@ export async function GET(context: APIContext) {
 
         customData: `
       <atom:link href="${feedUrl}" rel="self" type="application/rss+xml" />
+      <atom:icon>${feedImageUrl}</atom:icon>
+      <atom:logo>${feedImageUrl}</atom:logo>
+      <image>
+        <url>${feedImageUrl}</url>
+        <title>${SITE.NAME}</title>
+        <link>${homeUrl}</link>
+      </image>
       <follow_challenge>
         <feedId>136093735733238784</feedId>
         <userId>55205286935703552</userId>

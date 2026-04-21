@@ -35,7 +35,7 @@ const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.d
 const hasToc = tocHeadings.length > 0;
 const pagefindDate = post.data.date.toISOString().slice(0, 10);
 const postImageAlt = post.data.imageAlt ?? post.data.title;
-const postShareImage = `/og/blog/${post.id}.jpg`;
+const postShareImage = `/og/${post.id}.jpg`;
 ---
 
 <PageLayout
