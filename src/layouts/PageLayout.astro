@@ -10,15 +10,54 @@ type Props = {
     description: string;
     headerDivider?: boolean;
     lang?: string;
+    image?: string;
+    imageAlt?: string;
+    imageWidth?: number;
+    imageHeight?: number;
+    imageType?: string;
+    ogType?: "website" | "article";
+    publishedTime?: string | Date;
+    locale?: string;
 };
 
-const { title, description, headerDivider = true, lang = "en" } = Astro.props;
+const {
+    title,
+    description,
+    headerDivider = true,
+    lang = "en",
+    image,
+    imageAlt,
+    imageWidth,
+    imageHeight,
+    imageType,
+    ogType,
+    publishedTime,
+    locale = toOpenGraphLocale(lang),
+} = Astro.props;
+
+function toOpenGraphLocale(language: string): string {
+    const normalizedLanguage = language.toLowerCase();
+    if (normalizedLanguage.startsWith("zh")) return "zh_CN";
+    if (normalizedLanguage.startsWith("ja")) return "ja_JP";
+    return "en_US";
+}
 ---
 
 <!doctype html>
 <html lang={lang}>
     <head>
-        <Head title={`${title}`} description={description} />
+        <Head
+            title={title}
+            description={description}
+            image={image}
+            imageAlt={imageAlt}
+            imageWidth={imageWidth}
+            imageHeight={imageHeight}
+            imageType={imageType}
+            ogType={ogType}
+            publishedTime={publishedTime}
+            locale={locale}
+        />
     </head>
     <body>
         <Header showDivider={headerDivider} />

@@ -1,16 +1,52 @@
 ---
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
-import { SITE } from "@consts";
+import { SITE, SOCIALS } from "@consts";
 
 interface Props {
     title: string;
     description: string;
     image?: string;
+    imageAlt?: string;
+    imageWidth?: number;
+    imageHeight?: number;
+    imageType?: string;
+    ogType?: "website" | "article";
+    publishedTime?: string | Date;
+    locale?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description, image = "/assets/images/site/favicon.png" } = Astro.props;
+const {
+    title,
+    description,
+    image = "/assets/images/site/share-default.jpg",
+    imageAlt = `${title} preview image`,
+    imageWidth = 1200,
+    imageHeight = 630,
+    imageType = "image/jpeg",
+    ogType = "website",
+    publishedTime,
+    locale = "en_US",
+} = Astro.props;
+const previewImageURL = new URL(image, Astro.site);
+const publishedTimeContent =
+    publishedTime instanceof Date ? publishedTime.toISOString() : publishedTime;
+const imageWidthContent = String(imageWidth);
+const imageHeightContent = String(imageHeight);
+const twitterSite = getTwitterSite();
+
+function getTwitterSite(): string | undefined {
+    const twitter = SOCIALS.find((social) => social.NAME === "Twitter" && social.ENABLE !== false);
+    if (!twitter) return undefined;
+
+    try {
+        const username = new URL(twitter.HREF).pathname.split("/").filter(Boolean)[0];
+        return username ? `@${username}` : undefined;
+    } catch {
+        return undefined;
+    }
+}
 ---
 
 <!-- Global Metadata -->
@@ -30,18 +66,27 @@ const { title, description, image = "/assets/images/site/favicon.png" } = Astro.
 <meta name="description" content={description}>
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content={Astro.url}>
+<meta property="og:type" content={ogType}>
+<meta property="og:url" content={canonicalURL}>
 <meta property="og:title" content={title}>
 <meta property="og:description" content={description}>
-<meta property="og:image" content={new URL(image, Astro.url)}>
+<meta property="og:site_name" content={SITE.NAME}>
+<meta property="og:locale" content={locale}>
+<meta property="og:image" content={previewImageURL}>
+<meta property="og:image:width" content={imageWidthContent}>
+<meta property="og:image:height" content={imageHeightContent}>
+<meta property="og:image:type" content={imageType}>
+<meta property="og:image:alt" content={imageAlt}>
+{publishedTimeContent && <meta property="article:published_time" content={publishedTimeContent} />}
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content={Astro.url}>
-<meta property="twitter:title" content={title}>
-<meta property="twitter:description" content={description}>
-<meta property="twitter:image" content={new URL(image, Astro.url)}>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content={canonicalURL}>
+{twitterSite && <meta name="twitter:site" content={twitterSite} />}
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:image" content={previewImageURL}>
+<meta name="twitter:image:alt" content={imageAlt}>
 
 <!-- RSS Link -->
 <link
