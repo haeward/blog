@@ -1,3 +1,96 @@
+---
+version: alpha
+name: Haeward
+description: Quiet personal editorial Astro blog with narrow reading, stone surfaces, serif prose, compact content lists, media grids, search, and RSS.
+colors:
+  surface: stone-100
+  surface-dark: stone-900
+  header-surface: stone-100/85
+  header-surface-dark: stone-900/25
+  text-primary: black/95
+  text-primary-dark: white/90
+  text-strong: black
+  text-strong-dark: white
+  text-muted: black/40-75
+  text-muted-dark: white/38-74
+  hairline: black/5-12
+  hairline-dark: white/7-18
+  link: sky-700
+  link-dark: sky-300
+  link-hover: sky-800
+  link-hover-dark: sky-200
+  focus: cyan-500/70
+  quote: orange-400/85
+  quote-dark: orange-500/85
+  rating: amber-300
+  rating-dark: amber-200
+  success: emerald-500
+  danger: rose-500
+  toc-progress: "#c67c5a"
+typography:
+  ui:
+    family: Noto Sans
+    implementation: Tailwind font-sans
+  reading:
+    family: Noto Serif
+    implementation: Tailwind font-serif, .serif-reading-surface, .serif-reading-title
+  reading-zh:
+    family: Noto Serif SC
+    implementation: :lang(zh)
+  reading-ja:
+    family: Noto Serif JP
+    implementation: :lang(ja)
+  mono:
+    family: JetBrains Mono
+    implementation: Tailwind font-mono
+  article-body:
+    size: 1.04rem-1.06rem
+    line-height: leading-8
+  page-title:
+    size: text-3xl sm:text-4xl
+    weight: font-bold
+  card-title:
+    size: 0.84rem-1.14rem
+    weight: font-semibold
+spacing:
+  container: max-w-screen-md
+  page-gutter: px-5
+  main-y: py-12 sm:py-16
+  article-shell: max-w-screen-md
+  dense-list-gap: gap-1
+  link-grid-gap: gap-x-4 gap-y-3.5
+  media-grid-gap: gap-4 sm:gap-6
+rounded:
+  small: rounded rounded-sm rounded-md
+  card: rounded-lg
+  search: 1.5rem desktop, 1.15rem mobile
+  full: rounded-full
+components:
+  article-link:
+    color: link
+    color-dark: link-dark
+    focus: visible outline from LinkEnhancer
+  header-action:
+    size: size-6
+    shape: full
+    focus: focus
+  card:
+    shape: card
+    border: hairline
+    shadow: shadow-sm
+  media-card:
+    shape: card
+    ratio: aspect-[2/3]
+    accent: rating
+  search-panel:
+    shape: search
+    width: min(calc(100vw - 1.8rem), 48rem)
+    backdrop: blur
+  rss-preview:
+    stylesheet: /feed/pretty-feed.xsl
+    palette: standalone warm yellow preview
+---
+
 # Haeward Design System
 
 > Agent-consumable design specification for this Astro personal blog.
@@ -11,13 +104,15 @@ the code first and update the docs or implementation together.
 
 Detailed rules live in:
 
-- [Foundation](docs/design/foundation.md): color, typography, layout, depth, motion.
-- [Reading](docs/design/reading.md): article shell, prose, figures, TOC.
+- [Foundation](docs/design/foundation.md): expands the frontmatter values with
+  current color, typography, layout, depth, motion, and breakpoint rationale.
+- [Reading](docs/design/reading.md): article shell, prose, figures, lightbox,
+  and TOC.
 - [Components](docs/design/components.md): header, search, lists, cards, media,
   changelog, footer controls.
 - [RSS](docs/design/rss.md): `/rss.xml` and `pretty-feed.xsl`.
 
-## 1. Visual Theme And Atmosphere
+## 1. Overview
 
 | Attribute | Current rule |
 | --- | --- |
@@ -40,7 +135,20 @@ Use these principles:
 - Motion should clarify state or direction, never decorate the page.
 - Dark mode should preserve the same hierarchy, not create a separate theme.
 
-## 2. Color Palette And Roles
+## 2. Consumer Behavior
+
+Agents and tools should read this document in two layers:
+
+- Treat the YAML frontmatter as normative for current visual values and existing
+  component mappings.
+- Treat the Markdown sections as application guidance, rationale, and
+  project-specific constraints.
+- Preserve unknown or project-specific sections when transforming the document.
+- Do not assume frontmatter values exist as CSS variables or runtime tokens.
+- If frontmatter, prose, and implementation disagree, inspect the source files
+  first and update the docs or code together.
+
+## 3. Colors
 
 These are foundation values documented from current Tailwind/CSS usage. They are
 not a code token system or CSS variables.
@@ -59,8 +167,7 @@ not a code token system or CSS variables.
 | Focus accent | `cyan-500/70` | Header actions and key controls. |
 | Quote accent | `orange-400/85`, `orange-100` | Blockquotes. |
 | Rating accent | `amber-300` | Media stars. |
-| Success status | `emerald-500` | Reachable link status. |
-| Failure status | `rose-500` | Unreachable link status. |
+| Status accents | `emerald-500`, `rose-500` | Link status dots. |
 | TOC progress | `#c67c5a` | Article reading progress. |
 
 ### Dark Theme
@@ -82,7 +189,7 @@ not a code token system or CSS variables.
 Do not add a new dominant hue family. New colors need a semantic role and must
 not overpower the stone canvas.
 
-## 3. Typography Rules
+## 4. Typography
 
 | Role | Current implementation | Typical use |
 | --- | --- | --- |
@@ -91,8 +198,6 @@ not overpower the stone canvas.
 | Chinese serif | `Noto Serif SC` via `:lang(zh)` | Chinese text in reading surfaces. |
 | Japanese serif | `Noto Serif JP` via `:lang(ja)` | Japanese text in reading surfaces. |
 | Mono | `JetBrains Mono`, Tailwind `font-mono` | Code, year progress, changelog dates. |
-
-### Type Scale
 
 | Element | Size | Weight | Notes |
 | --- | --- | --- | --- |
@@ -114,7 +219,7 @@ Rules:
 - Do not use viewport-width font scaling.
 - Keep letter spacing non-negative.
 
-## 4. Layout Principles
+## 5. Layout
 
 | Pattern | Current rule |
 | --- | --- |
@@ -129,7 +234,33 @@ Rules:
 Do not add full-width bands or hero sections unless a real content need appears.
 The site’s default shape is centered, narrow, and text-led.
 
-## 5. Component Styling
+## 6. Elevation And Depth
+
+| Role | Current implementation |
+| --- | --- |
+| Default depth | `shadow-sm`, `ring-1`, low-opacity border. |
+| Card border | `black/5-12`, `white/7-18`. |
+| Hover lift | `-translate-y-px`, `-translate-y-0.5`, `-translate-y-1`. |
+| Search panel | Low-opacity border plus layered modal shadow. |
+| RSS preview | Standalone hard shadow in `pretty-feed.xsl`. |
+
+Do not introduce new default elevation levels for ordinary pages. Heavier shadow
+belongs only to existing cover-heavy media cards and the RSS preview.
+
+## 7. Shapes
+
+| Role | Current implementation |
+| --- | --- |
+| Default card radius | `rounded-lg`. |
+| Compact inline radius | `rounded`, `rounded-md`, `rounded-sm`. |
+| Modal radius | Search panel uses `1.5rem`, mobile `1.15rem`. |
+| Figure radius | `rounded-lg`. |
+| Icon button radius | `rounded-full` for header actions. |
+| Back-to-top radius | `rounded-lg`, not circular. |
+
+Do not add large pill-like surfaces to normal content sections.
+
+## 8. Components
 
 | Need | Use |
 | --- | --- |
@@ -153,24 +284,7 @@ Component rules:
 - Search, tabs, lightbox, and TOC have semantic or state attributes that must be
   preserved.
 
-## 6. Depth, Radius, And Motion
-
-| Role | Current implementation |
-| --- | --- |
-| Default card radius | `rounded-lg`. |
-| Compact inline radius | `rounded`, `rounded-md`, `rounded-sm`. |
-| Modal radius | Search panel uses `1.5rem`, mobile `1.15rem`. |
-| Figure radius | `rounded-lg`. |
-| Default depth | `shadow-sm`, `ring-1`, low-opacity border. |
-| Hover lift | `-translate-y-px`, `-translate-y-0.5`, `-translate-y-1`. |
-| Reveal motion | `.animate`: `opacity-0 translate-y-3` to visible, `700ms ease-out`. |
-| Stagger | Global script adds `.show` with `150ms` incremental delay. |
-| Direction cue | Arrow line/chevron transforms in `ArrowCard` and back-to-top. |
-
-Motion is allowed when it communicates direction, activation, or loading. Avoid
-looping decorative movement.
-
-## 7. Page Patterns
+## 9. Page Patterns
 
 | Page | Design rule |
 | --- | --- |
@@ -183,7 +297,7 @@ looping decorative movement.
 | Changelog | Eyebrow, serif title, year/date grid. No cards. |
 | RSS | Machine-readable feed with a standalone XSL subscription preview. |
 
-## 8. Do And Don’t
+## 10. Do And Don’t
 
 ### Do
 
@@ -207,7 +321,7 @@ looping decorative movement.
 - Don’t hand-edit generated link enrichment, link assets, Douban data, or Douban
   covers during design work.
 
-## 9. Responsive And Accessibility Rules
+## 11. Responsive And Accessibility
 
 | Area | Required behavior |
 | --- | --- |
@@ -220,7 +334,7 @@ looping decorative movement.
 | Semantics | Keep dialog, tablist, status, and screen-reader labels intact. |
 | Images | Meaningful images need useful alt text; decorative adjacent icons can be empty. |
 
-## 10. Agent Prompt Guide
+## 12. Agent Prompt Guide
 
 When generating UI for this project, use these mappings:
 
@@ -248,7 +362,7 @@ Before adding a new pattern, choose from the existing surfaces:
 | A long reading page | Article/prose rules in [Reading](docs/design/reading.md). |
 | A feed-related change | [RSS](docs/design/rss.md). |
 
-Validation:
+## 13. Validation
 
 - Markdown-only documentation changes: `pnpm run md:lint`.
 - Code/UI changes: `pnpm run check` and `pnpm run build:site`.

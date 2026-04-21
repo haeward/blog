@@ -1,8 +1,9 @@
 # Foundation
 
-These are foundation values for the current design. They describe the existing
-Tailwind utilities, CSS selectors, and custom CSS values; they are not a separate
-code token system or CSS variable layer.
+These are foundation values for the current design. They expand the compact
+frontmatter in `DESIGN.md` with implementation notes and rationale. They
+describe existing Tailwind utilities, CSS selectors, and custom CSS values; they
+are not a separate code token system or CSS variable layer.
 
 ## Source Files
 
