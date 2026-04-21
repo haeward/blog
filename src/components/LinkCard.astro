@@ -31,12 +31,12 @@ const statusLabel =
         href={item.url}
         target="_blank"
         rel="noopener noreferrer"
-        class="relative flex h-full min-h-14 items-center gap-3 rounded-lg border border-black/5 bg-white/35 px-3 py-2.5 transition-colors duration-300 hover:border-black/10 hover:bg-white/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-100 dark:border-white/7 dark:bg-white/[0.025] dark:hover:border-white/12 dark:hover:bg-white/[0.045] dark:focus-visible:ring-white/16 dark:focus-visible:ring-offset-stone-900"
+        class="relative flex h-full min-h-14 items-center gap-2.5 rounded-lg border border-black/12 bg-white/35 px-2.5 py-2.5 transition-colors duration-300 hover:border-black/18 hover:bg-white/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-100 dark:border-white/7 dark:bg-white/[0.025] dark:hover:border-white/12 dark:hover:bg-white/[0.045] dark:focus-visible:ring-white/16 dark:focus-visible:ring-offset-stone-900"
     >
         {item.status && (
       <span
         class:list={[
-          "absolute top-2.5 right-2.5 size-1.5 rounded-full",
+          "absolute top-2 right-2 size-1.5 rounded-full",
           item.status === "down" ? "bg-rose-500" : "bg-emerald-500",
         ]}
         data-link-status={item.status}
@@ -78,13 +78,13 @@ const statusLabel =
 
         <div class="min-w-0 space-y-0.5">
             <div
-                class="serif-reading-title truncate pr-3 text-[0.84rem] font-semibold leading-tight text-black/86 dark:text-white/86"
+                class="serif-reading-title truncate pr-2 text-[0.84rem] font-semibold leading-tight text-black/86 dark:text-white/86"
                 data-language-scan="true"
             >
                 {item.title}
             </div>
             <div
-                class="truncate text-[0.66rem] font-medium leading-tight text-black/45 dark:text-white/40"
+                class="truncate text-[0.66rem] font-medium leading-tight text-black/52 transition-colors duration-300 group-hover:text-sky-700/75 dark:text-white/40 dark:group-hover:text-sky-300/70"
             >
                 {meta}
             </div>
