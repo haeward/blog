@@ -1,14 +1,14 @@
 ---
 type MediaItem = {
-  title: string;
-  url?: string;
-  cover?: string;
-  subtitle?: string;
-  myRating?: number;
+    title: string;
+    url?: string;
+    cover?: string;
+    subtitle?: string;
+    myRating?: number;
 };
 
 interface Props {
-  item: MediaItem;
+    item: MediaItem;
 }
 
 const { item } = Astro.props;
@@ -16,7 +16,7 @@ const stars = Math.max(0, Math.min(5, Math.round(item.myRating ?? 0)));
 ---
 
 <li class="group h-full">
-  {item.url ? (
+    {item.url ? (
     <a
       href={item.url}
       target="_blank"

@@ -1,139 +1,141 @@
-<div
-  id="site-search"
-  class="site-search"
-  hidden
-  aria-hidden="true"
-  data-search-state="idle"
->
-  <div class="site-search__backdrop" data-search-close="true"></div>
+<div id="site-search" class="site-search" hidden aria-hidden="true" data-search-state="idle">
+    <div class="site-search__backdrop" data-search-close="true"></div>
 
-  <section
-    class="site-search__panel"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="site-search-title"
-  >
-    <h2 id="site-search-title" class="sr-only">Search articles</h2>
+    <section
+        class="site-search__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="site-search-title"
+    >
+        <h2 id="site-search-title" class="sr-only">Search articles</h2>
 
-    <div class="site-search__top">
-      <label class="site-search__input-shell" for="site-search-input">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="site-search__input-icon"
-          aria-hidden="true"
-        >
-          <circle cx="11" cy="11" r="7"></circle>
-          <path d="m20 20-3.5-3.5"></path>
-        </svg>
-        <input
-          id="site-search-input"
-          class="site-search__input"
-          type="search"
-          placeholder="Search articles..."
-          autocomplete="off"
-          autocapitalize="off"
-          spellcheck="false"
-          enterkeyhint="search"
-        />
-      </label>
+        <div class="site-search__top">
+            <label class="site-search__input-shell" for="site-search-input">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="site-search__input-icon"
+                    aria-hidden="true"
+                >
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <path d="m20 20-3.5-3.5"></path>
+                </svg>
+                <input
+                    id="site-search-input"
+                    class="site-search__input"
+                    type="search"
+                    placeholder="Search articles..."
+                    autocomplete="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    enterkeyhint="search"
+                >
+            </label>
 
-      <button
-        type="button"
-        class="site-search__close"
-        data-search-close="true"
-        aria-label="Close search"
-      >
-        ESC
-      </button>
-    </div>
+            <button
+                type="button"
+                class="site-search__close"
+                data-search-close="true"
+                aria-label="Close search"
+            >
+                ESC
+            </button>
+        </div>
 
-    <div class="site-search__divider"></div>
+        <div class="site-search__divider"></div>
 
-    <div class="site-search__body">
-      <p
-        id="site-search-summary"
-        class="site-search__summary"
-        hidden
-        role="status"
-        aria-live="polite"
-      ></p>
-      <div id="site-search-content" class="site-search__content"></div>
-    </div>
+        <div class="site-search__body">
+            <p
+                id="site-search-summary"
+                class="site-search__summary"
+                hidden
+                role="status"
+                aria-live="polite"
+            ></p>
+            <div id="site-search-content" class="site-search__content"></div>
+        </div>
 
-    <div class="site-search__divider"></div>
+        <div class="site-search__divider"></div>
 
-    <div class="site-search__footer">
-      <div class="site-search__hints" aria-hidden="true">
-        <span class="site-search__hint"><kbd>Enter</kbd> Open</span>
-        <span class="site-search__hint"><kbd>Tab</kbd> Navigate</span>
-        <span class="site-search__hint"><kbd>Esc</kbd> Close</span>
-      </div>
-      <a
-        class="site-search__credit"
-        href="https://pagefind.app/"
-        target="_blank"
-        rel="noreferrer noopener"
-      >
-        Powered by <span>Pagefind</span>
-      </a>
-    </div>
-  </section>
+        <div class="site-search__footer">
+            <div class="site-search__hints" aria-hidden="true">
+                <span class="site-search__hint"><kbd>Enter</kbd> Open</span>
+                <span class="site-search__hint"><kbd>Tab</kbd> Navigate</span>
+                <span class="site-search__hint"><kbd>Esc</kbd> Close</span>
+            </div>
+            <a
+                class="site-search__credit"
+                href="https://pagefind.app/"
+                target="_blank"
+                rel="noreferrer noopener"
+            >
+                Powered by <span>Pagefind</span>
+            </a>
+        </div>
+    </section>
 </div>
 
 <script is:inline>
-  const searchModalState = window.__searchModalState || (window.__searchModalState = {
-    bound: false,
-    refs: null,
-    open: false,
-    query: "",
-    results: [],
-    view: "idle",
-    summary: "",
-    lastTrigger: null,
-    searchToken: 0,
-    pagefind: null,
-    pagefindPromise: null,
-    missingIndex: false,
-    mergedLanguages: [],
-  });
+if (!window.__searchModalState) {
+    window.__searchModalState = {
+        bound: false,
+        refs: null,
+        open: false,
+        query: "",
+        results: [],
+        view: "idle",
+        summary: "",
+        lastTrigger: null,
+        searchToken: 0,
+        pagefind: null,
+        pagefindPromise: null,
+        missingIndex: false,
+        mergedLanguages: [],
+    };
+}
+const searchModalState = window.__searchModalState;
 
-  function clearSuppressedTriggerFocus() {
+function clearSuppressedTriggerFocus() {
     const trigger = document.querySelector("[data-search-trigger='true']");
     if (trigger instanceof HTMLElement) {
-      delete trigger.dataset.suppressFocusRing;
+        delete trigger.dataset.suppressFocusRing;
     }
-  }
+}
 
-  function initSearchModal() {
+function initSearchModal() {
     searchModalState.refs = {
-      root: document.getElementById("site-search"),
-      input: document.getElementById("site-search-input"),
-      summary: document.getElementById("site-search-summary"),
-      content: document.getElementById("site-search-content"),
-      trigger: document.querySelector("[data-search-trigger='true']"),
+        root: document.getElementById("site-search"),
+        input: document.getElementById("site-search-input"),
+        summary: document.getElementById("site-search-summary"),
+        content: document.getElementById("site-search-content"),
+        trigger: document.querySelector("[data-search-trigger='true']"),
     };
 
-    if (!searchModalState.refs.root || !searchModalState.refs.input || !searchModalState.refs.summary || !searchModalState.refs.content) {
-      return;
+    if (
+        !searchModalState.refs.root ||
+        !searchModalState.refs.input ||
+        !searchModalState.refs.summary ||
+        !searchModalState.refs.content
+    ) {
+        return;
     }
 
     searchModalState.refs.input.value = searchModalState.query;
 
     if (searchModalState.open) {
-      closeSearch({ restoreFocus: false });
+        closeSearch({ restoreFocus: false });
     } else {
-      document.documentElement.classList.remove("search-open");
-      renderSearchModal();
+        document.documentElement.classList.remove("search-open");
+        renderSearchModal();
     }
-  }
+}
 
-  function bindSearchModal() {
+function bindSearchModal() {
     if (searchModalState.bound) return;
     searchModalState.bound = true;
 
@@ -142,79 +144,82 @@
     document.addEventListener("input", handleSearchModalInput);
     document.addEventListener("pointerdown", clearSuppressedTriggerFocus, true);
     document.addEventListener("astro:after-swap", initSearchModal);
-  }
+}
 
-  function handleSearchModalClick(event) {
+function handleSearchModalClick(event) {
     if (!(event.target instanceof Element)) return;
 
     const trigger = event.target.closest("[data-search-trigger='true']");
     if (trigger) {
-      event.preventDefault();
-      if (searchModalState.open) {
-        closeSearch();
-      } else {
-        openSearch(trigger);
-      }
-      return;
+        event.preventDefault();
+        if (searchModalState.open) {
+            closeSearch();
+        } else {
+            openSearch(trigger);
+        }
+        return;
     }
 
     const closeTarget = event.target.closest("[data-search-close='true']");
     if (closeTarget && searchModalState.open) {
-      event.preventDefault();
-      closeSearch({ restoreFocus: false });
-      return;
+        event.preventDefault();
+        closeSearch({ restoreFocus: false });
+        return;
     }
 
     const resultLink = event.target.closest("[data-search-result-link='true']");
     if (resultLink && searchModalState.open) {
-      closeSearch({ restoreFocus: false });
+        closeSearch({ restoreFocus: false });
     }
-  }
+}
 
-  function handleSearchModalKeydown(event) {
+function handleSearchModalKeydown(event) {
     if (event.key === "Escape" && searchModalState.open) {
-      event.preventDefault();
-      closeSearch();
-      return;
+        event.preventDefault();
+        closeSearch();
+        return;
     }
 
-    const isShortcut = event.key.toLowerCase() === "k" && (event.metaKey || event.ctrlKey) && !event.altKey;
+    const isShortcut =
+        event.key.toLowerCase() === "k" && (event.metaKey || event.ctrlKey) && !event.altKey;
     if (!isShortcut) return;
     if (isEditableTarget(event.target)) return;
 
     event.preventDefault();
 
     if (searchModalState.open) {
-      closeSearch();
+        closeSearch();
     } else {
-      openSearch(document.querySelector("[data-search-trigger='true']"));
+        openSearch(document.querySelector("[data-search-trigger='true']"));
     }
-  }
+}
 
-  function handleSearchModalInput(event) {
-    if (!(event.target instanceof HTMLInputElement) || event.target.id !== "site-search-input") return;
+function handleSearchModalInput(event) {
+    if (!(event.target instanceof HTMLInputElement) || event.target.id !== "site-search-input")
+        return;
 
     const term = event.target.value.trim();
     searchModalState.query = term;
 
     if (!term) {
-      searchModalState.searchToken += 1;
-      searchModalState.results = [];
-      searchModalState.summary = "";
-      searchModalState.view = searchModalState.missingIndex ? "unavailable" : "idle";
-      renderSearchModal();
-      return;
+        searchModalState.searchToken += 1;
+        searchModalState.results = [];
+        searchModalState.summary = "";
+        searchModalState.view = searchModalState.missingIndex ? "unavailable" : "idle";
+        renderSearchModal();
+        return;
     }
 
     void searchArticles(term);
-  }
+}
 
-  function openSearch(trigger) {
+function openSearch(trigger) {
     const refs = searchModalState.refs;
     if (!refs?.root || !refs.input) return;
 
     searchModalState.open = true;
-    searchModalState.lastTrigger = trigger instanceof HTMLElement ? trigger : document.activeElement;
+    searchModalState.lastTrigger =
+        trigger instanceof HTMLElement ? trigger : document.activeElement;
     clearSuppressedTriggerFocus();
 
     refs.root.hidden = false;
@@ -225,15 +230,15 @@
     refs.input.focus({ preventScroll: true });
     refs.input.select();
     void ensurePagefind();
-  }
+}
 
-  function closeSearch({ restoreFocus = true } = {}) {
+function closeSearch({ restoreFocus = true } = {}) {
     const refs = searchModalState.refs;
     if (!refs?.root) return;
 
     const activeElement = document.activeElement;
     if (activeElement instanceof HTMLElement && refs.root.contains(activeElement)) {
-      activeElement.blur();
+        activeElement.blur();
     }
 
     searchModalState.open = false;
@@ -242,80 +247,81 @@
     document.documentElement.classList.remove("search-open");
 
     if (restoreFocus && searchModalState.lastTrigger instanceof HTMLElement) {
-      searchModalState.lastTrigger.dataset.suppressFocusRing = "true";
-      searchModalState.lastTrigger.focus({ preventScroll: true });
+        searchModalState.lastTrigger.dataset.suppressFocusRing = "true";
+        searchModalState.lastTrigger.focus({ preventScroll: true });
     }
-  }
+}
 
-  async function ensurePagefind() {
+async function ensurePagefind() {
     if (searchModalState.pagefind) return searchModalState.pagefind;
     if (searchModalState.missingIndex) return null;
     if (searchModalState.pagefindPromise) return searchModalState.pagefindPromise;
 
     searchModalState.pagefindPromise = (async () => {
-      try {
-        const imported = await import("/pagefind/pagefind.js");
-        const pagefindModule = imported?.default ?? imported;
-        const pagefind = typeof pagefindModule.createInstance === "function"
-          ? pagefindModule.createInstance()
-          : pagefindModule;
-        const languages = await loadPagefindLanguages();
+        try {
+            const imported = await import("/pagefind/pagefind.js");
+            const pagefindModule = imported?.default ?? imported;
+            const pagefind =
+                typeof pagefindModule.createInstance === "function"
+                    ? pagefindModule.createInstance()
+                    : pagefindModule;
+            const languages = await loadPagefindLanguages();
 
-        if (typeof pagefind.init === "function") {
-          await pagefind.init();
-        }
+            if (typeof pagefind.init === "function") {
+                await pagefind.init();
+            }
 
-        await mergePagefindLanguages(pagefind, languages);
-        searchModalState.pagefind = pagefind;
-        return pagefind;
-      } catch {
-        searchModalState.missingIndex = true;
-        if (!searchModalState.query) {
-          searchModalState.view = "unavailable";
-          renderSearchModal();
+            await mergePagefindLanguages(pagefind, languages);
+            searchModalState.pagefind = pagefind;
+            return pagefind;
+        } catch {
+            searchModalState.missingIndex = true;
+            if (!searchModalState.query) {
+                searchModalState.view = "unavailable";
+                renderSearchModal();
+            }
+            return null;
+        } finally {
+            searchModalState.pagefindPromise = null;
         }
-        return null;
-      } finally {
-        searchModalState.pagefindPromise = null;
-      }
     })();
 
     return searchModalState.pagefindPromise;
-  }
+}
 
-  async function loadPagefindLanguages() {
+async function loadPagefindLanguages() {
     const response = await fetch("/pagefind/pagefind-entry.json", {
-      headers: { "Accept": "application/json" },
+        headers: { Accept: "application/json" },
     });
 
     if (!response.ok) {
-      throw new Error("Pagefind entry unavailable");
+        throw new Error("Pagefind entry unavailable");
     }
 
     const entry = await response.json();
-    return entry?.languages && typeof entry.languages === "object"
-      ? entry.languages
-      : {};
-  }
+    return entry?.languages && typeof entry.languages === "object" ? entry.languages : {};
+}
 
-  async function mergePagefindLanguages(pagefind, languages) {
+async function mergePagefindLanguages(pagefind, languages) {
     if (typeof pagefind.mergeIndex !== "function") return;
 
     const languageKeys = Object.keys(languages);
     if (languageKeys.length <= 1) {
-      searchModalState.mergedLanguages = [];
-      return;
+        searchModalState.mergedLanguages = [];
+        return;
     }
 
     const primaryLanguage = getPrimaryPagefindLanguage(languages);
     const bundlePath = new URL("/pagefind/", window.location.origin).href;
     const languagesToMerge = languageKeys.filter((language) => language !== primaryLanguage);
 
-    await Promise.all(languagesToMerge.map((language) => pagefind.mergeIndex(bundlePath, { language })));
+    await Promise.all(
+        languagesToMerge.map((language) => pagefind.mergeIndex(bundlePath, { language })),
+    );
     searchModalState.mergedLanguages = languagesToMerge;
-  }
+}
 
-  function getPrimaryPagefindLanguage(languages) {
+function getPrimaryPagefindLanguage(languages) {
     const languageKeys = Object.keys(languages);
     const pageLanguage = (document.documentElement.getAttribute("lang") || "unknown").toLowerCase();
 
@@ -325,11 +331,14 @@
     if (languages[baseLanguage]) return baseLanguage;
 
     return languageKeys
-      .slice()
-      .sort((left, right) => (languages[right]?.page_count || 0) - (languages[left]?.page_count || 0))[0];
-  }
+        .slice()
+        .sort(
+            (left, right) =>
+                (languages[right]?.page_count || 0) - (languages[left]?.page_count || 0),
+        )[0];
+}
 
-  async function searchArticles(term) {
+async function searchArticles(term) {
     const token = ++searchModalState.searchToken;
     searchModalState.view = "loading";
     searchModalState.summary = "";
@@ -337,87 +346,88 @@
 
     const pagefind = await ensurePagefind();
     if (!pagefind) {
-      if (token !== searchModalState.searchToken) return;
-      searchModalState.view = "unavailable";
-      searchModalState.summary = "";
-      renderSearchModal();
-      return;
+        if (token !== searchModalState.searchToken) return;
+        searchModalState.view = "unavailable";
+        searchModalState.summary = "";
+        renderSearchModal();
+        return;
     }
 
     if (typeof pagefind.preload === "function") {
-      pagefind.preload(term);
+        pagefind.preload(term);
     }
 
-    const search = typeof pagefind.debouncedSearch === "function"
-      ? await pagefind.debouncedSearch(term)
-      : await pagefind.search(term);
+    const search =
+        typeof pagefind.debouncedSearch === "function"
+            ? await pagefind.debouncedSearch(term)
+            : await pagefind.search(term);
 
     if (token !== searchModalState.searchToken || search === null) return;
 
-    const data = await Promise.all((search.results || []).slice(0, 8).map((result) => result.data()));
+    const data = await Promise.all(
+        (search.results || []).slice(0, 8).map((result) => result.data()),
+    );
     if (token !== searchModalState.searchToken) return;
 
-    const items = data
-      .map(normalizeSearchResult)
-      .filter(Boolean);
+    const items = data.map(normalizeSearchResult).filter(Boolean);
 
     searchModalState.results = items;
     searchModalState.summary = items.length
-      ? `${items.length} result${items.length === 1 ? "" : "s"} for “${term}”`
-      : "";
+        ? `${items.length} result${items.length === 1 ? "" : "s"} for “${term}”`
+        : "";
     searchModalState.view = items.length ? "results" : "empty";
     renderSearchModal();
-  }
+}
 
-  function normalizeSearchResult(entry) {
+function normalizeSearchResult(entry) {
     if (!entry?.url) return null;
 
     const subResult = Array.isArray(entry.sub_results)
-      ? entry.sub_results.find((item) => item?.url)
-      : null;
+        ? entry.sub_results.find((item) => item?.url)
+        : null;
     const excerpt = subResult?.excerpt || entry.excerpt || "";
 
     return {
-      title: entry.meta?.title || "Untitled article",
-      date: formatSearchDate(entry.meta?.date),
-      href: subResult?.url || entry.url,
-      excerpt,
+        title: entry.meta?.title || "Untitled article",
+        date: formatSearchDate(entry.meta?.date),
+        href: subResult?.url || entry.url,
+        excerpt,
     };
-  }
+}
 
-  function formatSearchDate(value) {
+function formatSearchDate(value) {
     if (!value) return "";
 
     const date = new Date(value);
     if (Number.isNaN(date.valueOf())) return value;
 
     return date.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
+        month: "short",
+        day: "numeric",
+        year: "numeric",
     });
-  }
+}
 
-  function renderSearchModal() {
+function renderSearchModal() {
     const refs = searchModalState.refs;
     if (!refs?.root || !refs.summary || !refs.content) return;
 
     refs.root.dataset.searchState = searchModalState.view;
 
     if (searchModalState.summary) {
-      refs.summary.hidden = false;
-      refs.summary.textContent = searchModalState.summary;
+        refs.summary.hidden = false;
+        refs.summary.textContent = searchModalState.summary;
     } else {
-      refs.summary.hidden = true;
-      refs.summary.textContent = "";
+        refs.summary.hidden = true;
+        refs.summary.textContent = "";
     }
 
     refs.content.innerHTML = getSearchModalContent();
-  }
+}
 
-  function getSearchModalContent() {
+function getSearchModalContent() {
     if (searchModalState.view === "loading") {
-      return `
+        return `
         <div class="site-search__empty-state">
           <div class="site-search__spinner" aria-hidden="true"></div>
           <p class="site-search__headline">Searching the archive</p>
@@ -427,7 +437,7 @@
     }
 
     if (searchModalState.view === "unavailable") {
-      return `
+        return `
         <div class="site-search__empty-state">
           <p class="site-search__headline">Search index unavailable in dev mode</p>
           <p class="site-search__subline">Run <code>pnpm build</code> or <code>pnpm preview</code> to generate the Pagefind index.</p>
@@ -436,7 +446,7 @@
     }
 
     if (searchModalState.view === "empty") {
-      return `
+        return `
         <div class="site-search__empty-state">
           <p class="site-search__headline">No articles matched that search</p>
           <p class="site-search__subline">Try another keyword, title, or shorter phrase.</p>
@@ -445,22 +455,22 @@
     }
 
     if (searchModalState.view === "results") {
-      return `
+        return `
         <ul class="site-search__results-list">
           ${searchModalState.results.map(renderSearchResult).join("")}
         </ul>
       `;
     }
 
-      return `
+    return `
       <div class="site-search__empty-state">
         <p class="site-search__headline">Type a keyword to start searching</p>
         <p class="site-search__subline">Search blog posts and jump to matching sections.</p>
       </div>
     `;
-  }
+}
 
-  function renderSearchResult(result) {
+function renderSearchResult(result) {
     return `
       <li class="site-search__result">
         <a
@@ -474,26 +484,26 @@
         </a>
       </li>
     `;
-  }
+}
 
-  function escapeHtml(value) {
+function escapeHtml(value) {
     return String(value)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll("\"", "&quot;")
-      .replaceAll("'", "&#39;");
-  }
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+}
 
-  function escapeAttribute(value) {
+function escapeAttribute(value) {
     return escapeHtml(value).replaceAll("`", "&#96;");
-  }
+}
 
-  function isEditableTarget(target) {
+function isEditableTarget(target) {
     if (!(target instanceof Element)) return false;
     return Boolean(target.closest("input, textarea, select, [contenteditable='true']"));
-  }
+}
 
-  bindSearchModal();
-  initSearchModal();
+bindSearchModal();
+initSearchModal();
 </script>

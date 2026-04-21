@@ -1,0 +1,5 @@
+{
+    "*.{js,mjs,cjs,ts,tsx,astro,css,json,jsonc}": "biome check --write --no-errors-on-unmatched",
+    "*.{md,mdx}": "markdownlint-cli2 --fix",
+    "*.{js,mjs,cjs,ts,tsx,astro,css,json,jsonc,md,mdx,yml,yaml,toml,env,txt}": "secretlint"
+}

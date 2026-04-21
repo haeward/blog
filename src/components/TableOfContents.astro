@@ -2,30 +2,25 @@
 import type { MarkdownHeading } from "astro";
 
 type Props = {
-  headings: MarkdownHeading[];
-  variant?: "mobile" | "desktop";
-  title?: string;
-  lang?: string;
+    headings: MarkdownHeading[];
+    variant?: "mobile" | "desktop";
+    title?: string;
+    lang?: string;
 };
 
-const {
-  headings,
-  variant = "desktop",
-  title = "Contents",
-  lang = "en",
-} = Astro.props;
+const { headings, variant = "desktop", title = "Contents", lang = "en" } = Astro.props;
 
 const tocHeadings = headings.filter(({ depth }) => depth >= 2 && depth <= 4);
 
 if (tocHeadings.length === 0) {
-  return null;
+    return null;
 }
 
 const listClass = variant === "mobile" ? "blog-toc__list blog-toc__list--mobile" : "blog-toc__list";
 const depthClasses = {
-  2: "blog-toc__link blog-toc__link--depth-2",
-  3: "blog-toc__link blog-toc__link--depth-3",
-  4: "blog-toc__link blog-toc__link--depth-4",
+    2: "blog-toc__link blog-toc__link--depth-2",
+    3: "blog-toc__link blog-toc__link--depth-3",
+    4: "blog-toc__link blog-toc__link--depth-4",
 } as const;
 ---
 

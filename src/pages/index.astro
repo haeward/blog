@@ -1,44 +1,43 @@
 ---
-import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
-import Container from "@components/Container.astro";
-import PageLayout from "@layouts/PageLayout.astro";
+import { getCollection } from "astro:content";
 import ArrowCard from "@components/ArrowCard.astro";
+import Container from "@components/Container.astro";
 import { SITE, SOCIALS } from "@consts";
+import PageLayout from "@layouts/PageLayout.astro";
 
 const blog = (await getCollection("blog"))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_POSTS_ON_HOMEPAGE);
-
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
 ---
 
 <PageLayout title={SITE.NAME} description={SITE.DESC} lang="en">
-  <Container>
-    <div class="space-y-12 sm:space-y-14">
-      <section>
-        <div class="flex justify-center items-center mb-4">
-          <div class="relative w-48 h-48">
-            <Image
-              src="/assets/images/site/programmer-light.svg"
-              alt="programmer"
-              class="w-full h-full animate light-only absolute top-0 left-0"
-              width={192}
-              height={192}
-              loading="eager"
-            />
-            <Image
-              src="/assets/images/site/programmer-dark.svg"
-              alt="programmer"
-              class="w-full h-full animate dark-only hidden absolute top-0 left-0"
-              width={192}
-              height={192}
-              loading="eager"
-            />
-          </div>
-        </div>
-        <div class="flex justify-center animate gap-4 mb-4">
-          {SOCIALS.filter(social => social.ENABLE !== false).map((social) => (
+    <Container>
+        <div class="space-y-12 sm:space-y-14">
+            <section>
+                <div class="flex justify-center items-center mb-4">
+                    <div class="relative w-48 h-48">
+                        <Image
+                            src="/assets/images/site/programmer-light.svg"
+                            alt="programmer"
+                            class="w-full h-full animate light-only absolute top-0 left-0"
+                            width={192}
+                            height={192}
+                            loading="eager"
+                        />
+                        <Image
+                            src="/assets/images/site/programmer-dark.svg"
+                            alt="programmer"
+                            class="w-full h-full animate dark-only hidden absolute top-0 left-0"
+                            width={192}
+                            height={192}
+                            loading="eager"
+                        />
+                    </div>
+                </div>
+                <div class="flex justify-center animate gap-4 mb-4">
+                    {SOCIALS.filter(social => social.ENABLE !== false).map((social) => (
             <a
               href={social.HREF}
               target="_blank"
@@ -57,25 +56,27 @@ const blog = (await getCollection("blog"))
               />
             </a>
           ))}
-        </div>
-      </section>
+                </div>
+            </section>
 
-      <section class="animate px-1 py-2 sm:px-0 sm:py-3">
-        <div class="mb-4 flex items-end justify-between gap-4">
-          <div>
-            <h1 class="serif-reading-title text-[1.08rem] sm:text-[1.14rem] font-semibold text-black/96 dark:text-white/96">
-              Latest posts
-            </h1>
-          </div>
-        </div>
-        <ul class="flex flex-col gap-1">
-          {blog.map(post => (
+            <section class="animate px-1 py-2 sm:px-0 sm:py-3">
+                <div class="mb-4 flex items-end justify-between gap-4">
+                    <div>
+                        <h1
+                            class="serif-reading-title text-[1.08rem] sm:text-[1.14rem] font-semibold text-black/96 dark:text-white/96"
+                        >
+                            Latest posts
+                        </h1>
+                    </div>
+                </div>
+                <ul class="flex flex-col gap-1">
+                    {blog.map(post => (
             <li>
               <ArrowCard entry={post} />
             </li>
           ))}
-        </ul>
-      </section>
-    </div>
-  </Container>
+                </ul>
+            </section>
+        </div>
+    </Container>
 </PageLayout>

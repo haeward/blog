@@ -4,9 +4,9 @@ import { ClientRouter } from "astro:transitions";
 import { SITE } from "@consts";
 
 interface Props {
-  title: string;
-  description: string;
-  image?: string;
+    title: string;
+    description: string;
+    image?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -14,51 +14,59 @@ const { title, description, image = "/assets/images/site/favicon.png" } = Astro.
 ---
 
 <!-- Global Metadata -->
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="referrer" content="no-referrer" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
 <link rel="icon" type="image/svg+xml" href="/assets/images/site/reflecting.svg">
 <link rel="icon" type="image/x-icon" href="/assets/images/site/reflecting.svg">
-<meta name="generator" content={Astro.generator} />
+<meta name="generator" content={Astro.generator}>
 
 <!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
+<link rel="canonical" href={canonicalURL}>
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
+<meta name="title" content={title}>
+<meta name="description" content={description}>
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:type" content="website">
+<meta property="og:url" content={Astro.url}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:image" content={new URL(image, Astro.url)}>
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content={Astro.url}>
+<meta property="twitter:title" content={title}>
+<meta property="twitter:description" content={description}>
+<meta property="twitter:image" content={new URL(image, Astro.url)}>
 
 <!-- RSS Link -->
-<link rel="alternate" type="application/rss+xml" title={SITE.NAME} href={new URL("rss.xml", Astro.site)} />
+<link
+    rel="alternate"
+    type="application/rss+xml"
+    title={SITE.NAME}
+    href={new URL("rss.xml", Astro.site)}
+>
 
-<ClientRouter  />
+<ClientRouter />
 
 <script is:inline>
-  const siteState = window.__siteState || (window.__siteState = { bound: false });
-  const themeModes = ["system", "light", "dark"];
-  const themeLabels = {
+if (!window.__siteState) {
+    window.__siteState = { bound: false };
+}
+const siteState = window.__siteState;
+const themeModes = ["system", "light", "dark"];
+const themeLabels = {
     system: "System",
     light: "Light",
     dark: "Dark",
-  };
-  const colorSchemeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-  const languageSurfaceSelector = "[data-language-scan='true']";
-  const excludedLanguageTags = new Set([
+};
+const colorSchemeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+const languageSurfaceSelector = "[data-language-scan='true']";
+const excludedLanguageTags = new Set([
     "BUTTON",
     "CODE",
     "INPUT",
@@ -72,65 +80,71 @@ const { title, description, image = "/assets/images/site/favicon.png" } = Astro.
     "STYLE",
     "SVG",
     "TEXTAREA",
-  ]);
-  const hasHanScript = /\p{Script=Han}/u;
-  const hasJapaneseScript = /[\p{Script=Hiragana}\p{Script=Katakana}々〆ヶヵー]/u;
-  const hasCjkText = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}々〆ヶヵー]/u;
+]);
+const hasHanScript = /\p{Script=Han}/u;
+const hasJapaneseScript = /[\p{Script=Hiragana}\p{Script=Katakana}々〆ヶヵー]/u;
+const hasCjkText = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}々〆ヶヵー]/u;
 
-  // Apply theme ASAP to avoid flash on hard reloads.
-  preloadTheme();
+// Apply theme ASAP to avoid flash on hard reloads.
+preloadTheme();
 
-  function init() {
+function init() {
     preloadTheme();
     onScroll();
     applyLanguageFontHints();
     animate();
-  }
+}
 
-  function applyLanguageFontHints() {
+function applyLanguageFontHints() {
     document.querySelectorAll(languageSurfaceSelector).forEach((root) => {
-      if (!(root instanceof HTMLElement)) return;
-      if (root.dataset.languageScanComplete === "true") return;
-      scanLanguageSurface(root);
-      root.dataset.languageScanComplete = "true";
+        if (!(root instanceof HTMLElement)) return;
+        if (root.dataset.languageScanComplete === "true") return;
+        scanLanguageSurface(root);
+        root.dataset.languageScanComplete = "true";
     });
-  }
+}
 
-  function scanLanguageSurface(root) {
-    const baseLang = normalizeLang(root.lang || root.closest("[lang]")?.lang || document.documentElement.lang || "en");
+function scanLanguageSurface(root) {
+    const baseLang = normalizeLang(
+        root.lang || root.closest("[lang]")?.lang || document.documentElement.lang || "en",
+    );
     const textNodes = [];
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-      acceptNode(node) {
-        if (!(node instanceof Text)) return NodeFilter.FILTER_REJECT;
-        if (!node.textContent || !hasCjkText.test(node.textContent)) {
-          return NodeFilter.FILTER_REJECT;
-        }
+        acceptNode(node) {
+            if (!(node instanceof Text)) return NodeFilter.FILTER_REJECT;
+            if (!node.textContent || !hasCjkText.test(node.textContent)) {
+                return NodeFilter.FILTER_REJECT;
+            }
 
-        const parent = node.parentElement;
-        if (!parent) return NodeFilter.FILTER_REJECT;
-        if (parent.closest("[data-auto-lang='true']")) return NodeFilter.FILTER_REJECT;
+            const parent = node.parentElement;
+            if (!parent) return NodeFilter.FILTER_REJECT;
+            if (parent.closest("[data-auto-lang='true']")) return NodeFilter.FILTER_REJECT;
 
-        const nearestLangOwner = parent.closest("[lang]");
-        if (nearestLangOwner && nearestLangOwner !== root) {
-          return NodeFilter.FILTER_REJECT;
-        }
+            const nearestLangOwner = parent.closest("[lang]");
+            if (nearestLangOwner && nearestLangOwner !== root) {
+                return NodeFilter.FILTER_REJECT;
+            }
 
-        const excludedParent = parent.closest("button, code, input, kbd, noscript, option, pre, samp, script, select, style, svg, textarea");
-        if (excludedParent) return NodeFilter.FILTER_REJECT;
-        if (excludedLanguageTags.has(parent.tagName)) return NodeFilter.FILTER_REJECT;
+            const excludedParent = parent.closest(
+                "button, code, input, kbd, noscript, option, pre, samp, script, select, style, svg, textarea",
+            );
+            if (excludedParent) return NodeFilter.FILTER_REJECT;
+            if (excludedLanguageTags.has(parent.tagName)) return NodeFilter.FILTER_REJECT;
 
-        return NodeFilter.FILTER_ACCEPT;
-      },
+            return NodeFilter.FILTER_ACCEPT;
+        },
     });
 
     while (walker.nextNode()) {
-      textNodes.push(walker.currentNode);
+        textNodes.push(walker.currentNode);
     }
 
-    textNodes.forEach((node) => replaceTextNodeWithLanguageSegments(node, baseLang));
-  }
+    textNodes.forEach((node) => {
+        replaceTextNodeWithLanguageSegments(node, baseLang);
+    });
+}
 
-  function replaceTextNodeWithLanguageSegments(node, baseLang) {
+function replaceTextNodeWithLanguageSegments(node, baseLang) {
     const text = node.textContent;
     if (!text) return;
 
@@ -140,73 +154,73 @@ const { title, description, image = "/assets/images/site/favicon.png" } = Astro.
     const fragment = document.createDocumentFragment();
 
     segments.forEach((segment) => {
-      if (!segment.lang || segment.lang === baseLang) {
-        fragment.append(segment.text);
-        return;
-      }
+        if (!segment.lang || segment.lang === baseLang) {
+            fragment.append(segment.text);
+            return;
+        }
 
-      const span = document.createElement("span");
-      span.lang = segment.lang;
-      span.dataset.autoLang = "true";
-      span.textContent = segment.text;
-      fragment.append(span);
+        const span = document.createElement("span");
+        span.lang = segment.lang;
+        span.dataset.autoLang = "true";
+        span.textContent = segment.text;
+        fragment.append(span);
     });
 
     node.replaceWith(fragment);
-  }
+}
 
-  function splitLanguageSegments(text, baseLang) {
+function splitLanguageSegments(text, baseLang) {
     const tokens = [];
 
     for (const char of text) {
-      const script = classifyScript(char);
-      const previousToken = tokens.at(-1);
+        const script = classifyScript(char);
+        const previousToken = tokens.at(-1);
 
-      if (previousToken && previousToken.script === script) {
-        previousToken.text += char;
-      } else {
-        tokens.push({ text: char, script });
-      }
+        if (previousToken && previousToken.script === script) {
+            previousToken.text += char;
+        } else {
+            tokens.push({ text: char, script });
+        }
     }
 
     tokens.forEach((token, index) => {
-      const previousScript = tokens[index - 1]?.script;
-      const nextScript = tokens[index + 1]?.script;
+        const previousScript = tokens[index - 1]?.script;
+        const nextScript = tokens[index + 1]?.script;
 
-      if (token.script === "han" && (previousScript === "ja" || nextScript === "ja")) {
-        token.script = "ja";
-      }
+        if (token.script === "han" && (previousScript === "ja" || nextScript === "ja")) {
+            token.script = "ja";
+        }
     });
 
     return tokens.map((token) => ({
-      text: token.text,
-      lang: languageForScript(token.script, baseLang),
+        text: token.text,
+        lang: languageForScript(token.script, baseLang),
     }));
-  }
+}
 
-  function classifyScript(char) {
+function classifyScript(char) {
     if (hasJapaneseScript.test(char)) return "ja";
     if (hasHanScript.test(char)) return "han";
     return "other";
-  }
+}
 
-  function languageForScript(script, baseLang) {
+function languageForScript(script, baseLang) {
     if (script === "ja") return "ja";
     if (script === "han") {
-      if (baseLang === "ja") return "ja";
-      return "zh-CN";
+        if (baseLang === "ja") return "ja";
+        return "zh-CN";
     }
     return null;
-  }
+}
 
-  function normalizeLang(value) {
+function normalizeLang(value) {
     const language = value.toLowerCase();
     if (language.startsWith("ja")) return "ja";
     if (language.startsWith("zh")) return "zh-CN";
     return "en";
-  }
+}
 
-  function bindOnce() {
+function bindOnce() {
     if (siteState.bound) return;
     siteState.bound = true;
 
@@ -214,51 +228,51 @@ const { title, description, image = "/assets/images/site/favicon.png" } = Astro.
     window.addEventListener("scroll", onScroll, { passive: true });
 
     const handleSchemeChange = (event) => {
-      if (getStoredTheme() === "system") {
-        syncTheme("system", event.matches);
-      }
+        if (getStoredTheme() === "system") {
+            syncTheme("system", event.matches);
+        }
     };
 
     if (colorSchemeMediaQuery.addEventListener) {
-      colorSchemeMediaQuery.addEventListener("change", handleSchemeChange);
+        colorSchemeMediaQuery.addEventListener("change", handleSchemeChange);
     } else if ("onchange" in colorSchemeMediaQuery) {
-      colorSchemeMediaQuery.onchange = handleSchemeChange;
+        colorSchemeMediaQuery.onchange = handleSchemeChange;
     }
-  }
+}
 
-  function handleDocumentClick(event) {
+function handleDocumentClick(event) {
     if (!(event.target instanceof Element)) return;
 
     const themeToggle = event.target.closest("#theme-toggle");
     if (themeToggle) {
-      event.preventDefault();
-      const nextTheme = getNextTheme(getStoredTheme());
-      localStorage.setItem("theme", nextTheme);
-      syncTheme(nextTheme);
-      return;
+        event.preventDefault();
+        const nextTheme = getNextTheme(getStoredTheme());
+        localStorage.setItem("theme", nextTheme);
+        syncTheme(nextTheme);
+        return;
     }
 
     const backToTop = event.target.closest("#back-to-top");
     if (backToTop) {
-      event.preventDefault();
-      scrollToTop();
-      return;
+        event.preventDefault();
+        scrollToTop();
+        return;
     }
 
     const backToPrev = event.target.closest("#back-to-prev");
     if (backToPrev) {
-      event.preventDefault();
-      window.history.back();
-      return;
+        event.preventDefault();
+        window.history.back();
+        return;
     }
 
     const pre = event.target.closest("pre");
     if (pre) {
-      void tryCopyCode(pre, event);
+        void tryCopyCode(pre, event);
     }
-  }
+}
 
-  async function tryCopyCode(pre, event) {
+async function tryCopyCode(pre, event) {
     if (!(event instanceof MouseEvent)) return;
     if (!navigator?.clipboard?.writeText) return;
 
@@ -267,96 +281,96 @@ const { title, description, image = "/assets/images/site/favicon.png" } = Astro.
     const y = event.clientY - rect.top;
 
     if (x > rect.width - 40 && x < rect.width - 8 && y > 8 && y < 40) {
-      const code = pre.textContent || "";
-      if (!code) return;
+        const code = pre.textContent || "";
+        if (!code) return;
 
-      try {
-        await navigator.clipboard.writeText(code);
+        try {
+            await navigator.clipboard.writeText(code);
 
-        pre.style.setProperty(
-          "--copy-icon",
-          "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%23ffffff'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7' /%3e%3c/svg%3e\")"
-        );
+            pre.style.setProperty(
+                "--copy-icon",
+                "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%23ffffff'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7' /%3e%3c/svg%3e\")",
+            );
 
-        setTimeout(() => {
-          pre.style.removeProperty("--copy-icon");
-        }, 2000);
-      } catch (err) {
-        console.error("copy failed:", err);
-      }
+            setTimeout(() => {
+                pre.style.removeProperty("--copy-icon");
+            }, 2000);
+        } catch (err) {
+            console.error("copy failed:", err);
+        }
     }
-  }
+}
 
-  function animate() {
+function animate() {
     const animateElements = document.querySelectorAll(".animate:not(.show)");
 
     animateElements.forEach((element, index) => {
-      setTimeout(() => {
-        element.classList.add("show");
-      }, index * 150);
+        setTimeout(() => {
+            element.classList.add("show");
+        }, index * 150);
     });
-  }
+}
 
-  function onScroll() {
+function onScroll() {
     if (window.scrollY > 0) {
-      document.documentElement.classList.add("scrolled");
+        document.documentElement.classList.add("scrolled");
     } else {
-      document.documentElement.classList.remove("scrolled");
+        document.documentElement.classList.remove("scrolled");
     }
-  }
+}
 
-  function scrollToTop() {
+function scrollToTop() {
     window.scrollTo({
-      top: 0,
-      behavior: "smooth"
+        top: 0,
+        behavior: "smooth",
     });
-  }
+}
 
-  function toggleTheme(dark) {
+function toggleTheme(dark) {
     const css = document.createElement("style");
 
     css.appendChild(
-      document.createTextNode(
-        `* {
+        document.createTextNode(
+            `* {
              -webkit-transition: none !important;
              -moz-transition: none !important;
              -o-transition: none !important;
              -ms-transition: none !important;
              transition: none !important;
           }
-        `
-      )
+        `,
+        ),
     );
 
     document.head.appendChild(css);
 
     if (dark) {
-      document.documentElement.classList.add("dark");
+        document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove("dark");
+        document.documentElement.classList.remove("dark");
     }
 
     void window.getComputedStyle(css).opacity;
     document.head.removeChild(css);
-  }
+}
 
-  function getStoredTheme() {
+function getStoredTheme() {
     const userTheme = localStorage.getItem("theme");
     return themeModes.includes(userTheme) ? userTheme : "system";
-  }
+}
 
-  function getNextTheme(theme) {
+function getNextTheme(theme) {
     const themeIndex = themeModes.indexOf(theme);
     return themeModes[(themeIndex + 1) % themeModes.length];
-  }
+}
 
-  function resolveTheme(theme, systemPrefersDark = colorSchemeMediaQuery.matches) {
+function resolveTheme(theme, systemPrefersDark = colorSchemeMediaQuery.matches) {
     if (theme === "dark") return true;
     if (theme === "light") return false;
     return systemPrefersDark;
-  }
+}
 
-  function updateThemeToggle(theme) {
+function updateThemeToggle(theme) {
     const themeToggle = document.getElementById("theme-toggle");
     if (!(themeToggle instanceof HTMLElement)) return;
 
@@ -366,29 +380,29 @@ const { title, description, image = "/assets/images/site/favicon.png" } = Astro.
     themeToggle.dataset.themeMode = theme;
     themeToggle.setAttribute("aria-label", `Switch theme to ${nextLabel}`);
     themeToggle.setAttribute("title", `Switch theme to ${nextLabel}`);
-  }
+}
 
-  function syncTheme(theme = getStoredTheme(), systemPrefersDark = colorSchemeMediaQuery.matches) {
+function syncTheme(theme = getStoredTheme(), systemPrefersDark = colorSchemeMediaQuery.matches) {
     document.documentElement.dataset.themeMode = theme;
     toggleTheme(resolveTheme(theme, systemPrefersDark));
     updateThemeToggle(theme);
-  }
+}
 
-  function preloadTheme() {
+function preloadTheme() {
     syncTheme(getStoredTheme());
-  }
+}
 
-  function bindInitListeners() {
+function bindInitListeners() {
     if (siteState.initBound) return;
     siteState.initBound = true;
     document.addEventListener("DOMContentLoaded", init);
     document.addEventListener("astro:after-swap", init);
-  }
+}
 
-  bindOnce();
-  bindInitListeners();
+bindOnce();
+bindInitListeners();
 
-  if (document.readyState !== "loading") {
+if (document.readyState !== "loading") {
     init();
-  }
+}
 </script>

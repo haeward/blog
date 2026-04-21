@@ -3,112 +3,115 @@
 ---
 
 <script>
-  function enhanceLinks(): void {
+function enhanceLinks(): void {
     const article = document.querySelector("article");
     if (!article) return;
 
     const links = article.querySelectorAll("a");
 
-    links.forEach(link => {
-      const href = link.getAttribute("href");
-      if (!href) return;
+    links.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (!href) return;
 
-      processLink(link as HTMLAnchorElement, href);
+        processLink(link as HTMLAnchorElement, href);
     });
-  }
+}
 
-  function processLink(link: HTMLAnchorElement, href: string): void {
+function processLink(link: HTMLAnchorElement, href: string): void {
     if (href.startsWith("http://") || href.startsWith("https://")) {
-      processExternalLink(link);
+        processExternalLink(link);
     }
 
     if (!link.hasAttribute("aria-label")) {
-      const text = link.textContent?.trim();
-      if (text) {
-        if (href.startsWith("http")) {
-          try {
-            const domain = new URL(href).hostname;
-            link.setAttribute("aria-label", `${text} - External link to ${domain}`);
-          } catch {
-            link.setAttribute("aria-label", `${text} - External link`);
-          }
-        } else if (href.startsWith("mailto:")) {
-          link.setAttribute("aria-label", `Send email to ${text}`);
-        } else {
-          link.setAttribute("aria-label", `Internal link: ${text}`);
+        const text = link.textContent?.trim();
+        if (text) {
+            if (href.startsWith("http")) {
+                try {
+                    const domain = new URL(href).hostname;
+                    link.setAttribute("aria-label", `${text} - External link to ${domain}`);
+                } catch {
+                    link.setAttribute("aria-label", `${text} - External link`);
+                }
+            } else if (href.startsWith("mailto:")) {
+                link.setAttribute("aria-label", `Send email to ${text}`);
+            } else {
+                link.setAttribute("aria-label", `Internal link: ${text}`);
+            }
         }
-      }
     }
-  }
+}
 
-  function processExternalLink(link: HTMLAnchorElement): void {
+function processExternalLink(link: HTMLAnchorElement): void {
     link.setAttribute("target", "_blank");
     link.setAttribute("rel", "noopener noreferrer");
-  }
+}
 
-  const globalWindow = window as Window & { __linkEnhancerState?: { bound: boolean } };
-  const linkEnhancerState = globalWindow.__linkEnhancerState || (globalWindow.__linkEnhancerState = { bound: false });
-  if (!linkEnhancerState.bound) {
+const globalWindow = window as Window & { __linkEnhancerState?: { bound: boolean } };
+if (!globalWindow.__linkEnhancerState) {
+    globalWindow.__linkEnhancerState = { bound: false };
+}
+const linkEnhancerState = globalWindow.__linkEnhancerState;
+if (!linkEnhancerState.bound) {
     linkEnhancerState.bound = true;
     document.addEventListener("DOMContentLoaded", enhanceLinks);
     document.addEventListener("astro:page-load", enhanceLinks);
-  }
+}
 
-  enhanceLinks();
+enhanceLinks();
 </script>
 
 <style>
-  :global(article a:focus) {
+:global(article a:focus) {
     outline: 2px solid rgb(99 102 241) !important;
     outline-offset: 2px !important;
     border-radius: 2px;
-  }
+}
 
-  :global(article a:focus-visible) {
+:global(article a:focus-visible) {
     outline: 2px solid rgb(99 102 241) !important;
     outline-offset: 2px !important;
     background-color: rgba(99, 102, 241, 0.05) !important;
-  }
+}
 
-  :global(article a:focus:not(:focus-visible)) {
+:global(article a:focus:not(:focus-visible)) {
     outline: none !important;
-  }
+}
 
-  @media (prefers-contrast: high) {
+@media (prefers-contrast: high) {
     :global(article a) {
-      text-decoration: underline !important;
-      text-decoration-thickness: 2px !important;
+        text-decoration: underline !important;
+        text-decoration-thickness: 2px !important;
     }
 
     :global(article a:focus) {
-      outline: 3px solid currentColor !important;
-      outline-offset: 2px !important;
-      background-color: rgba(0, 0, 0, 0.1) !important;
+        outline: 3px solid currentColor !important;
+        outline-offset: 2px !important;
+        background-color: rgba(0, 0, 0, 0.1) !important;
     }
-  }
+}
 
-  @media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
     :global(article a) {
-      transition: none !important;
+        transition: none !important;
     }
-  }
+}
 
-  @media print {
+@media print {
     :global(article a[href^="http"]::after) {
-      content: " (" attr(href) ")";
-      font-size: 0.8em;
-      color: #666;
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
     }
 
     :global(article a:focus) {
-      outline: none !important;
-      background-color: transparent !important;
+        outline: none !important;
+        background-color: transparent !important;
     }
-  }
+}
 
-  @media (max-width: 640px) {
+@media (max-width: 640px) {
     :global(article a:focus) {
-      outline-width: 3px !important;
+        outline-width: 3px !important;
     }
-  }
+}
 </style>

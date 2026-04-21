@@ -1,38 +1,35 @@
-import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import { remarkSpotifyEmbed } from "./src/lib/remark-spotify-embed.ts";
+import { defineConfig } from "astro/config";
 import remarkImageCaption from "./src/lib/remark-image-caption.ts";
+import { remarkSpotifyEmbed } from "./src/lib/remark-spotify-embed.ts";
 
 const astroCommand = globalThis.process?.argv.includes("dev") ? "dev" : "build";
 const viteCacheDir = `node_modules/.vite/${astroCommand}`;
 
 export default defineConfig({
-  site: "https://haeward.com",
+    site: "https://haeward.com",
 
-  integrations: [sitemap(), mdx()],
+    integrations: [sitemap(), mdx()],
 
-  vite: {
-    cacheDir: viteCacheDir,
-    plugins: [tailwindcss()],
-  },
-
-  markdown: {
-    syntaxHighlight: "shiki",
-    shikiConfig: {
-      themes: {
-        light: "min-light",
-        dark: "dracula-soft"
-      },
-      defaultColor: false,
-      wrap: true,
+    vite: {
+        cacheDir: viteCacheDir,
+        plugins: [tailwindcss()],
     },
-    remarkPlugins: [
-      remarkSpotifyEmbed,
-      remarkImageCaption,
-    ]
-  },
 
-  output: "static",
+    markdown: {
+        syntaxHighlight: "shiki",
+        shikiConfig: {
+            themes: {
+                light: "min-light",
+                dark: "dracula-soft",
+            },
+            defaultColor: false,
+            wrap: true,
+        },
+        remarkPlugins: [remarkSpotifyEmbed, remarkImageCaption],
+    },
+
+    output: "static",
 });
