@@ -1,4 +1,4 @@
-name: douban
+name: Douban Data And Covers Sync
 
 on: 
   schedule:
