@@ -4,6 +4,125 @@
 		"rating": {
 			"count": 1,
 			"max": 5,
+			"star_count": 5,
+			"value": 5
+		},
+		"sharing_text": "我的评分：★★★★★ https://www.douban.com/doubanapp/dispatch/movie/1862151 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/1862151/interest/4822242947",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-23 00:17:45",
+		"status": "done",
+		"id": 4822242947,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 928879,
+				"max": 10,
+				"star_count": 4.5,
+				"value": 8.6
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2006-06-30(中国大陆)"
+			],
+			"pic": {
+				"large": "https://img3.doubanio.com/view/photo/m_ratio_poster/public/p712241453.jpg",
+				"normal": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p712241453.jpg"
+			},
+			"honor_infos": [
+				{
+					"kind": "movie",
+					"uri": "douban://douban.com/subject_collection/movie_top250",
+					"rank": 180,
+					"title": "豆瓣电影Top250"
+				}
+			],
+			"is_show": false,
+			"vendor_icons": [
+				"https://img9.doubanio.com/f/frodo/fbc90f355fc45d5d2056e0d88c697f9414b56b44/pics/vendors/tencent.png",
+				"https://img3.doubanio.com/f/frodo/6fa5caade3ca480ccd95f455ee4d195ee342eb90/pics/vendors/youku.png",
+				"https://img9.doubanio.com/f/frodo/6c7b857e6b2255201e73bf83732d95d572f3f9f7/pics/vendors/iqiyi.png"
+			],
+			"year": "2006",
+			"card_subtitle": "2006 / 中国大陆 中国香港 / 喜剧 犯罪 / 宁浩 / 郭涛 刘桦",
+			"id": "1862151",
+			"genres": [
+				"喜剧",
+				"犯罪"
+			],
+			"title": "疯狂的石头",
+			"is_released": true,
+			"actors": [
+				{
+					"name": "郭涛"
+				},
+				{
+					"name": "刘桦"
+				},
+				{
+					"name": "连晋"
+				},
+				{
+					"name": "黄渤"
+				},
+				{
+					"name": "徐峥"
+				},
+				{
+					"name": "岳小军"
+				},
+				{
+					"name": "罗兰"
+				},
+				{
+					"name": "王迅"
+				}
+			],
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "537253",
+				"_base_color": [
+					0.3333333333333333,
+					0.2727272727272727,
+					0.08627450980392157
+				],
+				"secondary_color": "f4f9f4",
+				"_avg_color": [
+					0.2760416666666667,
+					0.5161290322580645,
+					0.24313725490196078
+				],
+				"primary_color_dark": "374c37"
+			},
+			"type": "movie",
+			"has_linewatch": true,
+			"vendor_desc": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/1862151.jpg",
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/1862151",
+			"url": "https://movie.douban.com/subject/1862151/",
+			"release_date": null,
+			"uri": "douban://douban.com/movie/1862151",
+			"subtype": "movie",
+			"directors": [
+				{
+					"name": "宁浩"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"null_rating_reason": ""
+		},
+		"star_time": "2026-04-23 00:17:45"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
 			"star_count": 4,
 			"value": 4
 		},
