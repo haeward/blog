@@ -3,9 +3,6 @@ name: Douban Data And Covers Sync
 on: 
   schedule:
     - cron: "0 */6 * * *"
-  push:
-    branches:
-      - main
   watch:
     types: [started]
   workflow_dispatch:
