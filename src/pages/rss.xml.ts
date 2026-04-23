@@ -30,7 +30,7 @@ export async function GET(context: APIContext) {
                 description: post.data.description,
                 content: html,
                 pubDate: post.data.date,
-                link: `/${post.collection}/${post.id}/`,
+                link: `/posts/${post.id}/`,
             };
         }),
     );

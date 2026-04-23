@@ -14,7 +14,7 @@ Primary implementation files:
 - `src/components/MediaCard.astro`
 - `src/components/Footer.astro`
 - `src/components/YearProgress.astro`
-- `src/pages/blog/index.astro`
+- `src/pages/posts/index.astro`
 - `src/pages/links.astro`
 - `src/pages/media.astro`
 - `src/pages/changelog.astro`
@@ -46,7 +46,7 @@ Rules:
 - Use `bg-stone-100/85` and `dark:bg-stone-900/25`.
 - Add `header--divider` only when a page needs a subtle bottom border.
 - Stack on mobile, switch to row at `sm`.
-- Keep top-level nav stable: Archive, Media, About, Links.
+- Keep top-level nav stable: Archive, Media, Now, About, Links.
 
 Do not turn the header into a wide marketing nav or add a large mobile drawer
 without changing the navigation model intentionally.

@@ -36,7 +36,7 @@ const dateClasses = isHome
     : "text-center text-[0.8rem] font-semibold tracking-[0.04em] text-[#706c64] transition-colors duration-200 group-hover:text-[#45433f] dark:text-[#9d968b] dark:group-hover:text-[#b3ada3] sm:text-[0.88rem]";
 ---
 
-<a href={`/${entry.collection}/${entry.id}`} class={cardClasses}>
+<a href={`/posts/${entry.id}`} class={cardClasses}>
     <time
         class:list={[dateWidthClasses, dateClasses, "whitespace-nowrap"]}
         datetime={entry.data.date.toISOString()}

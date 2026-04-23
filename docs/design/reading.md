@@ -1,7 +1,7 @@
 # Reading
 
 This document defines the article and prose design rules for the blog. The main
-implementation lives in `src/pages/blog/[...slug].astro`, `src/pages/about.astro`,
+implementation lives in `src/pages/posts/[...slug].astro`, `src/pages/about.astro`,
 `src/styles/global.css`, `src/components/TableOfContents.astro`, and
 `src/components/LinkEnhancer.astro`.
 

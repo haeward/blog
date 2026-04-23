@@ -7,8 +7,13 @@ export const SITE: Site = {
 };
 
 export const BLOG: Metadata = {
-    TITLE: "Blog",
-    DESCRIPTION: "A collection of articles on topics I am passionate about.",
+    TITLE: "Archive",
+    DESCRIPTION: "A chronological archive of articles on topics I am passionate about.",
+};
+
+export const NOW: Metadata = {
+    TITLE: "Now",
+    DESCRIPTION: "What I am focused on right now, plus the latest moments.",
 };
 
 export const ABOUT: Metadata = {
@@ -18,7 +23,7 @@ export const ABOUT: Metadata = {
 
 export const MEDIA: Metadata = {
     TITLE: "Media",
-    DESCRIPTION: "Movies and books I track.",
+    DESCRIPTION: "Completed books, films, and shows I track.",
 };
 
 export const LINKS: Metadata = {
@@ -46,7 +51,7 @@ export const SOCIALS: Socials = [
     },
     {
         NAME: "Mastodon",
-        HREF: "https://m.cmx.im/@haeward",
+        HREF: "https://mas.to/@haeward",
         ICON: "/assets/icons/social/mastodon.svg",
         ENABLE: true,
     },
