@@ -2,23 +2,21 @@
 title: "About Me"
 ---
 
-I'm **Haeward**, a software developer with experience in Java, Python, and Go, currently focusing on **Rust**. As an open source enthusiast, I believe in the power of collaborative development and aspire to contribute more meaningfully to the community.
+I'm **Haeward**. I write software for a living, but most of the time I think of myself less as a specialist in one stack and more as someone who keeps chasing better ways to build, learn, and pay attention. These days, that curiosity is pulling me deeper into **Rust**, open source, and the quiet satisfaction of making useful things a little sharper.
 
-When I'm not coding, I enjoy reading books, watching films and anime, particularly mystery and science fiction genres. I'm fascinated by the intricate logic of detective stories and captivated by the boundless imagination of sci-fi narratives. You can see my recent watching and reading on the [Media](/media) page.
+Outside of code, I return to books, films, and anime with the same instinct. I like work with structure, atmosphere, and a strong inner logic, which is probably why I keep circling back to mystery and science fiction. If you're curious about what I've been watching or reading lately, I keep a running record on the [Media](/media) page.
 
-I also maintain a consistent running practice, inspired by the anime **[風が強く吹いている](https://bgm.tv/subject/248154)** (Run with the Wind). As the story beautifully captures:
+I run regularly, partly because it clears my head and partly because **[風が強く吹いている](https://bgm.tv/subject/248154)** lodged itself somewhere permanent in my brain. It made running feel less like discipline for its own sake and more like a way of staying awake to the world.
 
-> "Why can't we give up running even though it's so painful and hard? Because every cell in our body is restless, wanting to feel the strong wind blowing against us."
+I'm also drawn to tools, workflows, and small pieces of technology that make everyday work feel more deliberate. That ranges from automation scripts and development tools to hardware and gadgets that are thoughtfully made instead of merely new. Lately, some of that same curiosity has gone into learning **Japanese**, slowly but seriously.
 
-I'm passionate about productivity tools and emerging technologies that enhance daily workflows. From automation scripts to the latest development tools, I enjoy exploring solutions that make work more efficient and enjoyable. I also have a keen interest in hardware and gadgets that blend functionality with innovation.
-
-Currently learning **Japanese**. I'd love to connect if you're interested in discussing Japanese language or culture.
+If any of that overlaps with your corner of the internet, feel free to say hello.
 
 ---
 
 ## Online habitat
 
-I'm active on a few other corners of the internet. Let's connect!
+You can also find me here:
 
 * [GitHub](https://github.com/haeward)
 * [Twitter/X](https://x.com/haewyu)
@@ -26,4 +24,4 @@ I'm active on a few other corners of the internet. Let's connect!
 * [Douban](https://movie.douban.com/people/mithrasu)
 * [Bangumi](https://bgm.tv/user/haeward)
 
-Have a question, a project idea, or just want to say hello? Feel free to reach out via email: [me@haeward.com](mailto:me@haeward.com)
+For questions, project ideas, or a simple hello: [me@haeward.com](mailto:me@haeward.com)
