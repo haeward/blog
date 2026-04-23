@@ -423,7 +423,6 @@ function updateThemeToggle(theme) {
 
     themeToggle.dataset.themeMode = theme;
     themeToggle.setAttribute("aria-label", `Switch theme to ${nextLabel}`);
-    themeToggle.setAttribute("title", `Switch theme to ${nextLabel}`);
 }
 
 function syncTheme(theme = getStoredTheme(), systemPrefersDark = colorSchemeMediaQuery.matches) {
