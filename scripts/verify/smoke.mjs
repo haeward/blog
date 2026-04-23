@@ -6,7 +6,70 @@ import { chromium } from "playwright";
 
 const DIST_DIR = path.resolve("dist");
 const HOST = "127.0.0.1";
-const ARTICLE_SLUG = "/blog/2025/travelogue-of-southern-shanxi/";
+const ARTICLE_SLUG = "/posts/2025/travelogue-of-southern-shanxi/";
+const MOCK_MASTODON_ACCOUNT = { id: "haeward-account" };
+const MOCK_MASTODON_STATUSES = Array.from({ length: 5 }, (_, index) => ({
+    id: `moment-${index + 1}`,
+    account: {
+        acct: "haeward",
+        avatar: "/assets/images/site/favicon.png",
+        display_name: "Haeward",
+        url: "https://mas.to/@haeward",
+        username: "haeward",
+    },
+    card:
+        index === 0
+            ? {
+                  description: "A linked article preview.",
+                  image: "/assets/images/site/favicon.png",
+                  provider_name: "Example",
+                  title: "Example preview",
+                  url: "https://example.com/article",
+              }
+            : null,
+    content:
+        index === 3
+            ? `<p>Moment ${index + 1} from Mastodon. <a href="https://mas.to/tags/now">#Now</a></p>`
+            : `<p>Moment ${index + 1} from Mastodon. <a href="https://example.com/article">example.com</a></p>`,
+    created_at: `2026-04-2${index + 1}T16:57:00.000Z`,
+    media_attachments:
+        index === 1
+            ? [
+                  {
+                      description: "Preview attachment",
+                      preview_url: "/assets/images/site/favicon.png",
+                      type: "image",
+                      url: "/assets/images/site/favicon.png",
+                  },
+              ]
+            : [],
+    quote:
+        index === 2
+            ? {
+                  state: "accepted",
+                  quoted_status: {
+                      account: {
+                          acct: "quoted",
+                          display_name: "Quoted User",
+                          url: "https://mas.to/@quoted",
+                      },
+                      content: "<p>A quoted toot preview.</p>",
+                      created_at: "2026-04-20T08:30:00.000Z",
+                      url: "https://mas.to/@quoted/1",
+                  },
+              }
+            : null,
+    tags:
+        index === 3
+            ? [
+                  {
+                      name: "Now",
+                      url: "https://mas.to/tags/now",
+                  },
+              ]
+            : [],
+    url: `https://mas.to/@haeward/${index + 1}`,
+}));
 
 const MIME_TYPES = {
     ".css": "text/css; charset=utf-8",
@@ -199,7 +262,10 @@ async function run() {
     try {
         await assertStatus(baseUrl, "/", 200);
         await assertStatus(baseUrl, "/about/", 200);
-        await assertStatus(baseUrl, "/blog/", 200);
+        await assertStatus(baseUrl, "/posts/", 200);
+        await assertStatus(baseUrl, "/blog/", 404);
+        await assertStatus(baseUrl, "/blog/2025/travelogue-of-southern-shanxi/", 404);
+        await assertStatus(baseUrl, "/now/", 200);
         await assertStatus(baseUrl, ARTICLE_SLUG, 200);
         await assertStatus(baseUrl, "/links/", 200);
         await assertStatus(baseUrl, "/media/", 200);
@@ -209,9 +275,68 @@ async function run() {
         await assertStatus(baseUrl, "/does-not-exist/", 404);
 
         const page = await browser.newPage({ viewport: { width: 1440, height: 960 } });
+        await page.addInitScript(
+            ({ account, statuses }) => {
+                const originalFetch = window.fetch.bind(window);
+
+                window.fetch = async (input, init) => {
+                    const url =
+                        typeof input === "string"
+                            ? input
+                            : input instanceof Request
+                              ? input.url
+                              : String(input);
+
+                    if (url.startsWith("https://mas.to/api/v1/accounts/lookup")) {
+                        return {
+                            ok: true,
+                            async json() {
+                                return account;
+                            },
+                        };
+                    }
+
+                    if (url.startsWith(`https://mas.to/api/v1/accounts/${account.id}/statuses`)) {
+                        return {
+                            ok: true,
+                            async json() {
+                                return statuses;
+                            },
+                        };
+                    }
+
+                    return originalFetch(input, init);
+                };
+            },
+            {
+                account: MOCK_MASTODON_ACCOUNT,
+                statuses: MOCK_MASTODON_STATUSES,
+            },
+        );
         const assertNoErrors = bindPageDiagnostics(page, "desktop");
 
         await assertOk(page, `${baseUrl}/`, "Home");
+        const navLabels = await page
+            .locator("header nav a")
+            .evaluateAll((links) => links.map((link) => link.textContent?.trim() || ""));
+        const expectedNavLabels = ["Archive", "Media", "Now", "About", "Links"];
+        if (expectedNavLabels.some((label, index) => navLabels[index] !== label)) {
+            fail(
+                `Expected header nav to start with ${expectedNavLabels.join(", ")}. Received ${navLabels.join(", ")}.`,
+            );
+        }
+
+        await assertOk(page, `${baseUrl}/now/`, "Now");
+        await page.waitForSelector("[data-moments-item='true']");
+        const momentsCount = await page.locator("[data-moments-item='true']").count();
+        if (momentsCount !== 5) {
+            fail(`Expected /now to render 5 moments, received ${momentsCount}.`);
+        }
+        await page.waitForSelector('a:has-text("View Toot")');
+        await page.waitForSelector('a:has-text("Example preview")');
+        await page.waitForSelector('a:has-text("A quoted toot preview.")');
+        await page.waitForSelector('a:has-text("#Now")');
+
         await assertOk(page, `${baseUrl}/links/`, "Links");
         await page.waitForSelector('[data-links-section="blogroll"] [data-link-card="true"]');
         await page.waitForSelector('[data-links-section="videos"] [data-link-card="true"]');

@@ -4,7 +4,7 @@ title: "About Me"
 
 I'm **Haeward**. I write software for a living, but most of the time I think of myself less as a specialist in one stack and more as someone who keeps chasing better ways to build, learn, and pay attention. These days, that curiosity is pulling me deeper into **Rust**, open source, and the quiet satisfaction of making useful things a little sharper.
 
-Outside of code, I return to books, films, and anime with the same instinct. I like work with structure, atmosphere, and a strong inner logic, which is probably why I keep circling back to mystery and science fiction. If you're curious about what I've been watching or reading lately, I keep a running record on the [Media](/media) page.
+Outside of code, I return to books, films, and anime with the same instinct. I like work with structure, atmosphere, and a strong inner logic, which is probably why I keep circling back to mystery and science fiction. If you're curious about what I am into right now, there is a snapshot on the [Now](/now) page; finished books, films, and shows live on [Media](/media).
 
 I run regularly, partly because it clears my head and partly because **[風が強く吹いている](https://bgm.tv/subject/248154)** lodged itself somewhere permanent in my brain. It made running feel less like discipline for its own sake and more like a way of staying awake to the world.
 

@@ -1,0 +1,105 @@
+---
+import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import Link from "@components/Link.astro";
+import LinkEnhancer from "@components/LinkEnhancer.astro";
+import Moments from "@components/Moments.astro";
+import { NOW, SITE, SOCIALS } from "@consts";
+import PageLayout from "@layouts/PageLayout.astro";
+import { frontmatter } from "../content/now.md";
+
+type NowItem = {
+    title: string;
+    href?: string;
+};
+
+type NowFrontmatter = {
+    updated?: string;
+    reading?: NowItem[];
+    watching?: NowItem[];
+};
+
+const nowFrontmatter = frontmatter as NowFrontmatter;
+const sections = [
+    { title: "Reading", items: nowFrontmatter.reading ?? [] },
+    { title: "Watching", items: nowFrontmatter.watching ?? [] },
+].filter((section) => section.items.length > 0);
+
+const mastodon =
+    SOCIALS.find((social) => social.NAME === "Mastodon" && social.ENABLE !== false) ?? null;
+---
+
+<PageLayout title={`${NOW.TITLE} | ${SITE.NAME}`} description={NOW.DESCRIPTION} lang="en">
+    <Container>
+        <section class="space-y-10 sm:space-y-12">
+            <div class="animate max-w-2xl space-y-2">
+                <h1
+                    class="serif-reading-title text-3xl font-bold tracking-[0.01em] text-[#343331] dark:text-[#c8c3ba] sm:text-4xl"
+                >
+                    Now
+                </h1>
+
+                {nowFrontmatter.updated && (
+                    <p class="text-sm text-[#706c64] dark:text-[#9d968b]">
+                        Last updated
+                        <span class="font-medium text-[#45433f] dark:text-[#b3ada3]">
+                            <FormattedDate date={new Date(nowFrontmatter.updated)} />
+                        </span>
+                    </p>
+                )}
+            </div>
+
+            {sections.length > 0 && (
+                <section class="animate space-y-4">
+                    <h2
+                        class="serif-reading-title text-2xl font-bold text-[#343331] dark:text-[#c8c3ba]"
+                    >
+                        Books & Media
+                    </h2>
+
+                    <div class="space-y-6">
+                        {sections.map((section) => (
+                            <section class="space-y-3">
+                                <h3
+                                    class="serif-reading-title text-lg font-semibold text-[#45433f] dark:text-[#b3ada3]"
+                                >
+                                    {section.title}
+                                </h3>
+
+                                <ul class="serif-reading-surface list-disc space-y-2 pl-5 text-[1rem] leading-7 text-[#3f3d3a] dark:text-[#bdb6aa]">
+                                    {section.items.map((item) => (
+                                        <li>
+                                            {item.href ? (
+                                                <Link
+                                                    href={item.href}
+                                                    external={true}
+                                                    underline={true}
+                                                    class="text-cyan-700 dark:text-cyan-300"
+                                                >
+                                                    {item.title}
+                                                </Link>
+                                            ) : (
+                                                item.title
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </section>
+                        ))}
+                    </div>
+                </section>
+            )}
+
+            {mastodon && (
+                <Moments
+                    account="haeward"
+                    domain="mas.to"
+                    profileUrl={mastodon.HREF}
+                    limit={5}
+                />
+            )}
+        </section>
+    </Container>
+
+    <LinkEnhancer />
+</PageLayout>
