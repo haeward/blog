@@ -1,51 +1,51 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
+type CardVariant = "home" | "archive";
+
 type Props = {
     entry: CollectionEntry<"blog">;
+    variant?: CardVariant;
 };
 
-const { entry } = Astro.props;
+const { entry, variant = "archive" } = Astro.props;
+
+const isHome = variant === "home";
+const formattedDate = new Intl.DateTimeFormat(
+    "en-US",
+    isHome
+        ? {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+          }
+        : {
+              month: "short",
+              day: "numeric",
+          },
+).format(entry.data.date);
 
 const cardClasses =
-    "relative group flex flex-wrap items-center gap-x-2 gap-y-1 py-2 px-3 hover:-translate-y-px hover:text-black dark:hover:text-white transition-all duration-300 ease-in-out";
-const titleClasses =
-    "serif-reading-title text-[1.08rem] sm:text-[1.14rem] font-semibold text-current";
-const dateClasses = "text-xs sm:text-sm text-black/72 dark:text-white/66 whitespace-nowrap";
-const arrowClasses = "size-5 shrink-0 stroke-2 fill-none stroke-current";
+    "group grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 px-2 py-3 transition-colors duration-200 ease-out sm:gap-x-4";
+const titleClasses = isHome
+    ? "serif-reading-title text-[1.03rem] leading-[1.45] font-semibold text-current transition-colors duration-200 group-hover:text-black dark:group-hover:text-white sm:text-[1.12rem]"
+    : "serif-reading-title text-[1.08rem] leading-[1.45] font-semibold text-current transition-colors duration-200 group-hover:text-black dark:group-hover:text-white sm:text-[1.16rem]";
+const dateWidthClasses = isHome ? "w-[7.7rem] sm:w-[9rem]" : "w-[5rem] sm:w-[5.6rem]";
+const dateClasses = isHome
+    ? "text-center text-[0.76rem] font-semibold tracking-[0.04em] text-black/62 transition-colors duration-200 group-hover:text-black/78 dark:text-white/50 dark:group-hover:text-white/66 sm:text-[0.84rem]"
+    : "text-center text-[0.8rem] font-semibold tracking-[0.04em] text-black/62 transition-colors duration-200 group-hover:text-black/78 dark:text-white/50 dark:group-hover:text-white/66 sm:text-[0.88rem]";
 ---
 
 <a href={`/${entry.collection}/${entry.id}`} class={cardClasses}>
-    <div class="flex min-w-0 flex-col flex-1">
+    <time
+        class:list={[dateWidthClasses, dateClasses, "whitespace-nowrap"]}
+        datetime={entry.data.date.toISOString()}
+    >
+        {formattedDate}
+    </time>
+    <div class="min-w-0">
         <div class={titleClasses} data-language-scan="true" lang={entry.data.lang}>
             {entry.data.title}
         </div>
-    </div>
-    <div class="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-start">
-        <div class={dateClasses}>
-            {entry.data.date.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      })}
-        </div>
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            class={arrowClasses}
-            aria-hidden="true"
-        >
-            <line
-                x1="5"
-                y1="12"
-                x2="19"
-                y2="12"
-                class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
-            />
-            <polyline
-                points="12 5 19 12 12 19"
-                class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
-            />
-        </svg>
     </div>
 </a>

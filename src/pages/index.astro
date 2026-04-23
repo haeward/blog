@@ -60,19 +60,17 @@ const blog = (await getCollection("blog"))
             </section>
 
             <section class="animate px-1 py-2 sm:px-0 sm:py-3">
-                <div class="mb-4 flex items-end justify-between gap-4">
-                    <div>
-                        <h1
-                            class="serif-reading-title text-[1.08rem] sm:text-[1.14rem] font-semibold text-black/96 dark:text-white/96"
-                        >
-                            Latest posts
-                        </h1>
-                    </div>
+                <div class="mb-5">
+                    <h1
+                        class="serif-reading-title text-[1rem] font-semibold tracking-[0.2em] text-black/84 uppercase dark:text-white/74 sm:text-[1.12rem]"
+                    >
+                        LATEST POSTS
+                    </h1>
                 </div>
-                <ul class="flex flex-col gap-1">
+                <ul class="flex flex-col gap-1.5">
                     {blog.map(post => (
             <li>
-              <ArrowCard entry={post} />
+              <ArrowCard entry={post} variant="home" />
             </li>
           ))}
                 </ul>
