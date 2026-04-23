@@ -28,7 +28,7 @@ const sections: LinkSection[] = [
 
 <PageLayout title={`${LINKS.TITLE} | ${SITE.NAME}`} description={LINKS.DESCRIPTION} lang="en">
     <Container>
-        <section class="space-y-10 sm:space-y-12">
+        <section class="space-y-12 sm:space-y-14">
             <div class="animate max-w-2xl space-y-3">
                 <h1
                     class="serif-reading-title text-3xl font-bold tracking-[0.01em] text-[#343331] dark:text-[#c8c3ba] sm:text-4xl"
@@ -43,27 +43,27 @@ const sections: LinkSection[] = [
                 </p>
             </div>
 
-            <div class="space-y-10 sm:space-y-12">
+            <div class="space-y-12 sm:space-y-14">
                 {sections.map((section) => (
-          <section
-            class="animate space-y-4"
-            aria-labelledby={`links-section-${section.key}`}
-            data-links-section={section.key}
-          >
-            <h2
-              id={`links-section-${section.key}`}
-              class="serif-reading-title text-xl font-bold tracking-[0.01em] text-[#45433f] dark:text-[#b3ada3] sm:text-2xl"
-            >
-              {section.title}
-            </h2>
+                    <section
+                        class="animate space-y-5 sm:space-y-6"
+                        aria-labelledby={`links-section-${section.key}`}
+                        data-links-section={section.key}
+                    >
+                        <h2
+                            id={`links-section-${section.key}`}
+                            class="serif-reading-title text-xl font-bold tracking-[0.01em] text-[#45433f] dark:text-[#b3ada3] sm:text-2xl"
+                        >
+                            {section.title}
+                        </h2>
 
-            <ul class="mx-auto grid w-full max-w-[42rem] grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2 md:grid-cols-3">
-              {section.items.map((item) => (
-                <LinkCard item={item} />
-              ))}
-            </ul>
-          </section>
-        ))}
+                        <ul class="mx-auto grid w-full max-w-[40.75rem] grid-cols-1 gap-x-7 gap-y-6 sm:grid-cols-2 md:grid-cols-3">
+                            {section.items.map((item) => (
+                                <LinkCard item={item} />
+                            ))}
+                        </ul>
+                    </section>
+                ))}
             </div>
         </section>
     </Container>
