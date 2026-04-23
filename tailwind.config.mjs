@@ -6,8 +6,8 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Noto Sans", ...defaultTheme.fontFamily.sans],
-                serif: ["Noto Serif", ...defaultTheme.fontFamily.serif],
+                sans: ["Sarasa Gothic SC", ...defaultTheme.fontFamily.sans],
+                serif: ["Sarasa Gothic SC", ...defaultTheme.fontFamily.serif],
                 mono: ["JetBrains Mono", ...defaultTheme.fontFamily.mono],
             },
         },

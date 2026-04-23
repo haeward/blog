@@ -26,8 +26,8 @@ const SCRIM_MID_OPACITY = 0.28;
 const SCRIM_BOTTOM_OPACITY = 0.68;
 const PUBLIC_DIR = path.resolve(process.cwd(), "public");
 const FONT_DIR = path.join(PUBLIC_DIR, "assets/fonts");
-const TITLE_FONT_PATH = path.join(FONT_DIR, "NotoSans-Bold.ttf");
-const META_FONT_PATH = path.join(FONT_DIR, "NotoSans-Bold.ttf");
+const TITLE_FONT_PATH = path.join(FONT_DIR, "SarasaGothicSC-Bold.ttf");
+const META_FONT_PATH = path.join(FONT_DIR, "SarasaGothicSC-Bold.ttf");
 const TITLE_FONT_URL = pathToFileURL(TITLE_FONT_PATH).href;
 const META_FONT_URL = pathToFileURL(META_FONT_PATH).href;
 
@@ -223,12 +223,12 @@ function getOverlaySvg(layout: OverlayLayout, theme: OverlayTheme): string {
   ${layout.titleLines
       .map(
           (line, index) =>
-              `<text x="${TITLE_LEFT}" y="${layout.titleStartY + TITLE_LINE_HEIGHT * index}" fill="${theme.title.primary}" font-family="ShareTitle, Noto Sans, sans-serif" font-size="${TITLE_FONT_SIZE}" font-weight="700" filter="url(#titleShadow)">${escapeXml(line)}</text>`,
+              `<text x="${TITLE_LEFT}" y="${layout.titleStartY + TITLE_LINE_HEIGHT * index}" fill="${theme.title.primary}" font-family="ShareTitle, Sarasa Gothic SC, sans-serif" font-size="${TITLE_FONT_SIZE}" font-weight="700" filter="url(#titleShadow)">${escapeXml(line)}</text>`,
       )
       .join("")}
-  <text x="${META_TEXT_LEFT}" y="${META_BASELINE}" fill="${theme.meta.primary}" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="700" filter="url(#metaShadow)">${escapeXml(SITE.NAME)}</text>
-  <text x="${META_TEXT_LEFT + META_AUTHOR_WIDTH}" y="${META_BASELINE}" fill="${theme.meta.separator}" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="700" filter="url(#metaShadow)">–</text>
-  <text x="${META_TEXT_LEFT + META_AUTHOR_WIDTH + 26}" y="${META_BASELINE}" fill="${theme.meta.secondary}" font-family="ShareMeta, Noto Sans, sans-serif" font-size="21" font-weight="700" filter="url(#metaShadow)">${escapeXml(layout.metaText)}</text>
+  <text x="${META_TEXT_LEFT}" y="${META_BASELINE}" fill="${theme.meta.primary}" font-family="ShareMeta, Sarasa Gothic SC, sans-serif" font-size="21" font-weight="700" filter="url(#metaShadow)">${escapeXml(SITE.NAME)}</text>
+  <text x="${META_TEXT_LEFT + META_AUTHOR_WIDTH}" y="${META_BASELINE}" fill="${theme.meta.separator}" font-family="ShareMeta, Sarasa Gothic SC, sans-serif" font-size="21" font-weight="700" filter="url(#metaShadow)">–</text>
+  <text x="${META_TEXT_LEFT + META_AUTHOR_WIDTH + 26}" y="${META_BASELINE}" fill="${theme.meta.secondary}" font-family="ShareMeta, Sarasa Gothic SC, sans-serif" font-size="21" font-weight="700" filter="url(#metaShadow)">${escapeXml(layout.metaText)}</text>
 </svg>`;
 }
 

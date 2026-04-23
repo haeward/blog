@@ -5,10 +5,9 @@ type Props = {
     headings: MarkdownHeading[];
     variant?: "mobile" | "desktop";
     title?: string;
-    lang?: string;
 };
 
-const { headings, variant = "desktop", title = "Contents", lang = "en" } = Astro.props;
+const { headings, variant = "desktop", title = "Contents" } = Astro.props;
 
 const tocHeadings = headings.filter(({ depth }) => depth >= 2 && depth <= 4);
 
@@ -25,7 +24,7 @@ const depthClasses = {
 ---
 
 {variant === "mobile" ? (
-  <nav class="blog-toc blog-toc--mobile animate xl:hidden serif-reading-surface" data-language-scan="true" data-toc-root="true" data-toc-visible="false" lang={lang} aria-label={title}>
+  <nav class="blog-toc blog-toc--mobile animate xl:hidden serif-reading-surface" data-toc-root="true" data-toc-visible="false" aria-label={title}>
     <div class="blog-toc__body">
       <div class="blog-toc__progress" data-toc-progress="true" style="--blog-toc-progress: 0%;">
         <div class="blog-toc__progress-track" aria-hidden="true">
@@ -52,7 +51,7 @@ const depthClasses = {
     </div>
   </nav>
 ) : (
-  <aside class="blog-toc blog-toc--desktop animate hidden xl:block serif-reading-surface" data-language-scan="true" data-toc-root="true" data-toc-visible="false" lang={lang} aria-label={title}>
+  <aside class="blog-toc blog-toc--desktop animate hidden xl:block serif-reading-surface" data-toc-root="true" data-toc-visible="false" aria-label={title}>
     <nav class="blog-toc__body">
       <div class="blog-toc__progress" data-toc-progress="true" style="--blog-toc-progress: 0%;">
         <div class="blog-toc__progress-track" aria-hidden="true">

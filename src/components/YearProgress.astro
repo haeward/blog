@@ -18,7 +18,7 @@ const filledSquares = (progress / 100) * totalSquares;
     <div
         class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#706c64] dark:text-[#9d968b] sm:text-sm"
     >
-        <span class="font-mono shrink-0">{year}:</span>
+        <span class="ui-mono shrink-0">{year}:</span>
         <div class="flex flex-wrap gap-1">
             {Array.from({ length: totalSquares }, (_, i) => (
         <div
@@ -30,6 +30,6 @@ const filledSquares = (progress / 100) * totalSquares;
         />
       ))}
         </div>
-        <span class="font-mono shrink-0">{progressPercentage}%</span>
+        <span class="ui-mono shrink-0">{progressPercentage}%</span>
     </div>
 </div>

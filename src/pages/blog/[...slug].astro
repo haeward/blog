@@ -60,14 +60,12 @@ const postShareImage = `/og/${post.id}.jpg`;
 
                     <div
                         class="animate serif-reading-title text-xl sm:text-2xl font-bold text-[#343331] dark:text-[#c8c3ba]"
-                        data-language-scan="true"
-                        lang={post.data.lang}
                     >
                         {post.data.title}
                     </div>
 
                     <div
-                        class="animate flex flex-wrap items-center gap-x-3 gap-y-1 text-sm bg-stone-100 dark:bg-stone-900 text-[#706c64] dark:text-[#9d968b] py-1 px-2 rounded"
+                        class="animate flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-[#706c64] dark:text-[#9d968b]"
                     >
                         <div class="flex items-center gap-1 whitespace-nowrap">
                             <svg
@@ -141,9 +139,7 @@ const postShareImage = `/og/${post.id}.jpg`;
 
                 <article
                     class="animate mt-10 blog-article serif-reading-surface"
-                    data-language-scan="true"
                     data-pagefind-body
-                    lang={post.data.lang}
                 >
                     <Content />
                 </article>
@@ -158,7 +154,7 @@ const postShareImage = `/og/${post.id}.jpg`;
                     <path d="m15 18-6-6 6-6"/>
                   </svg>
                   <div class="min-w-0">
-                    <div class="font-sans text-sm max-w-full break-words sm:max-w-[300px] sm:truncate" data-language-scan="true" lang={prev.data.lang}>{prev.data.title}</div>
+                    <div class="font-sans text-sm max-w-full break-words sm:max-w-[300px] sm:truncate">{prev.data.title}</div>
                   </div>
                 </a>
               ) : (
@@ -167,7 +163,7 @@ const postShareImage = `/og/${post.id}.jpg`;
               {next ? (
                 <a href={`/blog/${next.id}`} class="group flex w-full items-center justify-between gap-1 px-4 py-2 rounded-lg transition-colors duration-300 sm:w-auto sm:justify-end">
                   <div class="text-left sm:text-right">
-                    <div class="font-sans text-sm max-w-full break-words sm:max-w-[300px] sm:truncate" data-language-scan="true" lang={next.data.lang}>{next.data.title}</div>
+                    <div class="font-sans text-sm max-w-full break-words sm:max-w-[300px] sm:truncate">{next.data.title}</div>
                   </div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true">
                     <path d="m9 18 6-6-6-6"/>
@@ -183,7 +179,7 @@ const postShareImage = `/og/${post.id}.jpg`;
 
             {hasToc && (
         <div class="blog-post-toc-rail">
-          <TableOfContents headings={tocHeadings} lang={post.data.lang} />
+          <TableOfContents headings={tocHeadings} />
         </div>
       )}
         </div>

@@ -3,64 +3,38 @@
 @plugin "@tailwindcss/typography";
 
 @font-face {
-    font-family: "Noto Sans";
-    src: url("/assets/fonts/NotoSans-Regular.ttf") format("truetype");
+    font-family: "Sarasa Gothic SC";
+    src:
+        url("/assets/fonts/SarasaGothicSC-Regular.woff2") format("woff2"),
+        url("/assets/fonts/SarasaGothicSC-Regular.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: "Noto Sans";
-    src: url("/assets/fonts/NotoSans-Bold.ttf") format("truetype");
+    font-family: "Sarasa Gothic SC";
+    src:
+        url("/assets/fonts/SarasaGothicSC-Bold.woff2") format("woff2"),
+        url("/assets/fonts/SarasaGothicSC-Bold.ttf") format("truetype");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: "Noto Serif";
-    src: url("/assets/fonts/NotoSerif-Regular.ttf") format("truetype");
+    font-family: "Sarasa Mono SC";
+    src:
+        url("/assets/fonts/SarasaMonoSC-Regular.woff2") format("woff2"),
+        url("/assets/fonts/SarasaMonoSC-Regular.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: "Noto Serif";
-    src: url("/assets/fonts/NotoSerif-Bold.ttf") format("truetype");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Noto Serif SC";
-    src: url("/assets/fonts/NotoSerifSC-Regular.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Noto Serif SC";
-    src: url("/assets/fonts/NotoSerifSC-Bold.ttf") format("truetype");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Noto Serif JP";
-    src: url("/assets/fonts/NotoSerifJP-Regular.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Noto Serif JP";
-    src: url("/assets/fonts/NotoSerifJP-Bold.ttf") format("truetype");
+    font-family: "Sarasa Mono SC";
+    src: url("/assets/fonts/SarasaMonoSC-Bold.ttf") format("truetype");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -123,23 +97,13 @@ footer {
 
 .serif-reading-surface,
 .serif-reading-title {
-    font-family: "Noto Serif", ui-serif, Georgia, serif;
+    font-family: "Sarasa Gothic SC", ui-sans-serif, system-ui, sans-serif;
     font-synthesis: none;
     letter-spacing: 0.012em;
 }
 
-.serif-reading-surface:lang(zh),
-.serif-reading-surface :lang(zh),
-.serif-reading-title:lang(zh),
-.serif-reading-title :lang(zh) {
-    font-family: "Noto Serif SC", "Noto Serif", ui-serif, Georgia, serif;
-}
-
-.serif-reading-surface:lang(ja),
-.serif-reading-surface :lang(ja),
-.serif-reading-title:lang(ja),
-.serif-reading-title :lang(ja) {
-    font-family: "Noto Serif JP", "Noto Serif", ui-serif, Georgia, serif;
+.ui-mono {
+    font-family: "Sarasa Mono SC", ui-monospace, monospace;
 }
 
 .blog-post-shell {
@@ -175,6 +139,8 @@ article {
     @apply prose-h4:mt-4 prose-h4:mb-2;
     @apply prose-h5:mt-3 prose-h5:mb-1;
     @apply prose-h6:mt-3 prose-h6:mb-1;
+    --tw-prose-bullets: #706c64;
+    --tw-prose-invert-bullets: #9d968b;
 }
 
 @layer utilities {
@@ -739,7 +705,7 @@ html.search-open {
 
 .site-search__result-title {
     margin: 0;
-    font-family: "Noto Serif", ui-serif, Georgia, serif;
+    font-family: "Sarasa Gothic SC", ui-sans-serif, system-ui, sans-serif;
     font-size: 1.06rem;
     font-weight: 700;
     line-height: 1.5;
@@ -1069,7 +1035,7 @@ article img {
 
 .blog-toc__progress-label {
     @apply shrink-0 text-[0.72rem] font-medium tabular-nums text-[#706c64] dark:text-[#9d968b];
-    font-family: "Noto Sans", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Sarasa Mono SC", ui-monospace, monospace;
 }
 
 .blog-toc__list {
@@ -1161,7 +1127,8 @@ article img {
 }
 
 .changelog-entry__date {
-    @apply font-mono text-[0.8rem] font-medium tracking-[0.04em] text-[#706c64] dark:text-[#9d968b];
+    @apply text-[0.8rem] font-medium tracking-[0.04em] text-[#706c64] dark:text-[#9d968b];
+    font-family: "Sarasa Mono SC", ui-monospace, monospace;
 }
 
 .changelog-entry__title {

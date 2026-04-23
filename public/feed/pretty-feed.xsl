@@ -15,16 +15,20 @@
         <link rel="icon" type="image/png" href="/assets/images/site/favicon.png"/>
         <style><![CDATA[
           @font-face {
-            font-family: "Noto Sans";
-            src: url("/assets/fonts/NotoSans-Regular.ttf") format("truetype");
+            font-family: "Sarasa Gothic SC";
+            src:
+              url("/assets/fonts/SarasaGothicSC-Regular.woff2") format("woff2"),
+              url("/assets/fonts/SarasaGothicSC-Regular.ttf") format("truetype");
             font-weight: 400;
             font-style: normal;
             font-display: swap;
           }
 
           @font-face {
-            font-family: "Noto Sans";
-            src: url("/assets/fonts/NotoSans-Bold.ttf") format("truetype");
+            font-family: "Sarasa Gothic SC";
+            src:
+              url("/assets/fonts/SarasaGothicSC-Bold.woff2") format("woff2"),
+              url("/assets/fonts/SarasaGothicSC-Bold.ttf") format("truetype");
             font-weight: 700;
             font-style: normal;
             font-display: swap;
@@ -83,7 +87,7 @@
 
           body {
             position: relative;
-            font-family: "Noto Sans", sans-serif;
+            font-family: "Sarasa Gothic SC", sans-serif;
             color: var(--ink);
             background-color: var(--bg-base);
             line-height: 1.6;
