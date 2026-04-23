@@ -28,12 +28,12 @@ const formattedDate = new Intl.DateTimeFormat(
 const cardClasses =
     "group grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 px-2 py-3 transition-colors duration-200 ease-out sm:gap-x-4";
 const titleClasses = isHome
-    ? "serif-reading-title text-[1.03rem] leading-[1.45] font-semibold text-current transition-colors duration-200 group-hover:text-black dark:group-hover:text-white sm:text-[1.12rem]"
-    : "serif-reading-title text-[1.08rem] leading-[1.45] font-semibold text-current transition-colors duration-200 group-hover:text-black dark:group-hover:text-white sm:text-[1.16rem]";
+    ? "serif-reading-title text-[1.03rem] leading-[1.45] font-semibold text-[#45433f] transition-colors duration-200 group-hover:text-[#292827] dark:text-[#b3ada3] dark:group-hover:text-[#d8d3ca] sm:text-[1.12rem]"
+    : "serif-reading-title text-[1.08rem] leading-[1.45] font-semibold text-[#45433f] transition-colors duration-200 group-hover:text-[#292827] dark:text-[#b3ada3] dark:group-hover:text-[#d8d3ca] sm:text-[1.16rem]";
 const dateWidthClasses = isHome ? "w-[7.7rem] sm:w-[9rem]" : "w-[5rem] sm:w-[5.6rem]";
 const dateClasses = isHome
-    ? "text-center text-[0.76rem] font-semibold tracking-[0.04em] text-black/62 transition-colors duration-200 group-hover:text-black/78 dark:text-white/50 dark:group-hover:text-white/66 sm:text-[0.84rem]"
-    : "text-center text-[0.8rem] font-semibold tracking-[0.04em] text-black/62 transition-colors duration-200 group-hover:text-black/78 dark:text-white/50 dark:group-hover:text-white/66 sm:text-[0.88rem]";
+    ? "text-center text-[0.76rem] font-semibold tracking-[0.04em] text-[#706c64] transition-colors duration-200 group-hover:text-[#45433f] dark:text-[#9d968b] dark:group-hover:text-[#b3ada3] sm:text-[0.84rem]"
+    : "text-center text-[0.8rem] font-semibold tracking-[0.04em] text-[#706c64] transition-colors duration-200 group-hover:text-[#45433f] dark:text-[#9d968b] dark:group-hover:text-[#b3ada3] sm:text-[0.88rem]";
 ---
 
 <a href={`/${entry.collection}/${entry.id}`} class={cardClasses}>

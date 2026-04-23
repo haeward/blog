@@ -209,9 +209,9 @@ function resolveCover(
               aria-selected={tab.key === DEFAULT_TAB ? "true" : "false"}
               data-tab={tab.key}
               data-active={tab.key === DEFAULT_TAB ? "true" : "false"}
-              class="group px-0 py-1 text-base text-stone-600 dark:text-stone-300 hover:text-black dark:hover:text-white transition-colors border-b border-transparent data-[active=true]:border-black/60 data-[active=true]:text-black data-[active=true]:dark:border-white/60 data-[active=true]:dark:text-white"
+              class="group px-0 py-1 text-base text-[#706c64] dark:text-[#9d968b] hover:text-[#292827] dark:hover:text-[#d8d3ca] transition-colors border-b border-transparent data-[active=true]:border-black/60 data-[active=true]:text-[#343331] data-[active=true]:dark:border-white/60 data-[active=true]:dark:text-[#c8c3ba]"
             >
-              {tab.label} <span class="text-stone-500 dark:text-stone-400">({tab.count})</span>
+              {tab.label} <span class="text-[#706c64] dark:text-[#9d968b]">({tab.count})</span>
             </button>
           ))}
                 </nav>
@@ -242,7 +242,7 @@ function resolveCover(
               <button
                 type="button"
                 aria-label="Load more"
-                class="group inline-flex min-h-11 min-w-32 items-center justify-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-medium text-stone-700 transition-all duration-200 hover:-translate-y-0.5 hover:text-black active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/12 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-100 dark:text-stone-200 dark:hover:text-white dark:focus-visible:ring-white/20 dark:focus-visible:ring-offset-stone-900 sm:text-base"
+                class="group inline-flex min-h-11 min-w-32 items-center justify-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-medium text-[#706c64] transition-all duration-200 hover:-translate-y-0.5 hover:text-[#292827] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/12 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-100 dark:text-[#9d968b] dark:hover:text-[#d8d3ca] dark:focus-visible:ring-white/20 dark:focus-visible:ring-offset-stone-900 sm:text-base"
                 data-media-more
               >
                 <span>Load more</span>
@@ -313,13 +313,13 @@ function resolveCover(
             const stars = Math.max(0, Math.min(5, Math.round(item.myRating || 0)));
             const cover = item.cover
                 ? `<img src="${escapeHtml(item.cover)}" alt="${title}" loading="lazy" decoding="async" fetchpriority="low" width="240" height="360" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" />`
-                : `<div class="h-full w-full flex items-center justify-center text-xs text-stone-500 dark:text-stone-400">No cover</div>`;
+                : `<div class="h-full w-full flex items-center justify-center text-xs text-[#706c64] dark:text-[#9d968b]">No cover</div>`;
             const body = `<div class="flex h-full flex-col">
                         <div class="relative aspect-[2/3] overflow-hidden rounded-lg bg-black/5 dark:bg-white/5">
                           ${cover}
                         </div>
                         <div class="pt-2 sm:pt-3 space-y-1.5 sm:space-y-2">
-                          <div class="serif-reading-title text-[11px] sm:text-xs font-semibold text-black/90 dark:text-white/90 leading-snug" data-language-scan="true" lang="en" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
+                          <div class="serif-reading-title text-[11px] sm:text-xs font-semibold text-[#45433f] dark:text-[#b3ada3] leading-snug" data-language-scan="true" lang="en" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
                             ${title}
                           </div>
                           <div class="flex items-center gap-0.5 text-amber-300 dark:text-amber-200">

@@ -20,7 +20,11 @@ const { showDivider = false } = Astro.props;
             >
                 <div class="flex items-center gap-4 sm:gap-8">
                     <Link href="/" underline={false}>
-                        <div class="font-semibold text-xl sm:text-2xl">{SITE.NAME}</div>
+                        <div
+                            class="font-semibold text-xl text-[#343331] dark:text-[#c8c3ba] sm:text-2xl"
+                        >
+                            {SITE.NAME}
+                        </div>
                     </Link>
                     <div class="flex flex-wrap items-center gap-3 sm:gap-6">
                         <button
@@ -41,7 +45,7 @@ const { showDivider = false } = Astro.props;
                                 stroke-width="1.5"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                class="theme-toggle__icon theme-toggle__icon--system group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
+                                class="theme-toggle__icon theme-toggle__icon--system group-hover:stroke-[#292827] group-hover:dark:stroke-[#d8d3ca] transition-colors duration-300 ease-in-out"
                                 aria-hidden="true"
                             >
                                 <rect x="3" y="4" width="18" height="12" rx="2"></rect>
@@ -58,7 +62,7 @@ const { showDivider = false } = Astro.props;
                                 stroke-width="1.5"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                class="theme-toggle__icon theme-toggle__icon--light group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
+                                class="theme-toggle__icon theme-toggle__icon--light group-hover:stroke-[#292827] group-hover:dark:stroke-[#d8d3ca] transition-colors duration-300 ease-in-out"
                                 aria-hidden="true"
                             >
                                 <circle cx="12" cy="12" r="5"></circle>
@@ -81,7 +85,7 @@ const { showDivider = false } = Astro.props;
                                 stroke-width="1.5"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                class="theme-toggle__icon theme-toggle__icon--dark group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
+                                class="theme-toggle__icon theme-toggle__icon--dark group-hover:stroke-[#292827] group-hover:dark:stroke-[#d8d3ca] transition-colors duration-300 ease-in-out"
                                 aria-hidden="true"
                             >
                                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -107,7 +111,7 @@ const { showDivider = false } = Astro.props;
                                 stroke-width="1.75"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                class="transition-colors duration-300 ease-in-out group-hover:stroke-black group-hover:dark:stroke-white"
+                                class="transition-colors duration-300 ease-in-out group-hover:stroke-[#292827] group-hover:dark:stroke-[#d8d3ca]"
                                 aria-hidden="true"
                             >
                                 <circle cx="11" cy="11" r="7"></circle>
@@ -116,7 +120,9 @@ const { showDivider = false } = Astro.props;
                         </button>
                     </div>
                 </div>
-                <nav class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm sm:text-base">
+                <nav
+                    class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[#706c64] dark:text-[#9d968b] sm:text-base"
+                >
                     <Link href="/blog" class="whitespace-nowrap"> Archive </Link>
                     <Link href="/media" class="whitespace-nowrap"> Media </Link>
                     <Link href="/about" class="whitespace-nowrap"> About </Link>

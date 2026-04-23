@@ -8,15 +8,17 @@ import PageLayout from "@layouts/PageLayout.astro";
     <Container>
         <div class="flex flex-col items-center justify-center h-[60vh] text-center px-4">
             <h1
-                class="text-7xl sm:text-9xl font-bold text-black-200 dark:text-black-200 transition-colors"
+                class="text-7xl sm:text-9xl font-bold text-[#343331] dark:text-[#c8c3ba] transition-colors"
             >
                 404
             </h1>
-            <p class="text-xl mb-4">Oops! Page not found</p>
-            <p class="text-lg mb-8">The page you're looking for doesn't exist or has been moved.</p>
+            <p class="text-xl mb-4 text-[#45433f] dark:text-[#b3ada3]">Oops! Page not found</p>
+            <p class="text-lg mb-8 text-[#706c64] dark:text-[#9d968b]">
+                The page you're looking for doesn't exist or has been moved.
+            </p>
             <a
                 href="/"
-                class="px-6 py-2 border border-current rounded hover:bg-stone hover:text-black dark:hover:bg-white dark:hover:text-black transition-colors"
+                class="px-6 py-2 border border-current rounded text-[#706c64] hover:bg-black/5 hover:text-[#292827] dark:text-[#9d968b] dark:hover:bg-white/8 dark:hover:text-[#d8d3ca] transition-colors"
             >
                 Go Home
             </a>
