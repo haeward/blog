@@ -18,12 +18,6 @@ function getHostLabel(url: string): string {
 
 const meta = item.platform ?? getHostLabel(item.url).toLowerCase();
 const placeholder = item.title.trim().slice(0, 1).toUpperCase();
-const statusLabel =
-    item.status === "up"
-        ? "Site reachable"
-        : item.status === "limited"
-          ? "Site reachable with request limits"
-          : "Site unreachable";
 ---
 
 <li class="group h-full" data-link-card="true">
@@ -33,19 +27,6 @@ const statusLabel =
         rel="noopener noreferrer"
         class="relative flex h-full min-h-14 items-center gap-2.5 rounded-lg border border-black/12 bg-white/35 px-2.5 py-2.5 transition-colors duration-300 hover:border-black/18 hover:bg-white/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-100 dark:border-white/7 dark:bg-white/[0.025] dark:hover:border-white/12 dark:hover:bg-white/[0.045] dark:focus-visible:ring-white/16 dark:focus-visible:ring-offset-stone-900"
     >
-        {item.status && (
-      <span
-        class:list={[
-          "absolute top-2 right-2 size-1.5 rounded-full",
-          item.status === "down" ? "bg-rose-500" : "bg-emerald-500",
-        ]}
-        data-link-status={item.status}
-        role="img"
-        aria-label={statusLabel}
-        title={statusLabel}
-      />
-    )}
-
         <div
             class="flex size-6 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-transparent"
         >
