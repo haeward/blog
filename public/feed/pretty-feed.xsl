@@ -15,16 +15,8 @@
         <link rel="icon" type="image/png" href="/assets/images/site/favicon.png"/>
         <style><![CDATA[
           @font-face {
-            font-family: "Sarasa Gothic SC";
-            src: url("/assets/fonts/SarasaGothicSC-Regular.woff2") format("woff2");
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap;
-          }
-
-          @font-face {
-            font-family: "Sarasa Gothic SC";
-            src: url("/assets/fonts/SarasaGothicSC-Bold.woff2") format("woff2");
+            font-family: "LXGW Neo XiHei";
+            src: url("/assets/fonts/LXGWNeoXiHei.ttf") format("truetype");
             font-weight: 700;
             font-style: normal;
             font-display: swap;
@@ -83,7 +75,7 @@
 
           body {
             position: relative;
-            font-family: "Sarasa Gothic SC", sans-serif;
+            font-family: "LXGW Neo XiHei", sans-serif;
             color: var(--ink);
             background-color: var(--bg-base);
             line-height: 1.6;

@@ -6,8 +6,8 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Sarasa Gothic SC", ...defaultTheme.fontFamily.sans],
-                serif: ["Sarasa Gothic SC", ...defaultTheme.fontFamily.serif],
+                sans: ["LXGW Neo XiHei", ...defaultTheme.fontFamily.sans],
+                serif: ["LXGW Neo XiHei", ...defaultTheme.fontFamily.serif],
                 mono: ["JetBrains Mono", ...defaultTheme.fontFamily.mono],
             },
         },

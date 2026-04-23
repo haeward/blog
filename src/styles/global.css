@@ -3,24 +3,8 @@
 @plugin "@tailwindcss/typography";
 
 @font-face {
-    font-family: "Sarasa Gothic SC";
-    src: url("/assets/fonts/SarasaGothicSC-Regular.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Sarasa Gothic SC";
-    src: url("/assets/fonts/SarasaGothicSC-Bold.woff2") format("woff2");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Sarasa Mono SC";
-    src: url("/assets/fonts/SarasaMonoSC-Regular.woff2") format("woff2");
+    font-family: "LXGW Neo XiHei";
+    src: url("/assets/fonts/LXGWNeoXiHei.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -83,13 +67,13 @@ footer {
 
 .serif-reading-surface,
 .serif-reading-title {
-    font-family: "Sarasa Gothic SC", ui-sans-serif, system-ui, sans-serif;
+    font-family: "LXGW Neo XiHei", ui-sans-serif, system-ui, sans-serif;
     font-synthesis: none;
-    letter-spacing: 0.012em;
+    font-kerning: normal;
 }
 
 .ui-mono {
-    font-family: "Sarasa Mono SC", ui-monospace, monospace;
+    font-family: "LXGW Neo XiHei", ui-sans-serif, system-ui, sans-serif;
 }
 
 .blog-post-shell {
@@ -113,9 +97,9 @@ article {
     @apply prose-headings:text-[#45433f] dark:prose-headings:text-[#b3ada3];
     @apply prose-p:text-[#3f3d3a] dark:prose-p:text-[#bdb6aa];
     @apply prose-li:text-[#45433f] dark:prose-li:text-[#b3ada3];
-    @apply prose-p:text-[1.06rem] prose-p:leading-8 prose-p:font-medium prose-p:tracking-[0.014em];
-    @apply prose-li:text-[1.04rem] prose-li:leading-8 prose-li:font-medium prose-li:tracking-[0.012em];
-    @apply prose-blockquote:text-[1.06rem] prose-blockquote:font-medium prose-blockquote:tracking-[0.014em];
+    @apply prose-p:text-[1.06rem] prose-p:leading-8 prose-p:font-medium;
+    @apply prose-li:text-[1.04rem] prose-li:leading-8 prose-li:font-medium;
+    @apply prose-blockquote:text-[1.06rem] prose-blockquote:font-medium;
     @apply break-words;
     overflow-wrap: anywhere;
     /* Reduce heading margins for tighter spacing */
@@ -691,7 +675,7 @@ html.search-open {
 
 .site-search__result-title {
     margin: 0;
-    font-family: "Sarasa Gothic SC", ui-sans-serif, system-ui, sans-serif;
+    font-family: "LXGW Neo XiHei", ui-sans-serif, system-ui, sans-serif;
     font-size: 1.06rem;
     font-weight: 700;
     line-height: 1.5;
@@ -1021,7 +1005,7 @@ article img {
 
 .blog-toc__progress-label {
     @apply shrink-0 text-[0.72rem] font-medium tabular-nums text-[#706c64] dark:text-[#9d968b];
-    font-family: "Sarasa Mono SC", ui-monospace, monospace;
+    font-family: "LXGW Neo XiHei", ui-sans-serif, system-ui, sans-serif;
 }
 
 .blog-toc__list {
@@ -1114,7 +1098,7 @@ article img {
 
 .changelog-entry__date {
     @apply text-[0.8rem] font-medium tracking-[0.04em] text-[#706c64] dark:text-[#9d968b];
-    font-family: "Sarasa Mono SC", ui-monospace, monospace;
+    font-family: "LXGW Neo XiHei", ui-sans-serif, system-ui, sans-serif;
 }
 
 .changelog-entry__title {
