@@ -34,16 +34,12 @@ const postBody = post.body ?? "";
 const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 4);
 const hasToc = tocHeadings.length > 0;
 const pagefindDate = post.data.date.toISOString().slice(0, 10);
-const postImageAlt = post.data.imageAlt ?? post.data.title;
-const postShareImage = `/og/${post.id}.jpg`;
 ---
 
 <PageLayout
     title={`${post.data.title} | ${SITE.NAME}`}
     description={post.data.description}
     headerDivider={true}
-    image={postShareImage}
-    imageAlt={postImageAlt}
     lang={post.data.lang}
     ogType="article"
     publishedTime={post.data.date}

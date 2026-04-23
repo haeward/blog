@@ -16,9 +16,7 @@
         <style><![CDATA[
           @font-face {
             font-family: "Sarasa Gothic SC";
-            src:
-              url("/assets/fonts/SarasaGothicSC-Regular.woff2") format("woff2"),
-              url("/assets/fonts/SarasaGothicSC-Regular.ttf") format("truetype");
+            src: url("/assets/fonts/SarasaGothicSC-Regular.woff2") format("woff2");
             font-weight: 400;
             font-style: normal;
             font-display: swap;
@@ -26,9 +24,7 @@
 
           @font-face {
             font-family: "Sarasa Gothic SC";
-            src:
-              url("/assets/fonts/SarasaGothicSC-Bold.woff2") format("woff2"),
-              url("/assets/fonts/SarasaGothicSC-Bold.ttf") format("truetype");
+            src: url("/assets/fonts/SarasaGothicSC-Bold.woff2") format("woff2");
             font-weight: 700;
             font-style: normal;
             font-display: swap;
