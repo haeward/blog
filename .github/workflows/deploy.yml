@@ -8,6 +8,10 @@ on:
       - main
   workflow_dispatch:
 
+concurrency:
+  group: site-build-and-deploy-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -29,21 +33,26 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Install Playwright browser
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm run smoke:install
+
+      - name: Build site
+        run: pnpm run build
 
       - name: Smoke check
-        run: pnpm run smoke
+        run: node scripts/verify/smoke.mjs
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./dist --project-name=blog  --commit-dirty=true
+          command: pages deploy ./dist --project-name=blog --commit-dirty=true
           wranglerVersion: '4'
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

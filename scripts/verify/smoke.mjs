@@ -135,6 +135,62 @@ async function assertStatus(baseUrl, route, expectedStatus) {
     }
 }
 
+async function getMediaTabCounts(page, tabName) {
+    return page.locator("#media-data").evaluate((node, name) => {
+        const tabData = JSON.parse(node.textContent || "{}");
+        const pageSize = Number.parseInt(node.dataset.pageSize || "100", 10);
+        const totalCount = Array.isArray(tabData[name]) ? tabData[name].length : 0;
+
+        return {
+            initialCount: Math.min(pageSize, totalCount),
+            totalCount,
+        };
+    }, tabName);
+}
+
+async function assertMediaTabLoadMore(page, tabName, label) {
+    const panelSelector = `[data-tab-panel="${tabName}"]:not([hidden])`;
+    const gridItemSelector = `${panelSelector} [data-media-grid] > li`;
+    const moreButtonSelector = `${panelSelector} [data-media-more]`;
+
+    await page.waitForSelector(gridItemSelector);
+
+    const { initialCount, totalCount } = await getMediaTabCounts(page, tabName);
+    const initialVisibleCount = await page.locator(gridItemSelector).count();
+    if (initialVisibleCount !== initialCount) {
+        fail(
+            `${label} expected ${initialCount} ${tabName} cards initially, received ${initialVisibleCount}.`,
+        );
+    }
+
+    if (totalCount <= initialCount) {
+        return;
+    }
+
+    const moreButton = page.locator(moreButtonSelector);
+    if ((await moreButton.count()) === 0) {
+        fail(`${label} expected a load-more button for ${tabName}, but none was rendered.`);
+    }
+
+    await moreButton.click();
+    await page.waitForFunction(
+        ({ panelSelector, expectedCount }) => {
+            const panel = document.querySelector(panelSelector);
+            if (!(panel instanceof HTMLElement)) return false;
+
+            const cards = panel.querySelectorAll("[data-media-grid] > li");
+            const moreWrapper = panel.querySelector("[data-media-more-wrapper]");
+            const moreHidden = !(moreWrapper instanceof HTMLElement) || moreWrapper.hidden === true;
+
+            return cards.length === expectedCount && moreHidden;
+        },
+        {
+            panelSelector,
+            expectedCount: totalCount,
+        },
+    );
+}
+
 async function run() {
     await ensureBuiltSite();
     const { server, baseUrl } = await startStaticServer();
@@ -187,25 +243,7 @@ async function run() {
         });
         await page.click('[data-tab="movies"]');
         await page.waitForFunction(() => window.location.hash === "#movies");
-        await page.waitForSelector(
-            '[data-tab-panel="movies"]:not([hidden]) [data-media-grid] > li',
-        );
-        const movieCards = await page
-            .locator('[data-tab-panel="movies"]:not([hidden]) [data-media-grid] > li')
-            .count();
-        if (movieCards !== 100) {
-            fail(`Expected 100 movie cards initially, received ${movieCards}.`);
-        }
-        const moreButton = page.locator(
-            '[data-tab-panel="movies"]:not([hidden]) [data-media-more]',
-        );
-        await moreButton.click();
-        await page.waitForFunction(() => {
-            const cards = document.querySelectorAll(
-                '[data-tab-panel="movies"]:not([hidden]) [data-media-grid] > li',
-            );
-            return cards.length === 124;
-        });
+        await assertMediaTabLoadMore(page, "movies", "Desktop media tab");
 
         await page.goto(`${baseUrl}${ARTICLE_SLUG}`, { waitUntil: "networkidle" });
         await page.click(".blog-article img");
@@ -231,18 +269,8 @@ async function run() {
 
         await mobilePage.goto(`${baseUrl}/media/#movies`, { waitUntil: "networkidle" });
         await mobilePage.locator('[data-tab="movies"]').click();
-        await mobilePage.waitForSelector(
-            '[data-tab-panel="movies"]:not([hidden]) [data-media-grid] > li',
-        );
-        await mobilePage
-            .locator('[data-tab-panel="movies"]:not([hidden]) [data-media-more]')
-            .click();
-        await mobilePage.waitForFunction(() => {
-            const cards = document.querySelectorAll(
-                '[data-tab-panel="movies"]:not([hidden]) [data-media-grid] > li',
-            );
-            return cards.length === 124;
-        });
+        await mobilePage.waitForFunction(() => window.location.hash === "#movies");
+        await assertMediaTabLoadMore(mobilePage, "movies", "Mobile media tab");
 
         assertNoErrors();
         assertNoMobileErrors();
@@ -261,7 +289,7 @@ run().then(
         console.log("Smoke checks passed.");
     },
     (error) => {
-        console.error(error instanceof Error ? error.message : String(error));
+        console.error(error instanceof Error ? (error.stack ?? error.message) : String(error));
         process.exitCode = 1;
     },
 );
