@@ -76,7 +76,6 @@ if (!window.__siteState) {
     window.__siteState = { bound: false };
 }
 const siteState = window.__siteState;
-const themeModes = ["system", "light", "dark"];
 const themeLabels = {
     system: "System",
     light: "Light",
@@ -119,7 +118,7 @@ function handleDocumentClick(event) {
     const themeToggle = event.target.closest("#theme-toggle");
     if (themeToggle) {
         event.preventDefault();
-        const nextTheme = getNextTheme(getStoredTheme());
+        const nextTheme = getNextTheme(resolveTheme(getStoredTheme()));
         localStorage.setItem("theme", nextTheme);
         syncTheme(nextTheme);
         return;
@@ -229,12 +228,11 @@ function toggleTheme(dark) {
 
 function getStoredTheme() {
     const userTheme = localStorage.getItem("theme");
-    return themeModes.includes(userTheme) ? userTheme : "system";
+    return userTheme === "light" || userTheme === "dark" ? userTheme : "system";
 }
 
 function getNextTheme(theme) {
-    const themeIndex = themeModes.indexOf(theme);
-    return themeModes[(themeIndex + 1) % themeModes.length];
+    return theme ? "light" : "dark";
 }
 
 function resolveTheme(theme, systemPrefersDark = colorSchemeMediaQuery.matches) {
@@ -243,21 +241,22 @@ function resolveTheme(theme, systemPrefersDark = colorSchemeMediaQuery.matches) 
     return systemPrefersDark;
 }
 
-function updateThemeToggle(theme) {
+function updateThemeToggle(dark) {
     const themeToggle = document.getElementById("theme-toggle");
     if (!(themeToggle instanceof HTMLElement)) return;
 
-    const nextTheme = getNextTheme(theme);
+    const nextTheme = getNextTheme(dark);
     const nextLabel = themeLabels[nextTheme];
 
-    themeToggle.dataset.themeMode = theme;
+    themeToggle.dataset.themeToggleMode = nextTheme;
     themeToggle.setAttribute("aria-label", `Switch theme to ${nextLabel}`);
 }
 
 function syncTheme(theme = getStoredTheme(), systemPrefersDark = colorSchemeMediaQuery.matches) {
+    const dark = resolveTheme(theme, systemPrefersDark);
     document.documentElement.dataset.themeMode = theme;
-    toggleTheme(resolveTheme(theme, systemPrefersDark));
-    updateThemeToggle(theme);
+    toggleTheme(dark);
+    updateThemeToggle(dark);
 }
 
 function preloadTheme() {

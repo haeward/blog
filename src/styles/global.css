@@ -497,9 +497,8 @@ html.scrolled #back-to-top {
     box-shadow: none;
 }
 
-html[data-theme-mode="system"] .theme-toggle__icon--light,
-html[data-theme-mode="light"] .theme-toggle__icon--dark,
-html[data-theme-mode="dark"] .theme-toggle__icon--system {
+#theme-toggle[data-theme-toggle-mode="light"] .theme-toggle__icon--light,
+#theme-toggle[data-theme-toggle-mode="dark"] .theme-toggle__icon--dark {
     display: block;
 }
 
