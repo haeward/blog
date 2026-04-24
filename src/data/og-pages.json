@@ -1,0 +1,12 @@
+{
+    "home": {
+        "title": "Haeward",
+        "og": "/assets/images/og/pages/haeward.png",
+        "ogAlt": "Retro green terminal-style cover for Haeward, with Arch Linux system text and an ASCII portrait."
+    },
+    "about": {
+        "title": "About",
+        "og": "/assets/images/og/pages/about.png",
+        "ogAlt": "Retro green terminal-style cover for the About page, with Arch Linux system text and an ASCII portrait."
+    }
+}

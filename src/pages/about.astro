@@ -3,10 +3,19 @@ import Container from "@components/Container.astro";
 import LinkEnhancer from "@components/LinkEnhancer.astro";
 import { ABOUT, SITE } from "@consts";
 import PageLayout from "@layouts/PageLayout.astro";
+import { getPageOg } from "@lib/og";
 import { Content as AboutContent } from "../content/about.md";
+
+const pageOg = getPageOg("about");
 ---
 
-<PageLayout title={`${ABOUT.TITLE} | ${SITE.NAME}`} description={ABOUT.DESCRIPTION} lang="en">
+<PageLayout
+    title={`${ABOUT.TITLE} | ${SITE.NAME}`}
+    description={ABOUT.DESCRIPTION}
+    ogImage={pageOg.ogImage}
+    ogImageAlt={pageOg.ogImageAlt}
+    lang="en"
+>
     <Container>
         <section class="space-y-10 sm:space-y-12">
             <div class="animate max-w-2xl space-y-3">

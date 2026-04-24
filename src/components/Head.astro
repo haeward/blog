@@ -6,13 +6,32 @@ import { SITE, SOCIALS } from "@consts";
 interface Props {
     title: string;
     description: string;
+    ogImage?: string;
+    ogImageAlt?: string;
+    ogImageWidth?: number;
+    ogImageHeight?: number;
+    ogImageType?: string;
     ogType?: "website" | "article";
     publishedTime?: string | Date;
     locale?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description, ogType = "website", publishedTime, locale = "en_US" } = Astro.props;
+const {
+    title,
+    description,
+    ogImage,
+    ogImageAlt = `${title} preview image`,
+    ogImageWidth = 1200,
+    ogImageHeight = 630,
+    ogImageType = "image/png",
+    ogType = "website",
+    publishedTime,
+    locale = "en_US",
+} = Astro.props;
+const ogImageURL = ogImage ? new URL(ogImage, Astro.site) : undefined;
+const ogImageWidthContent = String(ogImageWidth);
+const ogImageHeightContent = String(ogImageHeight);
 const publishedTimeContent =
     publishedTime instanceof Date ? publishedTime.toISOString() : publishedTime;
 const twitterSite = getTwitterSite();
@@ -52,14 +71,25 @@ function getTwitterSite(): string | undefined {
 <meta property="og:description" content={description}>
 <meta property="og:site_name" content={SITE.NAME}>
 <meta property="og:locale" content={locale}>
+{ogImageURL && (
+        <>
+            <meta property="og:image" content={ogImageURL} />
+            <meta property="og:image:width" content={ogImageWidthContent} />
+            <meta property="og:image:height" content={ogImageHeightContent} />
+            <meta property="og:image:type" content={ogImageType} />
+            <meta property="og:image:alt" content={ogImageAlt} />
+        </>
+    )}
 {publishedTimeContent && <meta property="article:published_time" content={publishedTimeContent} />}
 
 <!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content={ogImageURL ? "summary_large_image" : "summary"}>
 <meta name="twitter:url" content={canonicalURL}>
 {twitterSite && <meta name="twitter:site" content={twitterSite} />}
 <meta name="twitter:title" content={title}>
 <meta name="twitter:description" content={description}>
+{ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
+{ogImageURL && <meta name="twitter:image:alt" content={ogImageAlt} />}
 
 <!-- RSS Link -->
 <link

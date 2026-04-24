@@ -1,9 +1,11 @@
 ---
 title: "晋南游记"
-description: "记录在运城和临汾的旅程"
+description: "一篇关于晋南旅行的游记，记录在运城与临汾之间的见闻、历史遗迹、地方风物和旅途中的细节。"
 date: "2025-08-12"
 draft: false
 lang: "zh-CN"
+og: "/assets/images/og/posts/2025/travelogue-of-southern-shanxi.png"
+ogAlt: "晋南游记的复古绿色终端风格封面，包含 Arch Linux 系统信息和 ASCII 头像。"
 ---
 
 这几天，高中同学在年休，我们便约好在山西一同游玩几天，最终将目的地选在了“关公故里” —— [运城](https://zh.wikipedia.org/wiki/%E8%BF%90%E5%9F%8E%E5%B8%82) 和 "华夏第一都" —— [临汾](https://zh.wikipedia.org/wiki/%E4%B8%B4%E6%B1%BE%E5%B8%82)。

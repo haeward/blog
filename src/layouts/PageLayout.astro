@@ -8,6 +8,8 @@ import SearchModal from "@components/SearchModal.astro";
 type Props = {
     title: string;
     description: string;
+    ogImage?: string;
+    ogImageAlt?: string;
     headerDivider?: boolean;
     lang?: string;
     ogType?: "website" | "article";
@@ -18,6 +20,8 @@ type Props = {
 const {
     title,
     description,
+    ogImage,
+    ogImageAlt,
     headerDivider = true,
     lang = "en",
     ogType,
@@ -39,6 +43,8 @@ function toOpenGraphLocale(language: string): string {
         <Head
             title={title}
             description={description}
+            ogImage={ogImage}
+            ogImageAlt={ogImageAlt}
             ogType={ogType}
             publishedTime={publishedTime}
             locale={locale}
