@@ -2,38 +2,41 @@ import type { Metadata, Site, Socials } from "@types";
 
 export const SITE: Site = {
     NAME: "Haeward",
-    DESC: "Haeward's Blog",
+    DESC: "Personal notes on software, reading, media, travel, and the small systems that shape everyday life.",
     NUM_POSTS_ON_HOMEPAGE: 10,
 };
 
 export const BLOG: Metadata = {
     TITLE: "Archive",
-    DESCRIPTION: "A chronological archive of articles on topics I am passionate about.",
+    DESCRIPTION:
+        "A chronological archive of essays, notes, travelogues, and technical writing from Haeward.",
 };
 
 export const NOW: Metadata = {
     TITLE: "Now",
-    DESCRIPTION: "What I am focused on right now, plus the latest moments.",
+    DESCRIPTION: "A current snapshot of what I am reading, watching, building, and thinking about.",
 };
 
 export const ABOUT: Metadata = {
     TITLE: "About",
-    DESCRIPTION: "Who I am and what I do.",
+    DESCRIPTION:
+        "A brief introduction to Haeward, covering the person behind the site and ways to follow along.",
 };
 
 export const MEDIA: Metadata = {
     TITLE: "Media",
-    DESCRIPTION: "Completed books, films, and shows I track.",
+    DESCRIPTION: "A personal media shelf of books, films, series, anime, and notes worth keeping.",
 };
 
 export const LINKS: Metadata = {
     TITLE: "Links",
-    DESCRIPTION: "A directory of blogs and video creators I keep returning to.",
+    DESCRIPTION:
+        "A curated directory of blogs, publications, creators, and videos I return to for ideas and perspective.",
 };
 
 export const CHANGELOG: Metadata = {
     TITLE: "Changelog",
-    DESCRIPTION: "A timeline of major updates to the site.",
+    DESCRIPTION: "A running record of notable design, content, and technical updates to this site.",
 };
 
 export const SOCIALS: Socials = [

@@ -4,7 +4,10 @@ import { SITE } from "@consts";
 import PageLayout from "@layouts/PageLayout.astro";
 ---
 
-<PageLayout title={`404 | ${SITE.NAME}`} description="Page not found.">
+<PageLayout
+    title={`404 | ${SITE.NAME}`}
+    description="The page you are looking for does not exist or has moved."
+>
     <Container>
         <div class="flex flex-col items-center justify-center h-[60vh] text-center px-4">
             <h1

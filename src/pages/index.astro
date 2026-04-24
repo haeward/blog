@@ -5,14 +5,22 @@ import ArrowCard from "@components/ArrowCard.astro";
 import Container from "@components/Container.astro";
 import { SITE, SOCIALS } from "@consts";
 import PageLayout from "@layouts/PageLayout.astro";
+import { getPageOg } from "@lib/og";
 
 const blog = (await getCollection("blog"))
     .filter((post) => !post.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
     .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+const pageOg = getPageOg("home");
 ---
 
-<PageLayout title={SITE.NAME} description={SITE.DESC} lang="en">
+<PageLayout
+    title={SITE.NAME}
+    description={SITE.DESC}
+    ogImage={pageOg.ogImage}
+    ogImageAlt={pageOg.ogImageAlt}
+    lang="en"
+>
     <Container>
         <div class="space-y-12 sm:space-y-14">
             <section>
