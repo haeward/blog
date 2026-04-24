@@ -1,18 +1,20 @@
 ---
 type Props = {
     account: string;
+    accountId: string;
     domain: string;
     profileUrl: string;
     limit?: number;
 };
 
-const { account, domain, profileUrl, limit = 5 } = Astro.props;
+const { account, accountId, domain, profileUrl, limit = 5 } = Astro.props;
 ---
 
 <section
     class="animate space-y-5"
     data-moments-root="true"
     data-account={account}
+    data-account-id={accountId}
     data-domain={domain}
     data-profile-url={profileUrl}
     data-limit={limit.toString()}
@@ -56,6 +58,7 @@ function initMoments() {
 
 async function loadMoments(root) {
     const account = root.dataset.account;
+    const accountId = root.dataset.accountId;
     const domain = root.dataset.domain;
     const limit = Number.parseInt(root.dataset.limit || "5", 10);
     const statusNode = root.querySelector("[data-moments-status='true']");
@@ -63,6 +66,7 @@ async function loadMoments(root) {
 
     if (
         !account ||
+        !accountId ||
         !domain ||
         !(statusNode instanceof HTMLElement) ||
         !(listNode instanceof HTMLUListElement)
@@ -73,23 +77,7 @@ async function loadMoments(root) {
     const fallbackHref = root.dataset.profileUrl || `https://${domain}/@${account}`;
 
     try {
-        const lookupUrl = new URL(`https://${domain}/api/v1/accounts/lookup`);
-        lookupUrl.searchParams.set("acct", `${account}@${domain}`);
-
-        const lookupResponse = await fetch(lookupUrl.toString(), {
-            headers: { Accept: "application/json" },
-        });
-
-        if (!lookupResponse.ok) {
-            throw new Error("lookup_failed");
-        }
-
-        const accountData = await lookupResponse.json();
-        if (!accountData?.id) {
-            throw new Error("missing_account_id");
-        }
-
-        const statusesUrl = new URL(`https://${domain}/api/v1/accounts/${accountData.id}/statuses`);
+        const statusesUrl = new URL(`https://${domain}/api/v1/accounts/${accountId}/statuses`);
         statusesUrl.searchParams.set("limit", String(limit));
         statusesUrl.searchParams.set("exclude_replies", "true");
         statusesUrl.searchParams.set("exclude_reblogs", "true");
