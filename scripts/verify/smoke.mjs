@@ -7,7 +7,7 @@ import { chromium } from "playwright";
 const DIST_DIR = path.resolve("dist");
 const HOST = "127.0.0.1";
 const ARTICLE_SLUG = "/posts/2025/travelogue-of-southern-shanxi/";
-const MOCK_MASTODON_ACCOUNT = { id: "haeward-account" };
+const MOCK_MASTODON_ACCOUNT_ID = "114251868212289038";
 const MOCK_MASTODON_STATUSES = Array.from({ length: 5 }, (_, index) => ({
     id: `moment-${index + 1}`,
     account: {
@@ -276,7 +276,7 @@ async function run() {
 
         const page = await browser.newPage({ viewport: { width: 1440, height: 960 } });
         await page.addInitScript(
-            ({ account, statuses }) => {
+            ({ accountId, statuses }) => {
                 const originalFetch = window.fetch.bind(window);
 
                 window.fetch = async (input, init) => {
@@ -287,16 +287,7 @@ async function run() {
                               ? input.url
                               : String(input);
 
-                    if (url.startsWith("https://mas.to/api/v1/accounts/lookup")) {
-                        return {
-                            ok: true,
-                            async json() {
-                                return account;
-                            },
-                        };
-                    }
-
-                    if (url.startsWith(`https://mas.to/api/v1/accounts/${account.id}/statuses`)) {
+                    if (url.startsWith(`https://mas.to/api/v1/accounts/${accountId}/statuses`)) {
                         return {
                             ok: true,
                             async json() {
@@ -309,7 +300,7 @@ async function run() {
                 };
             },
             {
-                account: MOCK_MASTODON_ACCOUNT,
+                accountId: MOCK_MASTODON_ACCOUNT_ID,
                 statuses: MOCK_MASTODON_STATUSES,
             },
         );
@@ -354,12 +345,13 @@ async function run() {
         }
 
         const themeToggle = page.locator("#theme-toggle");
+        await page.waitForFunction(() => document.documentElement.dataset.themeMode === "system");
+        await themeToggle.click();
+        await page.waitForFunction(() => document.documentElement.dataset.themeMode === "dark");
         await themeToggle.click();
         await page.waitForFunction(() => document.documentElement.dataset.themeMode === "light");
-        await themeToggle.click();
-        await page.waitForFunction(() => document.documentElement.dataset.themeMode === "dark");
         await page.reload({ waitUntil: "networkidle" });
-        await page.waitForFunction(() => document.documentElement.dataset.themeMode === "dark");
+        await page.waitForFunction(() => document.documentElement.dataset.themeMode === "light");
 
         await page.goto(`${baseUrl}/media/#books`, { waitUntil: "networkidle" });
         await page.waitForFunction(() => {
