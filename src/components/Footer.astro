@@ -1,32 +1,54 @@
 ---
 import Container from "@components/Container.astro";
-import YearProgress from "@components/YearProgress.astro";
 import { SITE } from "@consts";
 
 const currentYear = new Date().getFullYear();
+
+const ccIcons = [
+    "M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2ZM9 8C6.792 8 5 9.792 5 12C5 14.208 6.792 16 9 16C10.104 16 11.104 15.552 11.828 14.828L10.4144 13.4144C10.0525 13.7762 9.5525 14 9 14C7.895 14 7 13.105 7 12C7 10.895 7.895 10 9 10C9.55299 10 10.0534 10.2241 10.4153 10.5866L11.829 9.173C11.1049 8.44841 10.1045 8 9 8ZM16 8C13.792 8 12 9.792 12 12C12 14.208 13.792 16 16 16C17.104 16 18.104 15.552 18.828 14.828L17.4144 13.4144C17.0525 13.7762 16.5525 14 16 14C14.895 14 14 13.105 14 12C14 10.895 14.895 10 16 10C16.553 10 17.0534 10.2241 17.4153 10.5866L18.829 9.173C18.1049 8.44841 17.1045 8 16 8Z",
+    "M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2ZM14 10H10C9.44772 10 9 10.4477 9 11V15H10.5V19H13.5V15H15V11C15 10.4477 14.5523 10 14 10ZM12 5C10.8954 5 10 5.89543 10 7C10 8.10457 10.8954 9 12 9C13.1046 9 14 8.10457 14 7C14 5.89543 13.1046 5 12 5Z",
+    "M4.25639 5.67208L7.83528 9.24858C7.62206 9.61662 7.5 10.0441 7.5 10.5C7.5 11.8807 8.61929 13 10 13H14L14.0899 13.0081C14.3231 13.0504 14.5 13.2545 14.5 13.5C14.5 13.7761 14.2761 14 14 14H8.5V16H11V18H13V16H14C14.1817 16 14.3589 15.9806 14.5296 15.9438L18.3279 19.7436C16.6042 21.1539 14.4009 22 12 22C6.47715 22 2 17.5228 2 12C2 9.5991 2.8461 7.39583 4.25639 5.67208ZM12 2C17.5228 2 22 6.47715 22 12C22 14.4009 21.1539 16.6042 19.7436 18.3279L16.1652 14.7507C16.3781 14.3828 16.5 13.9556 16.5 13.5C16.5 12.1193 15.3807 11 14 11H10L9.91012 10.9919C9.67688 10.9496 9.5 10.7455 9.5 10.5C9.5 10.2239 9.72386 10 10 10H15.5V8H13V6H11V8H10C9.81853 8 9.64159 8.01933 9.4711 8.05605L5.67208 4.25639C7.39583 2.8461 9.5991 2 12 2Z",
+    "M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM12 6C9.82278 6 7.97058 7.66991 7.28433 10.0006L6 10L8.5 13L11 10L9.40123 10.0003C9.91991 8.80452 10.8895 8 12 8C13.6569 8 15 9.79086 15 12C15 14.2091 13.6569 16 12 16C10.8899 16 9.92064 15.1961 9.40181 14.0011L7.28471 14.0007C7.97126 16.3307 9.82318 18 12 18C14.7614 18 17 15.3137 17 12C17 8.68629 14.7614 6 12 6Z",
+];
 ---
 
 <footer class="animate">
     <Container>
-        <YearProgress />
-
         <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <div class="animate leading-relaxed text-[var(--site-color-text-muted)]">
+            <div
+                class="animate flex flex-wrap items-center gap-x-2 gap-y-1 leading-relaxed text-[var(--site-color-text-muted)]"
+            >
                 <a href="/" class="font-bold">{SITE.NAME}</a>
-                {" | "}
-                &copy; 2024 ~ {currentYear}
-                {" · "}
+                <span>|</span>
+                <span>&copy; 2024 ~ {currentYear}</span>
+                <span>·</span>
+                <a
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+                    class="inline-flex items-center gap-1.5 transition-opacity hover:opacity-80"
+                    aria-label="CC BY-NC-SA 4.0"
+                    rel="license noopener noreferrer"
+                    target="_blank"
+                >
+                    <span>CC BY-NC-SA 4.0</span>
+                    <span class="inline-flex items-center gap-1" aria-hidden="true">
+                        {ccIcons.map((path) => (
+                            <svg
+                                class="h-4 w-4"
+                                aria-hidden="true"
+                                viewBox="0 0 24 24"
+                                width="1.2em"
+                                height="1.2em"
+                            >
+                                <path fill="currentColor" d={path}></path>
+                            </svg>
+                        ))}
+                    </span>
+                </a>
+            </div>
+            <div class="animate leading-relaxed text-[var(--site-color-text-muted)] sm:text-right">
                 <a href="/changelog" class="font-bold underline">Changelog</a>
                 {" · "}
                 <a href="/rss.xml" class="font-bold underline">RSS</a>
-            </div>
-            <div class="animate leading-relaxed text-[var(--site-color-text-muted)] sm:text-right">
-                Power by{" "}
-                <a href="https://astro.build/" class="font-bold text-base">Astro</a>
-                {" & "}
-                <a href="https://github.com/markhorn-dev/astro-nano" class="font-bold text-base"
-                    >Astro Nano</a
-                >
             </div>
         </div>
     </Container>
