@@ -78,10 +78,10 @@ RSS must remain discoverable in two places:
   href resolved from `Astro.site`.
 - `Footer.astro` includes a visible `RSS` link to `/rss.xml`.
 
-The footer RSS link uses the existing footer link style: bold, cyan, and
-underlined. Do not move RSS into the main header nav unless the overall
-navigation model changes; the feed is a utility destination, not a primary
-section like Archive or Media.
+The footer RSS link uses the existing footer link style: bold and underlined on
+the muted footer surface. Do not move RSS into the main header nav unless the
+overall navigation model changes; the feed is a utility destination, not a
+primary section like Archive or Media.
 
 ## Pretty Feed Preview
 

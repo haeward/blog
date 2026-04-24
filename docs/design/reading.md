@@ -1,9 +1,11 @@
 # Reading
 
 This document defines the article and prose design rules for the blog. The main
-implementation lives in `src/pages/posts/[...slug].astro`, `src/pages/about.astro`,
-`src/styles/global.css`, `src/components/TableOfContents.astro`, and
-`src/components/LinkEnhancer.astro`.
+implementation lives in `src/pages/posts/[...slug].astro`,
+`src/components/PostHeader.astro`, `src/components/PostNavigation.astro`,
+`src/components/ImageLightbox.astro`, `src/pages/about.astro`,
+`src/styles/global.css`, `src/components/TableOfContents.astro`,
+`src/components/LinkEnhancer.astro`, and article scripts in `src/scripts/`.
 
 Shared link color rules are documented in `docs/design/links.md`.
 
@@ -20,7 +22,7 @@ Article pages use a centered, narrow shell:
 
 The article title sits above the prose, not inside the generated Markdown body.
 It uses `.serif-reading-title`, `text-xl sm:text-2xl`, `font-bold`,
-`text-black/90`, and `dark:text-white/95`.
+and `--site-color-text-primary`.
 
 The meta row is compact and wraps:
 
@@ -50,8 +52,8 @@ Core prose settings:
   `tracking-[0.014em]`.
 - List items use `text-[1.04rem]`, `leading-8`, `font-medium`, and
   `tracking-[0.012em]`.
-- Body text uses `text-black/85` and `dark:text-white/85`.
-- List text uses `text-black/84` and `dark:text-white/84`.
+- Body text uses `--site-color-text-body`.
+- List text uses `--site-color-text-heading`.
 - Content breaks words with `break-words` and `overflow-wrap: anywhere`.
 
 Heading spacing is intentionally tighter than default prose:
@@ -103,7 +105,7 @@ Article link focus is defined in `LinkEnhancer.astro`:
 
 Strong text is bold and high contrast:
 
-- Use `text-black` and `dark:text-white`.
+- Use `--site-color-text-heading`.
 - Keep the current small padding and rounded background behavior.
 - Do not use color alone to make strong text look like a link.
 
@@ -212,7 +214,7 @@ Desktop placement:
 
 TOC visual behavior:
 
-- Text is small and muted: `text-sm text-black/68 dark:text-white/62`.
+- Text is small and muted through `--site-color-text-muted`.
 - Links use `text-[0.74rem]`, `rounded-md`, and compact padding.
 - Heading depth is shown by line width.
 - Active state increases font weight, text contrast, line width, and line height.

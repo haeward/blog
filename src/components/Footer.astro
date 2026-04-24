@@ -11,7 +11,7 @@ const currentYear = new Date().getFullYear();
         <YearProgress />
 
         <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <div class="animate leading-relaxed text-[#706c64] dark:text-[#9d968b]">
+            <div class="animate leading-relaxed text-[var(--site-color-text-muted)]">
                 <a href="/" class="font-bold">{SITE.NAME}</a>
                 {" | "}
                 &copy; 2024 ~ {currentYear}
@@ -20,7 +20,7 @@ const currentYear = new Date().getFullYear();
                 {" · "}
                 <a href="/rss.xml" class="font-bold underline">RSS</a>
             </div>
-            <div class="animate leading-relaxed text-[#706c64] dark:text-[#9d968b] sm:text-right">
+            <div class="animate leading-relaxed text-[var(--site-color-text-muted)] sm:text-right">
                 Power by{" "}
                 <a href="https://astro.build/" class="font-bold text-base">Astro</a>
                 {" & "}

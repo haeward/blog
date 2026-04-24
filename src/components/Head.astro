@@ -102,208 +102,21 @@ function getTwitterSite(): string | undefined {
 <ClientRouter />
 
 <script is:inline>
-if (!window.__siteState) {
-    window.__siteState = { bound: false };
-}
-const siteState = window.__siteState;
-const themeLabels = {
-    system: "System",
-    light: "Light",
-    dark: "Dark",
-};
-const colorSchemeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-// Apply theme ASAP to avoid flash on hard reloads.
-preloadTheme();
-
-function init() {
-    preloadTheme();
-    onScroll();
-    animate();
-}
-
-function bindOnce() {
-    if (siteState.bound) return;
-    siteState.bound = true;
-
-    document.addEventListener("click", handleDocumentClick);
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    const handleSchemeChange = (event) => {
-        if (getStoredTheme() === "system") {
-            syncTheme("system", event.matches);
-        }
-    };
-
-    if (colorSchemeMediaQuery.addEventListener) {
-        colorSchemeMediaQuery.addEventListener("change", handleSchemeChange);
-    } else if ("onchange" in colorSchemeMediaQuery) {
-        colorSchemeMediaQuery.onchange = handleSchemeChange;
-    }
-}
-
-function handleDocumentClick(event) {
-    if (!(event.target instanceof Element)) return;
-
-    const themeToggle = event.target.closest("#theme-toggle");
-    if (themeToggle) {
-        event.preventDefault();
-        const nextTheme = getNextTheme(resolveTheme(getStoredTheme()));
-        localStorage.setItem("theme", nextTheme);
-        syncTheme(nextTheme);
-        return;
-    }
-
-    const backToTop = event.target.closest("#back-to-top");
-    if (backToTop) {
-        event.preventDefault();
-        scrollToTop();
-        return;
-    }
-
-    const backToPrev = event.target.closest("#back-to-prev");
-    if (backToPrev) {
-        event.preventDefault();
-        window.history.back();
-        return;
-    }
-
-    const pre = event.target.closest("pre");
-    if (pre) {
-        void tryCopyCode(pre, event);
-    }
-}
-
-async function tryCopyCode(pre, event) {
-    if (!(event instanceof MouseEvent)) return;
-    if (!navigator?.clipboard?.writeText) return;
-
-    const rect = pre.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    if (x > rect.width - 40 && x < rect.width - 8 && y > 8 && y < 40) {
-        const code = pre.textContent || "";
-        if (!code) return;
-
-        try {
-            await navigator.clipboard.writeText(code);
-
-            pre.style.setProperty(
-                "--copy-icon",
-                "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%23ffffff'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7' /%3e%3c/svg%3e\")",
-            );
-
-            setTimeout(() => {
-                pre.style.removeProperty("--copy-icon");
-            }, 2000);
-        } catch (err) {
-            console.error("copy failed:", err);
-        }
-    }
-}
-
-function animate() {
-    const animateElements = document.querySelectorAll(".animate:not(.show)");
-
-    animateElements.forEach((element, index) => {
-        setTimeout(() => {
-            element.classList.add("show");
-        }, index * 150);
-    });
-}
-
-function onScroll() {
-    if (window.scrollY > 0) {
-        document.documentElement.classList.add("scrolled");
-    } else {
-        document.documentElement.classList.remove("scrolled");
-    }
-}
-
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-    });
-}
-
-function toggleTheme(dark) {
-    const css = document.createElement("style");
-
-    css.appendChild(
-        document.createTextNode(
-            `* {
-             -webkit-transition: none !important;
-             -moz-transition: none !important;
-             -o-transition: none !important;
-             -ms-transition: none !important;
-             transition: none !important;
-          }
-        `,
-        ),
-    );
-
-    document.head.appendChild(css);
-
-    if (dark) {
-        document.documentElement.classList.add("dark");
-    } else {
-        document.documentElement.classList.remove("dark");
-    }
-
-    void window.getComputedStyle(css).opacity;
-    document.head.removeChild(css);
-}
-
-function getStoredTheme() {
+const getStoredTheme = () => {
     const userTheme = localStorage.getItem("theme");
     return userTheme === "light" || userTheme === "dark" ? userTheme : "system";
-}
-
-function getNextTheme(theme) {
-    return theme ? "light" : "dark";
-}
-
-function resolveTheme(theme, systemPrefersDark = colorSchemeMediaQuery.matches) {
+};
+const resolveTheme = (theme, systemPrefersDark) => {
     if (theme === "dark") return true;
     if (theme === "light") return false;
     return systemPrefersDark;
-}
+};
+const theme = getStoredTheme();
+const dark = resolveTheme(theme, window.matchMedia("(prefers-color-scheme: dark)").matches);
+document.documentElement.dataset.themeMode = theme;
+document.documentElement.classList.toggle("dark", dark);
+</script>
 
-function updateThemeToggle(dark) {
-    const themeToggle = document.getElementById("theme-toggle");
-    if (!(themeToggle instanceof HTMLElement)) return;
-
-    const nextTheme = getNextTheme(dark);
-    const nextLabel = themeLabels[nextTheme];
-
-    themeToggle.dataset.themeToggleMode = nextTheme;
-    themeToggle.setAttribute("aria-label", `Switch theme to ${nextLabel}`);
-}
-
-function syncTheme(theme = getStoredTheme(), systemPrefersDark = colorSchemeMediaQuery.matches) {
-    const dark = resolveTheme(theme, systemPrefersDark);
-    document.documentElement.dataset.themeMode = theme;
-    toggleTheme(dark);
-    updateThemeToggle(dark);
-}
-
-function preloadTheme() {
-    syncTheme(getStoredTheme());
-}
-
-function bindInitListeners() {
-    if (siteState.initBound) return;
-    siteState.initBound = true;
-    document.addEventListener("DOMContentLoaded", init);
-    document.addEventListener("astro:after-swap", init);
-}
-
-bindOnce();
-bindInitListeners();
-
-if (document.readyState !== "loading") {
-    init();
-}
+<script>
+import "../scripts/site";
 </script>

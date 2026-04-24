@@ -34,15 +34,15 @@ const mastodon =
         <section class="space-y-10 sm:space-y-12">
             <div class="animate max-w-2xl space-y-2">
                 <h1
-                    class="serif-reading-title text-3xl font-bold tracking-[0.01em] text-[#343331] dark:text-[#c8c3ba] sm:text-4xl"
+                    class="serif-reading-title text-3xl font-bold tracking-[0.01em] text-[var(--site-color-text-primary)] sm:text-4xl"
                 >
                     Now
                 </h1>
 
                 {nowFrontmatter.updated && (
-                    <p class="text-sm text-[#706c64] dark:text-[#9d968b]">
+                    <p class="text-sm text-[var(--site-color-text-muted)]">
                         Last updated
-                        <span class="font-medium text-[#45433f] dark:text-[#b3ada3]">
+                        <span class="font-medium text-[var(--site-color-text-heading)]">
                             <FormattedDate date={new Date(nowFrontmatter.updated)} />
                         </span>
                     </p>
@@ -52,7 +52,7 @@ const mastodon =
             {sections.length > 0 && (
                 <section class="animate space-y-4">
                     <h2
-                        class="serif-reading-title text-2xl font-bold text-[#343331] dark:text-[#c8c3ba]"
+                        class="serif-reading-title text-2xl font-bold text-[var(--site-color-text-primary)]"
                     >
                         Books & Media
                     </h2>
@@ -61,12 +61,12 @@ const mastodon =
                         {sections.map((section) => (
                             <section class="space-y-3">
                                 <h3
-                                    class="serif-reading-title text-lg font-semibold text-[#45433f] dark:text-[#b3ada3]"
+                                    class="serif-reading-title text-lg font-semibold text-[var(--site-color-text-heading)]"
                                 >
                                     {section.title}
                                 </h3>
 
-                                <ul class="serif-reading-surface site-prose-links list-disc space-y-2 pl-5 text-[1rem] leading-7 text-[#3f3d3a] dark:text-[#bdb6aa]">
+                                <ul class="serif-reading-surface site-prose-links list-disc space-y-2 pl-5 text-[1rem] leading-7 text-[var(--site-color-text-body)]">
                                     {section.items.map((item) => (
                                         <li>
                                             {item.href ? (

@@ -1,32 +1,32 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
-import FormattedDate from "@components/FormattedDate.astro";
+import { render } from "astro:content";
+import ImageLightbox from "@components/ImageLightbox.astro";
 import LinkEnhancer from "@components/LinkEnhancer.astro";
+import PostHeader from "@components/PostHeader.astro";
+import PostNavigation from "@components/PostNavigation.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 import { SITE } from "@consts";
 import PageLayout from "@layouts/PageLayout.astro";
 import { getPostOg } from "@lib/og";
-import { readingTime, wordCount } from "@lib/utils";
+import type { BlogPost } from "@lib/posts";
+import { getPostNeighbors, getPublishedPosts } from "@lib/posts";
 
 export async function getStaticPaths() {
-    const posts = (await getCollection("blog"))
-        .filter((post) => !post.data.draft)
-        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+    const posts = await getPublishedPosts();
 
-    return posts.map((post, index) => ({
+    return posts.map((post) => ({
         params: { slug: post.id },
         props: {
             post,
-            next: index < posts.length - 1 ? posts[index + 1] : null,
-            prev: index > 0 ? posts[index - 1] : null,
+            ...getPostNeighbors(posts, post),
         },
     }));
 }
 
 type Props = {
-    post: CollectionEntry<"blog">;
-    prev: CollectionEntry<"blog"> | null;
-    next: CollectionEntry<"blog"> | null;
+    post: BlogPost;
+    prev: BlogPost | null;
+    next: BlogPost | null;
 };
 
 const { post, prev, next } = Astro.props;
@@ -34,7 +34,6 @@ const { Content, headings } = await render(post);
 const postBody = post.body ?? "";
 const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 4);
 const hasToc = tocHeadings.length > 0;
-const pagefindDate = post.data.date.toISOString().slice(0, 10);
 const postOg = getPostOg(post);
 ---
 
@@ -51,91 +50,7 @@ const postOg = getPostOg(post);
     <div class="px-5">
         <div class="blog-post-shell">
             <div class="blog-post-main">
-                <div class="space-y-4 my-6">
-                    <span
-                        data-pagefind-meta={`date:${pagefindDate}`}
-                        hidden
-                        aria-hidden="true"
-                    ></span>
-
-                    <div
-                        class="animate serif-reading-title text-xl sm:text-2xl font-bold text-[#343331] dark:text-[#c8c3ba]"
-                    >
-                        {post.data.title}
-                    </div>
-
-                    <div
-                        class="animate flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-[#706c64] dark:text-[#9d968b]"
-                    >
-                        <div class="flex items-center gap-1 whitespace-nowrap">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                            >
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                <line x1="16" y1="2" x2="16" y2="6"></line>
-                                <line x1="8" y1="2" x2="8" y2="6"></line>
-                                <line x1="3" y1="10" x2="21" y2="10"></line>
-                            </svg>
-                            <FormattedDate date={post.data.date} />
-                        </div>
-                        <div class="flex items-center gap-1 whitespace-nowrap">
-                            <span class="text-[#706c64] dark:text-[#9d968b]" aria-hidden="true"
-                                >·</span
-                            >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                                ></path>
-                                <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
-                                <line x1="10" y1="9" x2="8" y2="9"></line>
-                            </svg>
-                            <span>{wordCount(postBody)}</span>
-                        </div>
-                        <div class="flex items-center gap-1 whitespace-nowrap">
-                            <span class="text-[#706c64] dark:text-[#9d968b]" aria-hidden="true"
-                                >·</span
-                            >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                            >
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                            <span>{readingTime(postBody)}</span>
-                        </div>
-                    </div>
-                </div>
+                <PostHeader post={post} body={postBody} />
 
                 <article
                     class="animate mt-10 blog-article serif-reading-surface site-prose-links"
@@ -144,364 +59,17 @@ const postOg = getPostOg(post);
                     <Content />
                 </article>
 
-                {(prev || next) && (
-                        <>
-                            <hr class="animate mt-4 mb-4 border-black/10 dark:border-white/10" />
-                            <div class="animate mt-4 mb-6 flex flex-col gap-2 sm:flex-row sm:justify-between">
-                                {prev ? (
-                                    <a
-                                        href={`/posts/${prev.id}`}
-                                        class="site-nav-link group flex w-full items-center gap-1 rounded-lg px-4 py-2 transition-colors duration-300"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="20"
-                                            height="20"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="transition-transform duration-300 group-hover:-translate-x-1"
-                                            aria-hidden="true"
-                                        >
-                                            <path d="m15 18-6-6 6-6" />
-                                        </svg>
-                                        <div class="min-w-0">
-                                            <div class="max-w-full break-words font-sans text-sm sm:max-w-[300px] sm:truncate">
-                                                {prev.data.title}
-                                            </div>
-                                        </div>
-                                    </a>
-                                ) : (
-                                    <div class="hidden sm:block" />
-                                )}
-                                {next ? (
-                                    <a
-                                        href={`/posts/${next.id}`}
-                                        class="site-nav-link group flex w-full items-center justify-between gap-1 rounded-lg px-4 py-2 transition-colors duration-300 sm:w-auto sm:justify-end"
-                                    >
-                                        <div class="text-left sm:text-right">
-                                            <div class="max-w-full break-words font-sans text-sm sm:max-w-[300px] sm:truncate">
-                                                {next.data.title}
-                                            </div>
-                                        </div>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="20"
-                                            height="20"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="transition-transform duration-300 group-hover:translate-x-1"
-                                            aria-hidden="true"
-                                        >
-                                            <path d="m9 18 6-6-6-6" />
-                                        </svg>
-                                    </a>
-                                ) : (
-                                    <div class="hidden sm:block" />
-                                )}
-                            </div>
-                        </>
-                    )}
+                <PostNavigation prev={prev} next={next} />
             </div>
 
             {hasToc && (
-                    <div class="blog-post-toc-rail">
-                        <TableOfContents headings={tocHeadings} />
-                    </div>
-                )}
+                <div class="blog-post-toc-rail">
+                    <TableOfContents headings={tocHeadings} />
+                </div>
+            )}
         </div>
     </div>
 
     <LinkEnhancer />
-
-    <div id="image-lightbox" class="image-lightbox" aria-hidden="true">
-        <div class="image-lightbox__backdrop" data-close="true"></div>
-        <figure
-            class="image-lightbox__figure"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Image viewer"
-        >
-            <img class="image-lightbox__img" alt="" data-close="true">
-            <figcaption class="image-lightbox__caption" hidden></figcaption>
-        </figure>
-    </div>
-
-    <script is:inline>
-    const closeOverlay = (overlay) => {
-        const overlayImg = overlay.querySelector(".image-lightbox__img");
-        const overlayCaption = overlay.querySelector(".image-lightbox__caption");
-
-        overlay.classList.remove("is-open");
-        overlay.setAttribute("aria-hidden", "true");
-        document.documentElement.classList.remove("image-lightbox-open");
-        overlay.classList.remove("is-ready", "is-loading", "is-error");
-
-        if (overlayImg) {
-            overlayImg.src = "";
-            overlayImg.alt = "";
-            overlayImg.onload = null;
-            overlayImg.onerror = null;
-        }
-
-        if (overlayCaption) {
-            overlayCaption.textContent = "";
-            overlayCaption.hidden = true;
-        }
-    };
-
-    const openOverlay = (overlay, img) => {
-        const overlayImg = overlay.querySelector(".image-lightbox__img");
-        if (!overlayImg) return;
-
-        const overlayCaption = overlay.querySelector(".image-lightbox__caption");
-        const src = img.currentSrc || img.src;
-        if (!src) return;
-
-        overlayImg.alt = img.alt || "";
-        overlay.classList.add("is-loading");
-        overlay.classList.remove("is-ready", "is-error");
-        overlayImg.onload = () => {
-            overlay.classList.add("is-ready");
-            overlay.classList.remove("is-loading");
-        };
-        overlayImg.onerror = () => {
-            overlay.classList.remove("is-loading");
-            overlay.classList.add("is-error");
-        };
-        overlayImg.src = src;
-
-        if (overlayCaption) {
-            const text = img.alt?.trim();
-            overlayCaption.textContent = text || "";
-            overlayCaption.hidden = !text;
-        }
-
-        overlay.classList.add("is-open");
-        overlay.setAttribute("aria-hidden", "false");
-        document.documentElement.classList.add("image-lightbox-open");
-    };
-
-    const setupImageLightbox = () => {
-        const article = document.querySelector(".blog-article");
-        const overlay = document.getElementById("image-lightbox");
-        if (!article || !overlay) return;
-        if (article.dataset.lightboxBound === "true") return;
-        article.dataset.lightboxBound = "true";
-
-        if (overlay.dataset.lightboxBound !== "true") {
-            overlay.dataset.lightboxBound = "true";
-            overlay.addEventListener("click", (event) => {
-                const target = event.target;
-                if (target instanceof HTMLElement && target.dataset.close === "true") {
-                    closeOverlay(overlay);
-                }
-            });
-        }
-
-        article.addEventListener("click", (event) => {
-            const target = event.target;
-            if (!(target instanceof HTMLImageElement)) return;
-            if (target.closest("a")) return;
-            if (target.dataset.noZoom === "true") return;
-            event.preventDefault();
-            openOverlay(overlay, target);
-        });
-    };
-
-    const bindGlobalLightboxClose = () => {
-        if (window.__imageLightboxKeyBound) return;
-        window.__imageLightboxKeyBound = true;
-        document.addEventListener("keydown", (event) => {
-            if (event.key !== "Escape") return;
-            const overlay = document.getElementById("image-lightbox");
-            if (!overlay?.classList.contains("is-open")) return;
-            closeOverlay(overlay);
-        });
-    };
-
-    const syncTableOfContents = () => {
-        window.__blogTocCleanup?.();
-
-        const tocContainers = Array.from(document.querySelectorAll("[data-toc-root='true']"));
-        const tocProgressRows = Array.from(document.querySelectorAll("[data-toc-progress='true']"));
-        const tocProgressLabels = Array.from(
-            document.querySelectorAll("[data-toc-progress-label='true']"),
-        );
-
-        tocContainers.forEach((container) => {
-            if (!(container instanceof HTMLElement)) return;
-            container.setAttribute("data-toc-visible", "false");
-        });
-
-        tocProgressRows.forEach((row) => {
-            if (!(row instanceof HTMLElement)) return;
-            row.style.setProperty("--blog-toc-progress", "0%");
-            row.setAttribute("data-progress", "0");
-        });
-
-        tocProgressLabels.forEach((label) => {
-            label.textContent = "0%";
-        });
-
-        const article = document.querySelector(".blog-article");
-        if (!article) return;
-
-        const headings = Array.from(article.querySelectorAll("h2[id], h3[id], h4[id]"));
-        const tocLinks = Array.from(document.querySelectorAll("[data-toc-link='true']"));
-        if (headings.length === 0 || tocLinks.length === 0) {
-            return;
-        }
-
-        let activeSlug = "";
-        let activeProgress = -1;
-        let frameId = 0;
-        let observer = null;
-
-        const setActiveSlug = (slug) => {
-            if (slug === activeSlug) return;
-            activeSlug = slug;
-
-            tocLinks.forEach((link) => {
-                if (!(link instanceof HTMLElement)) return;
-                link.setAttribute("data-active", link.dataset.slug === slug ? "true" : "false");
-            });
-        };
-
-        const getActiveSlugFromViewport = () => {
-            const activationOffset = 140;
-            let candidate = null;
-
-            for (const heading of headings) {
-                const top = heading.getBoundingClientRect().top;
-                if (top - activationOffset <= 0) {
-                    candidate = heading;
-                    continue;
-                }
-
-                if (!candidate && top <= window.innerHeight * 0.6) {
-                    candidate = heading;
-                }
-                break;
-            }
-
-            if (!candidate) {
-                return headings[0]?.id ?? "";
-            }
-
-            return candidate.id;
-        };
-
-        const setActiveSlugFromHash = () => {
-            const hashSlug = decodeURIComponent(window.location.hash.replace(/^#/, ""));
-            if (!hashSlug) return false;
-
-            const hashedHeading = headings.find((heading) => heading.id === hashSlug);
-            if (!hashedHeading) return false;
-
-            setActiveSlug(hashedHeading.id);
-            return true;
-        };
-
-        const getArticleProgress = () => {
-            const articleRect = article.getBoundingClientRect();
-            const scrollSpan = articleRect.height - window.innerHeight;
-
-            if (scrollSpan <= 0) {
-                return articleRect.bottom <= window.innerHeight ? 100 : 0;
-            }
-
-            const consumedDistance = Math.min(Math.max(-articleRect.top, 0), scrollSpan);
-            return (consumedDistance / scrollSpan) * 100;
-        };
-
-        const setArticleProgress = (nextProgress) => {
-            const roundedProgress = Math.round(nextProgress);
-            if (roundedProgress === activeProgress) return;
-
-            activeProgress = roundedProgress;
-            const progressValue = `${roundedProgress}%`;
-            const isTocVisible = roundedProgress >= 1;
-
-            tocContainers.forEach((container) => {
-                if (!(container instanceof HTMLElement)) return;
-                container.setAttribute("data-toc-visible", isTocVisible ? "true" : "false");
-            });
-
-            tocProgressRows.forEach((row) => {
-                if (!(row instanceof HTMLElement)) return;
-                row.style.setProperty("--blog-toc-progress", progressValue);
-                row.setAttribute("data-progress", String(roundedProgress));
-            });
-
-            tocProgressLabels.forEach((label) => {
-                label.textContent = progressValue;
-            });
-        };
-
-        const updateTableOfContentsState = () => {
-            frameId = 0;
-            setActiveSlug(getActiveSlugFromViewport());
-            setArticleProgress(getArticleProgress());
-        };
-
-        const handleHashChange = () => {
-            if (setActiveSlugFromHash()) {
-                window.setTimeout(() => {
-                    requestUpdate();
-                }, 80);
-            }
-        };
-
-        const requestUpdate = () => {
-            if (frameId) return;
-            frameId = window.requestAnimationFrame(updateTableOfContentsState);
-        };
-
-        observer = new IntersectionObserver(
-            () => {
-                requestUpdate();
-            },
-            {
-                rootMargin: "-15% 0px -55% 0px",
-                threshold: [0, 1],
-            },
-        );
-
-        headings.forEach((heading) => {
-            observer.observe(heading);
-        });
-        window.addEventListener("hashchange", handleHashChange);
-        window.addEventListener("resize", requestUpdate);
-        window.addEventListener("scroll", requestUpdate, { passive: true });
-
-        if (!setActiveSlugFromHash()) {
-            requestUpdate();
-        }
-
-        window.__blogTocCleanup = () => {
-            if (frameId) {
-                window.cancelAnimationFrame(frameId);
-                frameId = 0;
-            }
-            observer?.disconnect();
-            window.removeEventListener("hashchange", handleHashChange);
-            window.removeEventListener("resize", requestUpdate);
-            window.removeEventListener("scroll", requestUpdate);
-        };
-    };
-
-    bindGlobalLightboxClose();
-    document.addEventListener("DOMContentLoaded", setupImageLightbox);
-    document.addEventListener("astro:page-load", setupImageLightbox);
-    document.addEventListener("DOMContentLoaded", syncTableOfContents);
-    document.addEventListener("astro:page-load", syncTableOfContents);
-    </script>
+    <ImageLightbox />
 </PageLayout>

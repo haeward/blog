@@ -6,7 +6,9 @@
 - `src/content/blog/` stores posts validated by `src/content.config.ts`; prefer stable, URL-safe slugs.
 - `src/data/links/links.json` is the links source. `src/data/links/generated.json` is generated enrichment.
 - `src/data/douban/*.json` and `public/douban/**` are Douban sync output.
-- `src/lib/` contains remark plugins and utilities; `src/styles/global.css` holds global styles and font faces.
+- `src/lib/` contains remark plugins, data helpers, shared class constants, and utilities.
+- `src/scripts/` contains bundled client-side behavior modules used by Astro components.
+- `src/styles/global.css` holds global styles, font faces, and lightweight semantic color tokens.
 - `public/assets/**` stores static assets. `dist/`, `.astro/`, `node_modules/`, `.pnpm-store/`, and `.wrangler/` are generated or local-only.
 
 ## Setup, Build, and Development Commands
@@ -34,7 +36,8 @@
 - Biome enforces 4-space indentation, line width 100, double quotes, and organized imports.
 - Follow existing aliases from `tsconfig.json`: `@components/*`, `@layouts/*`, `@lib/*`, `@consts`, and `@types`.
 - Keep components/layouts PascalCase. Keep route and content slugs URL-safe and stable.
-- Prefer existing UI patterns in `src/components/`, `src/pages/`, and `src/styles/global.css` over new abstractions.
+- Prefer existing UI patterns in `src/components/`, `src/pages/`, `src/lib/`, `src/scripts/`, and `src/styles/global.css` over new abstractions.
+- Use existing semantic color tokens from `src/styles/global.css` for repeated text, hover, focus, and surface colors.
 - Do not add dependencies unless explicitly required. If dependencies change, update `pnpm-lock.yaml`.
 - Do not change public routes, content schema, RSS/sitemap behavior, or Cloudflare deploy behavior unless requested.
 

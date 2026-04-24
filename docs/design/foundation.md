@@ -1,13 +1,18 @@
 # Foundation
 
 These are foundation values for the current design. They expand the compact
-frontmatter in `DESIGN.md` with implementation notes and rationale. They
-describe existing Tailwind utilities, CSS selectors, and custom CSS values; they
-are not a separate code token system or CSS variable layer.
+frontmatter in `DESIGN.md` with implementation notes and rationale. Core text,
+surface, focus, and link colors are exposed as lightweight CSS variables in
+`src/styles/global.css`; Tailwind utilities and component classes consume those
+tokens where reuse is high.
 
 ## Source Files
 
 - `src/styles/global.css`
+- `src/lib/media-card.ts`
+- `src/lib/media.ts`
+- `src/lib/posts.ts`
+- `src/scripts/*.ts`
 - `tailwind.config.mjs`
 - `src/layouts/PageLayout.astro`
 - `src/components/*.astro`
@@ -23,12 +28,13 @@ are not a separate code token system or CSS variable layer.
 | --- | --- | --- | --- |
 | Page canvas | `stone-100` | `stone-900` | Body and page background. |
 | Header canvas | `stone-100/85` | `stone-900/25` | Fixed translucent header. |
-| Primary text | `black/95` | `white/90` | Body default. |
-| Strong text | `black`, `black/96` | `white`, `white/95` | Headings, active states. |
-| Prose text | `black/85` | `white/85` | Article paragraphs. |
-| List text | `black/84` | `white/84` | Article lists. |
-| Muted text | `black/40` to `black/75` | `white/38` to `white/74` | Metadata and hints. |
-| Hairline | `black/5` to `black/12` | `white/7` to `white/18` | Borders, rings, dividers. |
+| Primary text | `--site-color-text-primary` | `--site-color-text-primary` | Body default and page titles. |
+| Strong text | `--site-color-text-heading` | `--site-color-text-heading` | Headings, active states, card titles. |
+| Prose text | `--site-color-text-body` | `--site-color-text-body` | Article paragraphs and reading surfaces. |
+| Soft prose text | `--site-color-text-body-soft` | `--site-color-text-body-soft` | Quote previews and secondary body copy. |
+| Muted text | `--site-color-text-muted` | `--site-color-text-muted` | Metadata and hints. |
+| Neutral hover | `--site-color-text-neutral-hover` | `--site-color-text-neutral-hover` | Non-accent control hover text. |
+| Hairline | `--site-color-surface-border` | `--site-color-surface-border` | Borders, rings, dividers. |
 | Search panel | `stone`/`zinc` gradients | `stone`/dark gradients | Modal surface only. |
 
 ### Accent Roles
@@ -167,15 +173,16 @@ Prefer color, opacity, and small transforms. Avoid looping decorative motion.
 ### Do
 
 - Use these documented roles when reading or writing Tailwind classes.
+- Prefer the lightweight CSS variables for repeated text and UI colors.
 - Keep dark-mode equivalents for every surface and text role.
 - Keep focus states visible.
 - Keep text and content width stable.
-- Update this file if the implementation gains real CSS variables or design
-  tokens later.
+- Update this file if the implementation gains new tokens or token semantics.
 
 ### Don’t
 
 - Don’t hardcode a new palette into components.
+- Don’t expand tokens into a full theme framework without a multi-theme need.
 - Don’t use RSS preview colors outside RSS.
 - Don’t add shadows or rounded panels just to fill space.
 - Don’t change font families casually.

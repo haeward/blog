@@ -1,8 +1,9 @@
 import { loadRenderers } from "astro:container";
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import { getContainerRenderer as getMDXRenderer } from "@astrojs/mdx";
 import rss from "@astrojs/rss";
 import { SITE } from "@consts";
+import { getPublishedPosts } from "@lib/posts";
 import type { APIContext } from "astro";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 
@@ -14,11 +15,7 @@ export async function GET(context: APIContext) {
     const feedImageUrl = new URL("/assets/images/site/favicon.png", siteUrl).href;
     const homeUrl = new URL("/", siteUrl).href;
 
-    const blog = (await getCollection("blog")).filter((post) => !post.data.draft);
-
-    const posts = [...blog].sort(
-        (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
-    );
+    const posts = await getPublishedPosts();
 
     const items = await Promise.all(
         posts.map(async (post) => {

@@ -44,14 +44,14 @@ const placeholder = item.title.trim().slice(0, 1).toUpperCase();
           />
           <span
             hidden
-            class="serif-reading-title text-[0.62rem] font-semibold text-[#706c64] dark:text-[#9d968b]"
+            class="serif-reading-title text-[0.62rem] font-semibold text-[var(--site-color-text-muted)]"
             aria-hidden="true"
           >
             {placeholder}
           </span>
         </>
       ) : (
-        <span class="serif-reading-title text-[0.62rem] font-semibold text-[#706c64] dark:text-[#9d968b]" aria-hidden="true">
+        <span class="serif-reading-title text-[0.62rem] font-semibold text-[var(--site-color-text-muted)]" aria-hidden="true">
           {placeholder}
         </span>
       )}
@@ -59,12 +59,12 @@ const placeholder = item.title.trim().slice(0, 1).toUpperCase();
 
         <div class="min-w-0 space-y-0.5">
             <div
-                class="serif-reading-title truncate pr-2 text-[0.89rem] font-semibold leading-tight text-[#45433f] dark:text-[#b3ada3]"
+                class="serif-reading-title truncate pr-2 text-[0.89rem] font-semibold leading-tight text-[var(--site-color-text-heading)]"
             >
                 {item.title}
             </div>
             <div
-                class="truncate text-[0.7rem] font-medium leading-tight text-[#706c64] dark:text-[#9d968b]"
+                class="truncate text-[0.7rem] font-medium leading-tight text-[var(--site-color-text-muted)]"
             >
                 {meta}
             </div>

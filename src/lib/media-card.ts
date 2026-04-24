@@ -1,0 +1,26 @@
+export const MEDIA_CARD_CLASSES = {
+    coverShell: "relative aspect-[2/3] overflow-hidden rounded-lg bg-black/5 dark:bg-white/5",
+    coverImage:
+        "h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]",
+    missingCover:
+        "h-full w-full flex items-center justify-center text-xs text-[var(--site-color-text-muted)]",
+    content: "pt-2 sm:pt-3 space-y-1.5 sm:space-y-2",
+    title: "serif-reading-title text-[11px] sm:text-xs font-semibold text-[var(--site-color-text-heading)] leading-snug",
+    stars: "flex items-center gap-0.5 text-amber-300 dark:text-amber-200",
+    linked: "site-focus-ring site-ring-surface flex h-full flex-col rounded-lg p-2.5 sm:p-3 shadow-sm ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-100 dark:ring-white/10 dark:hover:shadow-[0_18px_34px_-22px_rgba(0,0,0,0.72)] dark:focus-visible:ring-offset-stone-900",
+    static: "flex h-full flex-col rounded-lg p-2.5 sm:p-3 shadow-sm ring-1 ring-black/5 transition-all duration-300 hover:shadow-2xl hover:shadow-black/12 dark:ring-white/10 dark:hover:shadow-[0_18px_34px_-22px_rgba(0,0,0,0.72)] dark:hover:ring-white/18",
+};
+
+export const MEDIA_CARD_TITLE_CLAMP =
+    "display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;";
+
+export function renderMediaStars(stars: number): string {
+    return Array.from({ length: 5 }, (_, index) => {
+        const filled = index < stars;
+        return `<svg class="size-2.5 sm:size-3" viewBox="0 0 20 20" fill="${
+            filled ? "currentColor" : "none"
+        }" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.96a1 1 0 0 0 .95.69h4.163c.969 0 1.371 1.24.588 1.81l-3.368 2.447a1 1 0 0 0-.364 1.118l1.287 3.96c.3.921-.755 1.688-1.54 1.118l-3.368-2.447a1 1 0 0 0-1.176 0l-3.368 2.447c-.784.57-1.838-.197-1.539-1.118l1.287-3.96a1 1 0 0 0-.364-1.118L2.048 9.387c-.784-.57-.38-1.81.588-1.81h4.163a1 1 0 0 0 .95-.69l1.3-3.96z" />
+                  </svg>`;
+    }).join("");
+}

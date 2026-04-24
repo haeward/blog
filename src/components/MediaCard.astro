@@ -1,4 +1,6 @@
 ---
+import { MEDIA_CARD_CLASSES, MEDIA_CARD_TITLE_CLAMP } from "@lib/media-card";
+
 type MediaItem = {
     title: string;
     url?: string;
@@ -13,103 +15,52 @@ interface Props {
 
 const { item } = Astro.props;
 const stars = Math.max(0, Math.min(5, Math.round(item.myRating ?? 0)));
+const CardTag = item.url ? "a" : "div";
+const cardAttributes = item.url
+    ? { href: item.url, target: "_blank", rel: "noopener noreferrer" }
+    : {};
+const cardClass = item.url ? MEDIA_CARD_CLASSES.linked : MEDIA_CARD_CLASSES.static;
 ---
 
 <li class="group h-full">
-    {item.url ? (
-    <a
-      href={item.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="site-focus-ring site-ring-surface flex h-full flex-col rounded-lg p-2.5 sm:p-3 shadow-sm ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-100 dark:ring-white/10 dark:hover:shadow-[0_18px_34px_-22px_rgba(0,0,0,0.72)] dark:focus-visible:ring-offset-stone-900"
-    >
-      <div class="flex h-full flex-col">
-        <div class="relative aspect-[2/3] overflow-hidden rounded-lg bg-black/5 dark:bg-white/5">
-          {item.cover ? (
-            <img
-              src={item.cover}
-              alt={item.title}
-              loading="lazy"
-              decoding="async"
-              fetchpriority="low"
-              width="240"
-              height="360"
-              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-            />
-          ) : (
-            <div class="h-full w-full flex items-center justify-center text-xs text-[#706c64] dark:text-[#9d968b]">
-              No cover
+    <CardTag {...cardAttributes} class={cardClass}>
+        <div class="flex h-full flex-col">
+            <div class={MEDIA_CARD_CLASSES.coverShell}>
+                {item.cover ? (
+                    <img
+                        src={item.cover}
+                        alt={item.title}
+                        loading="lazy"
+                        decoding="async"
+                        fetchpriority="low"
+                        width="240"
+                        height="360"
+                        class={MEDIA_CARD_CLASSES.coverImage}
+                    />
+                ) : (
+                    <div class={MEDIA_CARD_CLASSES.missingCover}>No cover</div>
+                )}
             </div>
-          )}
+            <div class={MEDIA_CARD_CLASSES.content}>
+                <div class={MEDIA_CARD_CLASSES.title} style={MEDIA_CARD_TITLE_CLAMP}>
+                    {item.title}
+                </div>
+                <div class={MEDIA_CARD_CLASSES.stars}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                        <svg
+                            class="size-2.5 sm:size-3"
+                            viewBox="0 0 20 20"
+                            fill={star <= stars ? "currentColor" : "none"}
+                            stroke="currentColor"
+                            stroke-width="1.4"
+                            aria-hidden="true"
+                        >
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.96a1 1 0 0 0 .95.69h4.163c.969 0 1.371 1.24.588 1.81l-3.368 2.447a1 1 0 0 0-.364 1.118l1.287 3.96c.3.921-.755 1.688-1.54 1.118l-3.368-2.447a1 1 0 0 0-1.176 0l-3.368 2.447c-.784.57-1.838-.197-1.539-1.118l1.287-3.96a1 1 0 0 0-.364-1.118L2.048 9.387c-.784-.57-.38-1.81.588-1.81h4.163a1 1 0 0 0 .95-.69l1.3-3.96z" />
+                        </svg>
+                    ))}
+                    <span class="sr-only">{stars} out of 5</span>
+                </div>
+            </div>
         </div>
-        <div class="pt-2 sm:pt-3 space-y-1.5 sm:space-y-2">
-          <div
-            class="serif-reading-title text-[11px] sm:text-xs font-semibold text-[#45433f] dark:text-[#b3ada3] leading-snug"
-            style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;"
-          >
-            {item.title}
-          </div>
-          <div class="flex items-center gap-0.5 text-amber-300 dark:text-amber-200">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <svg
-                class="size-2.5 sm:size-3"
-                viewBox="0 0 20 20"
-                fill={star <= stars ? "currentColor" : "none"}
-                stroke="currentColor"
-                stroke-width="1.4"
-                aria-hidden="true"
-              >
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.96a1 1 0 0 0 .95.69h4.163c.969 0 1.371 1.24.588 1.81l-3.368 2.447a1 1 0 0 0-.364 1.118l1.287 3.96c.3.921-.755 1.688-1.54 1.118l-3.368-2.447a1 1 0 0 0-1.176 0l-3.368 2.447c-.784.57-1.838-.197-1.539-1.118l1.287-3.96a1 1 0 0 0-.364-1.118L2.048 9.387c-.784-.57-.38-1.81.588-1.81h4.163a1 1 0 0 0 .95-.69l1.3-3.96z" />
-              </svg>
-            ))}
-            <span class="sr-only">{stars} out of 5</span>
-          </div>
-        </div>
-      </div>
-    </a>
-  ) : (
-    <div class="flex h-full flex-col rounded-lg p-2.5 sm:p-3 shadow-sm ring-1 ring-black/5 transition-all duration-300 hover:shadow-2xl hover:shadow-black/12 dark:ring-white/10 dark:hover:shadow-[0_18px_34px_-22px_rgba(0,0,0,0.72)] dark:hover:ring-white/18">
-      <div class="relative aspect-[2/3] overflow-hidden rounded-lg bg-black/5 dark:bg-white/5">
-        {item.cover ? (
-          <img
-            src={item.cover}
-            alt={item.title}
-            loading="lazy"
-            decoding="async"
-            fetchpriority="low"
-            width="240"
-            height="360"
-            class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-          />
-        ) : (
-          <div class="h-full w-full flex items-center justify-center text-xs text-[#706c64] dark:text-[#9d968b]">
-            No cover
-          </div>
-        )}
-      </div>
-      <div class="pt-2 sm:pt-3 space-y-1.5 sm:space-y-2">
-        <div
-          class="serif-reading-title text-[11px] sm:text-xs font-semibold text-[#45433f] dark:text-[#b3ada3] leading-snug"
-          style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;"
-        >
-          {item.title}
-        </div>
-        <div class="flex items-center gap-0.5 text-amber-300 dark:text-amber-200">
-          {[1, 2, 3, 4, 5].map((star) => (
-            <svg
-              class="size-2.5 sm:size-3"
-              viewBox="0 0 20 20"
-              fill={star <= stars ? "currentColor" : "none"}
-              stroke="currentColor"
-              stroke-width="1.4"
-              aria-hidden="true"
-            >
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.96a1 1 0 0 0 .95.69h4.163c.969 0 1.371 1.24.588 1.81l-3.368 2.447a1 1 0 0 0-.364 1.118l1.287 3.96c.3.921-.755 1.688-1.54 1.118l-3.368-2.447a1 1 0 0 0-1.176 0l-3.368 2.447c-.784.57-1.838-.197-1.539-1.118l1.287-3.96a1 1 0 0 0-.364-1.118L2.048 9.387c-.784-.57-.38-1.81.588-1.81h4.163a1 1 0 0 0 .95-.69l1.3-3.96z" />
-            </svg>
-          ))}
-          <span class="sr-only">{stars} out of 5</span>
-        </div>
-      </div>
-    </div>
-  )}
+    </CardTag>
 </li>

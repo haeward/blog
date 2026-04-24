@@ -12,6 +12,12 @@ Primary implementation files:
 - `src/components/ArrowCard.astro`
 - `src/components/LinkCard.astro`
 - `src/components/MediaCard.astro`
+- `src/components/MediaBrowser.astro`
+- `src/components/MediaTabs.astro`
+- `src/components/MediaPanel.astro`
+- `src/components/PostHeader.astro`
+- `src/components/PostNavigation.astro`
+- `src/components/ImageLightbox.astro`
 - `src/components/Footer.astro`
 - `src/components/YearProgress.astro`
 - `src/pages/posts/index.astro`
@@ -19,6 +25,10 @@ Primary implementation files:
 - `src/pages/media.astro`
 - `src/pages/changelog.astro`
 - `src/styles/global.css`
+- `src/scripts/search-modal.ts`
+- `src/scripts/media-tabs.ts`
+- `src/scripts/moments.ts`
+- `src/scripts/site.ts`
 - `docs/design/links.md`
 
 ## Component Selection Guide
@@ -64,6 +74,7 @@ Rules:
 
 - Button id: `theme-toggle`.
 - State attribute: `data-theme-mode`.
+- Toggle button state attribute: `data-theme-toggle-mode`.
 - Storage key: `localStorage.theme`.
 - Resolved dark mode: `html.dark`.
 - Icon visibility: `html[data-theme-mode]`.
@@ -80,8 +91,8 @@ Use `.header-action` for small global icon controls.
 | --- | --- |
 | Size | `size-6` |
 | Shape | `rounded-full` |
-| Text | `text-stone-600`, `dark:text-stone-300` |
-| Hover | `hover:text-black`, `dark:hover:text-white` |
+| Text | `--site-color-text-muted` |
+| Hover | `--site-color-text-neutral-hover` |
 | Focus | Warm Clay focus ring from `--site-link-focus` |
 
 All icon-only controls need `aria-label`.
@@ -183,6 +194,10 @@ Styling:
 - Stars use amber.
 
 Do not add colorful frames; cover art provides the color.
+
+The shared card class strings live in `src/lib/media-card.ts` so the server
+rendered `MediaCard.astro` and client-rendered load-more cards stay visually
+identical.
 
 ## Media Tabs And Load More
 

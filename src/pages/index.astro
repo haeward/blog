@@ -1,16 +1,13 @@
 ---
 import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
 import ArrowCard from "@components/ArrowCard.astro";
 import Container from "@components/Container.astro";
 import { SITE, SOCIALS } from "@consts";
 import PageLayout from "@layouts/PageLayout.astro";
 import { getPageOg } from "@lib/og";
+import { getRecentPosts } from "@lib/posts";
 
-const blog = (await getCollection("blog"))
-    .filter((post) => !post.data.draft)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-    .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+const blog = await getRecentPosts(SITE.NUM_POSTS_ON_HOMEPAGE);
 const pageOg = getPageOg("home");
 ---
 
@@ -42,7 +39,7 @@ const pageOg = getPageOg("home");
               href={social.HREF}
               target="_blank"
               rel="noopener noreferrer"
-              class="hover:text-[#292827] dark:hover:text-[#d8d3ca] transition-colors duration-300"
+              class="hover:text-[var(--site-color-text-neutral-hover)] transition-colors duration-300"
               aria-label={social.NAME}
             >
               <Image
@@ -61,7 +58,7 @@ const pageOg = getPageOg("home");
             <section class="animate px-1 py-2 sm:px-0 sm:py-3">
                 <div class="mb-5">
                     <h1
-                        class="serif-reading-title text-[1rem] font-semibold tracking-[0.2em] text-[#45433f] uppercase dark:text-[#b3ada3] sm:text-[1.12rem]"
+                        class="serif-reading-title text-[1rem] font-semibold tracking-[0.2em] text-[var(--site-color-text-heading)] uppercase sm:text-[1.12rem]"
                     >
                         LATEST POSTS
                     </h1>

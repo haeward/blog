@@ -7,19 +7,17 @@ colors:
   surface-dark: stone-900
   header-surface: stone-100/85
   header-surface-dark: stone-900/25
-  text-primary: black/95
-  text-primary-dark: white/90
-  text-strong: black
-  text-strong-dark: white
-  text-muted: black/40-75
-  text-muted-dark: white/38-74
-  hairline: black/5-12
-  hairline-dark: white/7-18
-  link: sky-700
-  link-dark: sky-300
-  link-hover: sky-800
-  link-hover-dark: sky-200
-  focus: cyan-500/70
+  text-primary: var(--site-color-text-primary)
+  text-strong: var(--site-color-text-heading)
+  text-body: var(--site-color-text-body)
+  text-muted: var(--site-color-text-muted)
+  text-hover: var(--site-color-text-neutral-hover)
+  hairline: var(--site-color-surface-border)
+  link: var(--site-link-internal)
+  link-dark: var(--site-link-internal)
+  link-hover: var(--site-link-text-internal-hover)
+  link-hover-dark: var(--site-link-text-internal-hover)
+  focus: var(--site-link-focus)
   quote: orange-400/85
   quote-dark: orange-500/85
   rating: amber-300
@@ -96,7 +94,8 @@ components:
 > Agent-consumable design specification for this Astro personal blog.
 > Source of truth: `src/styles/global.css`, `tailwind.config.mjs`,
 > `src/layouts/PageLayout.astro`, `src/components/*.astro`,
-> `src/pages/*.astro`, and `public/feed/pretty-feed.xsl`.
+> `src/pages/*.astro`, `src/lib/*.ts`, `src/scripts/*.ts`, and
+> `public/feed/pretty-feed.xsl`.
 
 This document describes the current design. It is not a redesign proposal and
 must not override the implementation. If a rule here conflicts with code, inspect
@@ -144,27 +143,29 @@ Agents and tools should read this document in two layers:
 - Treat the Markdown sections as application guidance, rationale, and
   project-specific constraints.
 - Preserve unknown or project-specific sections when transforming the document.
-- Do not assume frontmatter values exist as CSS variables or runtime tokens.
+- Treat frontmatter color values as semantic mappings to the lightweight CSS
+  variables in `src/styles/global.css`.
 - If frontmatter, prose, and implementation disagree, inspect the source files
   first and update the docs or code together.
 
 ## 3. Colors
 
-These are foundation values documented from current Tailwind/CSS usage. They are
-not a code token system or CSS variables.
+These are foundation values documented from current Tailwind/CSS usage. Repeated
+text, focus, surface, and link colors are now named by lightweight CSS variables
+in `src/styles/global.css`.
 
 ### Light Theme
 
 | Role | Current value | Use |
 | --- | --- | --- |
 | Page background | `stone-100` | Body, header base, article meta row. |
-| Primary text | `black/95` | Body default. |
-| Strong text | `black`, `black/96` | Headings, active states. |
-| Body prose | `black/85` | Article paragraphs. |
-| Muted text | `black/40` to `black/75` | Dates, metadata, hints. |
-| Hairline | `black/5` to `black/12` | Cards, dividers, rings. |
-| Article link | `sky-700` | Links inside prose. |
-| Focus accent | `cyan-500/70` | Header actions and key controls. |
+| Primary text | `--site-color-text-primary` | Body default and page titles. |
+| Strong text | `--site-color-text-heading` | Headings, active states. |
+| Body prose | `--site-color-text-body` | Article paragraphs. |
+| Muted text | `--site-color-text-muted` | Dates, metadata, hints. |
+| Hairline | `--site-color-surface-border` | Cards, dividers, rings. |
+| Article link | `--site-link-internal` | Links inside prose. |
+| Focus accent | `--site-link-focus` | Header actions and key controls. |
 | Quote accent | `orange-400/85`, `orange-100` | Blockquotes. |
 | Rating accent | `amber-300` | Media stars. |
 | Status accents | `emerald-500`, `rose-500` | Link status dots. |
@@ -175,13 +176,13 @@ not a code token system or CSS variables.
 | Role | Current value | Use |
 | --- | --- | --- |
 | Page background | `stone-900` | Body and article meta row. |
-| Primary text | `white/90` | Body default. |
-| Strong text | `white`, `white/95` | Headings, active states. |
-| Body prose | `white/85` | Article paragraphs. |
-| Muted text | `white/38` to `white/74` | Dates, metadata, hints. |
-| Hairline | `white/7` to `white/18` | Cards, dividers, rings. |
-| Article link | `sky-300` | Links inside prose. |
-| Focus accent | `cyan-500/70`, `white/20` | Controls and dark focus rings. |
+| Primary text | `--site-color-text-primary` | Body default and page titles. |
+| Strong text | `--site-color-text-heading` | Headings, active states. |
+| Body prose | `--site-color-text-body` | Article paragraphs. |
+| Muted text | `--site-color-text-muted` | Dates, metadata, hints. |
+| Hairline | `--site-color-surface-border` | Cards, dividers, rings. |
+| Article link | `--site-link-internal` | Links inside prose. |
+| Focus accent | `--site-link-focus` | Controls and dark focus rings. |
 | Quote accent | `orange-500/85`, `orange-200` | Blockquotes. |
 | Rating accent | `amber-200` | Media stars. |
 | Search surface | Stone/zinc gradients | Search modal panel. |
@@ -265,8 +266,8 @@ Do not add large pill-like surfaces to normal content sections.
 | Need | Use |
 | --- | --- |
 | Generic page link | `Link.astro`, current color, optional underline. |
-| Article link | Bold sky link from global prose styles plus `LinkEnhancer`. |
-| Global icon action | `.header-action`, `size-6`, round, cyan focus ring. |
+| Article link | Bold Warm Clay link from global prose styles plus `LinkEnhancer`. |
+| Global icon action | `.header-action`, `size-6`, round, Warm Clay focus ring. |
 | Post list row | `ArrowCard`, serif title, date, animated arrow. |
 | External link card | `LinkCard`, compact favicon/title/meta/status surface. |
 | Poster card | `MediaCard`, `aspect-[2/3]`, cover, title, amber rating. |
@@ -312,7 +313,8 @@ Component rules:
 
 ### Don’t
 
-- Don’t introduce a token system in code without an explicit refactor.
+- Don’t expand the lightweight color tokens into a full theme framework without
+  a multi-theme need.
 - Don’t add dependencies for visual styling alone.
 - Don’t create marketing-style hero sections for this blog.
 - Don’t turn article bodies, archives, or changelog rows into heavy cards.
@@ -340,12 +342,12 @@ When generating UI for this project, use these mappings:
 
 ```text
 Page background      -> stone-100 / dark:stone-900
-Primary text         -> black/95 / dark:white/90
-Muted text           -> black or white with 40-75 opacity
+Primary text         -> --site-color-text-primary
+Muted text           -> --site-color-text-muted
 Reading title        -> .serif-reading-title
 Reading surface      -> .serif-reading-surface
-Article link         -> sky-700 / dark:sky-300
-Focus accent         -> cyan focus ring
+Article link         -> --site-link-internal / --site-link-external
+Focus accent         -> --site-link-focus
 Card surface         -> rounded-lg + low-opacity border/ring + shadow-sm
 Primary container    -> max-w-screen-md px-5
 Motion               -> color/opacity/arrow/translate only

@@ -1,27 +1,11 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
 import ArrowCard from "@components/ArrowCard.astro";
 import Container from "@components/Container.astro";
 import { BLOG, SITE } from "@consts";
 import PageLayout from "@layouts/PageLayout.astro";
+import { getPublishedPosts, groupPostsByYear } from "@lib/posts";
 
-const data = (await getCollection("blog"))
-    .filter((post) => !post.data.draft)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-type Acc = {
-    [year: string]: CollectionEntry<"blog">[];
-};
-
-const posts = data.reduce((acc: Acc, post) => {
-    const year = post.data.date.getFullYear().toString();
-    if (!acc[year]) {
-        acc[year] = [];
-    }
-    acc[year].push(post);
-    return acc;
-}, {});
-
+const posts = groupPostsByYear(await getPublishedPosts());
 const years = Object.keys(posts).sort((a, b) => Number.parseInt(b, 10) - Number.parseInt(a, 10));
 ---
 
@@ -31,7 +15,7 @@ const years = Object.keys(posts).sort((a, b) => Number.parseInt(b, 10) - Number.
             <div class="space-y-10 sm:space-y-14">
                 {years.map((year) => (
                         <section class="animate space-y-4 sm:space-y-5">
-                            <div class="serif-reading-title text-[1.36rem] font-semibold leading-none text-[#45433f] dark:text-[#b3ada3] sm:text-[1.8rem]">
+                            <div class="serif-reading-title text-[1.36rem] font-semibold leading-none text-[var(--site-color-text-heading)] sm:text-[1.8rem]">
                                 {year}
                             </div>
                             <div>

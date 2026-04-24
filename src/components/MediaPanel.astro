@@ -1,0 +1,50 @@
+---
+import MediaCard from "@components/MediaCard.astro";
+import type { ClientMediaItem, MediaTab, MediaTabKey } from "@lib/media";
+
+interface Props {
+    tab: MediaTab;
+    defaultTab: MediaTabKey;
+    initialItems: ClientMediaItem[];
+}
+
+const { tab, defaultTab, initialItems } = Astro.props;
+const isDefault = tab.key === defaultTab;
+const remainingCount = Math.max(tab.count - initialItems.length, 0);
+---
+
+<section
+    id={tab.key}
+    data-tab-panel={tab.key}
+    role="tabpanel"
+    aria-labelledby={`media-tab-${tab.key}`}
+    class="space-y-4 scroll-mt-24"
+    hidden={!isDefault}
+>
+    <ul class="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 xl:grid-cols-4" data-media-grid>
+        {initialItems.map((item) => (
+            <MediaCard item={item} />
+        ))}
+    </ul>
+
+    <div
+        class="flex justify-center pt-10 sm:pt-12"
+        data-media-more-wrapper
+        hidden={remainingCount === 0}
+    >
+        <button
+            type="button"
+            aria-label="Load more"
+            class="group inline-flex min-h-11 min-w-32 items-center justify-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-medium text-[var(--site-color-text-muted)] transition-all duration-200 hover:-translate-y-0.5 hover:text-[var(--site-color-text-neutral-hover)] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--site-color-focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-stone-100 dark:focus-visible:ring-offset-stone-900 sm:text-base"
+            data-media-more
+        >
+            <span>Load more</span>
+            <span
+                aria-hidden="true"
+                class="text-sm leading-none text-current opacity-70 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:opacity-85"
+            >
+                &rarr;
+            </span>
+        </button>
+    </div>
+</section>
