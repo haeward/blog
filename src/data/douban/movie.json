@@ -4,6 +4,151 @@
 		"rating": {
 			"count": 1,
 			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
+		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/movie/36901008 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/36901008/interest/4826481377",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-24 22:48:18",
+		"status": "done",
+		"id": 4826481377,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 32932,
+				"max": 10,
+				"star_count": 3.5,
+				"value": 6.6
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2026-03-07(中国大陆)"
+			],
+			"pic": {
+				"large": "https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2929956678.jpg",
+				"normal": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2929956678.jpg"
+			},
+			"honor_infos": [],
+			"is_show": false,
+			"vendor_icons": [],
+			"year": "2026",
+			"card_subtitle": "2026 / 美国 英国 / 剧情 动作 犯罪 / 巴特·雷顿 / 克里斯·海姆斯沃斯 马克·鲁法洛",
+			"id": "36901008",
+			"genres": [
+				"剧情",
+				"动作",
+				"犯罪"
+			],
+			"title": "洛杉矶劫案",
+			"is_released": true,
+			"actors": [
+				{
+					"name": "克里斯·海姆斯沃斯"
+				},
+				{
+					"name": "马克·鲁法洛"
+				},
+				{
+					"name": "巴里·基奥恩"
+				},
+				{
+					"name": "哈莉·贝瑞"
+				},
+				{
+					"name": "莫妮卡·巴巴罗"
+				},
+				{
+					"name": "科里·霍金斯"
+				},
+				{
+					"name": "尼克·诺特"
+				},
+				{
+					"name": "詹妮弗·杰森·李"
+				},
+				{
+					"name": "泰特·多诺万"
+				},
+				{
+					"name": "保罗·安德斯坦"
+				},
+				{
+					"name": "戴文·博斯蒂克"
+				},
+				{
+					"name": "德鲁·鲍威尔"
+				},
+				{
+					"name": "帕特里克·穆尔维"
+				},
+				{
+					"name": "马修·德尔·内格罗"
+				},
+				{
+					"name": "安德拉·内切塔"
+				},
+				{
+					"name": "法希姆·法兹利"
+				},
+				{
+					"name": "佩曼·莫阿迪"
+				},
+				{
+					"name": "丹·佩罗"
+				},
+				{
+					"name": "乔希·斯通"
+				},
+				{
+					"name": "哈娜可·福特曼"
+				}
+			],
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "416872",
+				"_base_color": [
+					0.5350877192982456,
+					0.4318181818181818,
+					0.17254901960784313
+				],
+				"secondary_color": "f4f8f9",
+				"_avg_color": [
+					0.4523809523809523,
+					0.10000000000000005,
+					0.27450980392156865
+				],
+				"primary_color_dark": "2b454c"
+			},
+			"type": "movie",
+			"has_linewatch": false,
+			"vendor_desc": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/36901008.jpg",
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/36901008",
+			"url": "https://movie.douban.com/subject/36901008/",
+			"release_date": null,
+			"uri": "douban://douban.com/movie/36901008",
+			"subtype": "movie",
+			"directors": [
+				{
+					"name": "巴特·雷顿"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"null_rating_reason": ""
+		},
+		"star_time": "2026-04-24 22:48:18"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
 			"star_count": 5,
 			"value": 5
 		},
