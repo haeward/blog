@@ -43504,7 +43504,12 @@
 	},
 	{
 		"comment": "",
-		"rating": null,
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
 		"sharing_text": "https://www.douban.com/doubanapp/dispatch/movie/1763134 来自@豆瓣App",
 		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/1763134/interest/2534961385",
 		"tags": [
