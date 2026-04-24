@@ -5,6 +5,8 @@ implementation lives in `src/pages/posts/[...slug].astro`, `src/pages/about.astr
 `src/styles/global.css`, `src/components/TableOfContents.astro`, and
 `src/components/LinkEnhancer.astro`.
 
+Shared link color rules are documented in `docs/design/links.md`.
+
 ## Reading Shell
 
 Article pages use a centered, narrow shell:
@@ -86,8 +88,9 @@ Article links are intentionally stronger than generic UI links:
 
 - Links are bold.
 - Links are not underlined by default.
-- Light mode link color is `sky-700`; dark mode is `sky-300`.
-- Hover state darkens or lightens the sky color and adds underline.
+- Internal links use muted Warm Clay brown.
+- External and mail links use warmer copper.
+- Hover and focus add a thinner underline with a restrained Warm Clay color shift.
 - Link transitions use `duration-300 ease-in-out`.
 - `LinkEnhancer` adds external-link behavior and accessible labels.
 

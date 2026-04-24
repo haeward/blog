@@ -132,7 +132,7 @@ async function loadMoments(root) {
         statusNode.hidden = false;
         statusNode.innerHTML = `Moments are unavailable right now. <a href="${escapeHtml(
             fallbackHref,
-        )}" target="_blank" rel="noreferrer noopener">Visit Mastodon instead.</a>`;
+        )}" target="_blank" rel="noreferrer noopener" class="site-link" data-external="true" data-underline="true">Visit Mastodon instead.</a>`;
         listNode.hidden = true;
         listNode.innerHTML = "";
     }
@@ -142,7 +142,7 @@ function setMomentsEmptyState(statusNode, listNode, fallbackHref) {
     statusNode.hidden = false;
     statusNode.innerHTML = `No recent moments yet. <a href="${escapeHtml(
         fallbackHref,
-    )}" target="_blank" rel="noreferrer noopener">Check Mastodon.</a>`;
+    )}" target="_blank" rel="noreferrer noopener" class="site-link" data-external="true" data-underline="true">Check Mastodon.</a>`;
     listNode.hidden = true;
     listNode.innerHTML = "";
 }
@@ -168,7 +168,7 @@ function renderMomentItem(status, formatters, domain) {
           <div class="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 pt-2.5 text-[0.93rem] leading-tight text-[#706c64] dark:text-[#8b8f98]">
             ${createdAt ? `<time datetime="${escapeAttribute(displayStatus.created_at)}">${escapeHtml(createdAt)}</time>` : ""}
             <span aria-hidden="true">·</span>
-            <a href="${escapeAttribute(url)}" target="_blank" rel="noreferrer noopener" class="font-medium text-cyan-700 transition-colors duration-200 hover:text-cyan-800 dark:text-cyan-300 dark:hover:text-cyan-200">View Toot</a>
+            <a href="${escapeAttribute(url)}" target="_blank" rel="noreferrer noopener" class="site-link font-medium" data-external="true" data-underline="true">View Toot</a>
           </div>
         </div>
       </li>
@@ -212,7 +212,7 @@ function renderPreviewCard(card) {
     if (!card?.url || (!card.title && !card.description && !card.image)) return "";
 
     return `
-      <a href="${escapeAttribute(card.url)}" target="_blank" rel="noreferrer noopener" class="mt-1 grid overflow-hidden rounded-lg border border-black/20 transition-colors duration-200 hover:border-cyan-700/40 dark:border-white/20 dark:hover:border-cyan-300/40 sm:grid-cols-[8rem_minmax(0,1fr)]">
+      <a href="${escapeAttribute(card.url)}" target="_blank" rel="noreferrer noopener" class="site-link-surface mt-1 grid overflow-hidden rounded-lg border border-black/20 transition-colors duration-200 dark:border-white/20 sm:grid-cols-[8rem_minmax(0,1fr)]">
         ${
             card.image
                 ? `<img src="${escapeAttribute(card.image)}" alt="" class="aspect-video h-full w-full object-cover sm:aspect-auto" loading="lazy">`
@@ -239,7 +239,7 @@ function renderQuote(quote, domain) {
     const content = sanitizeMomentContent(quotedStatus.content, account, domain);
 
     return `
-      <a href="${escapeAttribute(quoteUrl)}" target="_blank" rel="noreferrer noopener" class="mt-1 block rounded-lg border border-black/20 p-2 transition-colors duration-200 hover:border-cyan-700/40 dark:border-white/20 dark:hover:border-cyan-300/40">
+      <a href="${escapeAttribute(quoteUrl)}" target="_blank" rel="noreferrer noopener" class="site-link-surface mt-1 block rounded-lg border border-black/20 p-2 transition-colors duration-200 dark:border-white/20">
         <div class="text-sm font-semibold text-[#343331] dark:text-[#c8c3ba]">
           ${escapeHtml(authorName)}
           ${authorHandle ? `<span class="font-normal text-[#706c64] dark:text-[#9d968b]">${escapeHtml(authorHandle)}</span>` : ""}
@@ -281,7 +281,7 @@ function renderSafeChildren(node, account, domain) {
             if (tagName === "a") {
                 const href = getMomentLinkHref(child, account, domain);
                 const text = (child.textContent || href).replace(/\s+/g, " ").trim();
-                return `<a href="${escapeAttribute(href)}" target="_blank" rel="noreferrer noopener" class="font-medium text-cyan-700 transition-colors duration-200 hover:text-cyan-800 dark:text-cyan-300 dark:hover:text-cyan-200">${escapeHtml(text)}</a>`;
+                return `<a href="${escapeAttribute(href)}" target="_blank" rel="noreferrer noopener" class="site-link font-medium" data-external="true" data-underline="true">${escapeHtml(text)}</a>`;
             }
 
             return renderSafeChildren(child, account, domain);

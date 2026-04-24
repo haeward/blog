@@ -62,15 +62,15 @@ enhanceLinks();
 
 <style>
 :global(article a:focus) {
-    outline: 2px solid rgb(99 102 241) !important;
+    outline: 2px solid var(--site-link-focus) !important;
     outline-offset: 2px !important;
     border-radius: 2px;
 }
 
 :global(article a:focus-visible) {
-    outline: 2px solid rgb(99 102 241) !important;
+    outline: 2px solid var(--site-link-focus) !important;
     outline-offset: 2px !important;
-    background-color: rgba(99, 102, 241, 0.05) !important;
+    background-color: var(--site-link-focus-bg) !important;
 }
 
 :global(article a:focus:not(:focus-visible)) {

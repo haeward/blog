@@ -134,7 +134,7 @@ const pagefindDate = post.data.date.toISOString().slice(0, 10);
                 </div>
 
                 <article
-                    class="animate mt-10 blog-article serif-reading-surface"
+                    class="animate mt-10 blog-article serif-reading-surface site-prose-links"
                     data-pagefind-body
                 >
                     <Content />
@@ -147,7 +147,7 @@ const pagefindDate = post.data.date.toISOString().slice(0, 10);
                                 {prev ? (
                                     <a
                                         href={`/posts/${prev.id}`}
-                                        class="group flex w-full items-center gap-1 rounded-lg px-4 py-2 transition-colors duration-300"
+                                        class="site-nav-link group flex w-full items-center gap-1 rounded-lg px-4 py-2 transition-colors duration-300"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +176,7 @@ const pagefindDate = post.data.date.toISOString().slice(0, 10);
                                 {next ? (
                                     <a
                                         href={`/posts/${next.id}`}
-                                        class="group flex w-full items-center justify-between gap-1 rounded-lg px-4 py-2 transition-colors duration-300 sm:w-auto sm:justify-end"
+                                        class="site-nav-link group flex w-full items-center justify-between gap-1 rounded-lg px-4 py-2 transition-colors duration-300 sm:w-auto sm:justify-end"
                                     >
                                         <div class="text-left sm:text-right">
                                             <div class="max-w-full break-words font-sans text-sm sm:max-w-[300px] sm:truncate">

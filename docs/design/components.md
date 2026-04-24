@@ -19,6 +19,7 @@ Primary implementation files:
 - `src/pages/media.astro`
 - `src/pages/changelog.astro`
 - `src/styles/global.css`
+- `docs/design/links.md`
 
 ## Component Selection Guide
 
@@ -81,7 +82,7 @@ Use `.header-action` for small global icon controls.
 | Shape | `rounded-full` |
 | Text | `text-stone-600`, `dark:text-stone-300` |
 | Hover | `hover:text-black`, `dark:hover:text-white` |
-| Focus | `focus-visible:ring-2 focus-visible:ring-cyan-500/70` |
+| Focus | Warm Clay focus ring from `--site-link-focus` |
 
 All icon-only controls need `aria-label`.
 

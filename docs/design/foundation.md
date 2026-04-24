@@ -13,6 +13,7 @@ are not a separate code token system or CSS variable layer.
 - `src/components/*.astro`
 - `src/pages/*.astro`
 - `public/feed/pretty-feed.xsl`
+- `docs/design/links.md`
 
 ## Color Roles
 
@@ -34,16 +35,17 @@ are not a separate code token system or CSS variable layer.
 
 | Role | Light | Dark | Used by |
 | --- | --- | --- | --- |
-| Article link | `sky-700` | `sky-300` | Prose links. |
-| Link hover | `sky-800` | `sky-200` | Prose link hover. |
-| Focus | `cyan-500/70` | `cyan-500/70`, `white/20` | Header, buttons, search. |
+| Internal link | `#7d4b2f` | `#e6aa84` | In-site text links. |
+| External link | `#9f542f` | `#f0b58f` | `http`, `https`, and `mailto` links. |
+| Link emphasis | `#5f3723`, `#7c3f23` | `#ffd0af`, `#ffd7bc` | Active non-prose surfaces. |
+| Focus | Warm Clay CSS variables | Warm Clay CSS variables | Header, buttons, search, prose. |
 | Blockquote | `orange-400/85`, `orange-100` | `orange-500/85`, `neutral-500/10` | Quote border and fill. |
 | Blockquote text | `orange-800` | `orange-200` | Quote content. |
 | Code text | `red-600` | `red-400` | Inline code. |
 | Rating | `amber-300` | `amber-200` | Media stars. |
 | Link status up | `emerald-500` | `emerald-500` | LinkCard status dot. |
 | Link status down | `rose-500` | `rose-500` | LinkCard status dot. |
-| TOC progress | `#c67c5a` | `#c67c5a` | Article reading progress. |
+| TOC progress | Warm Clay external link | Warm Clay external link | Article reading progress. |
 
 ### RSS Preview Palette
 

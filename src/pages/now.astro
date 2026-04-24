@@ -66,7 +66,7 @@ const mastodon =
                                     {section.title}
                                 </h3>
 
-                                <ul class="serif-reading-surface list-disc space-y-2 pl-5 text-[1rem] leading-7 text-[#3f3d3a] dark:text-[#bdb6aa]">
+                                <ul class="serif-reading-surface site-prose-links list-disc space-y-2 pl-5 text-[1rem] leading-7 text-[#3f3d3a] dark:text-[#bdb6aa]">
                                     {section.items.map((item) => (
                                         <li>
                                             {item.href ? (
@@ -74,7 +74,6 @@ const mastodon =
                                                     href={item.href}
                                                     external={true}
                                                     underline={true}
-                                                    class="text-cyan-700 dark:text-cyan-300"
                                                 >
                                                     {item.title}
                                                 </Link>

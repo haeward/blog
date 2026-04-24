@@ -13,9 +13,11 @@ const { href, external, underline = false, class: className, ...rest } = Astro.p
 
 <a
     href={href}
-    target={external ? "_blank" : "_self"}
+    target={external ? "_blank" : undefined}
     rel={external ? "noopener noreferrer" : undefined}
-    class={cn("inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-[#292827] hover:dark:text-[#d8d3ca] transition-colors duration-300 ease-in-out", underline && "underline underline-offset-2", className)}
+    data-external={external ? "true" : undefined}
+    data-underline={underline ? "true" : undefined}
+    class={cn("site-link inline-block", className)}
     {...rest}
 >
     <slot />
