@@ -4,6 +4,119 @@
 		"rating": {
 			"count": 1,
 			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/movie/6536180 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/6536180/interest/4826663570",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-25 04:31:05",
+		"status": "done",
+		"id": 4826663570,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 252676,
+				"max": 10,
+				"star_count": 4,
+				"value": 8.1
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2011-09-16(西班牙)"
+			],
+			"pic": {
+				"large": "https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2258872500.jpg",
+				"normal": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2258872500.jpg"
+			},
+			"honor_infos": [],
+			"is_show": false,
+			"vendor_icons": [
+				"https://img9.doubanio.com/f/frodo/fbc90f355fc45d5d2056e0d88c697f9414b56b44/pics/vendors/tencent.png",
+				"https://img3.doubanio.com/f/frodo/6fa5caade3ca480ccd95f455ee4d195ee342eb90/pics/vendors/youku.png",
+				"https://img9.doubanio.com/f/frodo/6c7b857e6b2255201e73bf83732d95d572f3f9f7/pics/vendors/iqiyi.png"
+			],
+			"year": "2011",
+			"card_subtitle": "2011 / 哥伦比亚 西班牙 / 剧情 悬疑 惊悚 / 安德烈斯·拜斯 / 基姆·古铁雷斯 克拉拉·拉戈",
+			"id": "6536180",
+			"genres": [
+				"剧情",
+				"悬疑",
+				"惊悚"
+			],
+			"title": "黑暗面",
+			"is_released": true,
+			"actors": [
+				{
+					"name": "基姆·古铁雷斯"
+				},
+				{
+					"name": "克拉拉·拉戈"
+				},
+				{
+					"name": "玛蒂娜·加西亚"
+				},
+				{
+					"name": "亚历山德拉·斯图尔特"
+				},
+				{
+					"name": "玛利亚·罗德里格斯"
+				},
+				{
+					"name": "玛瑟拉·玛"
+				},
+				{
+					"name": "汉姆贝托·多拉多"
+				},
+				{
+					"name": "胡安·巴普蒂斯塔"
+				}
+			],
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "375372",
+				"_base_color": [
+					0.5888888888888889,
+					0.5172413793103449,
+					0.11372549019607843
+				],
+				"secondary_color": "f4f7f9",
+				"_avg_color": [
+					0.5772357723577236,
+					0.5,
+					0.3215686274509804
+				],
+				"primary_color_dark": "24374c"
+			},
+			"type": "movie",
+			"has_linewatch": true,
+			"vendor_desc": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/6536180.jpg",
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/6536180",
+			"url": "https://movie.douban.com/subject/6536180/",
+			"release_date": null,
+			"uri": "douban://douban.com/movie/6536180",
+			"subtype": "movie",
+			"directors": [
+				{
+					"name": "安德烈斯·拜斯"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"null_rating_reason": ""
+		},
+		"star_time": "2026-04-25 04:31:05"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
 			"star_count": 3,
 			"value": 3
 		},
