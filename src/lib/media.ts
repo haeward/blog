@@ -55,12 +55,42 @@ export type MediaTab = {
     label: string;
     count: number;
 };
+export type MediaDataPage = {
+    tab: MediaTabKey;
+    page: number;
+    pageSize: number;
+    totalCount: number;
+    hasMore: boolean;
+    items: ClientMediaItem[];
+};
+export type MediaManifest = {
+    defaultTab: MediaTabKey;
+    pageSize: number;
+    endpointBase: string;
+    tabs: Record<MediaTabKey, { count: number }>;
+};
 type MediaKind = "movie" | "book";
 
 export const MEDIA_PAGE_SIZE = 100;
 export const DEFAULT_MEDIA_TAB: MediaTabKey = "movies";
+export const MEDIA_DATA_ENDPOINT_BASE = "/media/data";
+
+let mediaItemsByTabCache: Record<MediaTabKey, ClientMediaItem[]> | null = null;
 
 export function getMediaPageData() {
+    const itemsByTab = getMediaItemsByTab();
+    const tabs = getMediaTabs(itemsByTab);
+
+    return {
+        tabs,
+        defaultItems: itemsByTab[DEFAULT_MEDIA_TAB].slice(0, MEDIA_PAGE_SIZE),
+        manifest: createMediaManifest(itemsByTab),
+    };
+}
+
+export function getMediaItemsByTab(): Record<MediaTabKey, ClientMediaItem[]> {
+    if (mediaItemsByTabCache) return mediaItemsByTabCache;
+
     const movieCoverIndex = createLocalCoverIndex("movie");
     const bookCoverIndex = createLocalCoverIndex("book");
     const movieEntries = normalizeItems(movieData as DoubanItem[], 5, movieCoverIndex);
@@ -75,26 +105,77 @@ export function getMediaPageData() {
     );
     const animeItems = movieEntries.filter((item) => isAnimation(item));
 
-    const itemsByTab: Record<MediaTabKey, ClientMediaItem[]> = {
+    mediaItemsByTabCache = {
         movies: movieItems.map(toClientMediaItem),
         series: seriesItems.map(toClientMediaItem),
         anime: animeItems.map(toClientMediaItem),
         books: books.map(toClientMediaItem),
     };
 
-    const tabs: MediaTab[] = [
+    return mediaItemsByTabCache;
+}
+
+export function getMediaTabs(
+    itemsByTab: Record<MediaTabKey, ClientMediaItem[]> = getMediaItemsByTab(),
+): MediaTab[] {
+    return [
         { key: "movies", label: "Movies", count: itemsByTab.movies.length },
         { key: "series", label: "Series", count: itemsByTab.series.length },
         { key: "anime", label: "Anime", count: itemsByTab.anime.length },
         { key: "books", label: "Books", count: itemsByTab.books.length },
     ];
+}
+
+export function createMediaManifest(
+    itemsByTab: Record<MediaTabKey, ClientMediaItem[]> = getMediaItemsByTab(),
+): MediaManifest {
+    return {
+        defaultTab: DEFAULT_MEDIA_TAB,
+        pageSize: MEDIA_PAGE_SIZE,
+        endpointBase: MEDIA_DATA_ENDPOINT_BASE,
+        tabs: {
+            movies: { count: itemsByTab.movies.length },
+            series: { count: itemsByTab.series.length },
+            anime: { count: itemsByTab.anime.length },
+            books: { count: itemsByTab.books.length },
+        },
+    };
+}
+
+export function getMediaPagePayload(
+    tab: MediaTabKey,
+    page: number,
+    itemsByTab: Record<MediaTabKey, ClientMediaItem[]> = getMediaItemsByTab(),
+): MediaDataPage {
+    const items = itemsByTab[tab];
+    const safePage = Math.max(1, page);
+    const start = (safePage - 1) * MEDIA_PAGE_SIZE;
+    const end = start + MEDIA_PAGE_SIZE;
 
     return {
-        tabs,
-        itemsByTab,
-        defaultItems: itemsByTab[DEFAULT_MEDIA_TAB].slice(0, MEDIA_PAGE_SIZE),
-        serializedItemsByTab: JSON.stringify(itemsByTab).replace(/</g, "\\u003c"),
+        tab,
+        page: safePage,
+        pageSize: MEDIA_PAGE_SIZE,
+        totalCount: items.length,
+        hasMore: end < items.length,
+        items: items.slice(start, end),
     };
+}
+
+export function getMediaDataStaticPaths() {
+    const itemsByTab = getMediaItemsByTab();
+
+    return (Object.entries(itemsByTab) as [MediaTabKey, ClientMediaItem[]][]).flatMap(
+        ([tab, items]) =>
+            Array.from({ length: Math.ceil(items.length / MEDIA_PAGE_SIZE) }, (_, index) => {
+                const page = index + 1;
+
+                return {
+                    params: { tab, page: String(page) },
+                    props: { payload: getMediaPagePayload(tab, page, itemsByTab) },
+                };
+            }),
+    );
 }
 
 function parseDate(value?: string): Date | undefined {

@@ -10,7 +10,6 @@ interface Props {
 
 const { tab, defaultTab, initialItems } = Astro.props;
 const isDefault = tab.key === defaultTab;
-const remainingCount = Math.max(tab.count - initialItems.length, 0);
 ---
 
 <section
@@ -27,24 +26,23 @@ const remainingCount = Math.max(tab.count - initialItems.length, 0);
         ))}
     </ul>
 
-    <div
-        class="flex justify-center pt-10 sm:pt-12"
-        data-media-more-wrapper
-        hidden={remainingCount === 0}
-    >
-        <button
-            type="button"
-            aria-label="Load more"
-            class="group inline-flex min-h-11 min-w-32 items-center justify-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-medium text-[var(--site-color-text-muted)] transition-all duration-200 hover:-translate-y-0.5 hover:text-[var(--site-color-text-neutral-hover)] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--site-color-focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-stone-100 dark:focus-visible:ring-offset-stone-900 sm:text-base"
-            data-media-more
-        >
-            <span>Load more</span>
-            <span
-                aria-hidden="true"
-                class="text-sm leading-none text-current opacity-70 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:opacity-85"
-            >
-                &rarr;
-            </span>
-        </button>
+    <div class="flex justify-center pt-8 text-center" data-media-status-wrapper hidden>
+        <div class="space-y-3">
+            <p
+                class="text-sm text-[var(--site-color-text-muted)] sm:text-base"
+                data-media-status-message
+            ></p>
+            <div class="flex justify-center" data-media-retry-wrapper hidden>
+                <button
+                    type="button"
+                    class="group inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium text-[var(--site-color-text-muted)] transition-colors duration-200 hover:text-[var(--site-color-text-neutral-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--site-color-focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-stone-100 dark:focus-visible:ring-offset-stone-900"
+                    data-media-retry
+                >
+                    Retry
+                </button>
+            </div>
+        </div>
     </div>
+
+    <div class="h-1 w-full" data-media-sentinel aria-hidden="true"></div>
 </section>

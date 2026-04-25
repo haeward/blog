@@ -5,15 +5,11 @@ import { MEDIA, SITE } from "@consts";
 import PageLayout from "@layouts/PageLayout.astro";
 import { getMediaPageData } from "@lib/media";
 
-const { tabs, defaultItems, serializedItemsByTab } = getMediaPageData();
+const { tabs, defaultItems, manifest } = getMediaPageData();
 ---
 
 <PageLayout title={`${MEDIA.TITLE} | ${SITE.NAME}`} description={MEDIA.DESCRIPTION}>
     <Container>
-        <MediaBrowser
-            tabs={tabs}
-            defaultItems={defaultItems}
-            serializedItemsByTab={serializedItemsByTab}
-        />
+        <MediaBrowser tabs={tabs} defaultItems={defaultItems} manifest={manifest} />
     </Container>
 </PageLayout>

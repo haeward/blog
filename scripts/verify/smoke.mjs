@@ -198,11 +198,15 @@ async function assertStatus(baseUrl, route, expectedStatus) {
     }
 }
 
+async function getMediaManifest(page) {
+    return page.locator("#media-data").evaluate((node) => JSON.parse(node.textContent || "{}"));
+}
+
 async function getMediaTabCounts(page, tabName) {
     return page.locator("#media-data").evaluate((node, name) => {
-        const tabData = JSON.parse(node.textContent || "{}");
-        const pageSize = Number.parseInt(node.dataset.pageSize || "100", 10);
-        const totalCount = Array.isArray(tabData[name]) ? tabData[name].length : 0;
+        const manifest = JSON.parse(node.textContent || "{}");
+        const pageSize = Number.parseInt(String(manifest.pageSize || "100"), 10);
+        const totalCount = Number(manifest.tabs?.[name]?.count ?? 0);
 
         return {
             initialCount: Math.min(pageSize, totalCount),
@@ -211,14 +215,44 @@ async function getMediaTabCounts(page, tabName) {
     }, tabName);
 }
 
-async function assertMediaTabLoadMore(page, tabName, label) {
+async function waitForActiveMediaTab(page, tabName) {
+    await page.waitForFunction((name) => {
+        const tab = document.querySelector(`[data-tab="${name}"]`);
+        return tab?.getAttribute("aria-selected") === "true";
+    }, tabName);
+}
+
+async function assertMediaTabInitialLoad(page, tabName, label) {
     const panelSelector = `[data-tab-panel="${tabName}"]:not([hidden])`;
     const gridItemSelector = `${panelSelector} [data-media-grid] > li`;
-    const moreButtonSelector = `${panelSelector} [data-media-more]`;
+    const { initialCount } = await getMediaTabCounts(page, tabName);
 
-    await page.waitForSelector(gridItemSelector);
+    if (initialCount === 0) {
+        const count = await page.locator(gridItemSelector).count();
+        if (count !== 0) {
+            fail(`${label} expected no cards for ${tabName}, received ${count}.`);
+        }
+        return;
+    }
+
+    await page.waitForFunction(
+        ({ panelSelector, expectedCount }) => {
+            const panel = document.querySelector(panelSelector);
+            if (!(panel instanceof HTMLElement)) return false;
+
+            return panel.querySelectorAll("[data-media-grid] > li").length === expectedCount;
+        },
+        { panelSelector, expectedCount: initialCount },
+    );
+}
+
+async function assertMediaTabAutoLoadMore(page, tabName, label) {
+    const panelSelector = `[data-tab-panel="${tabName}"]:not([hidden])`;
+    const gridItemSelector = `${panelSelector} [data-media-grid] > li`;
+    const sentinelSelector = `${panelSelector} [data-media-sentinel]`;
 
     const { initialCount, totalCount } = await getMediaTabCounts(page, tabName);
+    await assertMediaTabInitialLoad(page, tabName, label);
     const initialVisibleCount = await page.locator(gridItemSelector).count();
     if (initialVisibleCount !== initialCount) {
         fail(
@@ -230,28 +264,32 @@ async function assertMediaTabLoadMore(page, tabName, label) {
         return;
     }
 
-    const moreButton = page.locator(moreButtonSelector);
-    if ((await moreButton.count()) === 0) {
-        fail(`${label} expected a load-more button for ${tabName}, but none was rendered.`);
+    const loadMoreButton = page.locator(`${panelSelector} [data-media-more]`);
+    if ((await loadMoreButton.count()) !== 0) {
+        fail(`${label} expected auto loading without a visible load-more button.`);
     }
 
-    await moreButton.click();
+    await page.locator(sentinelSelector).scrollIntoViewIfNeeded();
     await page.waitForFunction(
         ({ panelSelector, expectedCount }) => {
             const panel = document.querySelector(panelSelector);
             if (!(panel instanceof HTMLElement)) return false;
 
             const cards = panel.querySelectorAll("[data-media-grid] > li");
-            const moreWrapper = panel.querySelector("[data-media-more-wrapper]");
-            const moreHidden = !(moreWrapper instanceof HTMLElement) || moreWrapper.hidden === true;
+            const sentinel = panel.querySelector("[data-media-sentinel]");
+            const sentinelHidden = !(sentinel instanceof HTMLElement) || sentinel.hidden === true;
 
-            return cards.length === expectedCount && moreHidden;
+            return cards.length === expectedCount && sentinelHidden;
         },
         {
             panelSelector,
             expectedCount: totalCount,
         },
     );
+}
+
+function countMediaRequests(requestLog, pathname) {
+    return requestLog.filter((entry) => entry === pathname).length;
 }
 
 async function run() {
@@ -269,6 +307,13 @@ async function run() {
         await assertStatus(baseUrl, ARTICLE_SLUG, 200);
         await assertStatus(baseUrl, "/links/", 200);
         await assertStatus(baseUrl, "/media/", 200);
+        await assertStatus(baseUrl, "/media/data/movies/1.json", 200);
+        await assertStatus(baseUrl, "/media/data/movies/2.json", 200);
+        await assertStatus(baseUrl, "/media/data/books/1.json", 200);
+        await assertStatus(baseUrl, "/media/data/series/1.json", 200);
+        await assertStatus(baseUrl, "/media/data/anime/1.json", 200);
+        await assertStatus(baseUrl, "/media/data/books/2.json", 404);
+        await assertStatus(baseUrl, "/media/data/unknown/1.json", 404);
         await assertStatus(baseUrl, "/rss.xml", 200);
         await assertStatus(baseUrl, "/robots.txt", 200);
         await assertStatus(baseUrl, "/sitemap-index.xml", 200);
@@ -305,8 +350,23 @@ async function run() {
             },
         );
         const assertNoErrors = bindPageDiagnostics(page, "desktop");
+        const desktopMediaRequests = [];
+        page.on("request", (request) => {
+            try {
+                const url = new URL(request.url());
+                if (url.pathname.startsWith("/media/data/")) {
+                    desktopMediaRequests.push(url.pathname);
+                }
+            } catch {}
+        });
 
         await assertOk(page, `${baseUrl}/`, "Home");
+        const homeImageSrc = await page.locator('img[alt="programmer"]').getAttribute("src");
+        if (homeImageSrc !== "/assets/images/site/home-hover-runtime.webp") {
+            fail(
+                `Expected homepage runtime image to use optimized asset, received ${homeImageSrc}.`,
+            );
+        }
         const navLabels = await page
             .locator("header nav a")
             .evaluateAll((links) => links.map((link) => link.textContent?.trim() || ""));
@@ -354,13 +414,45 @@ async function run() {
         await page.waitForFunction(() => document.documentElement.dataset.themeMode === "light");
 
         await page.goto(`${baseUrl}/media/#books`, { waitUntil: "networkidle" });
-        await page.waitForFunction(() => {
-            const tab = document.querySelector('[data-tab="books"]');
-            return tab?.getAttribute("aria-selected") === "true";
-        });
+        const mediaManifest = await getMediaManifest(page);
+        if (
+            mediaManifest.defaultTab !== "movies" ||
+            mediaManifest.pageSize !== 100 ||
+            mediaManifest.endpointBase !== "/media/data"
+        ) {
+            fail(`Unexpected media manifest: ${JSON.stringify(mediaManifest)}.`);
+        }
+        await waitForActiveMediaTab(page, "books");
+        await assertMediaTabInitialLoad(page, "books", "Desktop books tab");
+        if (countMediaRequests(desktopMediaRequests, "/media/data/books/1.json") !== 1) {
+            fail(`Expected /media/data/books/1.json to be requested once on first books load.`);
+        }
+
         await page.click('[data-tab="movies"]');
         await page.waitForFunction(() => window.location.hash === "#movies");
-        await assertMediaTabLoadMore(page, "movies", "Desktop media tab");
+        await assertMediaTabInitialLoad(page, "movies", "Desktop movies tab");
+
+        await page.click('[data-tab="books"]');
+        await waitForActiveMediaTab(page, "books");
+        await assertMediaTabInitialLoad(page, "books", "Desktop books revisit");
+        if (countMediaRequests(desktopMediaRequests, "/media/data/books/1.json") !== 1) {
+            fail(`Expected books tab revisit to reuse cached data without a second request.`);
+        }
+
+        await page.click('[data-tab="series"]');
+        await waitForActiveMediaTab(page, "series");
+        await assertMediaTabInitialLoad(page, "series", "Desktop series tab");
+
+        await page.click('[data-tab="anime"]');
+        await waitForActiveMediaTab(page, "anime");
+        await assertMediaTabInitialLoad(page, "anime", "Desktop anime tab");
+
+        await page.click('[data-tab="movies"]');
+        await waitForActiveMediaTab(page, "movies");
+        await assertMediaTabAutoLoadMore(page, "movies", "Desktop media tab");
+        if (countMediaRequests(desktopMediaRequests, "/media/data/movies/2.json") !== 1) {
+            fail(`Expected /media/data/movies/2.json to be requested once for desktop load more.`);
+        }
 
         await page.goto(`${baseUrl}${ARTICLE_SLUG}`, { waitUntil: "networkidle" });
         await page.click(".blog-article img");
@@ -383,11 +475,23 @@ async function run() {
                 "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1",
         });
         const assertNoMobileErrors = bindPageDiagnostics(mobilePage, "mobile");
+        const mobileMediaRequests = [];
+        mobilePage.on("request", (request) => {
+            try {
+                const url = new URL(request.url());
+                if (url.pathname.startsWith("/media/data/")) {
+                    mobileMediaRequests.push(url.pathname);
+                }
+            } catch {}
+        });
 
         await mobilePage.goto(`${baseUrl}/media/#movies`, { waitUntil: "networkidle" });
         await mobilePage.locator('[data-tab="movies"]').click();
         await mobilePage.waitForFunction(() => window.location.hash === "#movies");
-        await assertMediaTabLoadMore(mobilePage, "movies", "Mobile media tab");
+        await assertMediaTabAutoLoadMore(mobilePage, "movies", "Mobile media tab");
+        if (countMediaRequests(mobileMediaRequests, "/media/data/movies/2.json") !== 1) {
+            fail(`Expected /media/data/movies/2.json to be requested once for mobile load more.`);
+        }
 
         assertNoErrors();
         assertNoMobileErrors();

@@ -1,17 +1,17 @@
 ---
 import MediaPanel from "@components/MediaPanel.astro";
 import MediaTabs from "@components/MediaTabs.astro";
-import type { ClientMediaItem, MediaTab, MediaTabKey } from "@lib/media";
-import { DEFAULT_MEDIA_TAB, MEDIA_PAGE_SIZE } from "@lib/media";
+import type { ClientMediaItem, MediaManifest, MediaTab, MediaTabKey } from "@lib/media";
 
 interface Props {
     tabs: MediaTab[];
     defaultItems: ClientMediaItem[];
-    serializedItemsByTab: string;
+    manifest: MediaManifest;
     defaultTab?: MediaTabKey;
 }
 
-const { tabs, defaultItems, serializedItemsByTab, defaultTab = DEFAULT_MEDIA_TAB } = Astro.props;
+const { tabs, defaultItems, manifest, defaultTab = manifest.defaultTab } = Astro.props;
+const serializedManifest = JSON.stringify(manifest).replace(/</g, "\\u003c");
 ---
 
 <div class="space-y-10">
@@ -26,13 +26,7 @@ const { tabs, defaultItems, serializedItemsByTab, defaultTab = DEFAULT_MEDIA_TAB
     ))}
 </div>
 
-<script
-    id="media-data"
-    type="application/json"
-    data-page-size={MEDIA_PAGE_SIZE}
-    is:inline
-    set:html={serializedItemsByTab}
-></script>
+<script id="media-data" type="application/json" is:inline set:html={serializedManifest}></script>
 
 <script>
 import "../scripts/media-tabs";
