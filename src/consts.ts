@@ -48,7 +48,7 @@ export const SOCIALS: Socials = [
     },
     {
         NAME: "Twitter",
-        HREF: "https://x.com/haewyu",
+        HREF: "https://x.com/haewardev",
         ICON: "/assets/icons/social/twitter.svg",
         ENABLE: true,
     },
@@ -78,7 +78,7 @@ export const SOCIALS: Socials = [
     },
     {
         NAME: "YouTube",
-        HREF: "https://youtube.com/@haewyu",
+        HREF: "https://youtube.com/@haewardev",
         ICON: "/assets/icons/social/youtube.svg",
         ENABLE: false,
     },
