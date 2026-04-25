@@ -1,5 +1,6 @@
 ---
 type Props = {
+    title?: string;
     account: string;
     accountId: string;
     domain: string;
@@ -7,7 +8,7 @@ type Props = {
     limit?: number;
 };
 
-const { account, accountId, domain, profileUrl, limit = 5 } = Astro.props;
+const { title = "Moments", account, accountId, domain, profileUrl, limit = 5 } = Astro.props;
 ---
 
 <section
@@ -20,7 +21,7 @@ const { account, accountId, domain, profileUrl, limit = 5 } = Astro.props;
     data-limit={limit.toString()}
 >
     <h2 class="serif-reading-title text-2xl font-bold text-[var(--site-color-text-primary)]">
-        Moments
+        {title}
     </h2>
 
     <p
