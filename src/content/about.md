@@ -21,7 +21,7 @@ You can also find me here:
 * [GitHub](https://github.com/haeward)
 * [Twitter/X](https://x.com/haewyu)
 * [Mastodon](https://mas.to/@haeward)
-* [Douban](https://movie.douban.com/people/mithrasu)
+* [Douban](https://www.douban.com/people/mithrasu/)
 * [Bangumi](https://bgm.tv/user/haeward)
 
 For questions, project ideas, or a simple hello: [me@haeward.com](mailto:me@haeward.com)
