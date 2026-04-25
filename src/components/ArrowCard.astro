@@ -26,7 +26,7 @@ const formattedDate = new Intl.DateTimeFormat(
 ).format(entry.data.date);
 
 const cardClasses =
-    "group grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 px-2 py-3 transition-colors duration-200 ease-out sm:gap-x-4";
+    "group grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 px-2 py-1.5 transition-colors duration-200 ease-out sm:gap-x-4";
 const titleClasses = isHome
     ? "serif-reading-title text-[1.03rem] leading-[1.45] font-semibold text-[var(--site-color-text-heading)] transition-colors duration-200 group-hover:text-[var(--site-color-text-neutral-hover)] sm:text-[1.12rem]"
     : "serif-reading-title text-[1.08rem] leading-[1.45] font-semibold text-[var(--site-color-text-heading)] transition-colors duration-200 group-hover:text-[var(--site-color-text-neutral-hover)] sm:text-[1.16rem]";

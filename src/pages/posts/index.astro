@@ -19,7 +19,7 @@ const years = Object.keys(posts).sort((a, b) => Number.parseInt(b, 10) - Number.
                                 {year}
                             </div>
                             <div>
-                                <ul class="flex flex-col gap-1.5">
+                                <ul class="flex flex-col gap-1">
                                     {posts[year].map((post) => (
                                         <li>
                                             <ArrowCard entry={post} variant="archive" />
