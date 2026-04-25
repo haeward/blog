@@ -27,6 +27,16 @@ const placeholder = item.title.trim().slice(0, 1).toUpperCase();
         rel="noopener noreferrer"
         class="relative flex h-full min-h-14 items-center gap-2.25 rounded-lg border border-black/12 bg-white/35 px-2.25 py-2.5 transition-colors duration-300 hover:border-black/18 hover:bg-white/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-100 dark:border-white/7 dark:bg-white/[0.025] dark:hover:border-white/12 dark:hover:bg-white/[0.045] dark:focus-visible:ring-white/16 dark:focus-visible:ring-offset-stone-900"
     >
+        {item.status && (
+            <span
+                class:list={[
+                    "absolute top-2 right-2 size-1.5 rounded-full",
+                    item.status === "down" ? "bg-rose-500" : "bg-emerald-500",
+                ]}
+                data-link-status={item.status}
+            />
+        )}
+
         <div
             class="flex size-6 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-transparent"
         >
