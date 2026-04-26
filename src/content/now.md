@@ -1,6 +1,8 @@
 ---
 updated: "2026-04-24"
 current:
+    - item: "在学 Rust"
+    - item: "在学日语"
     - item: "开始洗冷水澡"
 
 reading:
