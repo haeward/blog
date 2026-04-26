@@ -7,6 +7,460 @@
 			"star_count": 4,
 			"value": 4
 		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/book/30331243 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/30331243/interest/4828244172",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-27 00:28:37",
+		"status": "done",
+		"id": 4828244172,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 8846,
+				"max": 10,
+				"star_count": 4.5,
+				"value": 8.6
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2018-10"
+			],
+			"pic": {
+				"large": "https://img3.doubanio.com/view/subject/l/public/s29910472.jpg",
+				"normal": "https://img3.doubanio.com/view/subject/m/public/s29910472.jpg"
+			},
+			"honor_infos": [],
+			"other_versions_count": 3,
+			"is_show": false,
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/161387ce451872cbf51fcb288cd5ffd1dcd89705/pics/vendors/logo_dedao@2x.png",
+				"https://img1.doubanio.com/f/frodo/f6f620132e6d8a02d171f03114bbe2339aa8af97/pics/vendors/logo_doubanread@2x.png"
+			],
+			"card_subtitle": "许先哲 / 2018 / 北京联合出版公司",
+			"book_subtitle": "",
+			"id": "30331243",
+			"author": [
+				"许先哲"
+			],
+			"is_released": true,
+			"vendor_original_price": "",
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "a5595c",
+				"_base_color": [
+					0.9921383647798743,
+					0.4608695652173913,
+					0.9019607843137255
+				],
+				"secondary_color": "f9f4f5",
+				"_avg_color": [
+					0.990990990990991,
+					0.2846153846153846,
+					0.5098039215686274
+				],
+				"primary_color_dark": "7f4447"
+			},
+			"type": "book",
+			"cover_url": "https://dou.img.lithub.cc/book/30331243.jpg",
+			"min_sale_price": "¥19.7",
+			"press": [
+				"北京联合出版公司"
+			],
+			"pages": [
+				"280"
+			],
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/30331243",
+			"url": "https://book.douban.com/subject/30331243/",
+			"title": "镖人：卷四",
+			"uri": "douban://douban.com/book/30331243",
+			"subtype": "book",
+			"intro": "收录连载第29回至第42回。\n大业三年（公元607年），隋王朝在隋炀帝杨广的残暴统治下民不聊生。\n阿育娅毅然告别刀马，只身一人重返大沙暴中为父报仇，却难敌四大家族人多势众。就在阿育娅命悬一线之际，裴行俨意外现身，出手救下了伤重的阿育娅……\n—————————————————————————————————\n信念越强，力量越强！\n轰动日本的中国漫画！\n一趟牵动天下命运的护镖，再掀武侠热潮！",
+			"buy_more_uri": "douban://douban.com/book/30331243/vendors_douban",
+			"null_rating_reason": "",
+			"article_intros": [],
+			"vendor_sale_price": "",
+			"has_ebook": true
+		},
+		"star_time": "2026-04-27 00:28:37"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
+		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/book/30394166 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/30394166/interest/4828240767",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-27 00:24:30",
+		"status": "done",
+		"id": 4828240767,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 8256,
+				"max": 10,
+				"star_count": 4.5,
+				"value": 8.6
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2019-1"
+			],
+			"pic": {
+				"large": "https://img9.doubanio.com/view/subject/l/public/s29952736.jpg",
+				"normal": "https://img9.doubanio.com/view/subject/m/public/s29952736.jpg"
+			},
+			"honor_infos": [],
+			"other_versions_count": 1,
+			"is_show": false,
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/161387ce451872cbf51fcb288cd5ffd1dcd89705/pics/vendors/logo_dedao@2x.png",
+				"https://img1.doubanio.com/f/frodo/f6f620132e6d8a02d171f03114bbe2339aa8af97/pics/vendors/logo_doubanread@2x.png"
+			],
+			"card_subtitle": "许先哲 / 2019 / 北京联合出版公司",
+			"book_subtitle": "",
+			"id": "30394166",
+			"author": [
+				"许先哲"
+			],
+			"is_released": true,
+			"vendor_original_price": "",
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "722827",
+				"_base_color": [
+					0.002283105022831041,
+					0.6576576576576576,
+					0.8705882352941177
+				],
+				"secondary_color": "f9f4f4",
+				"_avg_color": [
+					0.013661202185792384,
+					0.4841269841269842,
+					0.49411764705882355
+				],
+				"primary_color_dark": "4c1a1a"
+			},
+			"type": "book",
+			"cover_url": "https://dou.img.lithub.cc/book/30394166.jpg",
+			"min_sale_price": "¥18.2",
+			"press": [
+				"北京联合出版公司"
+			],
+			"pages": [
+				"272"
+			],
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/30394166",
+			"url": "https://book.douban.com/subject/30394166/",
+			"title": "镖人：卷五",
+			"uri": "douban://douban.com/book/30394166",
+			"subtype": "book",
+			"intro": "◆轰动日本的中国漫画！《镖人》第五册轰动上市！\n◆3次登上日本央视NHK电视台新闻报道节目，被日本媒体誉为“太阳系级别的中国动漫精品”！ 日文&韩文单行本热卖中！\n◆征服日本知名漫画编辑！双叶社（代表作《蜡笔小新》）前主编栗原一二、小学馆（代表作《名侦探柯南》）前主编御木基宏连连称赞！\n◆漫画大师高桥留美子（代表作《犬夜叉》）、藤泽亨（代表作《麻辣教师GTO》），知名作家马伯庸，《大圣归来》总导演田晓鹏，脱口秀大师李诞，实力派演员万茜鼎力推荐！\n◆新漫画、有妖气、快看漫画、腾讯动漫、网易漫画等十余家国内漫画阅读平台及日本知名电子阅读平台全好评连载中！\n◆新增36页未公开神秘番外&后记，随书附赠精美海报。\n◆信念越强，力量越强！\n________________________________________________________\n一部重现隋唐江湖的热血漫画！\n大业三年（公元607年），隋王朝在隋炀帝杨广的残暴统治下民不聊生。\n裴行俨与和伊玄的手下激烈交战，与此同时刀马一行人也赶到了营砦，在暗处等待机会救出阿育娅……",
+			"buy_more_uri": "douban://douban.com/book/30394166/vendors_douban",
+			"null_rating_reason": "",
+			"article_intros": [],
+			"vendor_sale_price": "",
+			"has_ebook": true
+		},
+		"star_time": "2026-04-27 00:24:30"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
+		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/book/30247517 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/30247517/interest/4828239449",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-27 00:22:57",
+		"status": "done",
+		"id": 4828239449,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 9733,
+				"max": 10,
+				"star_count": 4,
+				"value": 8.4
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2018-8"
+			],
+			"pic": {
+				"large": "https://img9.doubanio.com/view/subject/l/public/s29835816.jpg",
+				"normal": "https://img9.doubanio.com/view/subject/m/public/s29835816.jpg"
+			},
+			"honor_infos": [],
+			"other_versions_count": 5,
+			"is_show": false,
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/161387ce451872cbf51fcb288cd5ffd1dcd89705/pics/vendors/logo_dedao@2x.png",
+				"https://img1.doubanio.com/f/frodo/f6f620132e6d8a02d171f03114bbe2339aa8af97/pics/vendors/logo_doubanread@2x.png"
+			],
+			"card_subtitle": "许先哲 / 2018 / 北京联合出版公司",
+			"book_subtitle": "",
+			"id": "30247517",
+			"author": [
+				"许先哲"
+			],
+			"is_released": true,
+			"vendor_original_price": "",
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "724b51",
+				"_base_color": [
+					0.9761904761904762,
+					0.3414634146341464,
+					0.1607843137254902
+				],
+				"secondary_color": "f9f4f5",
+				"_avg_color": [
+					0.9710144927536232,
+					0.4181818181818182,
+					0.43137254901960786
+				],
+				"primary_color_dark": "4c3236"
+			},
+			"type": "book",
+			"cover_url": "https://dou.img.lithub.cc/book/30247517.jpg",
+			"min_sale_price": null,
+			"press": [
+				"北京联合出版公司"
+			],
+			"pages": [
+				"272"
+			],
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/30247517",
+			"url": "https://book.douban.com/subject/30247517/",
+			"title": "镖人：卷三",
+			"uri": "douban://douban.com/book/30247517",
+			"subtype": "book",
+			"intro": "收录连载第17回至第28回。\n一部重现隋唐江湖的热血漫画！\n大业三年（公元607年），隋王朝在隋炀帝杨广的残暴统治下民不聊生。刀马一行人在护送知世郎的途中被和伊玄及其手下拦截，朝廷的诡计、胡商家族的围攻接踵而至，一场大战一触即发……\n________________________________________________________\n信念越强，力量越强！\n轰动日本的中国漫画！\n一趟牵动天下命运的护镖，再掀武侠热潮！",
+			"buy_more_uri": "",
+			"null_rating_reason": "",
+			"article_intros": [],
+			"vendor_sale_price": "",
+			"has_ebook": true
+		},
+		"star_time": "2026-04-27 00:22:57"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/book/30218904 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/30218904/interest/4828238718",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-27 00:22:05",
+		"status": "done",
+		"id": 4828238718,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 11334,
+				"max": 10,
+				"star_count": 4.5,
+				"value": 8.5
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2018-6"
+			],
+			"pic": {
+				"large": "https://img1.doubanio.com/view/subject/l/public/s29779360.jpg",
+				"normal": "https://img1.doubanio.com/view/subject/m/public/s29779360.jpg"
+			},
+			"honor_infos": [
+				{
+					"kind": "book",
+					"uri": "douban://douban.com/subject_collection/EC4I5PRFQ?type=rank&category=book&rank_type=topn_book",
+					"rank": 8,
+					"title": "热门中国漫画图书TOP10"
+				}
+			],
+			"other_versions_count": 3,
+			"is_show": false,
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/161387ce451872cbf51fcb288cd5ffd1dcd89705/pics/vendors/logo_dedao@2x.png",
+				"https://img1.doubanio.com/f/frodo/f6f620132e6d8a02d171f03114bbe2339aa8af97/pics/vendors/logo_doubanread@2x.png"
+			],
+			"card_subtitle": "许先哲 / 2018 / 北京联合出版公司",
+			"book_subtitle": "",
+			"id": "30218904",
+			"author": [
+				"许先哲"
+			],
+			"is_released": true,
+			"vendor_original_price": "",
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "a59793",
+				"_base_color": [
+					0.04166666666666682,
+					0.1111111111111111,
+					0.1411764705882353
+				],
+				"secondary_color": "f9f6f4",
+				"_avg_color": [
+					0.018518518518518618,
+					0.14835164835164844,
+					0.7137254901960784
+				],
+				"primary_color_dark": "7f7471"
+			},
+			"type": "book",
+			"cover_url": "https://dou.img.lithub.cc/book/30218904.jpg",
+			"min_sale_price": null,
+			"press": [
+				"北京联合出版公司"
+			],
+			"pages": [
+				"272"
+			],
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/30218904",
+			"url": "https://book.douban.com/subject/30218904/",
+			"title": "镖人：卷二",
+			"uri": "douban://douban.com/book/30218904",
+			"subtype": "book",
+			"intro": "◆轰动日本的中国漫画！3次登上日本央视NHK电视台新闻报道节目，被日本媒体誉为“世界级水平的中国动漫精品”！\n◆征服日本资深漫画编辑！双叶社（代表作《蜡笔小新》）前主编栗原一二、小学馆（代表作《名侦探柯南》）前主编御木基宏连连称赞！\n◆漫画大师高桥留美子（代表作《犬夜叉》）、藤泽亨（代表作《麻辣教师GTO》），著名作家马伯庸，《大圣归来》总导演田晓鹏鼎力推荐！\n◆新漫画、有妖气、快看漫画、腾讯动漫、网易漫画等十余家国内漫画阅读平台及日本知名电子阅读平台めちゃコミック全好评连载中！\n◆新增25页从未公开过的番外，随书附赠精美海报&明信片。\n◆信念越强，力量越强！\n________________________________________________________\n一部重现隋唐江湖的热血漫画！\n大业三年（607年），隋王朝在隋炀帝杨广的残暴统治下民不聊生。身手不凡的镖客刀马在杀了欺压民众的常贵人后一边逃亡，一边护送义贼团魁首知世郎前往首都长安。在途中他遇上了被穷凶极恶之徒围困的刀客竖，出手解围后一行人还没来得及歇一口气，一群不速之客就出现在他们面前……",
+			"buy_more_uri": "",
+			"null_rating_reason": "",
+			"article_intros": [],
+			"vendor_sale_price": "",
+			"has_ebook": true
+		},
+		"star_time": "2026-04-27 00:22:05"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/book/30163844 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/30163844/interest/4828236416",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-27 00:19:23",
+		"status": "done",
+		"id": 4828236416,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 21261,
+				"max": 10,
+				"star_count": 4,
+				"value": 8.4
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2018-4"
+			],
+			"pic": {
+				"large": "https://img1.doubanio.com/view/subject/l/public/s29725620.jpg",
+				"normal": "https://img1.doubanio.com/view/subject/m/public/s29725620.jpg"
+			},
+			"honor_infos": [
+				{
+					"kind": "book",
+					"uri": "douban://douban.com/subject_collection/2018_book_897?type=rank&category=book&rank_type=year",
+					"rank": 6,
+					"title": "2018年度绘本·漫画"
+				}
+			],
+			"other_versions_count": 3,
+			"is_show": false,
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/161387ce451872cbf51fcb288cd5ffd1dcd89705/pics/vendors/logo_dedao@2x.png",
+				"https://img1.doubanio.com/f/frodo/f6f620132e6d8a02d171f03114bbe2339aa8af97/pics/vendors/logo_doubanread@2x.png"
+			],
+			"card_subtitle": "许先哲 / 2018 / 北京联合出版公司",
+			"book_subtitle": "",
+			"id": "30163844",
+			"author": [
+				"许先哲"
+			],
+			"is_released": true,
+			"vendor_original_price": "",
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "722022",
+				"_base_color": [
+					0.9958071278825996,
+					0.7194570135746606,
+					0.8666666666666667
+				],
+				"secondary_color": "f9f4f5",
+				"_avg_color": [
+					0.9931972789115646,
+					0.49,
+					0.39215686274509803
+				],
+				"primary_color_dark": "4c1516"
+			},
+			"type": "book",
+			"cover_url": "https://dou.img.lithub.cc/book/30163844.jpg",
+			"min_sale_price": null,
+			"press": [
+				"北京联合出版公司"
+			],
+			"pages": [
+				"280"
+			],
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/30163844",
+			"url": "https://book.douban.com/subject/30163844/",
+			"title": "镖人：卷一",
+			"uri": "douban://douban.com/book/30163844",
+			"subtype": "book",
+			"intro": "◆轰动日本的中国漫画！3次登上日本央视NHK电视台新闻报道节目，被日本媒体誉为“世界级水平的中国动漫精品”！\n◆征服日本资深漫画编辑！双叶社（代表作《蜡笔小新》）前主编栗原一二亲笔作序！小学馆（代表作《名侦探柯南》）前主编御木基宏连连称赞！\n◆漫画大师高桥留美子（代表作《犬夜叉》）、藤泽亨（代表作《麻辣教师GTO》），著名作家马伯庸，《大圣归来》总导演田晓鹏鼎力推荐！\n◆新漫画、有妖气、快看漫画、腾讯动漫、网易漫画等十余家国内漫画阅读平台及日本知名电子阅读平台めちゃコミック全好评连载中！\n◆新增18页从未公开过的番外&作者倾情撰写后记，随书附赠精美海报&3张明信片。\n◆信念越强，力量越强！\n________________________________________________________\n一部重现隋唐江湖的热血漫画！\n大业三年（公元607年），隋王朝在隋炀帝杨广的残暴统治下民不聊生。身手不凡的镖客刀马行走于西域大漠，在躲避朝廷追杀的途中，他接下了一个目的地为首都长安的护送任务，本以为只是一趟简单的护镖，却没想到一路危机四伏，险象环生。\n一场牵动天下命运的旅途就此拉开帷幕……",
+			"buy_more_uri": "",
+			"null_rating_reason": "",
+			"article_intros": [],
+			"vendor_sale_price": "",
+			"has_ebook": true
+		},
+		"star_time": "2026-04-27 00:19:23"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
 		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/book/36707112 来自@豆瓣App",
 		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/36707112/interest/4225148852",
 		"tags": [],
