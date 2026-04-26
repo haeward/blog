@@ -391,6 +391,7 @@ async function run() {
         await assertOk(page, `${baseUrl}/links/`, "Links");
         await page.waitForSelector('[data-links-section="blogroll"] [data-link-card="true"]');
         await page.waitForSelector('[data-links-section="videos"] [data-link-card="true"]');
+        await page.waitForSelector('[data-links-section="podcasts"]');
 
         const blogrollCount = await page
             .locator('[data-links-section="blogroll"] [data-link-card="true"]')

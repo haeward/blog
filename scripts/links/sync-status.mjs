@@ -48,6 +48,7 @@ function getCurrentUrls(source) {
     return new Set([
         ...(source.blogroll ?? []).map((item) => item.url),
         ...(source.videos ?? []).map((item) => item.url),
+        ...(source.podcasts ?? []).map((item) => item.url),
     ]);
 }
 

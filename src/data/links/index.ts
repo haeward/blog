@@ -5,6 +5,7 @@ import linkSource from "./links.json";
 type LinkSource = {
     blogroll: Array<Omit<LinkEntry, "image" | "status" | "checkedAt">>;
     videos: Array<Omit<LinkEntry, "image" | "status" | "checkedAt">>;
+    podcasts: Array<Omit<LinkEntry, "image" | "status" | "checkedAt">>;
 };
 
 const source = linkSource as LinkSource;
@@ -30,3 +31,4 @@ function enrichLinks(
 
 export const BLOGROLL_LINKS: LinkEntry[] = enrichLinks(source.blogroll, { includeStatus: true });
 export const VIDEO_LINKS: LinkEntry[] = enrichLinks(source.videos, { includeStatus: false });
+export const PODCAST_LINKS: LinkEntry[] = enrichLinks(source.podcasts, { includeStatus: false });

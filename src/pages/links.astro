@@ -4,7 +4,7 @@ import LinkCard from "@components/LinkCard.astro";
 import { LINKS, SITE } from "@consts";
 import PageLayout from "@layouts/PageLayout.astro";
 import type { LinkEntry } from "@types";
-import { BLOGROLL_LINKS, VIDEO_LINKS } from "../data/links";
+import { BLOGROLL_LINKS, PODCAST_LINKS, VIDEO_LINKS } from "../data/links";
 
 type LinkSection = {
     key: string;
@@ -23,12 +23,17 @@ const sections: LinkSection[] = [
         title: "Videos",
         items: VIDEO_LINKS,
     },
+    {
+        key: "podcasts",
+        title: "Podcast",
+        items: PODCAST_LINKS,
+    },
 ];
 ---
 
 <PageLayout title={`${LINKS.TITLE} | ${SITE.NAME}`} description={LINKS.DESCRIPTION} lang="en">
     <Container>
-        <section class="space-y-12 sm:space-y-14">
+        <section class="space-y-6 sm:space-y-8">
             <div class="animate space-y-3">
                 <h1
                     class="serif-reading-title text-3xl font-bold tracking-[0.01em] text-[var(--site-color-text-primary)] sm:text-4xl"
@@ -38,12 +43,11 @@ const sections: LinkSection[] = [
                 <p
                     class="serif-reading-surface text-[1.03rem] leading-8 font-medium tracking-[0.014em] text-[var(--site-color-text-body)]"
                 >
-                    A quiet directory of people, publications, and channels I keep returning to when
-                    I want better ideas, sharper taste, or just a different angle on the world.
+                    记录一些喜欢的内容。
                 </p>
             </div>
 
-            <div class="space-y-12 sm:space-y-14">
+            <div class="space-y-9 sm:space-y-10">
                 {sections.map((section) => (
                     <section
                         class="animate space-y-5 sm:space-y-6"

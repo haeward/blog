@@ -4,7 +4,7 @@ import path from "node:path";
 const filePath = path.resolve("src/data/links/links.json");
 const source = JSON.parse(readFileSync(filePath, "utf-8"));
 
-for (const key of ["blogroll", "videos"]) {
+for (const key of ["blogroll", "videos", "podcasts"]) {
     if (!Array.isArray(source[key])) continue;
 
     source[key] = [...source[key]].sort((left, right) => {
@@ -14,7 +14,7 @@ for (const key of ["blogroll", "videos"]) {
     });
 }
 
-writeFileSync(filePath, `${JSON.stringify(source, null, 2)}\n`);
+writeFileSync(filePath, `${JSON.stringify(source, null, 4)}\n`);
 console.log(`Links source sorted at ${path.relative(process.cwd(), filePath)}`);
 
 function compareByCodePoint(left, right) {

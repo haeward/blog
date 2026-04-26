@@ -9,7 +9,7 @@ export type Metadata = {
     DESCRIPTION: string;
 };
 
-export type LinkCategory = "blogroll" | "videos";
+export type LinkCategory = "blogroll" | "videos" | "podcasts";
 export type LinkStatus = "up" | "limited" | "down";
 
 export type LinkEntry = {

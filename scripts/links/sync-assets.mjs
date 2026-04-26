@@ -11,9 +11,11 @@ const outputPath = path.resolve("src/data/links/generated.json");
 const publicDir = path.resolve("public/assets/images/links");
 const blogrollDir = path.join(publicDir, "blogroll");
 const videosDir = path.join(publicDir, "videos");
+const podcastsDir = path.join(publicDir, "podcasts");
 
 mkdirSync(blogrollDir, { recursive: true });
 mkdirSync(videosDir, { recursive: true });
+mkdirSync(podcastsDir, { recursive: true });
 
 const source = JSON.parse(await readFile(sourcePath, "utf-8"));
 const output = await readJson(outputPath);
@@ -28,6 +30,11 @@ for (const item of source.blogroll ?? []) {
 
 for (const item of source.videos ?? []) {
     const image = await syncVideoAsset(item);
+    if (image) output[item.url] = { ...output[item.url], image };
+}
+
+for (const item of source.podcasts ?? []) {
+    const image = await syncPodcastAsset(item);
     if (image) output[item.url] = { ...output[item.url], image };
 }
 
@@ -47,6 +54,7 @@ function getCurrentUrls(source) {
     return new Set([
         ...(source.blogroll ?? []).map((item) => item.url),
         ...(source.videos ?? []).map((item) => item.url),
+        ...(source.podcasts ?? []).map((item) => item.url),
     ]);
 }
 
@@ -65,7 +73,7 @@ function deleteOrphanAssets(output) {
             .filter(Boolean),
     );
 
-    for (const dir of [blogrollDir, videosDir]) {
+    for (const dir of [blogrollDir, videosDir, podcastsDir]) {
         for (const name of readdirSync(dir)) {
             const filePath = path.join(dir, name);
             const publicPath = toPublicPath(filePath);
@@ -77,8 +85,12 @@ function deleteOrphanAssets(output) {
 }
 
 async function syncBlogrollAsset(item) {
+    return syncGenericAsset(item, blogrollDir);
+}
+
+async function syncGenericAsset(item, targetDir) {
     const fileBase = createKey(item.url);
-    const existing = findExistingAsset(blogrollDir, fileBase);
+    const existing = findExistingAsset(targetDir, fileBase);
     if (existing) return toPublicPath(existing);
 
     const downloaded = await downloadFirstAvailableAsset(
@@ -89,11 +101,32 @@ async function syncBlogrollAsset(item) {
             buildFallbackFavicon(item.url),
             buildFaviconServiceUrl(item.url),
         ],
-        blogrollDir,
+        targetDir,
         fileBase,
         item.url,
     );
     if (downloaded) return toPublicPath(downloaded);
+    return undefined;
+}
+
+async function syncPodcastAsset(item) {
+    const fileBase = createKey(item.url);
+    const existing = findExistingAsset(podcastsDir, fileBase);
+
+    const downloaded = await downloadFirstAvailableAsset(
+        [
+            await findOgImage(item.url),
+            await findNamedImage(item.url),
+            await findDeclaredIcon(item.url),
+            buildFallbackFavicon(item.url),
+            buildFaviconServiceUrl(item.url),
+        ],
+        podcastsDir,
+        fileBase,
+        item.url,
+    );
+    if (downloaded) return toPublicPath(downloaded);
+    if (existing) return toPublicPath(existing);
     return undefined;
 }
 
