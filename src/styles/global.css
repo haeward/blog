@@ -54,14 +54,17 @@ body {
     --site-color-surface-border: rgba(0, 0, 0, 0.1);
     --site-color-surface-border-strong: rgba(0, 0, 0, 0.2);
     --site-color-focus-ring: rgba(0, 0, 0, 0.12);
-    --site-link-internal: #7d4b2f;
-    --site-link-internal-hover: #5f3723;
-    --site-link-text-internal-hover: #805033;
-    --site-link-external: #9f542f;
-    --site-link-external-hover: #7c3f23;
-    --site-link-text-external-hover: #a25832;
-    --site-link-decoration: rgba(200, 145, 107, 0.72);
-    --site-link-external-decoration: rgba(214, 161, 124, 0.78);
+    --site-link: #9f542f;
+    --site-link-hover: #a25832;
+    --site-link-strong-hover: #7c3f23;
+    --site-link-decoration: rgba(214, 161, 124, 0.78);
+    --site-link-internal: var(--site-link);
+    --site-link-internal-hover: var(--site-link-strong-hover);
+    --site-link-text-internal-hover: var(--site-link-hover);
+    --site-link-external: var(--site-link);
+    --site-link-external-hover: var(--site-link-strong-hover);
+    --site-link-text-external-hover: var(--site-link-hover);
+    --site-link-external-decoration: var(--site-link-decoration);
     --site-link-focus: rgba(159, 84, 47, 0.48);
     --site-link-focus-bg: rgba(159, 84, 47, 0.08);
     --site-link-surface-border: rgba(159, 84, 47, 0.3);
@@ -79,14 +82,17 @@ html.dark body {
     --site-color-surface-border: rgba(255, 255, 255, 0.1);
     --site-color-surface-border-strong: rgba(255, 255, 255, 0.2);
     --site-color-focus-ring: rgba(255, 255, 255, 0.2);
-    --site-link-internal: #e6aa84;
-    --site-link-internal-hover: #ffd0af;
-    --site-link-text-internal-hover: #e8ae8a;
-    --site-link-external: #f0b58f;
-    --site-link-external-hover: #ffd7bc;
-    --site-link-text-external-hover: #f1b994;
-    --site-link-decoration: rgba(158, 94, 61, 0.82);
-    --site-link-external-decoration: rgba(176, 103, 67, 0.86);
+    --site-link: #f0b58f;
+    --site-link-hover: #f1b994;
+    --site-link-strong-hover: #ffd7bc;
+    --site-link-decoration: rgba(176, 103, 67, 0.86);
+    --site-link-internal: var(--site-link);
+    --site-link-internal-hover: var(--site-link-strong-hover);
+    --site-link-text-internal-hover: var(--site-link-hover);
+    --site-link-external: var(--site-link);
+    --site-link-external-hover: var(--site-link-strong-hover);
+    --site-link-text-external-hover: var(--site-link-hover);
+    --site-link-external-decoration: var(--site-link-decoration);
     --site-link-focus: rgba(240, 181, 143, 0.5);
     --site-link-focus-bg: rgba(240, 181, 143, 0.1);
     --site-link-surface-border: rgba(240, 181, 143, 0.34);
@@ -106,6 +112,10 @@ header.header--divider {
 
 main {
     @apply flex-1 py-12 sm:py-16;
+}
+
+main:has(.about-page) {
+    @apply pb-6 sm:pb-8;
 }
 
 footer {
@@ -356,6 +366,39 @@ article {
     .prose-invert blockquote > :last-child,
     article blockquote > :last-child {
         margin-block: 0 !important;
+    }
+
+    article.about-content blockquote {
+        @apply !relative;
+        @apply !shadow-none;
+        @apply !border-0;
+        @apply !text-[0.9rem];
+        background-color: transparent !important;
+    }
+
+    html.dark body article.about-content blockquote {
+        background-color: transparent !important;
+    }
+
+    article.about-content blockquote::before {
+        position: absolute;
+        top: 20%;
+        bottom: 20%;
+        left: 0;
+        width: 3px;
+        content: "";
+        background-color: var(--site-color-surface-border);
+        border-radius: 999px;
+    }
+
+    article.about-content blockquote p {
+        @apply !leading-6;
+    }
+
+    article.about-content hr {
+        @apply !mt-4 !mb-2;
+        border-color: var(--site-color-surface-border) !important;
+        border-top-width: 1px !important;
     }
 
     /* Custom code block styling */

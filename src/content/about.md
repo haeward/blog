@@ -2,26 +2,23 @@
 title: "About Me"
 ---
 
-I'm **Haeward**. I write software for a living, but most of the time I think of myself less as a specialist in one stack and more as someone who keeps chasing better ways to build, learn, and pay attention. These days, that curiosity is pulling me deeper into **Rust**, open source, and the quiet satisfaction of making useful things a little sharper.
+你好，我是 Haeward。
 
-Outside of code, I return to books, films, and anime with the same instinct. I like work with structure, atmosphere, and a strong inner logic, which is probably why I keep circling back to mystery and science fiction. If you're curious about what I am into right now, there is a snapshot on the [Now](/now) page; finished books, films, and shows live on [Media](/media).
+- 后端码农，做一些云原生相关的业务
+- 工作主要使用 Java 和 Go，业余会写一些 Python/HTML/CSS/TS
+- 喜欢看书、电影和动漫，涉猎不算多，但很杂，尤其偏爱悬疑和科幻题材
+- 经常阅读博客，主要用 RSS 订阅，也会偶尔打开原网站看看设计、更新和细节变化
+- 几乎每天都会听播客，内容大多围绕科技、历史、阅读、影视、商业与投资
+- 间歇性运动，还没有形成长期习惯，正在慢慢坚持
 
-I run regularly, partly because it clears my head and partly because **[風が強く吹いている](https://bgm.tv/subject/248154)** lodged itself somewhere permanent in my brain. It made running feel less like discipline for its own sake and more like a way of staying awake to the world.
+> 如果你感兴趣，也可以在 [Links](/links) 页面查看我关注的一些博客、频道和播客。
 
-I'm also drawn to tools, workflows, and small pieces of technology that make everyday work feel more deliberate. That ranges from automation scripts and development tools to hardware and gadgets that are thoughtfully made instead of merely new. Lately, some of that same curiosity has gone into learning **Japanese**, slowly but seriously.
+## 网络栖息地
 
-If any of that overlaps with your corner of the internet, feel free to say hello.
+- [GitHub](https://github.com/haeward)
+- [Twitter/X](https://x.com/haewyu)
+- [Mastodon](https://mas.to/@haeward)
+- [Douban](https://www.douban.com/people/mithrasu/)
+- [Bangumi](https://bgm.tv/user/haeward)
 
----
-
-## Online habitat
-
-You can also find me here:
-
-* [GitHub](https://github.com/haeward)
-* [Twitter/X](https://x.com/haewyu)
-* [Mastodon](https://mas.to/@haeward)
-* [Douban](https://www.douban.com/people/mithrasu/)
-* [Bangumi](https://bgm.tv/user/haeward)
-
-For questions, project ideas, or a simple hello: [me@haeward.com](mailto:me@haeward.com)
+欢迎来信: [me@haeward.com](mailto:me@haeward.com)
