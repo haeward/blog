@@ -7,6 +7,94 @@
 			"star_count": 4,
 			"value": 4
 		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/book/30490151 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/30490151/interest/4828241418",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-27 12:19:55",
+		"status": "done",
+		"id": 4828241418,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 7331,
+				"max": 10,
+				"star_count": 4.5,
+				"value": 8.6
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2019-4"
+			],
+			"pic": {
+				"large": "https://img1.doubanio.com/view/subject/l/public/s32293150.jpg",
+				"normal": "https://img1.doubanio.com/view/subject/m/public/s32293150.jpg"
+			},
+			"honor_infos": [],
+			"other_versions_count": 1,
+			"is_show": false,
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/161387ce451872cbf51fcb288cd5ffd1dcd89705/pics/vendors/logo_dedao@2x.png",
+				"https://img1.doubanio.com/f/frodo/f6f620132e6d8a02d171f03114bbe2339aa8af97/pics/vendors/logo_doubanread@2x.png"
+			],
+			"card_subtitle": "许先哲 / 2019 / 北京联合出版公司",
+			"book_subtitle": "",
+			"id": "30490151",
+			"author": [
+				"许先哲"
+			],
+			"is_released": true,
+			"vendor_original_price": "",
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "a5837f",
+				"_base_color": [
+					0.018518518518518507,
+					0.23076923076923084,
+					0.15294117647058825
+				],
+				"secondary_color": "f9f5f4",
+				"_avg_color": [
+					0.030303030303030276,
+					0.3125,
+					0.6901960784313725
+				],
+				"primary_color_dark": "7f6562"
+			},
+			"type": "book",
+			"cover_url": "https://dou.img.lithub.cc/book/30490151.jpg",
+			"min_sale_price": "¥16.8",
+			"press": [
+				"北京联合出版公司"
+			],
+			"pages": [
+				"256"
+			],
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/30490151",
+			"url": "https://book.douban.com/subject/30490151/",
+			"title": "镖人：卷六",
+			"uri": "douban://douban.com/book/30490151",
+			"subtype": "book",
+			"intro": "“镖”，指的是受雇的武夫，其保护的目标，亦指官府悬赏通缉的目标。《镖人》的故事展开于隋末民乱前夕 ，武功高强的神秘镖客刀马带着幼子小七行走于乱世之中，所遇之事一件件离奇又真实，刻画出人性在大时代背景下的千姿百态，如此，江湖上掀起一阵腥风血雨，各路人马的恩怨情仇 逐渐展开。",
+			"buy_more_uri": "douban://douban.com/book/30490151/vendors_douban",
+			"null_rating_reason": "",
+			"article_intros": [],
+			"vendor_sale_price": "",
+			"has_ebook": true
+		},
+		"star_time": "2026-04-27 12:19:55"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
 		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/book/30331243 来自@豆瓣App",
 		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/30331243/interest/4828244172",
 		"tags": [],
