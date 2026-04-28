@@ -1,6 +1,7 @@
 ---
 type Props = {
     title?: string;
+    headingLevel?: "h1" | "h2";
     account: string;
     accountId: string;
     domain: string;
@@ -8,7 +9,20 @@ type Props = {
     limit?: number;
 };
 
-const { title = "Moments", account, accountId, domain, profileUrl, limit = 5 } = Astro.props;
+const {
+    title = "Moments",
+    headingLevel = "h2",
+    account,
+    accountId,
+    domain,
+    profileUrl,
+    limit = 5,
+} = Astro.props;
+const HeadingTag = headingLevel;
+const headingClass =
+    headingLevel === "h1"
+        ? "serif-reading-title text-3xl font-bold tracking-[0.01em] text-[var(--site-color-text-primary)] sm:text-4xl"
+        : "serif-reading-title text-2xl font-bold text-[var(--site-color-text-primary)]";
 ---
 
 <section
@@ -20,9 +34,7 @@ const { title = "Moments", account, accountId, domain, profileUrl, limit = 5 } =
     data-profile-url={profileUrl}
     data-limit={limit.toString()}
 >
-    <h2 class="serif-reading-title text-2xl font-bold text-[var(--site-color-text-primary)]">
-        {title}
-    </h2>
+    <HeadingTag class={headingClass}>{title}</HeadingTag>
 
     <p
         class="serif-reading-surface text-sm text-[var(--site-color-text-muted)]"
@@ -33,7 +45,7 @@ const { title = "Moments", account, accountId, domain, profileUrl, limit = 5 } =
     </p>
 
     <ul
-        class="overflow-hidden rounded-lg border border-black/10 divide-y divide-black/10 dark:border-white/10 dark:divide-white/10"
+        class="overflow-hidden rounded-lg border border-[var(--site-color-text-primary)] divide-y divide-[var(--site-color-text-primary)]"
         data-moments-list="true"
         hidden
     ></ul>

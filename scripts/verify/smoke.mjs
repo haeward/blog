@@ -8,7 +8,7 @@ const DIST_DIR = path.resolve("dist");
 const HOST = "127.0.0.1";
 const ARTICLE_SLUG = "/posts/2025/travelogue-of-southern-shanxi/";
 const MOCK_MASTODON_ACCOUNT_ID = "114251868212289038";
-const MOCK_MASTODON_STATUSES = Array.from({ length: 5 }, (_, index) => ({
+const MOCK_MASTODON_STATUSES = Array.from({ length: 10 }, (_, index) => ({
     id: `moment-${index + 1}`,
     account: {
         acct: "haeward",
@@ -304,6 +304,8 @@ async function run() {
         await assertStatus(baseUrl, "/blog/", 404);
         await assertStatus(baseUrl, "/blog/2025/travelogue-of-southern-shanxi/", 404);
         await assertStatus(baseUrl, "/now/", 200);
+        await assertStatus(baseUrl, "/moments/", 200);
+        await assertStatus(baseUrl, "/toolbox/", 200);
         await assertStatus(baseUrl, ARTICLE_SLUG, 200);
         await assertStatus(baseUrl, "/links/", 200);
         await assertStatus(baseUrl, "/media/", 200);
@@ -378,10 +380,16 @@ async function run() {
         }
 
         await assertOk(page, `${baseUrl}/now/`, "Now");
+        const nowMomentsCount = await page.locator("[data-moments-item='true']").count();
+        if (nowMomentsCount !== 0) {
+            fail(`Expected /now to omit moments, received ${nowMomentsCount}.`);
+        }
+
+        await assertOk(page, `${baseUrl}/moments/`, "Moments");
         await page.waitForSelector("[data-moments-item='true']");
         const momentsCount = await page.locator("[data-moments-item='true']").count();
-        if (momentsCount !== 5) {
-            fail(`Expected /now to render 5 moments, received ${momentsCount}.`);
+        if (momentsCount !== 10) {
+            fail(`Expected /moments to render 10 moments, received ${momentsCount}.`);
         }
         await page.waitForSelector('a:has-text("View Toot")');
         await page.waitForSelector('a:has-text("Example preview")');

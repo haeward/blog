@@ -11,7 +11,7 @@ const { prev, next } = Astro.props;
 
 {(prev || next) && (
     <>
-        <hr class="animate mt-4 mb-4 border-black/10 dark:border-white/10" />
+        <hr class="animate mt-4 mb-4 border-[var(--site-color-text-primary)]" />
         <div class="animate mt-4 mb-6 flex flex-col gap-2 sm:flex-row sm:justify-between">
             {prev ? (
                 <a

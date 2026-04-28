@@ -46,11 +46,11 @@ body {
     @apply bg-[#efeee9] dark:bg-stone-900;
     @apply text-[var(--site-color-text-primary)];
     --site-color-text-primary: #343331;
-    --site-color-text-heading: #45433f;
-    --site-color-text-body: #3f3d3a;
-    --site-color-text-body-soft: #4a4742;
-    --site-color-text-muted: #706c64;
-    --site-color-text-neutral-hover: #292827;
+    --site-color-text-heading: var(--site-color-text-primary);
+    --site-color-text-body: var(--site-color-text-primary);
+    --site-color-text-body-soft: var(--site-color-text-primary);
+    --site-color-text-muted: var(--site-color-text-primary);
+    --site-color-text-neutral-hover: var(--site-color-text-primary);
     --site-color-surface-border: rgba(0, 0, 0, 0.1);
     --site-color-surface-border-strong: rgba(0, 0, 0, 0.2);
     --site-color-focus-ring: rgba(0, 0, 0, 0.12);
@@ -74,11 +74,11 @@ body {
 
 html.dark body {
     --site-color-text-primary: #d6d1c8;
-    --site-color-text-heading: #c5beb3;
-    --site-color-text-body: #cec7bb;
-    --site-color-text-body-soft: #cec7bb;
-    --site-color-text-muted: #aea79c;
-    --site-color-text-neutral-hover: #e5e0d8;
+    --site-color-text-heading: var(--site-color-text-primary);
+    --site-color-text-body: var(--site-color-text-primary);
+    --site-color-text-body-soft: var(--site-color-text-primary);
+    --site-color-text-muted: var(--site-color-text-primary);
+    --site-color-text-neutral-hover: var(--site-color-text-primary);
     --site-color-surface-border: rgba(255, 255, 255, 0.1);
     --site-color-surface-border-strong: rgba(255, 255, 255, 0.2);
     --site-color-focus-ring: rgba(255, 255, 255, 0.2);
@@ -108,6 +108,7 @@ header {
 
 header.header--divider {
     @apply border-b border-black/10 dark:border-white/8;
+    border-color: var(--site-color-text-primary);
 }
 
 main {
@@ -168,6 +169,12 @@ article {
     @apply prose-h6:mt-3 prose-h6:mb-1;
     --tw-prose-bullets: var(--site-color-text-muted);
     --tw-prose-invert-bullets: var(--site-color-text-muted);
+    --tw-prose-hr: var(--site-color-text-primary);
+    --tw-prose-invert-hr: var(--site-color-text-primary);
+    --tw-prose-th-borders: var(--site-color-text-primary);
+    --tw-prose-invert-th-borders: var(--site-color-text-primary);
+    --tw-prose-td-borders: var(--site-color-text-primary);
+    --tw-prose-invert-td-borders: var(--site-color-text-primary);
 }
 
 @layer utilities {
@@ -334,6 +341,14 @@ article {
         @apply !mt-3 !mb-1;
     }
 
+    .prose li,
+    .prose-invert li,
+    article li {
+        line-height: 1.8 !important;
+        margin-top: 0.05em !important;
+        margin-bottom: 0.05em !important;
+    }
+
     /* Custom blockquote styling */
     .prose blockquote,
     .prose-invert blockquote,
@@ -387,7 +402,7 @@ article {
         left: 0;
         width: 3px;
         content: "";
-        background-color: var(--site-color-surface-border);
+        background-color: var(--site-color-text-primary);
         border-radius: 999px;
     }
 
@@ -397,8 +412,75 @@ article {
 
     article.about-content hr {
         @apply !mt-4 !mb-2;
-        border-color: var(--site-color-surface-border) !important;
+        border-color: var(--site-color-text-primary) !important;
         border-top-width: 1px !important;
+    }
+
+    .prose hr,
+    .prose-invert hr,
+    article hr,
+    .prose thead,
+    .prose-invert thead,
+    article thead,
+    .prose tbody tr,
+    .prose-invert tbody tr,
+    article tbody tr {
+        border-color: var(--site-color-text-primary) !important;
+    }
+
+    .prose table,
+    .prose-invert table,
+    article table {
+        @apply mx-auto my-8 w-auto max-w-full overflow-hidden rounded-md;
+        border: 1px solid color-mix(in srgb, var(--site-color-text-primary) 24%, transparent);
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .prose thead,
+    .prose-invert thead,
+    article thead {
+        background-color: color-mix(in srgb, var(--site-link) 7%, transparent);
+    }
+
+    html.dark .prose thead,
+    html.dark .prose-invert thead,
+    html.dark article thead {
+        background-color: color-mix(in srgb, var(--site-link) 10%, transparent);
+    }
+
+    .prose th,
+    .prose-invert th,
+    article th {
+        @apply font-bold text-[var(--site-color-text-heading)];
+    }
+
+    .prose th,
+    .prose-invert th,
+    article th,
+    .prose td,
+    .prose-invert td,
+    article td {
+        @apply text-center align-middle;
+        border-right: 1px solid color-mix(in srgb, var(--site-color-text-primary) 24%, transparent);
+        border-bottom: 1px solid color-mix(in srgb, var(--site-color-text-primary) 18%, transparent);
+        padding: 0.5rem 0.75rem !important;
+        text-align: center !important;
+    }
+
+    .prose th:last-child,
+    .prose-invert th:last-child,
+    article th:last-child,
+    .prose td:last-child,
+    .prose-invert td:last-child,
+    article td:last-child {
+        border-right: 0;
+    }
+
+    .prose tbody tr:last-child td,
+    .prose-invert tbody tr:last-child td,
+    article tbody tr:last-child td {
+        border-bottom: 0;
     }
 
     /* Custom code block styling */
@@ -406,7 +488,8 @@ article {
     .prose-invert pre,
     article pre {
         @apply !bg-gray-100/90 dark:!bg-zinc-800/85;
-        @apply !border !border-gray-200/75 dark:!border-zinc-700/75;
+        @apply !border;
+        border-color: var(--site-color-text-primary) !important;
         @apply !rounded-lg;
         @apply !p-4;
         @apply !overflow-x-auto;
@@ -1109,6 +1192,34 @@ figcaption {
     line-height: 1.4;
 }
 
+.media-embed {
+    @apply my-6;
+}
+
+.spotify-embed {
+    @apply overflow-hidden;
+    border-radius: 12px;
+}
+
+.spotify-embed__frame {
+    display: block;
+    border: 0;
+    border-radius: inherit;
+    background-color: transparent;
+    opacity: 0;
+    transition: opacity 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.spotify-embed__frame[data-loaded="true"] {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .spotify-embed__frame {
+        transition: none;
+    }
+}
+
 /* Additional prose image styling */
 .prose figure,
 .prose-invert figure,
@@ -1236,6 +1347,7 @@ article img {
 
 .changelog-year {
     @apply grid gap-4 border-t border-black/10 pt-5 dark:border-white/10 sm:grid-cols-[5.5rem_minmax(0,1fr)] sm:gap-6 sm:pt-6;
+    border-color: var(--site-color-text-primary);
 }
 
 .changelog-year__header {
@@ -1256,6 +1368,7 @@ article img {
 
 .changelog-entry + .changelog-entry {
     @apply border-t border-black/6 dark:border-white/8;
+    border-color: var(--site-color-text-primary);
 }
 
 .changelog-entry__date {

@@ -17,6 +17,16 @@ export const NOW: Metadata = {
     DESCRIPTION: "A current snapshot of what I am reading, watching, building, and thinking about.",
 };
 
+export const MOMENTS: Metadata = {
+    TITLE: "Moments",
+    DESCRIPTION: "Recent short notes and updates from Haeward on Mastodon.",
+};
+
+export const TOOLBOX: Metadata = {
+    TITLE: "Toolbox",
+    DESCRIPTION: "A small inventory of tools, services, and workflows Haeward keeps close.",
+};
+
 export const ABOUT: Metadata = {
     TITLE: "About",
     DESCRIPTION:

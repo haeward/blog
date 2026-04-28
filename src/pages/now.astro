@@ -3,8 +3,7 @@ import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
 import Link from "@components/Link.astro";
 import LinkEnhancer from "@components/LinkEnhancer.astro";
-import Moments from "@components/Moments.astro";
-import { NOW, SITE, SOCIALS } from "@consts";
+import { NOW, SITE } from "@consts";
 import PageLayout from "@layouts/PageLayout.astro";
 import { frontmatter } from "../content/now.md";
 
@@ -26,9 +25,6 @@ const mediaSections = [
     { title: "最近在读", icon: "book", items: nowFrontmatter.reading ?? [] },
     { title: "最近在看", icon: "screen", items: nowFrontmatter.watching ?? [] },
 ].filter((section) => section.items.length > 0);
-
-const mastodon =
-    SOCIALS.find((social) => social.NAME === "Mastodon" && social.ENABLE !== false) ?? null;
 ---
 
 <PageLayout title={`${NOW.TITLE} | ${SITE.NAME}`} description={NOW.DESCRIPTION} lang="en">
@@ -114,17 +110,6 @@ const mastodon =
                         ))}
                     </div>
                 </section>
-            )}
-
-            {mastodon && (
-                <Moments
-                    title="碎碎念"
-                    account="haeward"
-                    accountId="114251868212289038"
-                    domain="mas.to"
-                    profileUrl={mastodon.HREF}
-                    limit={5}
-                />
             )}
         </section>
     </Container>
