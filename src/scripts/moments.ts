@@ -15,6 +15,8 @@ type MomentFormatters = {
 
 type MastodonAccount = {
     acct?: string;
+    avatar?: string;
+    avatar_static?: string;
     display_name?: string;
     url?: string;
     username?: string;
@@ -30,6 +32,7 @@ type MastodonAttachment = {
 type MastodonCard = {
     description?: string;
     image?: string;
+    image_description?: string;
     provider_name?: string;
     title?: string;
     url?: string;
@@ -47,6 +50,8 @@ type MastodonStatus = {
     content?: string;
     created_at?: string;
     emojis?: MastodonEmoji[];
+    in_reply_to_account_id?: string | null;
+    in_reply_to_id?: string | null;
     media_attachments?: MastodonAttachment[];
     quote?: {
         quoted_status?: MastodonStatus;
@@ -54,6 +59,8 @@ type MastodonStatus = {
     reblog?: MastodonStatus;
     url?: string;
 };
+
+const MASTODON_MAX_STATUS_LIMIT = 40;
 
 const globalWindow = window as MomentsWindow;
 globalWindow.__momentsState ??= { bound: false };
@@ -93,7 +100,8 @@ async function loadMoments(root: HTMLElement): Promise<void> {
 
     try {
         const statusesUrl = new URL(`https://${domain}/api/v1/accounts/${accountId}/statuses`);
-        statusesUrl.searchParams.set("limit", String(limit));
+        const fetchLimit = Math.min(MASTODON_MAX_STATUS_LIMIT, Math.max(limit * 2, limit));
+        statusesUrl.searchParams.set("limit", String(fetchLimit));
         statusesUrl.searchParams.set("exclude_replies", "true");
         statusesUrl.searchParams.set("exclude_reblogs", "true");
 
@@ -111,6 +119,12 @@ async function loadMoments(root: HTMLElement): Promise<void> {
             return;
         }
 
+        const visibleStatuses = statuses.filter(isStandaloneMomentStatus).slice(0, limit);
+        if (visibleStatuses.length === 0) {
+            setMomentsEmptyState(statusNode, listNode, fallbackHref);
+            return;
+        }
+
         const formatters = {
             date: new Intl.DateTimeFormat("en-US", {
                 day: "numeric",
@@ -124,8 +138,7 @@ async function loadMoments(root: HTMLElement): Promise<void> {
             }),
         };
 
-        listNode.innerHTML = statuses
-            .slice(0, limit)
+        listNode.innerHTML = visibleStatuses
             .map((status) => renderMomentItem(status, formatters, domain))
             .join("");
 
@@ -139,6 +152,11 @@ async function loadMoments(root: HTMLElement): Promise<void> {
         listNode.hidden = true;
         listNode.innerHTML = "";
     }
+}
+
+function isStandaloneMomentStatus(status: MastodonStatus): boolean {
+    const displayStatus = status?.reblog ?? status;
+    return !displayStatus?.in_reply_to_id && !displayStatus?.in_reply_to_account_id;
 }
 
 function setMomentsEmptyState(
@@ -176,10 +194,11 @@ function renderMomentItem(
     return `
       <li data-moments-item="true">
         <div role="article" class="serif-reading-surface px-5 py-4 text-[1rem] leading-6 text-[var(--site-color-text-body)]">
-          ${content ? `<div class="moments-content space-y-1.5">${content}</div>` : ""}
+          ${renderMomentAuthor(account, domain)}
+          ${content ? `<div class="moments-content mt-2 space-y-1.5">${content}</div>` : ""}
           ${renderMedia(displayStatus?.media_attachments)}
           ${renderPreviewCard(displayStatus?.card)}
-          ${renderQuote(displayStatus?.quote, domain)}
+          ${renderQuote(displayStatus?.quote, formatters, domain)}
 
           <div class="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 pt-3 text-[0.93rem] leading-tight text-[var(--site-color-text-muted)] dark:text-[#8b8f98]">
             ${createdAt ? `<time datetime="${escapeAttribute(displayStatus.created_at)}">${escapeHtml(createdAt)}</time>` : ""}
@@ -188,6 +207,31 @@ function renderMomentItem(
           </div>
         </div>
       </li>
+    `;
+}
+
+function renderMomentAuthor(account: MastodonAccount, domain: string): string {
+    const authorName =
+        toPlainText(account.display_name) || account.username || account.acct || "Mastodon";
+    const authorHandle = formatAccountHandle(account, domain);
+    const accountUrl =
+        typeof account.url === "string" && account.url
+            ? account.url
+            : `https://${domain}/@${account.username || account.acct || ""}`;
+    const avatar = account.avatar_static || account.avatar || "";
+
+    return `
+      <div class="flex items-start gap-2.5" data-moments-author="true">
+        ${
+            avatar
+                ? `<img src="${escapeAttribute(avatar)}" alt="" class="size-9 shrink-0 rounded-md object-cover" loading="lazy" data-moments-author-avatar="true">`
+                : ""
+        }
+        <div class="min-w-0 flex-1 pt-0.5">
+          <a href="${escapeAttribute(accountUrl)}" target="_blank" rel="noreferrer noopener" class="site-link block truncate text-sm font-semibold leading-5 text-[var(--site-color-text-primary)]" data-external="true">${escapeHtml(authorName)}</a>
+          ${authorHandle ? `<div class="truncate text-xs leading-5 text-[var(--site-color-text-muted)]" data-moments-author-handle="true">${escapeHtml(authorHandle)}</div>` : ""}
+        </div>
+      </div>
     `;
 }
 
@@ -243,15 +287,25 @@ function renderPreviewCard(card?: MastodonCard): string {
     `;
 }
 
-function renderQuote(quote: MastodonStatus["quote"], domain: string): string {
+function renderQuote(
+    quote: MastodonStatus["quote"],
+    formatters: MomentFormatters,
+    domain: string,
+): string {
     const quotedStatus = quote?.quoted_status;
     if (!quotedStatus) return "";
 
     const account = quotedStatus.account ?? {};
     const authorName =
         toPlainText(account.display_name) || account.username || account.acct || "Mastodon";
-    const authorHandle = account.acct ? `@${account.acct}` : "";
+    const authorHandle = formatAccountHandle(account, domain);
     const quoteUrl = typeof quotedStatus.url === "string" ? quotedStatus.url : account.url || "#";
+    const accountUrl = typeof account.url === "string" && account.url ? account.url : quoteUrl;
+    const avatar = account.avatar_static || account.avatar || "";
+    const createdAt =
+        typeof quotedStatus.created_at === "string"
+            ? formatMomentDate(new Date(quotedStatus.created_at), formatters)
+            : "";
     const content = sanitizeMomentContent(
         quotedStatus.content,
         account,
@@ -260,14 +314,55 @@ function renderQuote(quote: MastodonStatus["quote"], domain: string): string {
     );
 
     return `
-      <a href="${escapeAttribute(quoteUrl)}" target="_blank" rel="noreferrer noopener" class="site-link-surface mt-2 block rounded-lg border border-black/20 p-2 transition-colors duration-200 dark:border-white/20">
-        <div class="text-sm font-semibold text-[var(--site-color-text-primary)]">
-          ${escapeHtml(authorName)}
-          ${authorHandle ? `<span class="font-normal text-[var(--site-color-text-muted)]">${escapeHtml(authorHandle)}</span>` : ""}
+      <div class="mt-2.5 rounded-lg border border-black/20 bg-black/[0.015] p-2.5 dark:border-white/20 dark:bg-white/[0.025]" data-moments-quote="true">
+        <div class="flex items-start gap-2.5">
+          ${
+              avatar
+                  ? `<img src="${escapeAttribute(avatar)}" alt="" class="size-8 shrink-0 rounded-md object-cover" loading="lazy" data-moments-quote-avatar="true">`
+                  : ""
+          }
+          <div class="min-w-0 flex-1">
+            <div class="flex min-w-0 flex-wrap items-baseline gap-x-1.5 gap-y-0.5">
+              <a href="${escapeAttribute(accountUrl)}" target="_blank" rel="noreferrer noopener" class="site-link truncate text-sm font-semibold text-[var(--site-color-text-primary)]" data-external="true">${escapeHtml(authorName)}</a>
+              ${authorHandle ? `<span class="truncate text-xs text-[var(--site-color-text-muted)]">${escapeHtml(authorHandle)}</span>` : ""}
+            </div>
+            ${
+                createdAt
+                    ? `<a href="${escapeAttribute(quoteUrl)}" target="_blank" rel="noreferrer noopener" class="site-link mt-0.5 inline-block text-xs text-[var(--site-color-text-muted)]" data-external="true"><time datetime="${escapeAttribute(quotedStatus.created_at)}">${escapeHtml(createdAt)}</time></a>`
+                    : ""
+            }
+          </div>
         </div>
-        ${content ? `<div class="moments-content mt-1.5 line-clamp-3 space-y-1 text-sm leading-6 text-[var(--site-color-text-body-soft)]">${content}</div>` : ""}
+        ${content ? `<div class="moments-content mt-2 space-y-1 text-sm leading-6 text-[var(--site-color-text-body-soft)]">${content}</div>` : ""}
+        ${renderQuotePreviewCard(quotedStatus.card)}
+      </div>
+    `;
+}
+
+function renderQuotePreviewCard(card?: MastodonCard): string {
+    if (!card?.url || (!card.title && !card.description && !card.image)) return "";
+
+    return `
+      <a href="${escapeAttribute(card.url)}" target="_blank" rel="noreferrer noopener" class="site-link-surface mt-2 block overflow-hidden rounded-md border border-black/20 transition-colors duration-200 dark:border-white/20" data-moments-quote-card="true">
+        ${
+            card.image
+                ? `<img src="${escapeAttribute(card.image)}" alt="${escapeAttribute(card.image_description || "")}" class="aspect-video max-h-60 w-full object-cover" loading="lazy" data-moments-quote-card-image="true">`
+                : ""
+        }
+        <div class="space-y-1 p-2.5">
+          ${card.provider_name ? `<div class="text-xs font-medium text-[var(--site-color-text-muted)]">${escapeHtml(card.provider_name)}</div>` : ""}
+          ${card.title ? `<div class="line-clamp-2 text-sm font-semibold leading-5 text-[var(--site-color-text-primary)]">${escapeHtml(card.title)}</div>` : ""}
+          ${card.description ? `<div class="line-clamp-2 text-xs leading-5 text-[var(--site-color-text-muted)]">${escapeHtml(card.description)}</div>` : ""}
+        </div>
       </a>
     `;
+}
+
+function formatAccountHandle(account: MastodonAccount, domain: string): string {
+    const acct = account.acct || account.username || "";
+    if (!acct) return "";
+
+    return `@${acct.includes("@") ? acct : `${acct}@${domain}`}`;
 }
 
 function sanitizeMomentContent(
@@ -282,7 +377,11 @@ function sanitizeMomentContent(
     const doc = parser.parseFromString(html, "text/html");
     const emojiMap = createEmojiMap(emojis);
     const blocks = Array.from(doc.body.children)
-        .map((element) => renderSafeChildren(element, account, domain, emojiMap))
+        .map((element) =>
+            isInlineQuoteElement(element)
+                ? ""
+                : renderSafeChildren(element, account, domain, emojiMap),
+        )
         .filter(Boolean);
 
     if (blocks.length === 0) {
@@ -291,6 +390,10 @@ function sanitizeMomentContent(
     }
 
     return blocks.map((block) => `<p>${block}</p>`).join("");
+}
+
+function isInlineQuoteElement(element: Element): boolean {
+    return element.classList.contains("quote-inline");
 }
 
 function renderSafeChildren(
@@ -318,13 +421,35 @@ function renderSafeChildren(
 
             if (tagName === "a") {
                 const href = getMomentLinkHref(child, account, domain);
-                const text = (child.textContent || href).replace(/\s+/g, " ").trim();
+                const text = getMomentLinkText(child) || href;
                 return `<a href="${escapeAttribute(href)}" target="_blank" rel="noreferrer noopener" class="site-link font-medium" data-external="true" data-underline="true">${renderTextWithEmoji(text, emojiMap)}</a>`;
             }
 
             return renderSafeChildren(child, account, domain, emojiMap);
         })
         .join("");
+}
+
+function getMomentLinkText(link: Element): string {
+    const rendered = Array.from(link.childNodes)
+        .map((child) => getVisibleLinkText(child))
+        .join("")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    return rendered || (link.textContent || "").replace(/\s+/g, " ").trim();
+}
+
+function getVisibleLinkText(node: Node): string {
+    if (node.nodeType === Node.TEXT_NODE) return node.textContent || "";
+    if (!(node instanceof Element)) return "";
+
+    if (node.classList.contains("invisible")) return "";
+
+    const text = Array.from(node.childNodes)
+        .map((child) => getVisibleLinkText(child))
+        .join("");
+    return node.classList.contains("ellipsis") ? `${text}...` : text;
 }
 
 function createEmojiMap(emojis?: MastodonEmoji[]): Map<string, MastodonEmoji> {

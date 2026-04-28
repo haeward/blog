@@ -10,6 +10,10 @@ const ARTICLE_SLUG = "/posts/2025/travelogue-of-southern-shanxi/";
 const MOCK_MASTODON_ACCOUNT_ID = "114251868212289038";
 
 function renderMockMastodonContent(index) {
+    if (index === 2) {
+        return `<p class="quote-inline">RE: <a href="https://mas.to/@quoted/1">Quote inline source</a></p><p>Moment ${index + 1} from Mastodon.</p>`;
+    }
+
     if (index === 3) {
         return `<p>Moment ${index + 1} from Mastodon. <a href="https://mas.to/tags/now">#Now</a></p>`;
     }
@@ -21,15 +25,17 @@ function renderMockMastodonContent(index) {
     return `<p>Moment ${index + 1} from Mastodon. <a href="https://example.com/article">example.com</a></p>`;
 }
 
-const MOCK_MASTODON_STATUSES = Array.from({ length: 10 }, (_, index) => ({
+const MOCK_MASTODON_ACCOUNT = {
+    acct: "haeward",
+    avatar: "/assets/images/site/favicon.png",
+    display_name: "Haeward",
+    url: "https://mas.to/@haeward",
+    username: "haeward",
+};
+
+const MOCK_MASTODON_VISIBLE_STATUSES = Array.from({ length: 10 }, (_, index) => ({
     id: `moment-${index + 1}`,
-    account: {
-        acct: "haeward",
-        avatar: "/assets/images/site/favicon.png",
-        display_name: "Haeward",
-        url: "https://mas.to/@haeward",
-        username: "haeward",
-    },
+    account: MOCK_MASTODON_ACCOUNT,
     card:
         index === 0
             ? {
@@ -70,8 +76,18 @@ const MOCK_MASTODON_STATUSES = Array.from({ length: 10 }, (_, index) => ({
                   quoted_status: {
                       account: {
                           acct: "quoted",
+                          avatar: "/assets/images/site/favicon.png",
+                          avatar_static: "/assets/images/site/favicon.png",
                           display_name: "Quoted User",
                           url: "https://mas.to/@quoted",
+                      },
+                      card: {
+                          description: "A quoted link preview.",
+                          image: "/assets/images/site/favicon.png",
+                          image_description: "Quoted preview image",
+                          provider_name: "Quoted Site",
+                          title: "Quoted preview title",
+                          url: "https://example.com/quoted",
                       },
                       content: "<p>A quoted toot preview.</p>",
                       created_at: "2026-04-20T08:30:00.000Z",
@@ -90,6 +106,20 @@ const MOCK_MASTODON_STATUSES = Array.from({ length: 10 }, (_, index) => ({
             : [],
     url: `https://mas.to/@haeward/${index + 1}`,
 }));
+
+const MOCK_MASTODON_STATUSES = [
+    {
+        id: "reply-moment",
+        account: MOCK_MASTODON_ACCOUNT,
+        content: `<p>Reply should not render. <a href="https://mas.to/@someone/1">Reply source</a></p>`,
+        created_at: "2026-04-29T16:57:00.000Z",
+        in_reply_to_account_id: "someone",
+        in_reply_to_id: "reply-source",
+        media_attachments: [],
+        url: "https://mas.to/@haeward/reply",
+    },
+    ...MOCK_MASTODON_VISIBLE_STATUSES,
+];
 
 const MIME_TYPES = {
     ".css": "text/css; charset=utf-8",
@@ -411,9 +441,26 @@ async function run() {
         if (momentsCount !== 10) {
             fail(`Expected /moments to render 10 moments, received ${momentsCount}.`);
         }
+        if ((await page.locator("text=Reply should not render").count()) !== 0) {
+            fail("Expected /moments to filter reply statuses.");
+        }
+        if ((await page.locator("text=Quote inline source").count()) !== 0) {
+            fail("Expected /moments to hide Mastodon inline quote source links.");
+        }
+        await page.waitForSelector('[data-moments-author="true"]');
+        await page.waitForSelector('[data-moments-author-avatar="true"]');
+        await page.waitForSelector(
+            '[data-moments-author-handle="true"]:has-text("@haeward@mas.to")',
+        );
         await page.waitForSelector('a:has-text("View Toot")');
         await page.waitForSelector('a:has-text("Example preview")');
-        await page.waitForSelector('a:has-text("A quoted toot preview.")');
+        await page.waitForSelector("text=A quoted toot preview.");
+        await page.waitForSelector('[data-moments-quote="true"]');
+        await page.waitForSelector('[data-moments-quote-avatar="true"]');
+        await page.waitForSelector(
+            '[data-moments-quote-card-image="true"][alt="Quoted preview image"]',
+        );
+        await page.waitForSelector('a:has-text("Quoted preview title")');
         await page.waitForSelector('a:has-text("#Now")');
         await page.waitForSelector('[data-moments-emoji="true"][alt=":blobcatsweat:"]');
         await page.waitForSelector('[data-moments-media="true"][alt="Preview attachment"]');
