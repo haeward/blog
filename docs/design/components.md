@@ -1,260 +1,262 @@
 # Components
 
-This document defines reusable UI patterns and content surfaces. It combines the
-site’s navigation, command surfaces, cards, lists, media grids, changelog, and
-footer controls.
+This file covers the reusable UI pieces and page-level content surfaces that
+actually exist in the current repo.
 
-Primary implementation files:
+Primary sources:
 
 - `src/components/Header.astro`
 - `src/components/SearchModal.astro`
 - `src/components/BackToTop.astro`
 - `src/components/ArrowCard.astro`
 - `src/components/LinkCard.astro`
-- `src/components/MediaCard.astro`
 - `src/components/MediaBrowser.astro`
 - `src/components/MediaTabs.astro`
 - `src/components/MediaPanel.astro`
-- `src/components/PostHeader.astro`
-- `src/components/PostNavigation.astro`
-- `src/components/ImageLightbox.astro`
+- `src/components/MediaCard.astro`
 - `src/components/Footer.astro`
-- `src/components/YearProgress.astro`
-- `src/pages/posts/index.astro`
-- `src/pages/links.astro`
-- `src/pages/media.astro`
-- `src/pages/changelog.astro`
 - `src/styles/global.css`
 - `src/scripts/search-modal.ts`
 - `src/scripts/media-tabs.ts`
-- `src/scripts/moments.ts`
-- `src/scripts/site.ts`
-- `docs/design/links.md`
+- `src/pages/posts/index.astro`
+- `src/pages/links.astro`
+- `src/pages/media.astro`
 
-## Component Selection Guide
+## Selection Guide
 
-| Need | Use | Notes |
-| --- | --- | --- |
-| Site navigation | `Header.astro` | Fixed, translucent, compact. |
-| Theme control | `#theme-toggle` | Three-state cycle. |
-| Global search | `SearchModal.astro` | Command surface, not a route. |
-| Return to top | `BackToTop.astro` | Fixed rounded square. |
-| Post list item | `ArrowCard.astro` | Title/date/arrow row. |
-| External reference | `LinkCard.astro` | Compact card with favicon/status. |
-| Media item | `MediaCard.astro` | Poster, title, rating. |
-| Change log entry | Changelog page grid | Date/content row, not card. |
-| Footer progress | `YearProgress.astro` | Quiet mono square progress. |
+| Need | Use |
+| --- | --- |
+| Global navigation | `Header.astro` |
+| Theme control | `#theme-toggle` |
+| Global search | `SearchModal.astro` |
+| Dense post row | `ArrowCard.astro` |
+| Compact outbound reference | `LinkCard.astro` |
+| Poster-first media item | `MediaCard.astro` |
+| Media browsing shell | `MediaBrowser.astro` |
+| Utility footer links | `Footer.astro` |
+| Return-to-top control | `BackToTop.astro` |
 
 ## Header
 
-The header is a fixed tool strip.
+The header is a fixed translucent strip rendered by `PageLayout.astro`.
 
-Rules:
+Current rules:
 
-- Render through `PageLayout.astro`.
-- Align inner content to `max-w-screen-md`.
-- Use `px-5`, `fixed`, `z-50`, `backdrop-blur`.
-- Use `bg-stone-100/85` and `dark:bg-stone-900/25`.
-- Add `header--divider` only when a page needs a subtle bottom border.
-- Stack on mobile, switch to row at `sm`.
-- Keep top-level nav stable: Archive, Media, Now, About, Links.
+- global shell uses `px-5`
+- inner width stays at `max-w-screen-md`
+- mobile stacks into two rows, `sm` becomes a single row
+- optional divider is controlled through `header--divider`
+- nav stays text-first and stable
 
-Do not turn the header into a wide marketing nav or add a large mobile drawer
-without changing the navigation model intentionally.
+Current header nav:
 
-## Theme Toggle
+- Archive
+- Media
+- Now
+- About
+- Links
 
-The theme toggle cycles:
+Do not turn this into a product navbar or drawer-based mobile IA without an
+intentional route model change.
 
-1. `system`
-2. `light`
-3. `dark`
+## Theme Toggle and Header Actions
 
-Rules:
+The theme toggle is one icon button inside the normal header-action system.
 
-- Button id: `theme-toggle`.
-- State attribute: `data-theme-mode`.
-- Toggle button state attribute: `data-theme-toggle-mode`.
-- Storage key: `localStorage.theme`.
-- Resolved dark mode: `html.dark`.
-- Icon visibility: `html[data-theme-mode]`.
-- Accessible text: update `aria-label` and `title` to the next mode.
-- Switching temporarily disables transitions to avoid theme-flash animation.
+Current behavior:
 
-Do not split this into separate light and dark controls.
+- modes cycle `system -> light -> dark`
+- button id is `theme-toggle`
+- visible icon shows the next action
+- focus uses the warm clay ring
+- click temporarily suppresses transition flash
 
-## Header Actions
+`header-action` rules:
 
-Use `.header-action` for small global icon controls.
-
-| Property | Rule |
-| --- | --- |
-| Size | `size-6` |
-| Shape | `rounded-full` |
-| Text | `--site-color-text-muted` |
-| Hover | `--site-color-text-neutral-hover` |
-| Focus | Warm Clay focus ring from `--site-link-focus` |
+- `size-6`
+- rounded full shape
+- muted text at rest
+- neutral-hover text on hover
+- visible focus ring
 
 All icon-only controls need `aria-label`.
 
 ## Search Modal
 
-Search is a global command surface.
+Search is a command surface, not a page route.
 
-Root behavior:
+Structural rules:
 
-- Root id: `site-search`.
-- Hidden by default with `hidden` and `aria-hidden="true"`.
-- Opening adds `html.search-open`.
-- Closing restores hidden state and focus when appropriate.
-- Shortcut: `Meta+K` or `Ctrl+K`, except inside editable targets.
-- Escape closes.
+- root id: `site-search`
+- hidden by default via `hidden` and `aria-hidden`
+- open state adds `html.search-open`
+- panel width: `min(calc(100vw - 1.8rem), 48rem)`
+- panel radius: `1.5rem`, `1.15rem` on mobile
+- blurred backdrop plus darkened overlay
 
-Panel rules:
+Keyboard behavior from `src/scripts/search-modal.ts`:
 
-- Full-screen fixed overlay with `z-index: 150`.
-- Blurred backdrop with subtle radial light layer.
-- Panel width: `min(calc(100vw - 1.8rem), 48rem)`.
-- Panel radius: `1.5rem`, mobile `1.15rem`.
-- Low-opacity border and layered shadow.
+- `Meta+K` / `Ctrl+K` opens and closes
+- Escape closes
+- shortcuts are ignored inside editable targets
+- closing restores focus to the previous trigger when appropriate
 
-Search states:
+States:
 
-| State | Behavior |
+| State | Meaning |
 | --- | --- |
-| `idle` | Prompt user to type a keyword. |
-| `loading` | Spinner and loading copy. |
-| `unavailable` | Explain Pagefind is unavailable in dev mode. |
-| `empty` | Explain no articles matched. |
-| `results` | Render up to eight Pagefind results. |
+| `idle` | Waiting for input |
+| `loading` | Pagefind request in progress |
+| `unavailable` | Search index not available |
+| `empty` | No article matched |
+| `results` | Result cards rendered |
 
-Preserve `data-search-*` hooks and dialog semantics.
+Search result cards are lightly raised list items, not article previews.
 
 ## ArrowCard
 
-`ArrowCard` is the default post-list row.
+`ArrowCard` is the default post-list surface on the home and archive pages.
 
-| Element | Current style |
-| --- | --- |
-| Row | `flex flex-wrap items-center gap-x-2 gap-y-1 py-2 px-3` |
-| Hover | `hover:-translate-y-px`, stronger text color |
-| Title | `.serif-reading-title`, `1.08rem sm:1.14rem`, semibold |
-| Date | `text-xs sm:text-sm`, muted |
-| Arrow | Stroke-only SVG with animated line/chevron |
+Current composition:
 
-Use it for title/date lists. Do not add excerpts, images, or card backgrounds by
-default.
+- date-first grid, not title-first card
+- compact horizontal rhythm
+- no background panel
+- hover only changes text emphasis
+
+Variant behavior:
+
+- `home` uses longer date width and slightly smaller title
+- `archive` uses shorter month/day date width and slightly larger title
+
+Use it for post indexes. Do not grow it into an excerpt card by default.
 
 ## LinkCard
 
-`LinkCard` is the compact external-link directory card.
+`LinkCard` is the compact reference card used on `/links`.
+
+Current rules:
+
+- whole card is one external anchor
+- minimum height `min-h-14`
+- icon area is `size-6`
+- missing image falls back to the first initial
+- optional status dot sits at the top-right
+- title is truncated, metadata is smaller and quieter
+
+Current `/links` sections:
+
+- Blogroll
+- Videos
+- Podcast
+
+Status behavior:
+
+- `up` and `limited` render green
+- `down` renders rose
+
+The card stays quiet. The favicon and status dot do the extra signaling.
+
+## Media Browser and Cards
+
+The Media page is built from `MediaBrowser`, `MediaTabs`, `MediaPanel`, and
+`MediaCard`.
+
+### Media tabs
+
+- text-first tablist
+- active tab uses stronger text and a bottom border
+- hash sync controls active tab
+- `role="tablist"`, `role="tab"`, and `role="tabpanel"` are preserved
+
+### Media panels
+
+- default tab is SSR-rendered with items
+- other tabs start empty
+- each panel owns a grid, status area, retry area, and bottom sentinel
+- loading is sentinel-driven, not button-driven
+
+### Media cards
+
+- neutral shell, colorful cover
+- `aspect-[2/3]` cover
+- two-line title clamp
+- amber star rating
+- linked cards get focus ring and lift
+- static cards preserve the same structure without anchor semantics
+
+Keep the shell neutral and let cover art carry the color.
+
+## Footer
+
+The footer is a text utility strip, not a secondary navigation chrome block.
+
+Current utility links:
+
+- Moments
+- Toolbox
+- Changelog
+- RSS
 
 Rules:
 
-- Outer element is an `li`.
-- Anchor is external with `target="_blank"` and `rel="noopener noreferrer"`.
-- Minimum height is `min-h-14`.
-- Icon area is `size-6`.
-- Image alt is empty when adjacent text names the link.
-- Missing image falls back to title initial.
-- Status dot uses `role="img"`, `aria-label`, and `title`.
-
-| Surface | Current style |
-| --- | --- |
-| Light | `border-black/5 bg-white/35` |
-| Dark | `dark:border-white/7 dark:bg-white/[0.025]` |
-| Hover | Slightly stronger border/background |
-| Focus | Ring with stone page offset |
-
-Status roles:
-
-- `up` and `limited`: emerald.
-- `down`: rose.
-
-## MediaCard
-
-`MediaCard` is a poster-first card.
-
-Rules:
-
-- Poster area uses `aspect-[2/3]`.
-- Cover images are lazy and async.
-- Missing cover shows `No cover`.
-- Title clamps to two lines.
-- Rating is five SVG stars plus screen-reader text.
-- Linked cards wrap the whole card in an external anchor.
-- Non-linked cards keep the same visual structure as a `div`.
-
-Styling:
-
-- `rounded-lg p-2.5 sm:p-3`.
-- `shadow-sm ring-1 ring-black/5`.
-- Hover lift and stronger shadow.
-- Cover image scales slightly on hover.
-- Stars use amber.
-
-Do not add colorful frames; cover art provides the color.
-
-The shared card class strings live in `src/lib/media-card.ts` so the server
-rendered `MediaCard.astro` and client-rendered load-more cards stay visually
-identical.
-
-## Media Tabs And Load More
-
-Media tabs are category controls.
-
-- Tablist uses `role="tablist"`.
-- Tabs use `role="tab"`, `aria-selected`, `aria-controls`, `data-tab`,
-  `data-active`.
-- Panels use `role="tabpanel"` and `aria-labelledby`.
-- Active tab uses stronger text and bottom border.
-- URL hash syncs the active tab.
-- Each tab loads up to `100` items initially.
-- `Load more` appends another page.
-
-Do not convert this page to infinite scroll.
-
-## Changelog
-
-The changelog is a date/content grid.
-
-- Eyebrow: `.changelog-page__eyebrow`.
-- Year section: `.changelog-year`, top border, responsive two-column grid.
-- Entry: `.changelog-entry`, date column and content column.
-- Date: mono, muted, small, tracked.
-- Content: `.serif-reading-surface`, `leading-7`.
-
-Do not turn changelog rows into cards.
-
-## Footer And Year Progress
-
-Footer rules:
-
-- Use `Container`.
-- Keep links text-based and underlined where appropriate.
-- RSS remains a utility footer link, not a primary nav item.
-- `YearProgress` is small, mono, and informational.
-- Progress squares are twenty small bordered cells.
-
-Do not move year progress into a dashboard widget.
+- use text links, not icon buttons
+- keep the right cluster compact and underlined
+- keep RSS in the footer, not the main header
 
 ## Back To Top
 
-Rules:
+The back-to-top control is a small floating utility.
 
-- Button id: `back-to-top`.
-- Fixed bottom-right.
-- Size: `size-12`.
-- Shape: `rounded-lg`.
-- Hidden until `html.scrolled`.
-- Uses arrow reveal motion.
-- Scrolls smoothly to top.
+Current rules:
 
-Do not replace it with a filled floating action button.
+- button id: `back-to-top`
+- fixed bottom-right
+- `size-12`
+- `rounded-2xl`
+- hidden until `html.scrolled`
+- arrow animates directionally on hover
+
+Do not replace it with a loud filled FAB.
+
+## Page-Level Surfaces
+
+### Archive
+
+- year sections
+- dense `ArrowCard` list
+- no excerpts or cover images
+
+### Links
+
+- sectioned list of compact cards
+- narrow explanatory intro
+- three-column layout only when width allows
+
+### Media
+
+- tabs first
+- poster grid second
+- empty/retry/loading states stay minimal
+
+### Changelog
+
+- date/content chronology
+- border-led grouping
+- do not turn it into a card feed
+
+## Quick Reference
+
+| Need | Use |
+| --- | --- |
+| New list item | start from `ArrowCard` density |
+| New utility action | muted text + visible focus + small directional motion |
+| New compact card | `rounded-lg`, low-noise border, single clear purpose |
+| New content grid | let content define color; keep shell neutral |
 
 ## Data Boundaries
 
-Do not hand-edit generated or synced data while doing visual work:
+Do not hand-edit generated or synced data during design-doc work:
 
 - `src/data/links/generated.json`
 - `public/assets/images/links/**`

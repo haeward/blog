@@ -1,372 +1,208 @@
----
-version: alpha
-name: Haeward
-description: Quiet personal editorial Astro blog with narrow reading, stone surfaces, serif prose, compact content lists, media grids, search, and RSS.
-colors:
-  surface: stone-100
-  surface-dark: stone-900
-  header-surface: stone-100/85
-  header-surface-dark: stone-900/25
-  text-primary: var(--site-color-text-primary)
-  text-strong: var(--site-color-text-heading)
-  text-body: var(--site-color-text-body)
-  text-muted: var(--site-color-text-muted)
-  text-hover: var(--site-color-text-neutral-hover)
-  hairline: var(--site-color-surface-border)
-  link: var(--site-link-internal)
-  link-dark: var(--site-link-internal)
-  link-hover: var(--site-link-text-internal-hover)
-  link-hover-dark: var(--site-link-text-internal-hover)
-  focus: var(--site-link-focus)
-  quote: orange-400/85
-  quote-dark: orange-500/85
-  rating: amber-300
-  rating-dark: amber-200
-  success: emerald-500
-  danger: rose-500
-  toc-progress: "#c67c5a"
-typography:
-  ui:
-    family: Noto Sans
-    implementation: Tailwind font-sans
-  reading:
-    family: Noto Serif
-    implementation: Tailwind font-serif, .serif-reading-surface, .serif-reading-title
-  reading-zh:
-    family: Noto Serif SC
-    implementation: :lang(zh)
-  reading-ja:
-    family: Noto Serif JP
-    implementation: :lang(ja)
-  mono:
-    family: JetBrains Mono
-    implementation: Tailwind font-mono
-  article-body:
-    size: 1.04rem-1.06rem
-    line-height: leading-8
-  page-title:
-    size: text-3xl sm:text-4xl
-    weight: font-bold
-  card-title:
-    size: 0.84rem-1.14rem
-    weight: font-semibold
-spacing:
-  container: max-w-screen-md
-  page-gutter: px-5
-  main-y: py-12 sm:py-16
-  article-shell: max-w-screen-md
-  dense-list-gap: gap-1
-  link-grid-gap: gap-x-4 gap-y-3.5
-  media-grid-gap: gap-4 sm:gap-6
-rounded:
-  small: rounded rounded-sm rounded-md
-  card: rounded-lg
-  search: 1.5rem desktop, 1.15rem mobile
-  full: rounded-full
-components:
-  article-link:
-    color: link
-    color-dark: link-dark
-    focus: visible outline from LinkEnhancer
-  header-action:
-    size: size-6
-    shape: full
-    focus: focus
-  card:
-    shape: card
-    border: hairline
-    shadow: shadow-sm
-  media-card:
-    shape: card
-    ratio: aspect-[2/3]
-    accent: rating
-  search-panel:
-    shape: search
-    width: min(calc(100vw - 1.8rem), 48rem)
-    backdrop: blur
-  rss-preview:
-    stylesheet: /feed/pretty-feed.xsl
-    palette: standalone warm yellow preview
----
+# Design System
 
-# Haeward Design System
+Design guide for the current Astro blog. This is a description of the
+implemented design, not a redesign brief.
 
-> Agent-consumable design specification for this Astro personal blog.
-> Source of truth: `src/styles/global.css`, `tailwind.config.mjs`,
-> `src/layouts/PageLayout.astro`, `src/components/*.astro`,
-> `src/pages/*.astro`, `src/lib/*.ts`, `src/scripts/*.ts`, and
-> `public/feed/pretty-feed.xsl`.
+Detailed topic docs:
 
-This document describes the current design. It is not a redesign proposal and
-must not override the implementation. If a rule here conflicts with code, inspect
-the code first and update the docs or implementation together.
-
-Detailed rules live in:
-
-- [Foundation](docs/design/foundation.md): expands the frontmatter values with
-  current color, typography, layout, depth, motion, and breakpoint rationale.
-- [Reading](docs/design/reading.md): article shell, prose, figures, lightbox,
-  and TOC.
-- [Components](docs/design/components.md): header, search, lists, cards, media,
-  changelog, footer controls.
-- [RSS](docs/design/rss.md): `/rss.xml` and `pretty-feed.xsl`.
+- [Design YAML](docs/design/design.yaml)
+- [Foundation](docs/design/foundation.md)
+- [Reading](docs/design/reading.md)
+- [Components](docs/design/components.md)
+- [RSS](docs/design/rss.md)
 
 ## 1. Overview
 
-| Attribute | Current rule |
-| --- | --- |
-| Style | Quiet personal editorial blog, not a product site or dashboard. |
-| Personality | Content-first, narrow reading, low-chroma surfaces, restrained motion. |
-| Canvas | Stone light/dark background: `bg-stone-100`, `dark:bg-stone-900`. |
-| Voice | Serif content titles and prose; sans UI; mono dates/code. |
-| Primary width | `max-w-screen-md` with `px-5`. |
-| Interaction | Small color changes, arrow reveals, subtle lifts, visible focus. |
+This site is a personal editorial blog. It should read like a calm notebook,
+not a product landing page, dashboard, or marketing surface.
 
-The design should make writing, reading, links, and media logs feel calm and
-direct. The interface should not ask for attention unless it is helping the user
-read, navigate, search, copy, or open something.
+The visual center is always the content column. The shell stays warm, quiet, and
+slightly tactile: paper-like background, low-noise text colors, compact chrome,
+and small motion that explains interaction without competing with the writing.
 
-Use these principles:
+Three traits define the current implementation:
 
-- Content is the visual center. Avoid decorative wrappers around page sections.
-- Stone backgrounds and opacity-based text colors define the base atmosphere.
-- Images and media covers may provide color; UI chrome should stay quiet.
-- Motion should clarify state or direction, never decorate the page.
-- Dark mode should preserve the same hierarchy, not create a separate theme.
+- warm paper canvas instead of pure white
+- narrow reading width instead of wide magazine layouts
+- restrained interaction instead of expressive UI chrome
 
 ## 2. Consumer Behavior
 
-Agents and tools should read this document in two layers:
+Read this document in two layers:
 
-- Treat the YAML frontmatter as normative for current visual values and existing
-  component mappings.
-- Treat the Markdown sections as application guidance, rationale, and
-  project-specific constraints.
-- Preserve unknown or project-specific sections when transforming the document.
-- Treat frontmatter color values as semantic mappings to the lightweight CSS
-  variables in `src/styles/global.css`.
-- If frontmatter, prose, and implementation disagree, inspect the source files
-  first and update the docs or code together.
+- `docs/design/design.yaml` is the canonical structured summary of current
+  visual values.
+- Markdown sections explain how those values are applied in this repo.
 
-## 3. Colors
+Rules for agents:
 
-These are foundation values documented from current Tailwind/CSS usage. Repeated
-text, focus, surface, and link colors are now named by lightweight CSS variables
-in `src/styles/global.css`.
+- preserve unknown sections rather than normalizing them away
+- inspect implementation when prose and code disagree
+- treat `src/styles/global.css` as the source of truth for repeated colors,
+  focus, link behavior, and modal surfaces
+- do not infer a CSS token framework from this document; the project uses
+  lightweight CSS variables plus Tailwind utilities
 
-### Light Theme
+## 3. Design Principles
 
-| Role | Current value | Use |
-| --- | --- | --- |
-| Page background | `stone-100` | Body, header base, article meta row. |
-| Primary text | `--site-color-text-primary` | Body default and page titles. |
-| Strong text | `--site-color-text-heading` | Headings, active states. |
-| Body prose | `--site-color-text-body` | Article paragraphs. |
-| Muted text | `--site-color-text-muted` | Dates, metadata, hints. |
-| Hairline | `--site-color-surface-border` | Cards, dividers, rings. |
-| Article link | `--site-link-internal` | Links inside prose. |
-| Focus accent | `--site-link-focus` | Header actions and key controls. |
-| Quote accent | `orange-400/85`, `orange-100` | Blockquotes. |
-| Rating accent | `amber-300` | Media stars. |
-| Status accents | `emerald-500`, `rose-500` | Link status dots. |
-| TOC progress | `#c67c5a` | Article reading progress. |
+1. Content first. The shell should support reading, sorting, searching, and
+   browsing, not become the main event.
+2. Warm restraint. The page background, borders, and text colors should stay in
+   one warm family. Color appears mostly in links, quotes, ratings, status dots,
+   and RSS preview.
+3. Stable width. Most pages stay within `max-w-screen-md`; readability is a
+   product decision here, not an incidental utility class.
+4. Small motion. Hover, reveal, and dialog motion should clarify state or
+   direction. Nothing should pulse, loop, or perform for decoration.
+5. Same hierarchy in both themes. Dark mode keeps the same relationships, not a
+   different personality.
 
-### Dark Theme
+## 4. Colors
 
-| Role | Current value | Use |
-| --- | --- | --- |
-| Page background | `stone-900` | Body and article meta row. |
-| Primary text | `--site-color-text-primary` | Body default and page titles. |
-| Strong text | `--site-color-text-heading` | Headings, active states. |
-| Body prose | `--site-color-text-body` | Article paragraphs. |
-| Muted text | `--site-color-text-muted` | Dates, metadata, hints. |
-| Hairline | `--site-color-surface-border` | Cards, dividers, rings. |
-| Article link | `--site-link-internal` | Links inside prose. |
-| Focus accent | `--site-link-focus` | Controls and dark focus rings. |
-| Quote accent | `orange-500/85`, `orange-200` | Blockquotes. |
-| Rating accent | `amber-200` | Media stars. |
-| Search surface | Stone/zinc gradients | Search modal panel. |
+The normal site palette is warm paper plus warm clay accents.
 
-Do not add a new dominant hue family. New colors need a semantic role and must
-not overpower the stone canvas.
+- Page canvas: `#efeee9` in light mode, `stone-900` in dark mode
+- Text system: `--site-color-text-primary`, `--site-color-text-heading`,
+  `--site-color-text-body`, `--site-color-text-muted`
+- Borders and rings: `--site-color-surface-border`,
+  `--site-color-surface-border-strong`
+- Link system: `--site-link-*` variables for internal, external, hover,
+  decoration, and focus states
+- Reading accents: orange blockquotes, amber ratings, emerald/rose status dots
 
-## 4. Typography
+The RSS preview is the only deliberate palette exception. It uses a bold yellow
+and red browser-preview language inside `public/feed/pretty-feed.xsl`.
 
-| Role | Current implementation | Typical use |
-| --- | --- | --- |
-| UI sans | `Noto Sans`, Tailwind `font-sans` | Header, nav, controls, metadata. |
-| Reading serif | `Noto Serif`, Tailwind `font-serif` | Articles, page titles, content labels. |
-| Chinese serif | `Noto Serif SC` via `:lang(zh)` | Chinese text in reading surfaces. |
-| Japanese serif | `Noto Serif JP` via `:lang(ja)` | Japanese text in reading surfaces. |
-| Mono | `JetBrains Mono`, Tailwind `font-mono` | Code, year progress, changelog dates. |
+## 5. Typography
 
-| Element | Size | Weight | Notes |
-| --- | --- | --- | --- |
-| Article body | `1.04rem` | inherited | `leading-8`, serif. |
-| Article paragraph | `1.06rem` | `font-medium` | `tracking-[0.014em]`. |
-| Article list item | `1.04rem` | `font-medium` | `tracking-[0.012em]`. |
-| Article title | `text-xl sm:text-2xl` | `font-bold` | Serif reading title. |
-| Page title | `text-3xl sm:text-4xl` | `font-bold` | Links, Changelog. |
-| Section title | `text-xl sm:text-2xl` | `font-bold` | Link sections. |
-| ArrowCard title | `1.08rem sm:1.14rem` | `font-semibold` | Post lists. |
-| LinkCard title | `0.84rem` | `font-semibold` | Compact external link cards. |
-| MediaCard title | `11px sm:text-xs` | `font-semibold` | Poster cards, two-line clamp. |
+The current site is no longer a serif-first implementation. The readable face
+used by `.serif-reading-surface` and `.serif-reading-title` is
+`LXGW Neo XiHei`. The class names are historical and should not be treated as a
+promise of serif typography.
 
-Rules:
+Active type roles:
 
-- Use `.serif-reading-title` for content titles.
-- Use `.serif-reading-surface` for long-form reading surfaces.
-- Preserve `lang` and `data-language-scan` on mixed-language content.
-- Do not use viewport-width font scaling.
-- Keep letter spacing non-negative.
+- UI shell: `font-sans` / system UI
+- Reading and titles: `LXGW Neo XiHei`
+- Code and utility text: `JetBrains Mono`
 
-## 5. Layout
+Current scale anchors:
 
-| Pattern | Current rule |
-| --- | --- |
-| Page shell | `PageLayout` renders header, `main`, search modal, footer, back-to-top. |
-| Content container | `Container`: `mx-auto max-w-screen-md px-5`. |
-| Main spacing | `main` uses `py-12 sm:py-16` and layout top offset `mt-14 sm:mt-8`. |
-| Article shell | `.blog-post-shell`: `relative mx-auto max-w-screen-md`. |
-| Vertical rhythm | `space-y-8`, `space-y-10`, `space-y-12`, `sm:space-y-12`. |
-| Header width | Header inner content aligns to `max-w-screen-md`. |
-| Dense grids | Link and media pages use grids only where scanning benefits from them. |
+- page title: `text-3xl sm:text-4xl`
+- post title: `text-xl sm:text-2xl`
+- prose body: `1.04rem` to `1.06rem`, `leading-8`
+- dense card titles: `0.89rem` to `1.16rem`
+- micro metadata: `0.7rem` to `0.88rem`
 
-Do not add full-width bands or hero sections unless a real content need appears.
-The site’s default shape is centered, narrow, and text-led.
+## 6. Layout
 
-## 6. Elevation And Depth
+The layout is intentionally repetitive:
 
-| Role | Current implementation |
-| --- | --- |
-| Default depth | `shadow-sm`, `ring-1`, low-opacity border. |
-| Card border | `black/5-12`, `white/7-18`. |
-| Hover lift | `-translate-y-px`, `-translate-y-0.5`, `-translate-y-1`. |
-| Search panel | Low-opacity border plus layered modal shadow. |
-| RSS preview | Standalone hard shadow in `pretty-feed.xsl`. |
+- global page shell uses `px-5`
+- content width usually resolves to `max-w-screen-md`
+- `main` uses `py-12 sm:py-16`
+- article pages keep title, meta, body, navigation, and optional TOC inside one
+  narrow reading frame
+- compact grids are used only for links and media
 
-Do not introduce new default elevation levels for ordinary pages. Heavier shadow
-belongs only to existing cover-heavy media cards and the RSS preview.
+Do not introduce wide framed sections, nested page cards, or decorative hero
+bands without changing the product model.
 
-## 7. Shapes
+## 7. Motion
 
-| Role | Current implementation |
-| --- | --- |
-| Default card radius | `rounded-lg`. |
-| Compact inline radius | `rounded`, `rounded-md`, `rounded-sm`. |
-| Modal radius | Search panel uses `1.5rem`, mobile `1.15rem`. |
-| Figure radius | `rounded-lg`. |
-| Icon button radius | `rounded-full` for header actions. |
-| Back-to-top radius | `rounded-lg`, not circular. |
+Motion is present but quiet:
 
-Do not add large pill-like surfaces to normal content sections.
+- `.animate` reveal: `duration-700 ease-out`
+- normal hover/focus transitions: about `200ms` to `300ms`
+- lightbox and search: slightly faster dialog motion
+- hover motion is usually one of:
+  - color change
+  - `translateY(-1px)`
+  - short directional arrow movement
+
+Avoid looping motion, exaggerated bounces, and large shadow jumps.
 
 ## 8. Components
 
-| Need | Use |
-| --- | --- |
-| Generic page link | `Link.astro`, current color, optional underline. |
-| Article link | Bold Warm Clay link from global prose styles plus `LinkEnhancer`. |
-| Global icon action | `.header-action`, `size-6`, round, Warm Clay focus ring. |
-| Post list row | `ArrowCard`, serif title, date, animated arrow. |
-| External link card | `LinkCard`, compact favicon/title/meta/status surface. |
-| Poster card | `MediaCard`, `aspect-[2/3]`, cover, title, amber rating. |
-| Search surface | `SearchModal`, full-screen overlay, blurred backdrop, panel. |
-| Reading TOC | `TableOfContents`, desktop rail at `xl`, progress indicator. |
-| Back-to-top | Fixed `size-12` rounded square with arrow reveal. |
-| RSS preview | `pretty-feed.xsl`, self-contained XSL browser aid. |
+The recurring building blocks are:
 
-Component rules:
+- fixed translucent header with theme toggle and search trigger
+- custom search modal with Pagefind-backed results
+- `ArrowCard` for post lists
+- `LinkCard` for compact outbound references
+- `MediaCard` for poster-first media items
+- article TOC, image lightbox, and previous/next links
+- footer utility links and back-to-top control
 
-- Cards use `rounded-lg`, low-opacity borders/rings, and `shadow-sm`.
-- Avoid nested card surfaces.
-- Icon-only controls must have `aria-label`.
-- Existing `data-*` hooks are part of the interaction contract.
-- Search, tabs, lightbox, and TOC have semantic or state attributes that must be
-  preserved.
+All of them should feel like thin wrappers around content, not decorative
+objects.
 
 ## 9. Page Patterns
 
-| Page | Design rule |
+Current page patterns:
+
+- Home: compact post list and restrained overview surfaces
+- Archive: year-grouped post index with dense `ArrowCard` rows
+- Article: narrow reading shell with optional TOC and image zoom
+- Links: sectioned reference directory with compact cards
+- Media: tabbed poster grid with sentinel-based loading
+- About / utility content pages: same reading width, no special landing-page
+  chrome
+- Changelog: date/content chronology, not card feed
+- RSS preview: standalone browser aid, not part of the normal shell
+
+## 10. Quick Reference
+
+| Need | Use |
 | --- | --- |
-| Home | Sparse introduction: programmer SVG, social icons, latest posts. No hero copy. |
-| Blog archive | Year groups plus `ArrowCard` rows. No thumbnails or summaries. |
-| Article | Title/meta, prose, optional previous/next, desktop TOC rail. |
-| Links | Serif intro, sectioned compact link-card grids. |
-| Media | Tabs for content categories, poster grids, explicit load-more. |
-| About | Plain reading surface inside `Container`. |
-| Changelog | Eyebrow, serif title, year/date grid. No cards. |
-| RSS | Machine-readable feed with a standalone XSL subscription preview. |
+| New page shell | `px-5` + `max-w-screen-md` before inventing a custom width |
+| New text link | Warm clay link roles from `--site-link-*` |
+| New compact card | `rounded-lg`, subtle border/ring, low-noise background |
+| New utility action | icon or text-only control with visible focus |
+| New content list item | start from `ArrowCard` density, not from a marketing card |
+| New media surface | let cover art provide color; keep shell neutral |
+| New reading feature | add it around the article, not as a framed hero block |
 
-## 10. Do And Don’t
+## 11. Anti-Patterns
 
-### Do
+Do not do these unless the design language intentionally changes:
 
-- Use the existing Tailwind utilities and CSS selectors as the design source.
-- Keep normal pages inside `Container` or an intentional equivalent.
-- Keep body text readable before adding visual treatment.
-- Use visible focus states for every interactive element.
-- Preserve light/dark parity for text, surfaces, borders, and controls.
-- Use the existing three-state theme model: `system -> light -> dark`.
-- Keep RSS stable at `/rss.xml` and preserve feed discovery.
-- Update this documentation when changing design behavior.
+- no pure-white page background
+- no cool blue-gray neutral system
+- no large floating cards around normal page sections
+- no wide prose columns
+- no extra article hero wrappers
+- no bright secondary palette for normal site pages
+- no hard, heavy shadows as the default depth language
+- no decorative motion that does not clarify interaction
+- no copying the RSS preview palette into normal pages
 
-### Don’t
+## 12. Accessibility And Responsive Rules
 
-- Don’t expand the lightweight color tokens into a full theme framework without
-  a multi-theme need.
-- Don’t add dependencies for visual styling alone.
-- Don’t create marketing-style hero sections for this blog.
-- Don’t turn article bodies, archives, or changelog rows into heavy cards.
-- Don’t add a new color palette around a section.
-- Don’t remove `data-*` hooks used by scripts or smoke tests.
-- Don’t hand-edit generated link enrichment, link assets, Douban data, or Douban
-  covers during design work.
+Accessibility is handled through concrete behavior, not slogans:
 
-## 11. Responsive And Accessibility
+- focus states must remain visible on links, icon controls, cards, and dialogs
+- keyboard search open/close must keep working
+- TOC, search, and lightbox must preserve their current semantics
+- line length must stay readable on desktop
+- mobile should keep the same information order without relying on hover
+- article anchors use `scroll-margin-top` to remain readable under the fixed
+  header
 
-| Area | Required behavior |
-| --- | --- |
-| Header | Wraps on small screens, becomes horizontal at `sm`. |
-| Links | Grid moves from one to two to three columns. |
-| Media | Grid starts at two columns, expands at wider breakpoints. |
-| Search | Mobile hides desktop `ESC` button and stacks footer hints. |
-| Article TOC | Desktop rail only at `xl`; never crowd mobile reading. |
-| Focus | Use `focus-visible` rings/outlines; do not suppress focus generally. |
-| Semantics | Keep dialog, tablist, status, and screen-reader labels intact. |
-| Images | Meaningful images need useful alt text; decorative adjacent icons can be empty. |
+## 13. Source Of Truth / Validation
 
-## 12. Agent Prompt Guide
+Source of truth:
 
-When generating UI for this project, use these mappings:
+- `src/styles/global.css`
+- `src/layouts/PageLayout.astro`
+- `src/components/*.astro`
+- `src/pages/*.astro`
+- `src/lib/media-card.ts`
+- `src/scripts/*.ts`
+- `public/feed/pretty-feed.xsl`
 
-```text
-Page background      -> stone-100 / dark:stone-900
-Primary text         -> --site-color-text-primary
-Muted text           -> --site-color-text-muted
-Reading title        -> .serif-reading-title
-Reading surface      -> .serif-reading-surface
-Article link         -> --site-link-internal / --site-link-external
-Focus accent         -> --site-link-focus
-Card surface         -> rounded-lg + low-opacity border/ring + shadow-sm
-Primary container    -> max-w-screen-md px-5
-Motion               -> color/opacity/arrow/translate only
-```
+Validation rules:
 
-Before adding a new pattern, choose from the existing surfaces:
-
-| If you need | Start from |
-| --- | --- |
-| A post row | `ArrowCard`. |
-| An external reference | `LinkCard`. |
-| A visual cover item | `MediaCard`. |
-| A global command surface | `SearchModal`. |
-| A long reading page | Article/prose rules in [Reading](docs/design/reading.md). |
-| A feed-related change | [RSS](docs/design/rss.md). |
-
-## 13. Validation
-
-- Markdown-only documentation changes: `pnpm run md:lint`.
-- Code/UI changes: `pnpm run check` and `pnpm run build:site`.
-- UI, route, RSS, media, links, search, theme, article, or smoke-hook changes:
-  `pnpm run smoke`.
+- if design docs conflict with code, fix the docs or code together
+- docs-only updates should run `pnpm run md:lint`
+- remove stale component/file references when structure changes

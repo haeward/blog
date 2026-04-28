@@ -1,243 +1,228 @@
 # Reading
 
-This document defines the article and prose design rules for the blog. The main
-implementation lives in `src/pages/posts/[...slug].astro`,
-`src/components/PostHeader.astro`, `src/components/PostNavigation.astro`,
-`src/components/ImageLightbox.astro`, `src/pages/about.astro`,
-`src/styles/global.css`, `src/components/TableOfContents.astro`,
-`src/components/LinkEnhancer.astro`, and article scripts in `src/scripts/`.
+This file documents the implemented reading experience for articles and other
+content-led pages.
 
-Shared link color rules are documented in `docs/design/links.md`.
+Primary sources:
+
+- `src/pages/posts/[...slug].astro`
+- `src/components/PostHeader.astro`
+- `src/components/PostNavigation.astro`
+- `src/components/TableOfContents.astro`
+- `src/components/ImageLightbox.astro`
+- `src/components/LinkEnhancer.astro`
+- `src/styles/global.css`
+- `src/scripts/blog-toc.ts`
+- `src/scripts/article-lightbox.ts`
 
 ## Reading Shell
 
-Article pages use a centered, narrow shell:
+Article pages use a narrow, centered frame:
 
-- The outer article page uses `px-5`.
-- `.blog-post-shell` is `relative mx-auto max-w-screen-md`.
-- `.blog-post-main` is `min-w-0 w-full`.
-- The body article uses `class="animate mt-10 blog-article serif-reading-surface"`.
-- The article carries `data-pagefind-body` so search indexes the content.
-- The article receives `lang={post.data.lang}` and `data-language-scan="true"`.
+- outer page gutter: `px-5`
+- shell: `.blog-post-shell` = `relative mx-auto max-w-screen-md`
+- main column: `.blog-post-main` = `min-w-0 w-full`
+- article element: `animate mt-10 blog-article serif-reading-surface
+  site-prose-links`
 
-The article title sits above the prose, not inside the generated Markdown body.
-It uses `.serif-reading-title`, `text-xl sm:text-2xl`, `font-bold`,
-and `--site-color-text-primary`.
+The article title and metadata live outside rendered Markdown. That keeps the
+page shell stable even when post content structure changes.
 
-The meta row is compact and wraps:
+Current header rules:
 
-- Use `flex flex-wrap items-center`.
-- Use `gap-x-3 gap-y-1`.
-- Keep text at `text-sm`.
-- Keep background aligned with the page canvas: `bg-stone-100` and
-  `dark:bg-stone-900`.
-- Use small icons for date, word count, and reading time.
-- Use muted separators with `aria-hidden="true"`.
+- title: `.serif-reading-title text-xl sm:text-2xl font-bold`
+- meta row: `flex flex-wrap items-center gap-x-3 gap-y-1 text-sm`
+- metadata is icon-led and quiet, not banner-like
 
-Do not create a large article header card. The title, metadata, and body should
-feel like one continuous reading surface.
+Do not wrap the article header in a hero card.
 
-## Prose Typography
+## Prose Rules
 
-The `article` rule in `src/styles/global.css` overrides Tailwind Typography to
-match the current reading style.
+The `article` selector in `src/styles/global.css` is the main reading contract.
 
-Core prose settings:
+Current behavior:
 
-- `max-w-full prose dark:prose-invert`.
-- `text-[1.04rem] leading-8`.
-- `font-serif`.
-- Headings use `font-bold`, serif type, and `tracking-[0.01em]`.
-- Paragraphs use `text-[1.06rem]`, `leading-8`, `font-medium`, and
-  `tracking-[0.014em]`.
-- List items use `text-[1.04rem]`, `leading-8`, `font-medium`, and
-  `tracking-[0.012em]`.
-- Body text uses `--site-color-text-body`.
-- List text uses `--site-color-text-heading`.
-- Content breaks words with `break-words` and `overflow-wrap: anywhere`.
+- `max-w-full prose dark:prose-invert`
+- base text `1.04rem`, paragraphs `1.06rem`, `leading-8`
+- paragraphs and list items use medium weight with small positive tracking
+- headings use `font-bold` and `--site-color-text-heading`
+- long words can break with `overflow-wrap: anywhere`
 
-Heading spacing is intentionally tighter than default prose:
+Heading spacing is tighter than default typography plugin output:
 
-- `h1`: `mt-8 mb-4`.
-- `h2`: `mt-6 mb-3`.
-- `h3`: `mt-5 mb-2`.
-- `h4`: `mt-4 mb-2`.
-- `h5` and `h6`: `mt-3 mb-1`.
+- `h1`: `mt-8 mb-4`
+- `h2`: `mt-6 mb-3`
+- `h3`: `mt-5 mb-2`
+- `h4`: `mt-4 mb-2`
+- `h5`, `h6`: `mt-3 mb-1`
 
-Do not widen line length to make articles feel more spacious. Readability comes
-from the column width, line height, and serif stack.
+The result should feel compact, readable, and steady from paragraph to heading.
 
-## Multilingual Text
+## Typography Reality
 
-The reading stack supports English, Chinese, and Japanese.
+The current reading face is `LXGW Neo XiHei`. Older references to Noto Serif are
+outdated for this repo.
 
-- `.serif-reading-surface` and `.serif-reading-title` default to `Noto Serif`.
-- `:lang(zh)` switches to `Noto Serif SC`.
-- `:lang(ja)` switches to `Noto Serif JP`.
-- The global script scans elements marked with `data-language-scan="true"`.
-- Mixed Han, Hiragana, and Katakana segments are wrapped with generated `lang`
-  spans when needed.
+Important implementation detail:
 
-When adding a content surface:
+- `.serif-reading-surface` and `.serif-reading-title` are historical class
+  names
+- in the current code, both classes map to `LXGW Neo XiHei`
 
-- Set the root `lang` when the content has a known language.
-- Add `data-language-scan="true"` for mixed-language readable text.
-- Do not add language scanning to controls, code, inputs, or SVG content.
+When updating reading docs or CSS, follow the implementation, not the class
+name.
 
-## Links And Emphasis
+## Multilingual Content
 
-Article links are intentionally stronger than generic UI links:
-
-- Links are bold.
-- Links are not underlined by default.
-- Internal links use muted Warm Clay brown.
-- External and mail links use warmer copper.
-- Hover and focus add a thinner underline with a restrained Warm Clay color shift.
-- Link transitions use `duration-300 ease-in-out`.
-- `LinkEnhancer` adds external-link behavior and accessible labels.
-
-Article link focus is defined in `LinkEnhancer.astro`:
-
-- Focus gets a visible outline.
-- `focus-visible` adds a subtle background.
-- High-contrast preference forces stronger underline and outline.
-- Reduced-motion preference removes article link transitions.
-
-Strong text is bold and high contrast:
-
-- Use `--site-color-text-heading`.
-- Keep the current small padding and rounded background behavior.
-- Do not use color alone to make strong text look like a link.
-
-## Blockquotes
-
-Blockquotes are semantic callouts, not decorative pull quotes.
-
-Current styling:
-
-- Not italic.
-- Left border: `border-orange-400/85` or `dark:border-orange-500/85`.
-- Background: `bg-orange-100` or `dark:bg-neutral-500/10`.
-- Text: `text-orange-800` or `dark:text-orange-200`.
-- Spacing: `mx-1 my-2 px-4 py-3`.
-- Shape: `rounded-r-md`.
-- Weight: bold at about `1.02rem`.
-- Shadow: `shadow-sm`.
-
-Blockquote paragraphs reset margins and remove generated quote marks. Do not
-nest other card-like surfaces inside blockquotes.
-
-## Code
-
-Inline code and code blocks use `JetBrains Mono`.
-
-Inline code:
-
-- Text color is red, `text-red-600` or `dark:text-red-400`.
-- Use `px-1.5 py-0.5`.
-- Use a small radius.
-- Suppress Tailwind Typography backtick pseudo-elements.
-
-Code blocks:
-
-- Use `bg-gray-100/90` or `dark:bg-zinc-800/85`.
-- Use a low-opacity border.
-- Use `rounded-lg`, `p-4`, and `my-6`.
-- Use `overflow-x-auto`.
-- Use `text-sm`, `font-mono`, and relaxed line height.
-- Preserve Shiki light/dark variables through the global `pre code *` rules.
-
-The copy affordance is a pseudo-element button in the upper-right of `pre`. It
-appears on hover and is clicked through the global document handler. Do not add a
-second visible copy button unless the code block implementation is changed
-across the site.
-
-## Figures And Images
-
-Figures should support reading, not interrupt it.
-
-Current rules:
-
-- `figure` uses `my-6` and centered text.
-- `.blog-figure` uses `my-8`.
-- Images are `max-w-full h-auto mx-auto rounded-lg shadow-sm`.
-- `.blog-figure__image` is capped at `min(100%, 46rem)`.
-- Captions are centered, medium weight, relaxed, and muted.
-- Article images get `cursor: zoom-in`.
-- Hover lifts article images by `translateY(-1px) scale(1.01)` and adds shadow.
-
-Image-heavy posts must also follow `docs/content-image-budget.md`:
-
-- Keep the opening viewport to one lead image, or two only when needed.
-- Treat twenty content images as the default upper target.
-- Prefer source widths at or below `1440px`.
-- Keep captions descriptive.
-
-Do not stack many full-width images before the first meaningful section break.
-
-## Image Lightbox
-
-Article images open into `#image-lightbox` when they are not inside links and do
-not set `data-no-zoom="true"`.
-
-Lightbox behavior:
-
-- The overlay is fixed, full-screen, and `z-index: 200`.
-- The backdrop is black at high opacity.
-- The figure is a dialog with `aria-modal="true"` and label `"Image viewer"`.
-- The selected image is loaded into `.image-lightbox__img`.
-- The caption mirrors the image alt text when present.
-- Escape closes the overlay.
-- Clicking backdrop or image elements with `data-close="true"` closes it.
-- The document root gets `image-lightbox-open` to prevent background scroll.
-
-Images need useful alt text when the caption should be meaningful in the
-lightbox.
-
-## Table Of Contents
-
-The article TOC is a reading-progress aid. It is not a second navigation system
-for all pages.
-
-TOC source rules:
-
-- Use Markdown headings from Astro render output.
-- Include only depths `2`, `3`, and `4`.
-- Skip TOC entirely when there are no eligible headings.
-
-Desktop placement:
-
-- `.blog-post-toc-rail` is hidden until `xl`.
-- It is fixed at vertical center with `top-1/2 -translate-y-1/2`.
-- It is `w-48`.
-- Horizontal position is computed to sit outside the article column.
-
-TOC visual behavior:
-
-- Text is small and muted through `--site-color-text-muted`.
-- Links use `text-[0.74rem]`, `rounded-md`, and compact padding.
-- Heading depth is shown by line width.
-- Active state increases font weight, text contrast, line width, and line height.
-- The progress bar uses `--blog-toc-progress` and `#c67c5a`.
-- The TOC is hidden until article progress is at least one percent.
-
-Do not show a desktop TOC inside the main article column. The article column
-must stay visually clean.
-
-## Previous And Next Links
-
-Previous and next article links appear only when adjacent posts exist.
+The page root sets `lang={post.data.lang}` through `PageLayout`. Mixed-language
+readable surfaces use `data-language-scan="true"` where needed.
 
 Rules:
 
-- Separate them from the article with a thin `hr`.
-- Use a responsive column-to-row layout: stacked on small screens, side by side
-  at `sm`.
-- Use arrow icons with small horizontal hover motion.
-- Truncate titles at desktop widths, but allow wrapping on mobile.
-- Keep labels visually minimal; the title and direction arrow carry the action.
+- set the root `lang` when the page language is known
+- keep language scanning for readable mixed-language content
+- do not apply language scanning to controls, code, inputs, or SVG
 
-## Do Not
+## Links and Emphasis
+
+Article links use the site-wide warm clay link system plus article-specific
+accessibility handling from `LinkEnhancer.astro`.
+
+Current rules:
+
+- links are bold
+- links are not underlined at rest
+- hover/focus reveals underline and a restrained color shift
+- focus adds a visible outline and light background
+- high-contrast mode forces stronger underline and outline
+- reduced-motion mode removes transitions
+
+Strong text:
+
+- stays in heading color
+- gets small inline padding and rounded corners
+- should not be styled to resemble a separate badge system
+
+## Blockquotes
+
+Blockquotes are compact callouts inside the reading flow.
+
+Current style:
+
+- no italics
+- orange left border
+- soft orange background in light mode
+- soft neutral background in dark mode
+- bold text around `1.02rem`
+- `rounded-r-md` and `shadow-sm`
+
+On the About page only, blockquotes become lighter and more note-like. That is
+an intentional local exception.
+
+## Code and Tables
+
+Inline code:
+
+- uses `JetBrains Mono`
+- uses red foreground
+- uses small padding and a small radius
+- suppresses default Tailwind Typography backticks
+
+Code blocks:
+
+- `bg-gray-100/90` or `dark:bg-zinc-800/85`
+- low-noise border
+- `rounded-lg p-4 my-6`
+- hover-only copy affordance rendered as a pseudo-element
+
+Tables:
+
+- centered and rounded
+- lightly bordered with the site text color mixed into transparency
+- header row gets a faint warm link tint
+
+Do not add a second visible copy button without changing the global pattern.
+
+## Figures and Images
+
+Figures support the article; they should not dominate it by default.
+
+Current rules:
+
+- `figure` uses centered layout and generous vertical rhythm
+- images are rounded and lightly shadowed
+- `.blog-figure__image` is capped at `46rem`
+- captions are centered, medium weight, and relaxed
+- article images show `cursor: zoom-in`
+- hover adds a very small lift and shadow increase
+
+Image-heavy posts should still follow
+`docs/content-image-budget.md`.
+
+## Image Lightbox
+
+The article lightbox is an enhancement around normal images, not a gallery
+system.
+
+Behavior from `src/scripts/article-lightbox.ts`:
+
+- only images inside `.blog-article` participate
+- linked images are skipped
+- images with `data-no-zoom="true"` are skipped
+- overlay opens by copying `currentSrc` / `src`
+- caption mirrors the image `alt` text
+- Escape closes
+- clicking the backdrop or the overlay image closes
+
+Visual behavior from CSS:
+
+- overlay fills the viewport at `z-index: 200`
+- backdrop is `rgba(0, 0, 0, 0.85)`
+- image and figure animate in with short scale/opacity motion
+- `html.image-lightbox-open` disables background scroll
+
+## Table of Contents
+
+The TOC is a reading-progress tool, not global navigation.
+
+Source rules:
+
+- eligible headings are only `h2`, `h3`, and `h4`
+- no eligible headings means no TOC
+
+Two variants exist:
+
+- mobile TOC inside the article flow, hidden at `xl`
+- desktop TOC rail outside the article column at `xl`
+
+Current behavior:
+
+- hidden until reading progress reaches at least `1%`
+- active item follows viewport position
+- progress bar width tracks article progress
+- depth is expressed through line length
+- active state increases weight, contrast, and line width
+
+Do not move the desktop TOC inside the main article column.
+
+## Previous and Next
+
+Adjacent-post navigation appears only when there is a previous or next post.
+
+Rules:
+
+- separate it from the article with a thin `hr`
+- stack on mobile, split at `sm`
+- keep labels minimal
+- use small directional arrow motion only
+
+## Anti-Patterns
+
+- no article hero cards
+- no wide prose columns
+- no decorative wrappers around normal reading content
+- no image dump before the article establishes structure
+- no separate link system just for articles
 
 - Do not use a wide article layout for normal posts.
 - Do not wrap the article body in a card.

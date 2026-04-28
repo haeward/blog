@@ -1,189 +1,194 @@
 # Foundation
 
-These are foundation values for the current design. They expand the compact
-frontmatter in `DESIGN.md` with implementation notes and rationale. Core text,
-surface, focus, and link colors are exposed as lightweight CSS variables in
-`src/styles/global.css`; Tailwind utilities and component classes consume those
-tokens where reuse is high.
+This file expands the structured summary in `docs/design/design.yaml`. It
+explains how the current visual system is implemented in code and how to reuse
+it without inventing a second design language.
 
-## Source Files
+Primary sources:
 
 - `src/styles/global.css`
-- `src/lib/media-card.ts`
-- `src/lib/media.ts`
-- `src/lib/posts.ts`
-- `src/scripts/*.ts`
-- `tailwind.config.mjs`
 - `src/layouts/PageLayout.astro`
 - `src/components/*.astro`
-- `src/pages/*.astro`
+- `src/lib/media-card.ts`
+- `src/scripts/*.ts`
 - `public/feed/pretty-feed.xsl`
-- `docs/design/links.md`
 
-## Color Roles
+## Why This Looks This Way
 
-### Base Palette
+The site aims for calm reading rather than visual performance.
+
+- warm paper is easier on the eye than pure white
+- most UI stays in the same warm neutral family as the page
+- accent color appears where the reader needs orientation: links, quotes,
+  progress, ratings, status, and dialog focus
+- content surfaces should feel thin and light, never padded into dashboard
+  panels
+
+## Color System
+
+The project uses lightweight CSS variables on `body` and `html.dark body`.
+These are the real reusable roles.
+
+### Core text and surface roles
 
 | Role | Light | Dark | Notes |
 | --- | --- | --- | --- |
-| Page canvas | `stone-100` | `stone-900` | Body and page background. |
-| Header canvas | `stone-100/85` | `stone-900/25` | Fixed translucent header. |
-| Primary text | `--site-color-text-primary` | `--site-color-text-primary` | Body default and page titles. |
-| Strong text | `--site-color-text-heading` | `--site-color-text-heading` | Headings, active states, card titles. |
-| Prose text | `--site-color-text-body` | `--site-color-text-body` | Article paragraphs and reading surfaces. |
-| Soft prose text | `--site-color-text-body-soft` | `--site-color-text-body-soft` | Quote previews and secondary body copy. |
-| Muted text | `--site-color-text-muted` | `--site-color-text-muted` | Metadata and hints. |
-| Neutral hover | `--site-color-text-neutral-hover` | `--site-color-text-neutral-hover` | Non-accent control hover text. |
-| Hairline | `--site-color-surface-border` | `--site-color-surface-border` | Borders, rings, dividers. |
-| Search panel | `stone`/`zinc` gradients | `stone`/dark gradients | Modal surface only. |
+| Page canvas | `#efeee9` | `stone-900` | Base page background. |
+| Header canvas | `#efeee9/88` | `stone-900/25` | Fixed translucent header. |
+| Primary text | `#343331` | `#d6d1c8` | Default readable text. |
+| Heading text | `--site-color-text-heading` | same role | Titles and active states. |
+| Body text | `--site-color-text-body` | same role | Reading surfaces. |
+| Muted text | `--site-color-text-muted` | same role | Dates, counts, hints. |
+| Neutral hover | `--site-color-text-neutral-hover` | same role | Low-noise hover text. |
+| Border | `--site-color-surface-border` | same role | Cards, lines, rings. |
+| Strong border | `--site-color-surface-border-strong` | same role | Stronger hover ring/border. |
 
-### Accent Roles
+### Link roles
+
+| Role | Light | Dark | Use |
+| --- | --- | --- | --- |
+| `--site-link` | `#9f542f` | `#f0b58f` | Shared warm clay link base. |
+| `--site-link-hover` | `#a25832` | `#f1b994` | Text-link hover. |
+| `--site-link-strong-hover` | `#7c3f23` | `#ffd7bc` | Strong active hover. |
+| `--site-link-decoration` | warm clay alpha | warm clay alpha | Underline decoration. |
+| `--site-link-focus` | warm clay alpha | warm clay alpha | Focus outline/ring. |
+| `--site-link-focus-bg` | warm clay alpha | warm clay alpha | Focus fill on nav/text links. |
+
+Rules:
+
+- prose links and UI links share one warm clay family
+- links are not permanently underlined in normal state
+- hover and focus reveal emphasis rather than switching to a brand-new color
+- external links may use the same family but slightly stronger emphasis
+
+### Accent roles
 
 | Role | Light | Dark | Used by |
 | --- | --- | --- | --- |
-| Internal link | `#7d4b2f` | `#e6aa84` | In-site text links. |
-| External link | `#9f542f` | `#f0b58f` | `http`, `https`, and `mailto` links. |
-| Link emphasis | `#5f3723`, `#7c3f23` | `#ffd0af`, `#ffd7bc` | Active non-prose surfaces. |
-| Focus | Warm Clay CSS variables | Warm Clay CSS variables | Header, buttons, search, prose. |
-| Blockquote | `orange-400/85`, `orange-100` | `orange-500/85`, `neutral-500/10` | Quote border and fill. |
-| Blockquote text | `orange-800` | `orange-200` | Quote content. |
-| Code text | `red-600` | `red-400` | Inline code. |
-| Rating | `amber-300` | `amber-200` | Media stars. |
-| Link status up | `emerald-500` | `emerald-500` | LinkCard status dot. |
-| Link status down | `rose-500` | `rose-500` | LinkCard status dot. |
-| TOC progress | Warm Clay external link | Warm Clay external link | Article reading progress. |
+| Blockquote border/fill | orange | orange on dark neutral | Article quotes. |
+| Inline code text | red-600 | red-400 | Inline code only. |
+| Rating stars | amber-300 | amber-200 | Media cards. |
+| Status up | emerald-500 | emerald-500 | Link availability dot. |
+| Status down | rose-500 | rose-500 | Link availability dot. |
+| TOC active/progress | warm clay external link | same role | Reading progress. |
 
-### RSS Preview Palette
+### RSS exception
 
-The RSS browser preview is intentionally standalone.
+The RSS preview palette is intentionally separate:
 
-| Role | Value |
-| --- | --- |
-| Background | `#FFC34A` |
-| Panel | `#fffdf7` |
-| Cream | `#fff9ec` |
-| Ink | `#19120f` |
-| Muted | `#5e554d` |
-| Line | `#231915` |
-| Link red | `#cf3825` |
-| Link red hover | `#a82618` |
-| Coin yellow | `#ffc93c` |
+- yellow background
+- cream panel
+- dark ink borders
+- red links
 
-Do not reuse the RSS preview palette in normal site pages.
+Do not reuse it in normal site pages.
 
 ## Typography
 
-| Token | Implementation | Use |
+The current implementation differs from the older docs: the main readable face
+is `LXGW Neo XiHei`, not Noto Serif.
+
+| Role | Current implementation | Use |
 | --- | --- | --- |
-| `font-ui` | `Noto Sans`, Tailwind `font-sans` | Header, buttons, nav, labels. |
-| `font-reading` | `Noto Serif`, Tailwind `font-serif` | Prose and content titles. |
-| `font-reading-zh` | `Noto Serif SC` | Chinese readable text. |
-| `font-reading-ja` | `Noto Serif JP` | Japanese readable text. |
-| `font-code` | `JetBrains Mono`, Tailwind `font-mono` | Code, dates, progress. |
+| UI shell | `font-sans` / system UI | Header, nav, small controls. |
+| Reading/title face | `LXGW Neo XiHei` | `.serif-reading-*`, TOC labels, search result titles. |
+| Mono | `JetBrains Mono` | Code, RSS utility text, small machine-like labels. |
 
-### Size Scale
+Important note:
 
-| Token | Current value | Use |
-| --- | --- | --- |
-| `text-fine` | `0.66rem` to `0.78rem` | Link metadata, search dates. |
-| `text-caption` | `text-xs`, `text-sm` | Dates, captions, footer. |
-| `text-ui` | `text-sm sm:text-base` | Header nav, buttons. |
-| `text-card-title` | `0.84rem` to `1.14rem` | Link and post cards. |
-| `text-prose` | `1.04rem` to `1.06rem` | Article body. |
-| `text-section` | `text-xl sm:text-2xl` | Section headings. |
-| `text-page` | `text-3xl sm:text-4xl` | Directory page titles. |
+- `.serif-reading-surface` and `.serif-reading-title` are historical class
+  names; they currently map to `LXGW Neo XiHei`
 
-### Line Height And Tracking
+### Active scale
 
-| Context | Line height | Tracking |
-| --- | --- | --- |
-| Article base | `leading-8` | default or positive. |
-| Paragraphs | `leading-8` | `0.014em`. |
-| List items | `leading-8` | `0.012em`. |
-| Serif title | title-dependent | `0.012em` base class. |
-| Search excerpt | `1.65` | default. |
-| Captions | relaxed | default. |
-
-Do not use negative letter spacing for this site.
-
-## Layout
-
-| Token | Current value | Use |
-| --- | --- | --- |
-| `container-main` | `max-w-screen-md px-5` | Normal page content. |
-| `article-shell` | `max-w-screen-md` | Blog post wrapper. |
-| `search-panel` | `min(calc(100vw - 1.8rem), 48rem)` | Search modal. |
-| `rss-page` | `44rem` | RSS XSL preview. |
-| `toc-rail` | `w-48`, fixed at `xl` | Article TOC. |
-| `poster-ratio` | `aspect-[2/3]` | Media covers. |
-
-### Spacing Scale In Use
-
-| Value | Use |
+| Surface | Size pattern |
 | --- | --- |
-| `px-5` | Page gutters. |
-| `py-12 sm:py-16` | Main vertical page padding. |
-| `space-y-8` | Simple content pages. |
-| `space-y-10 sm:space-y-12` | Directory and changelog sections. |
-| `gap-1` | Dense post lists. |
-| `gap-x-4 gap-y-3.5` | Link grid. |
-| `gap-4 sm:gap-6` | Media grid. |
-| `p-2.5 sm:p-3` | Media cards. |
-| `px-3 py-2.5` | Link cards. |
+| Page titles | `text-3xl sm:text-4xl` |
+| Post title | `text-xl sm:text-2xl` |
+| Article body | `1.04rem` to `1.06rem`, `leading-8` |
+| Dense list title | `1.03rem` to `1.16rem` |
+| Link card title | about `0.89rem` |
+| Search excerpt | `0.95rem`, `line-height: 1.65` |
+| Micro meta | `0.7rem` to `0.88rem` |
 
-## Radius, Borders, And Elevation
+Do not add viewport-width type scaling or negative tracking.
 
-| Token | Current value | Use |
+## Layout and Spacing
+
+Stable dimensions matter more here than dramatic variation.
+
+| Pattern | Current rule |
+| --- | --- |
+| Main container | `max-w-screen-md px-5` |
+| Main vertical rhythm | `py-12 sm:py-16` |
+| Article shell | `max-w-screen-md` |
+| Search panel | `min(calc(100vw - 1.8rem), 48rem)` |
+| RSS preview shell | `44rem` |
+| Media cover ratio | `aspect-[2/3]` |
+
+Frequent spacing values:
+
+- `gap-1` for dense post lists
+- `space-y-6` to `space-y-10` for page sections
+- `gap-x-7 gap-y-6` on the Links grid
+- `gap-4 sm:gap-6` on the Media grid
+- `p-2.5 sm:p-3` on Media cards
+- `px-2.25 py-2.5` on Link cards
+
+## Shape, Border, and Depth
+
+The site uses small radii and light depth.
+
+| Role | Current value | Use |
 | --- | --- | --- |
-| `radius-small` | `rounded`, `rounded-sm`, `rounded-md` | Inline code, TOC links. |
-| `radius-card` | `rounded-lg` | Cards, images, controls. |
-| `radius-search` | `1.5rem`, mobile `1.15rem` | Search modal only. |
-| `radius-rss` | `18px` to `28px` | RSS preview panels/buttons. |
-| `border-subtle` | `black/5-12`, `white/7-18` | Cards and dividers. |
-| `shadow-subtle` | `shadow-sm` | Images and cards. |
-| `shadow-hover` | `hover:shadow-2xl` scoped to media cards | Cover-heavy cards only. |
-| `shadow-rss` | hard `0 7px 0` style | RSS preview only. |
+| Small radius | `rounded` to `rounded-md` | Inline code, TOC links, small shells. |
+| Card radius | `rounded-lg` | Link cards, media cards, images. |
+| Utility radius | `rounded-full` to `rounded-2xl` | Header actions, back-to-top. |
+| Search radius | `1.5rem` / `1.15rem mobile` | Search modal only. |
+| Default depth | subtle border or `shadow-sm` | Cards and figures. |
+| Strong depth | stronger shadow on hover | Mostly Media cards and lightbox. |
 
-Do not introduce new default elevation levels for ordinary pages.
+Rules:
+
+- ordinary page sections should not become floating cards
+- hard shadow stacks belong only to the RSS preview
+- stronger elevation should be rare and content-led
 
 ## Motion
 
-| Token | Current value | Use |
-| --- | --- | --- |
-| `motion-reveal` | `duration-700 ease-out` | `.animate` reveal. |
-| `motion-standard` | `duration-300 ease-in-out` | Links, cards, arrows. |
-| `motion-fast` | `160ms` to `220ms` | Lightbox/search microstates. |
-| `motion-stagger` | `150ms` | Global reveal sequence. |
-| `motion-lift-small` | `translateY(-1px)` | ArrowCard, search result, image. |
-| `motion-lift-card` | `hover:-translate-y-1` | Media cards. |
+Current motion language:
 
-Prefer color, opacity, and small transforms. Avoid looping decorative motion.
+- `.animate` reveal: `700ms ease-out`
+- most hover transitions: `200ms` to `300ms`
+- lightbox/search open states: `140ms` to `260ms`
+- typical lift: `translateY(-1px)`
+- typical directional motion: short arrow travel
 
-## Breakpoints
+Use motion to confirm action, not to advertise it.
 
-| Breakpoint | Current behavior |
+## Decision Table
+
+| Need | Use |
 | --- | --- |
-| Default mobile | Single-column header stack, two-column media grid. |
-| `sm` | Header becomes row, larger page padding/text steps. |
-| `md` | Link grid can reach three columns; media grid reaches three columns. |
-| `xl` | Media grid reaches four columns; article TOC rail appears. |
+| New text role | start from `--site-color-text-*` before adding a fresh color |
+| New interactive text | start from `--site-link-*` |
+| New subtle border | start from `--site-color-surface-border` |
+| New compact surface | `rounded-lg` with low-noise border/background |
+| New utility control | muted text + clear focus ring + small hover shift |
+| New accent | only if it has a semantic job and does not crowd warm clay/orange/amber |
 
-## Do And Don’t
+## Do and Don’t
 
 ### Do
 
-- Use these documented roles when reading or writing Tailwind classes.
-- Prefer the lightweight CSS variables for repeated text and UI colors.
-- Keep dark-mode equivalents for every surface and text role.
-- Keep focus states visible.
-- Keep text and content width stable.
-- Update this file if the implementation gains new tokens or token semantics.
+- reuse the existing CSS variables for repeated color roles
+- keep dark-mode equivalents for every new repeated role
+- keep widths and spacing stable across similar pages
+- update this file when the implementation changes materially
 
 ### Don’t
 
-- Don’t hardcode a new palette into components.
-- Don’t expand tokens into a full theme framework without a multi-theme need.
-- Don’t use RSS preview colors outside RSS.
-- Don’t add shadows or rounded panels just to fill space.
-- Don’t change font families casually.
-- Don’t scale type continuously with viewport width.
+- don’t hardcode a new palette into one component
+- don’t treat this repo as if it already had a full token framework
+- don’t reintroduce the old Noto Serif/Noto Sans narrative
+- don’t use the RSS preview palette outside RSS

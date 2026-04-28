@@ -1,0 +1,88 @@
+version: alpha
+name: Haeward
+description: Warm paper Astro blog with narrow reading, quiet lists, compact
+  media grids, a custom search modal, and a standalone RSS preview.
+colors:
+  page:
+    light: "#efeee9"
+    dark: stone-900
+  text-primary:
+    light: "#343331"
+    dark: "#d6d1c8"
+  text-heading:
+    light: var(--site-color-text-heading)
+    dark: var(--site-color-text-heading)
+  text-muted:
+    light: var(--site-color-text-muted)
+    dark: var(--site-color-text-muted)
+  border:
+    light: var(--site-color-surface-border)
+    dark: var(--site-color-surface-border)
+  link-internal:
+    light: "#9f542f"
+    dark: "#f0b58f"
+  link-hover:
+    light: "#a25832"
+    dark: "#f1b994"
+  link-strong-hover:
+    light: "#7c3f23"
+    dark: "#ffd7bc"
+  focus:
+    light: rgba(159, 84, 47, 0.48)
+    dark: rgba(240, 181, 143, 0.5)
+  quote:
+    light: orange-400/85 on orange-100
+    dark: orange-500/85 on neutral-500/10
+  rating:
+    light: amber-300
+    dark: amber-200
+  status-up: emerald-500
+  status-down: rose-500
+  rss-preview:
+    background: "#FFC34A"
+    panel: "#fffdf7"
+    ink: "#19120f"
+    link: "#cf3825"
+typography:
+  ui:
+    family: ui-sans-serif, system-ui, sans-serif
+    implementation: body font-sans
+  reading:
+    family: LXGW Neo XiHei
+    implementation: .serif-reading-surface and .serif-reading-title
+  mono:
+    family: JetBrains Mono
+    implementation: font-mono and RSS utility text
+  note: class names with "serif-reading" are historical names, not font facts
+spacing:
+  container: max-w-screen-md
+  gutter: px-5
+  main-y: py-12 sm:py-16
+  article-gap: mt-10
+  dense-list-gap: gap-1
+  media-grid-gap: gap-4 sm:gap-6
+rounded:
+  small: rounded to rounded-md
+  card: rounded-lg
+  utility: rounded-full to rounded-2xl
+  search: 1.5rem desktop, 1.15rem mobile
+components:
+  header-action:
+    size: size-6
+    shape: rounded-full
+    focus: var(--site-link-focus)
+  article-link:
+    style: warm clay text, no underline until hover/focus
+  link-card:
+    shape: rounded-lg
+    status: top-right dot
+  media-card:
+    shape: rounded-lg
+    cover-ratio: aspect-[2/3]
+    hover: small lift, slightly stronger shadow
+  search-panel:
+    width: min(calc(100vw - 1.8rem), 48rem)
+    backdrop: blurred darkened overlay
+  rss-preview:
+    stylesheet: /feed/pretty-feed.xsl
+    mode: standalone playful preview
