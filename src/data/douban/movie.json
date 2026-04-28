@@ -7,6 +7,147 @@
 			"star_count": 3,
 			"value": 3
 		},
+		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/movie/34850525 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/34850525/interest/4829635960",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-28 22:43:42",
+		"status": "done",
+		"id": 4829635960,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 24430,
+				"max": 10,
+				"star_count": 3.5,
+				"value": 6.9
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2026-01-10(中国大陆)"
+			],
+			"pic": {
+				"large": "https://img2.doubanio.com/view/photo/m_ratio_poster/public/p2928560201.jpg",
+				"normal": "https://img2.doubanio.com/view/photo/s_ratio_poster/public/p2928560201.jpg"
+			},
+			"honor_infos": [
+				{
+					"kind": "movie",
+					"uri": "douban://douban.com/subject_collection/ECTMO64KY?type=rank&category=movie&rank_type=film_genre",
+					"rank": 7,
+					"title": "中国台湾动作片榜"
+				}
+			],
+			"is_show": false,
+			"vendor_icons": [
+				"https://img9.doubanio.com/f/frodo/fbc90f355fc45d5d2056e0d88c697f9414b56b44/pics/vendors/tencent.png",
+				"https://img2.doubanio.com/f/frodo/8e1b7f8b48804cf759fc411e75d62c5ffd4f8f42/pics/vendors/migu_video.png",
+				"https://img9.doubanio.com/f/frodo/88a62f5e0cf9981c910e60f4421c3e66aac2c9bc/pics/vendors/bilibili.png"
+			],
+			"year": "2025",
+			"card_subtitle": "2025 / 中国台湾 / 剧情 动作 犯罪 / 洪子烜 / 林柏宏 宋芸桦",
+			"id": "34850525",
+			"genres": [
+				"剧情",
+				"动作",
+				"犯罪"
+			],
+			"title": "96分钟：列车爆炸案",
+			"is_released": true,
+			"actors": [
+				{
+					"name": "林柏宏"
+				},
+				{
+					"name": "宋芸桦"
+				},
+				{
+					"name": "王柏杰"
+				},
+				{
+					"name": "李李仁"
+				},
+				{
+					"name": "姚以缇"
+				},
+				{
+					"name": "蔡凡熙"
+				},
+				{
+					"name": "孔令元"
+				},
+				{
+					"name": "李铭忠"
+				},
+				{
+					"name": "黄奇斌"
+				},
+				{
+					"name": "吕雪凤"
+				},
+				{
+					"name": "郑志伟"
+				},
+				{
+					"name": "陈雪甄"
+				},
+				{
+					"name": "巫建和"
+				},
+				{
+					"name": "林昀希"
+				},
+				{
+					"name": "邹承恩"
+				}
+			],
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "2f4a72",
+				"_base_color": [
+					0.6,
+					0.5882352941176471,
+					0.13333333333333333
+				],
+				"secondary_color": "f4f6f9",
+				"_avg_color": [
+					0.6904761904761906,
+					0.17073170731707324,
+					0.3215686274509804
+				],
+				"primary_color_dark": "1f314c"
+			},
+			"type": "movie",
+			"has_linewatch": true,
+			"vendor_desc": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/34850525.jpg",
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/34850525",
+			"url": "https://movie.douban.com/subject/34850525/",
+			"release_date": null,
+			"uri": "douban://douban.com/movie/34850525",
+			"subtype": "movie",
+			"directors": [
+				{
+					"name": "洪子烜"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"null_rating_reason": ""
+		},
+		"star_time": "2026-04-28 22:43:42"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
 		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/movie/20505982 来自@豆瓣App",
 		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/20505982/interest/4829512652",
 		"tags": [],

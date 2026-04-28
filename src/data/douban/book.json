@@ -4,6 +4,270 @@
 		"rating": {
 			"count": 1,
 			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
+		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/book/34884051 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/34884051/interest/4829705338",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-28 23:54:35",
+		"status": "done",
+		"id": 4829705338,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 5871,
+				"max": 10,
+				"star_count": 4,
+				"value": 8.4
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2020-1"
+			],
+			"pic": {
+				"large": "https://img3.doubanio.com/view/subject/l/public/s33532302.jpg",
+				"normal": "https://img3.doubanio.com/view/subject/m/public/s33532302.jpg"
+			},
+			"honor_infos": [],
+			"other_versions_count": 1,
+			"is_show": false,
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/161387ce451872cbf51fcb288cd5ffd1dcd89705/pics/vendors/logo_dedao@2x.png",
+				"https://img1.doubanio.com/f/frodo/f6f620132e6d8a02d171f03114bbe2339aa8af97/pics/vendors/logo_doubanread@2x.png"
+			],
+			"card_subtitle": "许先哲 / 2020 / 江苏凤凰文艺出版社",
+			"book_subtitle": "",
+			"id": "34884051",
+			"author": [
+				"许先哲"
+			],
+			"is_released": true,
+			"vendor_original_price": "",
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "7c83a5",
+				"_base_color": [
+					0.638888888888889,
+					0.24657534246575333,
+					0.28627450980392155
+				],
+				"secondary_color": "f4f5f9",
+				"_avg_color": [
+					0.9868421052631579,
+					0.22619047619047622,
+					0.6588235294117647
+				],
+				"primary_color_dark": "60657f"
+			},
+			"type": "book",
+			"cover_url": "https://dou.img.lithub.cc/book/34884051.jpg",
+			"min_sale_price": null,
+			"press": [
+				"江苏凤凰文艺出版社"
+			],
+			"pages": [
+				"256"
+			],
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/34884051",
+			"url": "https://book.douban.com/subject/34884051/",
+			"title": "镖人：卷九",
+			"uri": "douban://douban.com/book/34884051",
+			"subtype": "book",
+			"intro": "◆轰动日本的中国漫画！3次登上日本央视NHK电视台新闻报道节目，被日本媒体盛赞为“太阳系级别的中国动漫精品”。\n◆日本四大报纸之一《每日新闻》、日本知名杂志《映画秘宝》专文报道。\n◆日本漫画大师高桥留美子（代表作《犬夜叉》）、藤泽亨（代表作《麻辣教师GTO》），日本双叶社（代表作《蜡笔小新》）前主编栗原一二，日本小学馆（代表作《名侦探柯南》）前主编御木基宏，日本知名动画导演新房昭之（代表作《魔法少女小圆》），纷纷激赏不已！\n◆日文&韩文单行本热卖中！\n◆从日本火回中国！中国日报、今日头条、澎湃新闻、新周刊等媒体争相报道。\n◆脱口秀大师李诞、实力派演员万茜、知名作家马伯庸（代表作《长安十二时辰》）、知名动画导演田晓鹏（代表作《大圣归来》）鼎力推荐！\n◆快看漫画、腾讯动漫、网易漫画、新漫画、有妖气等国内多家平台全好评连载中。\n◆全国巡回签售会场场火爆！\n◆第九十一话新增17页全新内容！\n◆信念越强，力量越强！\n________________________________________________________\n一部重现隋唐江湖的热血漫画！\n大业三年（公元607年），隋王朝在隋炀帝杨广的残暴统治下民不聊生。\n长安城内，一场惊天动地的阴谋正在酝酿；而千里之外的玉门关，刀马一行人与驻守边关的隋军展开了厮杀……",
+			"buy_more_uri": "",
+			"null_rating_reason": "",
+			"article_intros": [],
+			"vendor_sale_price": "",
+			"has_ebook": true
+		},
+		"star_time": "2026-04-28 23:54:35"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/book/34813164 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/34813164/interest/4829705193",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-28 23:54:27",
+		"status": "done",
+		"id": 4829705193,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 6123,
+				"max": 10,
+				"star_count": 4.5,
+				"value": 8.5
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2019-11"
+			],
+			"pic": {
+				"large": "https://img3.doubanio.com/view/subject/l/public/s33506687.jpg",
+				"normal": "https://img3.doubanio.com/view/subject/m/public/s33506687.jpg"
+			},
+			"honor_infos": [],
+			"other_versions_count": 1,
+			"is_show": false,
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/161387ce451872cbf51fcb288cd5ffd1dcd89705/pics/vendors/logo_dedao@2x.png",
+				"https://img1.doubanio.com/f/frodo/f6f620132e6d8a02d171f03114bbe2339aa8af97/pics/vendors/logo_doubanread@2x.png"
+			],
+			"card_subtitle": "许先哲 / 2019 / 江苏凤凰文艺出版社",
+			"book_subtitle": "",
+			"id": "34813164",
+			"author": [
+				"许先哲"
+			],
+			"is_released": true,
+			"vendor_original_price": "",
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "a59e91",
+				"_base_color": [
+					0.11111111111111112,
+					0.125,
+					0.09411764705882353
+				],
+				"secondary_color": "f9f8f4",
+				"_avg_color": [
+					0.0037878787878787845,
+					0.316546762589928,
+					0.5450980392156862
+				],
+				"primary_color_dark": "7f7a6f"
+			},
+			"type": "book",
+			"cover_url": "https://dou.img.lithub.cc/book/34813164.jpg",
+			"min_sale_price": null,
+			"press": [
+				"江苏凤凰文艺出版社"
+			],
+			"pages": [
+				"256"
+			],
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/34813164",
+			"url": "https://book.douban.com/subject/34813164/",
+			"title": "镖人：卷八",
+			"uri": "douban://douban.com/book/34813164",
+			"subtype": "book",
+			"intro": "收录连载第72回至第83回。\n大业三年（公元607年），隋王朝在隋炀帝杨广的残暴统治下民不聊生。\n裴行俨为了坚守自己心中的道义，选择与叔父裴世矩分道扬镳。而在大漠深处，告别刀马一行人的阿育娅成了边境者的一员，开始执行自己的初次任务……\n—————————————————————————————————\n信念越强，力量越强！\n轰动日本的中国漫画！\n一趟牵动天下命运的护镖，再掀武侠热潮！",
+			"buy_more_uri": "",
+			"null_rating_reason": "",
+			"article_intros": [],
+			"vendor_sale_price": "",
+			"has_ebook": true
+		},
+		"star_time": "2026-04-28 23:54:27"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/book/33411326 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/33411326/interest/4828480234",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-28 23:53:14",
+		"status": "done",
+		"id": 4828480234,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 6849,
+				"max": 10,
+				"star_count": 4.5,
+				"value": 8.6
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2019-7"
+			],
+			"pic": {
+				"large": "https://img9.doubanio.com/view/subject/l/public/s33311455.jpg",
+				"normal": "https://img9.doubanio.com/view/subject/m/public/s33311455.jpg"
+			},
+			"honor_infos": [],
+			"other_versions_count": 1,
+			"is_show": false,
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/161387ce451872cbf51fcb288cd5ffd1dcd89705/pics/vendors/logo_dedao@2x.png",
+				"https://img1.doubanio.com/f/frodo/f6f620132e6d8a02d171f03114bbe2339aa8af97/pics/vendors/logo_doubanread@2x.png"
+			],
+			"card_subtitle": "许先哲 / 2019 / 北京联合出版公司",
+			"book_subtitle": "",
+			"id": "33411326",
+			"author": [
+				"许先哲"
+			],
+			"is_released": true,
+			"vendor_original_price": "",
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "72423f",
+				"_base_color": [
+					0.01202749140893472,
+					0.44907407407407407,
+					0.8470588235294118
+				],
+				"secondary_color": "f9f5f4",
+				"_avg_color": [
+					0.019999999999999924,
+					0.2525252525252525,
+					0.38823529411764707
+				],
+				"primary_color_dark": "4c2c2a"
+			},
+			"type": "book",
+			"cover_url": "https://dou.img.lithub.cc/book/33411326.jpg",
+			"min_sale_price": "¥20.54",
+			"press": [
+				"北京联合出版公司"
+			],
+			"pages": [
+				"272"
+			],
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/33411326",
+			"url": "https://book.douban.com/subject/33411326/",
+			"title": "镖人：卷七",
+			"uri": "douban://douban.com/book/33411326",
+			"subtype": "book",
+			"intro": "◆轰动日本的中国漫画！3次登上日本央视NHK电视台新闻报道节目，被日本媒体誉为“世界级水平的中国动漫精品”！\n◆日本四大报纸之一《每日新闻》、日本知名杂志《映画秘宝》专文报道。\n◆日本漫画大师高桥留美子、藤泽亨，日本双叶社前主编栗原一二，日本小学馆前主编御木基宏，日本知名动画导演新房昭之，纷纷激赏不已！\n◆日文&韩文单行本热卖中！\n◆从日本火回中国！今日头条、澎湃新闻、新周刊、中国日报等媒体争相报道。\n◆知名作家马伯庸、知名动画导演田晓鹏、脱口秀大师李诞、实力派演员万茜鼎力推荐！\n◆快看漫画、腾讯动漫、网易漫画、新漫画、有妖气等国内十余家平台全好评连载中。\n◆2018年签售会场场火爆！2019年全国巡回签售即将再次点燃读者的心！\n◆信念越强，力量越强！\n________________________________________________________\n一部重现隋唐江湖的热血漫画！\n大业三年（公元607年），隋王朝在隋炀帝杨广的残暴统治下民不聊生。\n在马快们的伏击中脱身的刀马一行人来到了尉迟家族后人藏身的洞穴，而此人手里竟有传说中的宝刀丙子椒林。\n与此同时，神秘二人组继续对刀马紧追不舍……",
+			"buy_more_uri": "douban://douban.com/book/33411326/vendors_douban",
+			"null_rating_reason": "",
+			"article_intros": [],
+			"vendor_sale_price": "",
+			"has_ebook": true
+		},
+		"star_time": "2026-04-28 23:53:14"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
 			"star_count": 4,
 			"value": 4
 		},
