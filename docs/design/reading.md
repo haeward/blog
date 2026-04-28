@@ -151,7 +151,7 @@ Current rules:
 
 - `figure` uses centered layout and generous vertical rhythm
 - images are rounded and lightly shadowed
-- `.blog-figure__image` is capped at `46rem`
+- `.blog-figure__image` is capped by the reading column and viewport height
 - captions are centered, medium weight, and relaxed
 - article images show `cursor: zoom-in`
 - hover adds a very small lift and shadow increase

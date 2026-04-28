@@ -1061,7 +1061,12 @@ figure img {
 }
 
 .blog-figure__image {
+    display: block;
     width: min(100%, 46rem);
+    height: auto;
+    max-height: min(72vh, 42rem);
+    object-fit: contain;
+    cursor: zoom-in;
 }
 
 .blog-figure__caption {
@@ -1071,6 +1076,14 @@ figure img {
 
 html.image-lightbox-open {
     overflow: hidden;
+}
+
+article.blog-article hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    height: 1px;
+    border: 0;
+    background-color: color-mix(in srgb, var(--site-color-text-primary) 58%, transparent);
 }
 
 .blog-article :is(h2, h3, h4) {

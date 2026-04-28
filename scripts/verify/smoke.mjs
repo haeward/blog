@@ -486,6 +486,24 @@ async function run() {
         }
 
         await page.goto(`${baseUrl}${ARTICLE_SLUG}`, { waitUntil: "networkidle" });
+        const articleImageStyles = await page
+            .locator(".blog-figure__image")
+            .first()
+            .evaluate((image) => {
+                const styles = window.getComputedStyle(image);
+                return {
+                    cursor: styles.cursor,
+                    maxHeight: styles.maxHeight,
+                    objectFit: styles.objectFit,
+                };
+            });
+        if (
+            articleImageStyles.cursor !== "zoom-in" ||
+            articleImageStyles.objectFit !== "contain" ||
+            articleImageStyles.maxHeight === "none"
+        ) {
+            fail(`Unexpected article image styles: ${JSON.stringify(articleImageStyles)}.`);
+        }
         await page.click(".blog-article img");
         await page.waitForSelector(".image-lightbox.is-open");
         await page.keyboard.press("Escape");
