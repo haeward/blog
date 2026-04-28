@@ -1,5 +1,6 @@
 ---
 import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
 import { CHANGELOG, SITE } from "@consts";
 import PageLayout from "@layouts/PageLayout.astro";
 import { CHANGELOG_ENTRIES } from "../data/changelog";
@@ -47,7 +48,7 @@ const changelogYears = Object.keys(changelogByYear).sort((a, b) => Number(b) - N
             <ol class="changelog-list" aria-label={`Updates from ${year}`}>
               {changelogByYear[year].map((entry) => (
                 <li class="changelog-entry">
-                  <time class="changelog-entry__date" datetime={entry.date}>{entry.date}</time>
+                  <FormattedDate class="changelog-entry__date" date={new Date(`${entry.date}T00:00:00`)} />
                   <p class="serif-reading-surface changelog-entry__title">{entry.content}</p>
                 </li>
               ))}

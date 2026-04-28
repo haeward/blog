@@ -5,6 +5,14 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     {
+        date: "2026-04-28",
+        content: "Add the Moments and Toolbox pages",
+    },
+    {
+        date: "2026-04-27",
+        content: "Add a Podcast section to the Links page",
+    },
+    {
         date: "2026-04-24",
         content: "Add the Now page and ship terminal-style share previews",
     },
