@@ -24,6 +24,7 @@ function init(): void {
     syncTheme(getStoredTheme());
     onScroll();
     animate();
+    prepareMediaEmbeds();
 }
 
 function bindOnce(): void {
@@ -113,6 +114,23 @@ function animate(): void {
         setTimeout(() => {
             element.classList.add("show");
         }, index * 150);
+    });
+}
+
+function prepareMediaEmbeds(): void {
+    const frames = document.querySelectorAll<HTMLIFrameElement>(
+        ".spotify-embed__frame:not([data-embed-bound])",
+    );
+
+    frames.forEach((frame) => {
+        frame.dataset.embedBound = "true";
+
+        const reveal = () => {
+            frame.dataset.loaded = "true";
+        };
+
+        frame.addEventListener("load", reveal, { once: true });
+        window.setTimeout(reveal, 1500);
     });
 }
 

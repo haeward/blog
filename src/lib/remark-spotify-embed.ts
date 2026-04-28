@@ -2,8 +2,12 @@ import type { Html, Link, Paragraph, Root, Text } from "mdast";
 import type { Parent } from "unist";
 import { visit } from "unist-util-visit";
 
+const SPOTIFY_MEDIA_TYPES = ["track", "album", "playlist", "artist", "show", "episode"] as const;
+
+type SpotifyMediaType = (typeof SPOTIFY_MEDIA_TYPES)[number];
+
 interface SpotifyData {
-    type: string;
+    type: SpotifyMediaType;
     id: string;
 }
 
@@ -18,11 +22,12 @@ export function remarkSpotifyEmbed() {
                 if (node.children.length === 1 && node.children[0].type === "link") {
                     const link = node.children[0] as Link;
                     const url = link.url;
+                    const spotifyData = extractSpotifyData(url);
 
-                    if (isSpotifyUrl(url)) {
+                    if (spotifyData) {
                         const mediaNode: Html = {
                             type: "html",
-                            value: generateSpotifyEmbed(url),
+                            value: generateSpotifyEmbed(spotifyData),
                         };
 
                         parent.children[index] = mediaNode;
@@ -30,16 +35,17 @@ export function remarkSpotifyEmbed() {
                 }
 
                 if (node.children.length === 1 && node.children[0].type === "text") {
-                    const text = (node.children[0] as Text).value;
-                    const mediaMatch = text.match(/::media\[([^\]]+)\]/);
+                    const text = (node.children[0] as Text).value.trim();
+                    const mediaMatch = text.match(/^::media\[([^\]]+)\]$/);
 
                     if (mediaMatch) {
                         const url = mediaMatch[1];
+                        const spotifyData = extractSpotifyData(url);
 
-                        if (isSpotifyUrl(url)) {
+                        if (spotifyData) {
                             const mediaNode: Html = {
                                 type: "html",
-                                value: generateSpotifyEmbed(url),
+                                value: generateSpotifyEmbed(spotifyData),
                             };
 
                             parent.children[index] = mediaNode;
@@ -51,17 +57,13 @@ export function remarkSpotifyEmbed() {
     };
 }
 
-function isSpotifyUrl(url: string): boolean {
-    return url.includes("spotify.com/");
-}
-
-function generateSpotifyEmbed(url: string): string {
-    const spotifyData = extractSpotifyData(url);
+function generateSpotifyEmbed(spotifyData: SpotifyData): string {
     const height = getSpotifyHeight(spotifyData.type);
 
     return `<div class="media-embed spotify-embed">
     <iframe
-      style="border-radius:12px"
+      class="spotify-embed__frame"
+      title="Spotify embedded player"
       src="https://open.spotify.com/embed/${spotifyData.type}/${spotifyData.id}?utm_source=generator"
       width="100%"
       height="${height}"
@@ -73,21 +75,33 @@ function generateSpotifyEmbed(url: string): string {
   </div>`;
 }
 
-function extractSpotifyData(url: string): SpotifyData {
-    const match = url.match(
-        /spotify\.com\/(track|album|playlist|artist|show|episode)\/([a-zA-Z0-9]+)/,
-    );
-    if (match) {
-        return {
-            type: match[1],
-            id: match[2].split("?")[0],
-        };
+function extractSpotifyData(url: string): SpotifyData | undefined {
+    try {
+        const parsedUrl = new URL(url);
+        const hostname = parsedUrl.hostname.toLowerCase();
+
+        if (hostname !== "spotify.com" && !hostname.endsWith(".spotify.com")) {
+            return undefined;
+        }
+
+        const [type, id] = parsedUrl.pathname.split("/").filter(Boolean);
+
+        if (!isSpotifyMediaType(type) || !id) {
+            return undefined;
+        }
+
+        return { type, id };
+    } catch {
+        return undefined;
     }
-    return { type: "track", id: "" };
 }
 
-function getSpotifyHeight(type: string): string {
-    const heights: Record<string, string> = {
+function isSpotifyMediaType(type: string | undefined): type is SpotifyMediaType {
+    return SPOTIFY_MEDIA_TYPES.includes(type as SpotifyMediaType);
+}
+
+function getSpotifyHeight(type: SpotifyMediaType): string {
+    const heights: Record<SpotifyMediaType, string> = {
         track: "152",
         album: "352",
         playlist: "352",
@@ -95,5 +109,5 @@ function getSpotifyHeight(type: string): string {
         show: "232",
         episode: "232",
     };
-    return heights[type] || "152";
+    return heights[type];
 }
