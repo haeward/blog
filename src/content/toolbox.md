@@ -73,15 +73,16 @@ title: "Toolbox"
 
 ## 数字生活开支
 
-| 分类 | 名称 | 价格 | 到期/续费日期 | 续费周期 | 自动续费 |
+| 分类 | 名称 | 价格 | 续费周期 | 到期/续费日期 | 自动续费 |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| 效率 | 1Password | $47.88 | Apr 28 | 年付 | Y |
-| 购物 | 88 VIP | ¥88 | Dec 16 | 年付 | Y |
-| AI | ChatGPT Plus | $20 | Apr 20 | 月付 | Y |
-| 社交 | Fastmail | $60 | May 29 | 年付 | Y |
-| 云盘 | iCloud | ¥6 | Nov 25 | 月付 | Y |
-| 效率 | Kagi | $36 | Jul 12, 2025 | 年付 | N |
-| 音乐 | Spotify | ¥ 205 | Apr 23 | 年付 | Y |
-| 效率 | Wcloud | ¥287.99 | Feb 18 | 年付 | Y |
-| 阅读 | 微信读书 | ¥50 | Apr 23 | 年付 | Y |
-| 购物 | 京东 PLUS | ¥99 | Oct 27, 2026 | 年付 | N |
+| 效率 | [1Password](https://1password.com/) | $47.88 | 年付 | Apr 28 | Y |
+| 购物 | [88 VIP](https://taobao.com/) | ¥88 | 年付 | Dec 16 | Y |
+| AI | [ChatGPT Plus](https://chatgpt.com) | $20 | 月付 | Apr 20 | Y |
+| 社交 | [Fastmail](https://fastmail.com/) | $60 | 年付 | May 29 | Y |
+| 云盘 | [iCloud](https://www.icloud.com/) | ¥6 | 月付 | Nov 25 | Y |
+| 效率 | [Kagi](https://kagi.com/) | $36 | 年付 | Jul 12, 2025 | N |
+| 效率 | [Pinboard](https://pinboard.in/) | $17 | 年付 | Feb 20, 2028 | Y |
+| 音乐 | [Spotify](https://www.spotify.com/) | ¥ 205 | 年付 | Apr 23 | Y |
+| 效率 | [Wcloud](https://wcloud.me/) | ¥287.99 | 年付 | Feb 18 | Y |
+| 阅读 | [微信读书](https://weread.qq.com/) | ¥50 | 年付 | Apr 23 | Y |
+| 购物 | [京东 PLUS](https://jd.com/) | ¥99 | 年付 | Oct 27, 2026 | N |
