@@ -8,6 +8,19 @@ const DIST_DIR = path.resolve("dist");
 const HOST = "127.0.0.1";
 const ARTICLE_SLUG = "/posts/2025/travelogue-of-southern-shanxi/";
 const MOCK_MASTODON_ACCOUNT_ID = "114251868212289038";
+
+function renderMockMastodonContent(index) {
+    if (index === 3) {
+        return `<p>Moment ${index + 1} from Mastodon. <a href="https://mas.to/tags/now">#Now</a></p>`;
+    }
+
+    if (index === 4) {
+        return `<p>Moment ${index + 1} from Mastodon. :blobcatsweat: Custom emoji check.</p>`;
+    }
+
+    return `<p>Moment ${index + 1} from Mastodon. <a href="https://example.com/article">example.com</a></p>`;
+}
+
 const MOCK_MASTODON_STATUSES = Array.from({ length: 10 }, (_, index) => ({
     id: `moment-${index + 1}`,
     account: {
@@ -27,11 +40,18 @@ const MOCK_MASTODON_STATUSES = Array.from({ length: 10 }, (_, index) => ({
                   url: "https://example.com/article",
               }
             : null,
-    content:
-        index === 3
-            ? `<p>Moment ${index + 1} from Mastodon. <a href="https://mas.to/tags/now">#Now</a></p>`
-            : `<p>Moment ${index + 1} from Mastodon. <a href="https://example.com/article">example.com</a></p>`,
+    content: renderMockMastodonContent(index),
     created_at: `2026-04-2${index + 1}T16:57:00.000Z`,
+    emojis:
+        index === 4
+            ? [
+                  {
+                      shortcode: "blobcatsweat",
+                      static_url: "/assets/images/site/favicon.png",
+                      url: "/assets/images/site/favicon.png",
+                  },
+              ]
+            : [],
     media_attachments:
         index === 1
             ? [
@@ -395,6 +415,8 @@ async function run() {
         await page.waitForSelector('a:has-text("Example preview")');
         await page.waitForSelector('a:has-text("A quoted toot preview.")');
         await page.waitForSelector('a:has-text("#Now")');
+        await page.waitForSelector('[data-moments-emoji="true"][alt=":blobcatsweat:"]');
+        await page.waitForSelector('[data-moments-media="true"][alt="Preview attachment"]');
 
         await assertOk(page, `${baseUrl}/links/`, "Links");
         await page.waitForSelector('[data-links-section="blogroll"] [data-link-card="true"]');

@@ -35,11 +35,18 @@ type MastodonCard = {
     url?: string;
 };
 
+type MastodonEmoji = {
+    shortcode?: string;
+    static_url?: string;
+    url?: string;
+};
+
 type MastodonStatus = {
     account?: MastodonAccount;
     card?: MastodonCard;
     content?: string;
     created_at?: string;
+    emojis?: MastodonEmoji[];
     media_attachments?: MastodonAttachment[];
     quote?: {
         quoted_status?: MastodonStatus;
@@ -154,7 +161,12 @@ function renderMomentItem(
 ): string {
     const displayStatus = status?.reblog ?? status;
     const account = displayStatus?.account ?? {};
-    const content = sanitizeMomentContent(displayStatus?.content, account, domain);
+    const content = sanitizeMomentContent(
+        displayStatus?.content,
+        account,
+        domain,
+        displayStatus?.emojis,
+    );
     const createdAt =
         typeof displayStatus?.created_at === "string"
             ? formatMomentDate(new Date(displayStatus.created_at), formatters)
@@ -163,13 +175,13 @@ function renderMomentItem(
 
     return `
       <li data-moments-item="true">
-        <div role="article" class="serif-reading-surface px-5 py-3 text-[1rem] leading-6 text-[var(--site-color-text-body)]">
-          ${content ? `<div class="moments-content space-y-1">${content}</div>` : ""}
+        <div role="article" class="serif-reading-surface px-5 py-4 text-[1rem] leading-6 text-[var(--site-color-text-body)]">
+          ${content ? `<div class="moments-content space-y-1.5">${content}</div>` : ""}
           ${renderMedia(displayStatus?.media_attachments)}
           ${renderPreviewCard(displayStatus?.card)}
           ${renderQuote(displayStatus?.quote, domain)}
 
-          <div class="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 pt-2.5 text-[0.93rem] leading-tight text-[var(--site-color-text-muted)] dark:text-[#8b8f98]">
+          <div class="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 pt-3 text-[0.93rem] leading-tight text-[var(--site-color-text-muted)] dark:text-[#8b8f98]">
             ${createdAt ? `<time datetime="${escapeAttribute(displayStatus.created_at)}">${escapeHtml(createdAt)}</time>` : ""}
             <span aria-hidden="true">·</span>
             <a href="${escapeAttribute(url)}" target="_blank" rel="noreferrer noopener" class="site-link font-medium" data-external="true" data-underline="true">View Toot</a>
@@ -192,20 +204,20 @@ function renderMedia(attachments?: MastodonAttachment[]): string {
     if (media.length === 0) return "";
 
     return `
-      <div class="mt-1 grid gap-2 ${media.length === 1 ? "" : "grid-cols-2"}">
+      <div class="mt-2 grid gap-2.5 ${media.length === 1 ? "" : "grid-cols-2"}">
         ${media
             .map((attachment) => {
                 const src = attachment.preview_url || attachment.url || "";
                 const alt = attachment.description || "";
                 const baseClass =
-                    "aspect-video w-full rounded-lg border border-black/20 object-cover dark:border-white/20";
+                    "h-auto max-h-[28rem] w-full rounded-lg border border-black/20 bg-black/5 object-contain dark:border-white/20 dark:bg-white/5";
 
                 if (attachment.type === "video" || attachment.type === "gifv") {
                     const videoSrc = attachment.url || src;
-                    return `<video src="${escapeAttribute(videoSrc)}" poster="${escapeAttribute(src)}" class="${baseClass}" controls playsinline preload="metadata"></video>`;
+                    return `<video src="${escapeAttribute(videoSrc)}" poster="${escapeAttribute(src)}" class="${baseClass}" controls playsinline preload="metadata" data-moments-media="true"></video>`;
                 }
 
-                return `<img src="${escapeAttribute(src)}" alt="${escapeAttribute(alt)}" class="${baseClass}" loading="lazy">`;
+                return `<img src="${escapeAttribute(src)}" alt="${escapeAttribute(alt)}" class="${baseClass}" loading="lazy" data-moments-media="true">`;
             })
             .join("")}
       </div>
@@ -216,7 +228,7 @@ function renderPreviewCard(card?: MastodonCard): string {
     if (!card?.url || (!card.title && !card.description && !card.image)) return "";
 
     return `
-      <a href="${escapeAttribute(card.url)}" target="_blank" rel="noreferrer noopener" class="site-link-surface mt-1 grid overflow-hidden rounded-lg border border-black/20 transition-colors duration-200 dark:border-white/20 sm:grid-cols-[8rem_minmax(0,1fr)]">
+      <a href="${escapeAttribute(card.url)}" target="_blank" rel="noreferrer noopener" class="site-link-surface mt-2 grid overflow-hidden rounded-lg border border-black/20 transition-colors duration-200 dark:border-white/20 sm:grid-cols-[8rem_minmax(0,1fr)]">
         ${
             card.image
                 ? `<img src="${escapeAttribute(card.image)}" alt="" class="aspect-video h-full w-full object-cover sm:aspect-auto" loading="lazy">`
@@ -240,15 +252,20 @@ function renderQuote(quote: MastodonStatus["quote"], domain: string): string {
         toPlainText(account.display_name) || account.username || account.acct || "Mastodon";
     const authorHandle = account.acct ? `@${account.acct}` : "";
     const quoteUrl = typeof quotedStatus.url === "string" ? quotedStatus.url : account.url || "#";
-    const content = sanitizeMomentContent(quotedStatus.content, account, domain);
+    const content = sanitizeMomentContent(
+        quotedStatus.content,
+        account,
+        domain,
+        quotedStatus.emojis,
+    );
 
     return `
-      <a href="${escapeAttribute(quoteUrl)}" target="_blank" rel="noreferrer noopener" class="site-link-surface mt-1 block rounded-lg border border-black/20 p-2 transition-colors duration-200 dark:border-white/20">
+      <a href="${escapeAttribute(quoteUrl)}" target="_blank" rel="noreferrer noopener" class="site-link-surface mt-2 block rounded-lg border border-black/20 p-2 transition-colors duration-200 dark:border-white/20">
         <div class="text-sm font-semibold text-[var(--site-color-text-primary)]">
           ${escapeHtml(authorName)}
           ${authorHandle ? `<span class="font-normal text-[var(--site-color-text-muted)]">${escapeHtml(authorHandle)}</span>` : ""}
         </div>
-        ${content ? `<div class="moments-content mt-1 line-clamp-3 space-y-1 text-sm leading-6 text-[var(--site-color-text-body-soft)]">${content}</div>` : ""}
+        ${content ? `<div class="moments-content mt-1.5 line-clamp-3 space-y-1 text-sm leading-6 text-[var(--site-color-text-body-soft)]">${content}</div>` : ""}
       </a>
     `;
 }
@@ -257,13 +274,15 @@ function sanitizeMomentContent(
     html: string | undefined,
     account: MastodonAccount,
     domain: string,
+    emojis?: MastodonEmoji[],
 ): string {
     if (typeof html !== "string" || !html.trim()) return "";
 
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
+    const emojiMap = createEmojiMap(emojis);
     const blocks = Array.from(doc.body.children)
-        .map((element) => renderSafeChildren(element, account, domain))
+        .map((element) => renderSafeChildren(element, account, domain, emojiMap))
         .filter(Boolean);
 
     if (blocks.length === 0) {
@@ -274,11 +293,16 @@ function sanitizeMomentContent(
     return blocks.map((block) => `<p>${block}</p>`).join("");
 }
 
-function renderSafeChildren(node: Node, account: MastodonAccount, domain: string): string {
+function renderSafeChildren(
+    node: Node,
+    account: MastodonAccount,
+    domain: string,
+    emojiMap: Map<string, MastodonEmoji>,
+): string {
     return Array.from(node.childNodes)
         .map((child) => {
             if (child.nodeType === Node.TEXT_NODE) {
-                return escapeHtml(child.textContent || "");
+                return renderTextWithEmoji(child.textContent || "", emojiMap);
             }
 
             if (!(child instanceof Element)) return "";
@@ -286,15 +310,72 @@ function renderSafeChildren(node: Node, account: MastodonAccount, domain: string
             const tagName = child.tagName.toLowerCase();
             if (tagName === "br") return "<br>";
 
+            if (tagName === "img" && isCustomEmojiImage(child)) {
+                const src = child.getAttribute("src") || "";
+                const alt = child.getAttribute("alt") || "";
+                return renderEmojiImage(src, alt);
+            }
+
             if (tagName === "a") {
                 const href = getMomentLinkHref(child, account, domain);
                 const text = (child.textContent || href).replace(/\s+/g, " ").trim();
-                return `<a href="${escapeAttribute(href)}" target="_blank" rel="noreferrer noopener" class="site-link font-medium" data-external="true" data-underline="true">${escapeHtml(text)}</a>`;
+                return `<a href="${escapeAttribute(href)}" target="_blank" rel="noreferrer noopener" class="site-link font-medium" data-external="true" data-underline="true">${renderTextWithEmoji(text, emojiMap)}</a>`;
             }
 
-            return renderSafeChildren(child, account, domain);
+            return renderSafeChildren(child, account, domain, emojiMap);
         })
         .join("");
+}
+
+function createEmojiMap(emojis?: MastodonEmoji[]): Map<string, MastodonEmoji> {
+    const emojiMap = new Map<string, MastodonEmoji>();
+    if (!Array.isArray(emojis)) return emojiMap;
+
+    emojis.forEach((emoji) => {
+        const shortcode = emoji?.shortcode;
+        const src = emoji?.url || emoji?.static_url;
+        if (typeof shortcode !== "string" || !shortcode || typeof src !== "string" || !src) {
+            return;
+        }
+        emojiMap.set(shortcode, emoji);
+    });
+
+    return emojiMap;
+}
+
+function renderTextWithEmoji(text: string, emojiMap: Map<string, MastodonEmoji>): string {
+    if (emojiMap.size === 0 || !text.includes(":")) return escapeHtml(text);
+
+    const shortcodePattern = /:([A-Za-z0-9_+-]+):/g;
+    let rendered = "";
+    let lastIndex = 0;
+
+    for (const match of text.matchAll(shortcodePattern)) {
+        const matchIndex = match.index ?? 0;
+        const [token, shortcode] = match;
+        const emoji = emojiMap.get(shortcode);
+
+        rendered += escapeHtml(text.slice(lastIndex, matchIndex));
+        rendered += emoji
+            ? renderEmojiImage(emoji.url || emoji.static_url || "", token)
+            : escapeHtml(token);
+        lastIndex = matchIndex + token.length;
+    }
+
+    rendered += escapeHtml(text.slice(lastIndex));
+    return rendered;
+}
+
+function renderEmojiImage(src: string, alt: string): string {
+    return `<img src="${escapeAttribute(src)}" alt="${escapeAttribute(alt)}" class="mx-0.5 inline-block size-[1.2em] align-[-0.18em]" loading="lazy" data-moments-emoji="true">`;
+}
+
+function isCustomEmojiImage(element: Element): boolean {
+    const src = element.getAttribute("src");
+    if (!src) return false;
+
+    const classList = Array.from(element.classList);
+    return classList.some((className) => ["custom-emoji", "emojione"].includes(className));
 }
 
 function getMomentLinkHref(link: Element, account: MastodonAccount, domain: string): string {
