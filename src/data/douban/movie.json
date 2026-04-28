@@ -7,6 +7,300 @@
 			"star_count": 3,
 			"value": 3
 		},
+		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/movie/20505982 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/20505982/interest/4829512652",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-28 20:19:01",
+		"status": "done",
+		"id": 4829512652,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 286310,
+				"max": 10,
+				"star_count": 3.5,
+				"value": 7.2
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2016-07-08(中国大陆)"
+			],
+			"pic": {
+				"large": "https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2359670540.jpg",
+				"normal": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2359670540.jpg"
+			},
+			"honor_infos": [
+				{
+					"kind": "movie",
+					"uri": "douban://douban.com/subject_collection/ECY46L6UY?type=rank&category=movie&rank_type=award_movie",
+					"rank": 9,
+					"title": "第36届香港电影金像奖获奖名单"
+				}
+			],
+			"is_show": false,
+			"vendor_icons": [
+				"https://img2.doubanio.com/f/frodo/8e1b7f8b48804cf759fc411e75d62c5ffd4f8f42/pics/vendors/migu_video.png",
+				"https://img9.doubanio.com/f/frodo/fbc90f355fc45d5d2056e0d88c697f9414b56b44/pics/vendors/tencent.png",
+				"https://img3.doubanio.com/f/frodo/6fa5caade3ca480ccd95f455ee4d195ee342eb90/pics/vendors/youku.png"
+			],
+			"year": "2016",
+			"card_subtitle": "2016 / 中国大陆 中国香港 / 剧情 动作 犯罪 / 梁乐民 陆剑青 / 郭富城 梁家辉",
+			"id": "20505982",
+			"genres": [
+				"剧情",
+				"动作",
+				"犯罪"
+			],
+			"title": "寒战2",
+			"is_released": true,
+			"actors": [
+				{
+					"name": "郭富城"
+				},
+				{
+					"name": "梁家辉"
+				},
+				{
+					"name": "杨采妮"
+				},
+				{
+					"name": "彭于晏"
+				},
+				{
+					"name": "李治廷"
+				},
+				{
+					"name": "文咏珊"
+				},
+				{
+					"name": "周润发"
+				},
+				{
+					"name": "马伊琍"
+				},
+				{
+					"name": "杨祐宁"
+				},
+				{
+					"name": "张国柱"
+				},
+				{
+					"name": "吴樾"
+				},
+				{
+					"name": "周笔畅"
+				},
+				{
+					"name": "李子雄"
+				},
+				{
+					"name": "骆应钧"
+				},
+				{
+					"name": "林文龙"
+				}
+			],
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "9a9ea5",
+				"_base_color": [
+					0.619047619047619,
+					0.06542056074766359,
+					0.8392156862745098
+				],
+				"secondary_color": "f4f6f9",
+				"_avg_color": [
+					0.6333333333333334,
+					0.0571428571428571,
+					0.6862745098039216
+				],
+				"primary_color_dark": "77797f"
+			},
+			"type": "movie",
+			"has_linewatch": true,
+			"vendor_desc": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/20505982.jpg",
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/20505982",
+			"url": "https://movie.douban.com/subject/20505982/",
+			"release_date": null,
+			"uri": "douban://douban.com/movie/20505982",
+			"subtype": "movie",
+			"directors": [
+				{
+					"name": "梁乐民"
+				},
+				{
+					"name": "陆剑青"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"null_rating_reason": ""
+		},
+		"star_time": "2026-04-28 20:19:01"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/movie/6890730 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/6890730/interest/4829512144",
+		"tags": [],
+		"charts": [],
+		"is_editable": false,
+		"platforms": [],
+		"vote_count": 0,
+		"create_time": "2026-04-28 20:18:20",
+		"status": "done",
+		"id": 4829512144,
+		"is_private": false,
+		"subject": {
+			"rating": {
+				"count": 413896,
+				"max": 10,
+				"star_count": 4,
+				"value": 7.6
+			},
+			"controversy_reason": "",
+			"pubdate": [
+				"2012-11-08(中国大陆)"
+			],
+			"pic": {
+				"large": "https://img1.doubanio.com/view/photo/m_ratio_poster/public/p1741835010.jpg",
+				"normal": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p1741835010.jpg"
+			},
+			"honor_infos": [
+				{
+					"kind": "movie",
+					"uri": "douban://douban.com/subject_collection/EC3AOZZUY?type=rank&category=movie&rank_type=film_genre",
+					"rank": 11,
+					"title": "中国香港犯罪片榜"
+				}
+			],
+			"is_show": false,
+			"vendor_icons": [
+				"https://img9.doubanio.com/f/frodo/fbc90f355fc45d5d2056e0d88c697f9414b56b44/pics/vendors/tencent.png",
+				"https://img3.doubanio.com/f/frodo/6fa5caade3ca480ccd95f455ee4d195ee342eb90/pics/vendors/youku.png",
+				"https://img9.doubanio.com/f/frodo/88a62f5e0cf9981c910e60f4421c3e66aac2c9bc/pics/vendors/bilibili.png"
+			],
+			"year": "2012",
+			"card_subtitle": "2012 / 中国香港 中国大陆 / 剧情 动作 犯罪 / 梁乐民 陆剑青 / 郭富城 梁家辉",
+			"id": "6890730",
+			"genres": [
+				"剧情",
+				"动作",
+				"犯罪"
+			],
+			"title": "寒战",
+			"is_released": true,
+			"actors": [
+				{
+					"name": "郭富城"
+				},
+				{
+					"name": "梁家辉"
+				},
+				{
+					"name": "李治廷"
+				},
+				{
+					"name": "彭于晏"
+				},
+				{
+					"name": "杨采妮"
+				},
+				{
+					"name": "马伊琍"
+				},
+				{
+					"name": "林家栋"
+				},
+				{
+					"name": "安志杰"
+				},
+				{
+					"name": "钱嘉乐"
+				},
+				{
+					"name": "尹子维"
+				},
+				{
+					"name": "王敏德"
+				},
+				{
+					"name": "黄芝琪"
+				},
+				{
+					"name": "郑欣宜"
+				},
+				{
+					"name": "文峰"
+				},
+				{
+					"name": "贾晓晨"
+				},
+				{
+					"name": "刘德华"
+				},
+				{
+					"name": "何华超"
+				}
+			],
+			"color_scheme": {
+				"is_dark": true,
+				"primary_color_light": "726c67",
+				"_base_color": [
+					0.07017543859649127,
+					0.09844559585492223,
+					0.7568627450980392
+				],
+				"secondary_color": "f9f7f4",
+				"_avg_color": [
+					0.5952380952380953,
+					0.10294117647058819,
+					0.26666666666666666
+				],
+				"primary_color_dark": "4c4844"
+			},
+			"type": "movie",
+			"has_linewatch": true,
+			"vendor_desc": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/6890730.jpg",
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/6890730",
+			"url": "https://movie.douban.com/subject/6890730/",
+			"release_date": null,
+			"uri": "douban://douban.com/movie/6890730",
+			"subtype": "movie",
+			"directors": [
+				{
+					"name": "梁乐民"
+				},
+				{
+					"name": "陆剑青"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"null_rating_reason": ""
+		},
+		"star_time": "2026-04-28 20:18:20"
+	},
+	{
+		"comment": "",
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
 		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/movie/3078609 来自@豆瓣App",
 		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/3078609/interest/4828627277",
 		"tags": [],
