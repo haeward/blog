@@ -1,5 +1,369 @@
 [
 	{
+		"charts": [],
+		"comment": "",
+		"create_time": "2026-04-29 15:14:28",
+		"id": 4830051811,
+		"is_editable": false,
+		"is_private": false,
+		"platforms": [],
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/book/37668521 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/37668521/interest/4830051811",
+		"status": "done",
+		"subject": {
+			"article_intros": [],
+			"author": [
+				"许先哲"
+			],
+			"book_subtitle": "",
+			"buy_more_uri": "douban://douban.com/book/37668521/vendors_douban",
+			"card_subtitle": "许先哲 / 2025 / 北京联合出版公司",
+			"color_scheme": {
+				"_base_color": [
+					0.033333333333333326,
+					0.2564102564102565,
+					0.15294117647058825
+				],
+				"_avg_color": [
+					0.006329113924050648,
+					0.4340659340659341,
+					0.7137254901960784
+				],
+				"primary_color_light": "a5837b",
+				"primary_color_dark": "7f655e",
+				"secondary_color": "f9f5f4",
+				"is_dark": true
+			},
+			"controversy_reason": "",
+			"cover_url": "https://dou.img.lithub.cc/book/37668521.jpg",
+			"has_ebook": true,
+			"honor_infos": [
+				{
+					"kind": "book",
+					"rank": 5,
+					"title": "每月热门图书榜",
+					"uri": "douban://douban.com/subject_collection/book_hot_monthly?type=rank&category=book&rank_type=monthly"
+				}
+			],
+			"id": "37668521",
+			"intro": "编辑推荐\n◆累计销量超百万册的国漫神作《镖人》单行本第13册！江湖篇收官之作！\n◆收录连载第118回至第122回，一趟牵动天下命运的护镖，再掀武侠热潮！\n◆新增江湖篇收官后记，随书附赠江湖篇收官贺图海报！\n◆同名电影由“天下第一武指”袁和平亲自导演，知名演员吴京主演，同期筹备中。\n◆同名动画腾讯视频热播！同名动画荣获中国动漫金龙奖最佳系列动画银奖！全新定制动画书腰，腾讯亲自授权！\n◆脱口秀大师李诞、实力演员万茜、知名作家马伯庸、知名动画导演田晓鹏鼎力推荐！\n◆3次登上日本央视NHK电视台新闻报道节目，被日本媒体盛赞为“太阳系级别的中国动漫精品”！\n◆日本漫画大师高桥留美子（代表作《犬夜叉》）、藤泽亨（代表作《麻辣教师GTO》），双叶社（代表作《蜡笔小新》）前主编栗原一二，小学馆（代表作《名侦探柯南》）前主编御木基宏，知名动画导演新房昭之（代表作《魔法少女小圆》），纷纷激赏不已！\n◆分镜惊艳，打戏酣畅淋漓：本书以黑白水墨风格重新塑造硬派武侠漫画，大场景分镜张力十足，令人震撼，小分镜细节拉满，观感极佳。打戏内容流畅，让人肾上腺素飙升热血沸腾。\n◆扎根历史，考据严谨：在艺术风格上非常注重细节和真实性，所有的大事件有其史料支撑。也从不放过一丝细节上的考究，从兵器的设计到人物服饰的参考，从角色的说话习惯到各类石碑石刻，都体现了作者对历史文化的深入研究。\n◆信念越强，力量越强！\n\n内容简介\n一部重现隋唐江湖的热血漫画！\n大业三年（公元607年），隋王朝在隋炀帝杨广的残暴统治下民不聊生。\n刀马与谛听的宿命对决，不仅承载着骁骑卫的昔日荣光和幻灭， 三阶教的兴衰，更是承载着彼此对立的信念，谁都无法退让。裴行 俨和秦叔宝的千里追凶，燕子娘的江湖求生，隋炀帝的北巡，裴世矩的担忧，知世郎的预言，阿育娅的决心，暗流涌动的朝野……所有人物的故事线汇聚到一起，江湖篇迎来终极高潮。\n媒体评论\n◆酣畅淋漓的泼墨写意，豪放苍劲的传奇故事。——马伯庸（知名作家，代表作《长安十二时辰》）\n◆一直很想看到一个霸气的古代东方故事，不能造作，要扎根在历史中，生长出粗糙真实的颗粒感；不能矫情，要寄情于江湖间，延展出跌宕起伏的大格局。感谢《镖人》实现了这一切。——田晓鹏（知名动画导演，代表作《大圣归来》）\n◆仿佛看了一场电影，让人不禁倒吸一口冷气。许先生的天才可见一斑。——栗原一二（日本知名漫画编辑，《蜡笔小新》前主编）\n◆魅力非凡的角色，风驰电掣的剧情，趣味横生无可挑剔。——高桥留美子（日本知名漫画家，代表作《犬夜叉》）\n◆气势磅礴的描写让人不忍释卷，一读到底。——藤泽亨（日本知名漫画家，代表作《麻辣教师GTO》）\n◆我喜欢这犀利的画面！我喜欢这动人的故事！我喜欢这剧画的风格！好想读到后续的内容啊！——新房昭之（日本知名动画导演，代表作《魔法少女小圆》）",
+			"is_released": true,
+			"is_show": false,
+			"min_sale_price": "¥39.9",
+			"null_rating_reason": "",
+			"other_versions_count": 0,
+			"pages": [
+				"264"
+			],
+			"pic": {
+				"large": "https://img1.doubanio.com/view/subject/l/public/s35358400.jpg",
+				"normal": "https://img1.doubanio.com/view/subject/m/public/s35358400.jpg"
+			},
+			"press": [
+				"北京联合出版公司"
+			],
+			"pubdate": [
+				"2025-12"
+			],
+			"rating": {
+				"count": 1808,
+				"max": 10,
+				"star_count": 4.5,
+				"value": 9
+			},
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/37668521",
+			"subtype": "book",
+			"title": "镖⼈：卷十三",
+			"type": "book",
+			"uri": "douban://douban.com/book/37668521",
+			"url": "https://book.douban.com/subject/37668521/",
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/161387ce451872cbf51fcb288cd5ffd1dcd89705/pics/vendors/logo_dedao@2x.png",
+				"https://img1.doubanio.com/f/frodo/f6f620132e6d8a02d171f03114bbe2339aa8af97/pics/vendors/logo_doubanread@2x.png"
+			],
+			"vendor_original_price": "",
+			"vendor_sale_price": ""
+		},
+		"tags": [],
+		"vote_count": 0,
+		"star_time": "2026-04-29 15:14:28"
+	},
+	{
+		"charts": [],
+		"comment": "",
+		"create_time": "2026-04-29 15:14:19",
+		"id": 4830051737,
+		"is_editable": false,
+		"is_private": false,
+		"platforms": [],
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
+		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/book/36955784 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/36955784/interest/4830051737",
+		"status": "done",
+		"subject": {
+			"article_intros": [],
+			"author": [
+				"许先哲"
+			],
+			"book_subtitle": "卷十二",
+			"buy_more_uri": "douban://douban.com/book/36955784/vendors_douban",
+			"card_subtitle": "许先哲 / 2024 / 北京联合出版公司",
+			"color_scheme": {
+				"_base_color": [
+					0.9770459081836327,
+					0.7324561403508771,
+					0.8941176470588236
+				],
+				"_avg_color": [
+					0.97953216374269,
+					0.5377358490566038,
+					0.41568627450980394
+				],
+				"primary_color_light": "721e2a",
+				"primary_color_dark": "4c141c",
+				"secondary_color": "f9f4f5",
+				"is_dark": true
+			},
+			"controversy_reason": "",
+			"cover_url": "https://dou.img.lithub.cc/book/36955784.jpg",
+			"has_ebook": true,
+			"honor_infos": [
+				{
+					"kind": "book",
+					"rank": 7,
+					"title": "豆瓣2024年度绘本漫画图书",
+					"uri": "douban://douban.com/subject_collection/ECSI7RY7Y?type=rank&category=book&rank_type=year"
+				}
+			],
+			"id": "36955784",
+			"intro": "编辑推荐：\n◆轰动日本的中国漫画《镖人》第12册！\n◆脱口秀大师李诞、实力演员万茜、知名作家马伯庸、知名动画导演田晓鹏鼎力推荐！\n◆3次登上日本央视NHK电视台新闻报道节目，被日本媒体盛赞为“太阳系级别的中国动漫精品”！\n◆日本漫画大师高桥留美子（代表作《犬夜叉》）、藤泽亨（代表作《麻辣教师GTO》），双叶社（代表作《蜡笔小新》）前主编栗原一二，小学馆（代表作《名侦探柯南》）前主编御木基宏，知名动画导演新房昭之（代表作《魔法少女小圆》），纷纷激赏不已！\n◆分镜惊艳，打戏酣畅淋漓：本书以黑白水墨风格重新塑造硬派武侠漫画，大场景分镜张力十足，令人震撼，小分镜细节拉满，观感极佳。打戏内容流畅，让人肾上腺素飙升热血沸腾。\n◆扎根历史，考据严谨：在艺术风格上非常注重细节和真实性，所有的大事件有其史料支撑。也从不放过一丝细节上的考究，从兵器的设计到人物服饰的参考，从角色的说话习惯到各类石碑石刻，都体现了作者对历史文化的深入研究。\n◆同名动画腾讯热播：同名动画荣获中国动漫金龙奖最佳系列动画银奖。同名电影由“天下第一武指”袁和平亲自导演，知名演员吴京参演，同期筹备中。\n◆信念越强，力量越强！\n内容简介：\n大业三年（公元607年），隋王朝在隋炀帝杨广的残暴统治下民不聊生。\n建康城外，刀马和谛听所属的十三骁骑无往不利，入城生擒了陈后主这个亡国之君。待到班师回朝，一片太平祥和之下暗流涌动，昔日并肩作战的刀马和谛听经历了何事，导致两人的理想背道而驰，直至闹到如今这般不死不休的地步……\n媒体评论：\n◆太阳系级别的中国动漫精品！——日本NHK综合频道「これでわかった！世界のいま」\n◆酣畅淋漓的泼墨写意，豪放苍劲的传奇故事。——马伯庸（知名作家，代表作《长安十二时辰》）\n◆一直很想看到一个霸气的古代东方故事，不能造作，要扎根在历史中，生长出粗糙真实的颗粒感；不能矫情，要寄情于江湖间，延展出跌宕起伏的大格局。感谢《镖人》实现了这一切。——田晓鹏（知名动画导演，代表作《大圣归来》）\n◆仿佛看了一场电影，让人不禁倒吸一口冷气。许先生的天才可见一斑。——栗原一二（日本知名漫画编辑，《蜡笔小新》前主编）\n◆魅力非凡的角色，风驰电掣的剧情，趣味横生无可挑剔。——高桥留美子（日本知名漫画家，代表作《犬夜叉》）\n◆气势磅礴的描写让人不忍释卷，一读到底。——藤泽亨（日本知名漫画家，代表作《麻辣教师GTO》）\n◆我喜欢这犀利的画面！我喜欢这动人的故事！我喜欢这剧画的风格！好想读到后续的内容啊！——新房昭之（日本知名动画导演，代表作《魔法少女小圆》）",
+			"is_released": true,
+			"is_show": false,
+			"min_sale_price": "¥27.0",
+			"null_rating_reason": "",
+			"other_versions_count": 0,
+			"pages": [],
+			"pic": {
+				"large": "https://img3.doubanio.com/view/subject/l/public/s34935122.jpg",
+				"normal": "https://img3.doubanio.com/view/subject/m/public/s34935122.jpg"
+			},
+			"press": [
+				"北京联合出版公司"
+			],
+			"pubdate": [
+				"2024-8"
+			],
+			"rating": {
+				"count": 2452,
+				"max": 10,
+				"star_count": 4.5,
+				"value": 8.9
+			},
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/36955784",
+			"subtype": "book",
+			"title": "镖人：卷十二",
+			"type": "book",
+			"uri": "douban://douban.com/book/36955784",
+			"url": "https://book.douban.com/subject/36955784/",
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/161387ce451872cbf51fcb288cd5ffd1dcd89705/pics/vendors/logo_dedao@2x.png",
+				"https://img1.doubanio.com/f/frodo/f6f620132e6d8a02d171f03114bbe2339aa8af97/pics/vendors/logo_doubanread@2x.png"
+			],
+			"vendor_original_price": "",
+			"vendor_sale_price": ""
+		},
+		"tags": [],
+		"vote_count": 0,
+		"star_time": "2026-04-29 15:14:19"
+	},
+	{
+		"charts": [],
+		"comment": "",
+		"create_time": "2026-04-29 15:13:45",
+		"id": 4830051408,
+		"is_editable": false,
+		"is_private": false,
+		"platforms": [],
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
+		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/book/35747476 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/35747476/interest/4830051408",
+		"status": "done",
+		"subject": {
+			"article_intros": [],
+			"author": [
+				"许先哲"
+			],
+			"book_subtitle": "",
+			"buy_more_uri": "",
+			"card_subtitle": "许先哲 / 2022 / 北京联合出版公司",
+			"color_scheme": {
+				"_base_color": [
+					0.9880952380952381,
+					0.48908296943231444,
+					0.8980392156862745
+				],
+				"_avg_color": [
+					0,
+					0.33333333333333337,
+					0.49411764705882355
+				],
+				"primary_color_light": "723a3e",
+				"primary_color_dark": "4c2729",
+				"secondary_color": "f9f4f5",
+				"is_dark": true
+			},
+			"controversy_reason": "",
+			"cover_url": "https://dou.img.lithub.cc/book/35747476.jpg",
+			"has_ebook": true,
+			"honor_infos": [],
+			"id": "35747476",
+			"intro": "收录连载第103回至第110回。\n大业三年（公元607年），隋王朝在隋炀帝杨广的残暴统治下民不聊生。\n谛听与刀马的交手，早已没有胜负，只有生死，究竟是从何时开始，昔日同袍的两人将手中的武器挥向彼此？\n—————————————————————————————————\n信念越强，力量越强！\n轰动日本的中国漫画！\n一趟牵动天下命运的护镖，再掀武侠热潮！",
+			"is_released": true,
+			"is_show": false,
+			"min_sale_price": null,
+			"null_rating_reason": "",
+			"other_versions_count": 1,
+			"pages": [
+				"248"
+			],
+			"pic": {
+				"large": "https://img3.doubanio.com/view/subject/l/public/s34121317.jpg",
+				"normal": "https://img3.doubanio.com/view/subject/m/public/s34121317.jpg"
+			},
+			"press": [
+				"北京联合出版公司"
+			],
+			"pubdate": [
+				"2022-3"
+			],
+			"rating": {
+				"count": 4175,
+				"max": 10,
+				"star_count": 4,
+				"value": 8.4
+			},
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/35747476",
+			"subtype": "book",
+			"title": "镖人：卷十一",
+			"type": "book",
+			"uri": "douban://douban.com/book/35747476",
+			"url": "https://book.douban.com/subject/35747476/",
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/161387ce451872cbf51fcb288cd5ffd1dcd89705/pics/vendors/logo_dedao@2x.png",
+				"https://img1.doubanio.com/f/frodo/f6f620132e6d8a02d171f03114bbe2339aa8af97/pics/vendors/logo_doubanread@2x.png"
+			],
+			"vendor_original_price": "",
+			"vendor_sale_price": ""
+		},
+		"tags": [],
+		"vote_count": 0,
+		"star_time": "2026-04-29 15:13:45"
+	},
+	{
+		"charts": [],
+		"comment": "",
+		"create_time": "2026-04-29 15:13:29",
+		"id": 4830051274,
+		"is_editable": false,
+		"is_private": false,
+		"platforms": [],
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
+		"sharing_text": "我的评分：★★★★ https://www.douban.com/doubanapp/dispatch/book/35139911 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/35139911/interest/4830051274",
+		"status": "done",
+		"subject": {
+			"article_intros": [],
+			"author": [
+				"许先哲"
+			],
+			"book_subtitle": "",
+			"buy_more_uri": "",
+			"card_subtitle": "许先哲 / 2020 / 江苏凤凰文艺出版社",
+			"color_scheme": {
+				"_base_color": [
+					0.9784313725490196,
+					0.8415841584158416,
+					0.792156862745098
+				],
+				"_avg_color": [
+					0.9885057471264368,
+					0.39999999999999997,
+					0.5686274509803921
+				],
+				"primary_color_light": "a51a2c",
+				"primary_color_dark": "7f1422",
+				"secondary_color": "f9f4f5",
+				"is_dark": true
+			},
+			"controversy_reason": "",
+			"cover_url": "https://dou.img.lithub.cc/book/35139911.jpg",
+			"has_ebook": true,
+			"honor_infos": [],
+			"id": "35139911",
+			"intro": "一部重现隋唐江湖的热血漫画！\n大业三年（公元607年），隋王朝在隋炀帝杨广的残暴统治下民不聊生。\n面对泥撅处罗可汗的挑衅，杨广亲自北巡以示天子之威；与此同时，谛听与隗知二人终于追上了刀马一行人……",
+			"is_released": true,
+			"is_show": false,
+			"min_sale_price": null,
+			"null_rating_reason": "",
+			"other_versions_count": 1,
+			"pages": [
+				"256"
+			],
+			"pic": {
+				"large": "https://img3.doubanio.com/view/subject/l/public/s33695492.jpg",
+				"normal": "https://img3.doubanio.com/view/subject/m/public/s33695492.jpg"
+			},
+			"press": [
+				"江苏凤凰文艺出版社"
+			],
+			"pubdate": [
+				"2020-7"
+			],
+			"rating": {
+				"count": 5337,
+				"max": 10,
+				"star_count": 4.5,
+				"value": 8.6
+			},
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/35139911",
+			"subtype": "book",
+			"title": "镖人：卷十",
+			"type": "book",
+			"uri": "douban://douban.com/book/35139911",
+			"url": "https://book.douban.com/subject/35139911/",
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/161387ce451872cbf51fcb288cd5ffd1dcd89705/pics/vendors/logo_dedao@2x.png",
+				"https://img1.doubanio.com/f/frodo/f6f620132e6d8a02d171f03114bbe2339aa8af97/pics/vendors/logo_doubanread@2x.png"
+			],
+			"vendor_original_price": "",
+			"vendor_sale_price": ""
+		},
+		"tags": [],
+		"vote_count": 0,
+		"star_time": "2026-04-29 15:13:29"
+	},
+	{
 		"comment": "",
 		"rating": {
 			"count": 1,
