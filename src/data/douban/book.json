@@ -2,6 +2,93 @@
 	{
 		"charts": [],
 		"comment": "",
+		"create_time": "2026-05-11 04:26:49",
+		"id": 3883943218,
+		"is_editable": false,
+		"is_private": false,
+		"platforms": [],
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
+		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/book/35875707 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/35875707/interest/3883943218",
+		"status": "done",
+		"subject": {
+			"article_intros": [],
+			"author": [
+				"王凌"
+			],
+			"book_subtitle": "",
+			"buy_more_uri": "douban://douban.com/book/35875707/vendors_douban",
+			"card_subtitle": "王凌 / 2022 / 人民邮电出版社",
+			"color_scheme": {
+				"_base_color": [
+					0.5512820512820512,
+					0.609375,
+					0.5019607843137255
+				],
+				"_avg_color": [
+					0.5472972972972974,
+					0.556390977443609,
+					0.5215686274509804
+				],
+				"primary_color_light": "4086a5",
+				"primary_color_dark": "31677f",
+				"secondary_color": "f4f8f9",
+				"is_dark": true
+			},
+			"controversy_reason": "",
+			"cover_url": "https://dou.img.lithub.cc/book/35875707.jpg",
+			"has_ebook": true,
+			"honor_infos": [],
+			"id": "35875707",
+			"intro": "本书为插画师WLOP 的第三部个人作品集，主题为“苍蓝”，“苍”有苍影之意，代表鬼刀，也代表鬼刀与西凌斯之间的羁绊，“蓝”是冰公主海琴烟的代表色。书中的插画作品为WLOP 近两年绘制的（不与前两部作品集重复），且加入了新的连载漫画《云虫》《夭梦》中的插画作品，全书共收录作品百余幅。\n本书分为6 章：前四章分别为“群像”“独狼”“皇权”和“人间”，展示了《鬼刀》漫画中的场景和人物插画作品；第五章和第六章分别为“夭梦”和“云虫”，展示了同名连载漫画中的精美插画。\n本书的装帧考究，设计、印刷均为珍藏级别。本书适合CG 爱好者、绘画爱好者、漫画爱好者欣赏，也适合相关艺术从业者收藏与临摹。",
+			"is_released": true,
+			"is_show": false,
+			"min_sale_price": "¥115.4",
+			"null_rating_reason": "",
+			"other_versions_count": 0,
+			"pages": [
+				"128"
+			],
+			"pic": {
+				"large": "https://img9.doubanio.com/view/subject/l/public/s35162624.jpg",
+				"normal": "https://img9.doubanio.com/view/subject/m/public/s35162624.jpg"
+			},
+			"press": [
+				"人民邮电出版社"
+			],
+			"pubdate": [
+				"2022-5"
+			],
+			"rating": {
+				"count": 220,
+				"max": 10,
+				"star_count": 4.5,
+				"value": 8.8
+			},
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/35875707",
+			"subtype": "book",
+			"title": "鬼刀3·苍蓝 WLOP典藏插画作品集",
+			"type": "book",
+			"uri": "douban://douban.com/book/35875707",
+			"url": "https://book.douban.com/subject/35875707/",
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/161387ce451872cbf51fcb288cd5ffd1dcd89705/pics/vendors/logo_dedao@2x.png"
+			],
+			"vendor_original_price": "",
+			"vendor_sale_price": ""
+		},
+		"tags": [],
+		"vote_count": 0,
+		"star_time": "2026-05-11 04:26:49"
+	},
+	{
+		"charts": [],
+		"comment": "",
 		"create_time": "2026-04-29 15:14:28",
 		"id": 4830051811,
 		"is_editable": false,
