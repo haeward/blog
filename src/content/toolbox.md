@@ -78,6 +78,7 @@ title: "Toolbox"
 | 效率 | [1Password](https://1password.com/) | $47.88 | 年付 | Apr 28 | Y |
 | 购物 | [88 VIP](https://taobao.com/) | ¥88 | 年付 | Dec 16 | Y |
 | AI | [ChatGPT Plus](https://chatgpt.com) | $20 | 月付 | Apr 20 | Y |
+| 开发 | [Cloudflare Domain](https://www.cloudflare.com/) | $10.46 | 年付 | Aug 2, 2029 | Y |
 | 社交 | [Fastmail](https://fastmail.com/) | $60 | 年付 | May 29 | Y |
 | 云盘 | [iCloud](https://www.icloud.com/) | ¥6 | 月付 | Nov 25 | Y |
 | 效率 | [Kagi](https://kagi.com/) | $36 | 年付 | Jul 12, 2025 | N |
