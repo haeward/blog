@@ -320,7 +320,7 @@ function renderQuote(
               avatar
                   ? `<img src="${escapeAttribute(avatar)}" alt="" class="size-8 shrink-0 rounded-md object-cover" loading="lazy" data-moments-quote-avatar="true">`
                   : ""
-          }
+}
           <div class="min-w-0 flex-1">
             <div class="flex min-w-0 flex-wrap items-baseline gap-x-1.5 gap-y-0.5">
               <a href="${escapeAttribute(accountUrl)}" target="_blank" rel="noreferrer noopener" class="site-link truncate text-sm font-semibold text-[var(--site-color-text-primary)]" data-external="true">${escapeHtml(authorName)}</a>
