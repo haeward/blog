@@ -2,6 +2,186 @@
 	{
 		"charts": [],
 		"comment": "",
+		"create_time": "2026-05-13 22:21:58",
+		"id": 4839227215,
+		"is_editable": false,
+		"is_private": false,
+		"platforms": [],
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
+		"sharing_text": "我的评分：★★★ https://www.douban.com/doubanapp/dispatch/movie/35517044 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/35517044/interest/4839227215",
+		"status": "done",
+		"subject": {
+			"actors": [
+				{
+					"name": "王骁"
+				},
+				{
+					"name": "田曦薇"
+				},
+				{
+					"name": "王传君"
+				},
+				{
+					"name": "朱云峰"
+				},
+				{
+					"name": "张瑞涵"
+				},
+				{
+					"name": "姜冠南"
+				},
+				{
+					"name": "马旭东"
+				},
+				{
+					"name": "宋郁河"
+				},
+				{
+					"name": "董宝石"
+				},
+				{
+					"name": "雷佳音"
+				},
+				{
+					"name": "扈耀之"
+				},
+				{
+					"name": "张哲华"
+				},
+				{
+					"name": "詹鑫"
+				},
+				{
+					"name": "谭希和"
+				},
+				{
+					"name": "任程伟"
+				},
+				{
+					"name": "白志迪"
+				},
+				{
+					"name": "赵达"
+				},
+				{
+					"name": "闫佩伦"
+				},
+				{
+					"name": "黄晓娟"
+				},
+				{
+					"name": "王沛禄"
+				},
+				{
+					"name": "徐冬冬"
+				},
+				{
+					"name": "姚橹"
+				},
+				{
+					"name": "周大勇"
+				},
+				{
+					"name": "栾元晖"
+				},
+				{
+					"name": "刘巴特尔"
+				},
+				{
+					"name": "宗俊涛"
+				},
+				{
+					"name": "鞠帛展"
+				},
+				{
+					"name": "刘闯"
+				},
+				{
+					"name": "宋熹"
+				},
+				{
+					"name": "王正权"
+				},
+				{
+					"name": "荣飞"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"card_subtitle": "2026 / 中国大陆 / 剧情 犯罪 / 刘海波 / 王骁 田曦薇",
+			"color_scheme": {
+				"_base_color": [
+					0.05970149253731342,
+					0.6633663366336633,
+					0.792156862745098
+				],
+				"_avg_color": [
+					0.018518518518518545,
+					0.4285714285714286,
+					0.24705882352941178
+				],
+				"primary_color_light": "724126",
+				"primary_color_dark": "4c2b19",
+				"secondary_color": "f9f6f4",
+				"is_dark": true
+			},
+			"controversy_reason": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/35517044.jpg",
+			"directors": [
+				{
+					"name": "刘海波"
+				}
+			],
+			"genres": [
+				"剧情",
+				"犯罪"
+			],
+			"has_linewatch": true,
+			"honor_infos": [],
+			"id": "35517044",
+			"is_released": true,
+			"is_show": false,
+			"null_rating_reason": "暂无评分",
+			"pic": {
+				"large": "https://img3.doubanio.com/view/photo/m_ratio_poster/public/p2932040107.jpg",
+				"normal": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2932040107.jpg"
+			},
+			"pubdate": [
+				"2026-05-04(中国大陆)"
+			],
+			"rating": {
+				"count": 0,
+				"max": 10,
+				"star_count": 0,
+				"value": 0
+			},
+			"release_date": null,
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/35517044",
+			"subtype": "tv",
+			"title": "低智商犯罪",
+			"type": "tv",
+			"uri": "douban://douban.com/tv/35517044",
+			"url": "https://movie.douban.com/subject/35517044/",
+			"vendor_desc": "",
+			"vendor_icons": [
+				"https://img2.doubanio.com/f/frodo/8e1b7f8b48804cf759fc411e75d62c5ffd4f8f42/pics/vendors/migu_video.png",
+				"https://img9.doubanio.com/f/frodo/6c7b857e6b2255201e73bf83732d95d572f3f9f7/pics/vendors/iqiyi.png"
+			],
+			"year": "2026"
+		},
+		"tags": [],
+		"vote_count": 0,
+		"star_time": "2026-05-13 22:21:58"
+	},
+	{
+		"charts": [],
+		"comment": "",
 		"create_time": "2026-05-13 14:34:48",
 		"id": 4841144526,
 		"is_editable": false,
