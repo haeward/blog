@@ -111,10 +111,10 @@ const MOCK_MASTODON_STATUSES = [
     {
         id: "reply-moment",
         account: MOCK_MASTODON_ACCOUNT,
-        content: `<p>Reply should not render. <a href="https://mas.to/@someone/1">Reply source</a></p>`,
+        content: `<p>Reply should render. <a href="https://mas.to/@someone/1">Reply source</a></p>`,
         created_at: "2026-04-29T16:57:00.000Z",
         in_reply_to_account_id: "someone",
-        in_reply_to_id: "reply-source",
+        in_reply_to_id: "114251868212289000",
         media_attachments: [],
         url: "https://mas.to/@haeward/reply",
     },
@@ -441,9 +441,13 @@ async function run() {
         if (momentsCount !== 10) {
             fail(`Expected /moments to render 10 moments, received ${momentsCount}.`);
         }
-        if ((await page.locator("text=Reply should not render").count()) !== 0) {
-            fail("Expected /moments to filter reply statuses.");
+        if ((await page.locator("text=Reply should render").count()) !== 1) {
+            fail("Expected /moments to render reply statuses.");
         }
+        await page.waitForSelector(
+            '[data-moments-reply="true"] a[href="https://mas.to/web/statuses/114251868212289000"]:has-text("toot")',
+        );
+        await page.waitForSelector('a[href="https://mas.to/@haeward/reply"]:has-text("View Toot")');
         if ((await page.locator("text=Quote inline source").count()) !== 0) {
             fail("Expected /moments to hide Mastodon inline quote source links.");
         }

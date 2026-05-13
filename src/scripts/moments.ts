@@ -102,7 +102,6 @@ async function loadMoments(root: HTMLElement): Promise<void> {
         const statusesUrl = new URL(`https://${domain}/api/v1/accounts/${accountId}/statuses`);
         const fetchLimit = Math.min(MASTODON_MAX_STATUS_LIMIT, Math.max(limit * 2, limit));
         statusesUrl.searchParams.set("limit", String(fetchLimit));
-        statusesUrl.searchParams.set("exclude_replies", "true");
         statusesUrl.searchParams.set("exclude_reblogs", "true");
 
         const statusesResponse = await fetch(statusesUrl.toString(), {
@@ -119,7 +118,7 @@ async function loadMoments(root: HTMLElement): Promise<void> {
             return;
         }
 
-        const visibleStatuses = statuses.filter(isStandaloneMomentStatus).slice(0, limit);
+        const visibleStatuses = statuses.slice(0, limit);
         if (visibleStatuses.length === 0) {
             setMomentsEmptyState(statusNode, listNode, fallbackHref);
             return;
@@ -152,11 +151,6 @@ async function loadMoments(root: HTMLElement): Promise<void> {
         listNode.hidden = true;
         listNode.innerHTML = "";
     }
-}
-
-function isStandaloneMomentStatus(status: MastodonStatus): boolean {
-    const displayStatus = status?.reblog ?? status;
-    return !displayStatus?.in_reply_to_id && !displayStatus?.in_reply_to_account_id;
 }
 
 function setMomentsEmptyState(
@@ -195,6 +189,7 @@ function renderMomentItem(
       <li data-moments-item="true">
         <div role="article" class="serif-reading-surface px-5 py-4 text-[1rem] leading-6 text-[var(--site-color-text-body)]">
           ${renderMomentAuthor(account, domain)}
+          ${renderReplyReference(displayStatus, domain)}
           ${content ? `<div class="moments-content mt-2 space-y-1.5">${content}</div>` : ""}
           ${renderMedia(displayStatus?.media_attachments)}
           ${renderPreviewCard(displayStatus?.card)}
@@ -207,6 +202,18 @@ function renderMomentItem(
           </div>
         </div>
       </li>
+    `;
+}
+
+function renderReplyReference(status: MastodonStatus, domain: string): string {
+    if (typeof status.in_reply_to_id !== "string" || !status.in_reply_to_id) return "";
+
+    const replyUrl = `https://${domain}/web/statuses/${encodeURIComponent(status.in_reply_to_id)}`;
+
+    return `
+      <div class="mt-2 text-[0.82rem] leading-5 text-[var(--site-color-text-muted)]" data-moments-reply="true">
+        Replying to <a href="${escapeAttribute(replyUrl)}" target="_blank" rel="noreferrer noopener" class="site-link font-medium" data-external="true" data-underline="true">toot</a>
+      </div>
     `;
 }
 
