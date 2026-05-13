@@ -2,6 +2,130 @@
 	{
 		"charts": [],
 		"comment": "",
+		"create_time": "2026-05-13 14:34:48",
+		"id": 4841144526,
+		"is_editable": false,
+		"is_private": false,
+		"platforms": [],
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 2,
+			"value": 2
+		},
+		"sharing_text": "我的评分：★★ https://www.douban.com/doubanapp/dispatch/movie/37332091 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/37332091/interest/4841144526",
+		"status": "done",
+		"subject": {
+			"actors": [
+				{
+					"name": "潘斌龙"
+				},
+				{
+					"name": "包贝尔"
+				},
+				{
+					"name": "赵润南"
+				},
+				{
+					"name": "克拉拉"
+				},
+				{
+					"name": "周大勇"
+				},
+				{
+					"name": "郭子恒"
+				},
+				{
+					"name": "侯浩然"
+				},
+				{
+					"name": "于柏林"
+				},
+				{
+					"name": "释小龙"
+				},
+				{
+					"name": "汤镇业"
+				},
+				{
+					"name": "九孔"
+				},
+				{
+					"name": "常铖"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"card_subtitle": "2026 / 中国大陆 / 动作 犯罪 / 成思毅 / 潘斌龙 包贝尔",
+			"color_scheme": {
+				"_base_color": [
+					0.07407407407407408,
+					0.3673469387755102,
+					0.19215686274509805
+				],
+				"_avg_color": [
+					0.06989247311827955,
+					0.3297872340425532,
+					0.3686274509803922
+				],
+				"primary_color_light": "725b48",
+				"primary_color_dark": "4c3c30",
+				"secondary_color": "f9f7f4",
+				"is_dark": true
+			},
+			"controversy_reason": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/37332091.jpg",
+			"directors": [
+				{
+					"name": "成思毅"
+				}
+			],
+			"genres": [
+				"动作",
+				"犯罪"
+			],
+			"has_linewatch": true,
+			"honor_infos": [],
+			"id": "37332091",
+			"is_released": true,
+			"is_show": false,
+			"null_rating_reason": "",
+			"pic": {
+				"large": "https://img9.doubanio.com/view/photo/m_ratio_poster/public/p2930874585.jpg",
+				"normal": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2930874585.jpg"
+			},
+			"pubdate": [
+				"2026-03-20(中国大陆网络)"
+			],
+			"rating": {
+				"count": 9489,
+				"max": 10,
+				"star_count": 2.5,
+				"value": 5.1
+			},
+			"release_date": null,
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/37332091",
+			"subtype": "movie",
+			"title": "扫恶",
+			"type": "movie",
+			"uri": "douban://douban.com/movie/37332091",
+			"url": "https://movie.douban.com/subject/37332091/",
+			"vendor_desc": "",
+			"vendor_icons": [
+				"https://img2.doubanio.com/f/frodo/8e1b7f8b48804cf759fc411e75d62c5ffd4f8f42/pics/vendors/migu_video.png",
+				"https://img9.doubanio.com/f/frodo/fbc90f355fc45d5d2056e0d88c697f9414b56b44/pics/vendors/tencent.png",
+				"https://img3.doubanio.com/f/frodo/6fa5caade3ca480ccd95f455ee4d195ee342eb90/pics/vendors/youku.png"
+			],
+			"year": "2026"
+		},
+		"tags": [],
+		"vote_count": 0,
+		"star_time": "2026-05-13 14:34:48"
+	},
+	{
+		"charts": [],
+		"comment": "",
 		"create_time": "2026-05-13 03:50:58",
 		"id": 4840914243,
 		"is_editable": false,
