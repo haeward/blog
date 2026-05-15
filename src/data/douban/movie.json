@@ -1,6 +1,226 @@
 [
 	{
 		"charts": [],
+		"comment": "剧情 bug 太多，最想吐槽的一点：NPC 都这么好的记忆力吗？",
+		"create_time": "2026-05-16 01:21:16",
+		"id": 4843051200,
+		"is_editable": false,
+		"is_private": false,
+		"platforms": [],
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 2,
+			"value": 2
+		},
+		"sharing_text": "我的评分：★★ 剧情 bug 太多，最想吐槽的一点：NPC 都这么好的记忆力吗？ https://www.douban.com/doubanapp/dispatch/movie/35922594 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/35922594/interest/4843051200",
+		"status": "done",
+		"subject": {
+			"actors": [
+				{
+					"name": "潘粤明"
+				},
+				{
+					"name": "王鹤棣"
+				},
+				{
+					"name": "任敏"
+				},
+				{
+					"name": "姜珮瑶"
+				},
+				{
+					"name": "赵虎"
+				},
+				{
+					"name": "江奇霖"
+				},
+				{
+					"name": "宋霄瑛子"
+				},
+				{
+					"name": "郑奇"
+				},
+				{
+					"name": "陈玺旭"
+				},
+				{
+					"name": "刘闯"
+				},
+				{
+					"name": "周大勇"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"card_subtitle": "2026 / 中国大陆 / 剧情 悬疑 犯罪 / 王之 / 潘粤明 王鹤棣",
+			"color_scheme": {
+				"_base_color": [
+					0.0555555555555556,
+					0.20930232558139542,
+					0.16862745098039217
+				],
+				"_avg_color": [
+					0.0729166666666667,
+					0.21333333333333332,
+					0.29411764705882354
+				],
+				"primary_color_light": "72625a",
+				"primary_color_dark": "4c413c",
+				"secondary_color": "f9f6f4",
+				"is_dark": true
+			},
+			"controversy_reason": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/35922594.jpg",
+			"directors": [
+				{
+					"name": "王之"
+				}
+			],
+			"genres": [
+				"剧情",
+				"悬疑",
+				"犯罪"
+			],
+			"has_linewatch": true,
+			"honor_infos": [],
+			"id": "35922594",
+			"is_released": true,
+			"is_show": false,
+			"null_rating_reason": "",
+			"pic": {
+				"large": "https://img9.doubanio.com/view/photo/m_ratio_poster/public/p2931782015.jpg",
+				"normal": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2931782015.jpg"
+			},
+			"pubdate": [
+				"2026-04-26(中国大陆)"
+			],
+			"rating": {
+				"count": 68312,
+				"max": 10,
+				"star_count": 3.5,
+				"value": 7
+			},
+			"release_date": null,
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/35922594",
+			"subtype": "tv",
+			"title": "黑夜告白",
+			"type": "tv",
+			"uri": "douban://douban.com/tv/35922594",
+			"url": "https://movie.douban.com/subject/35922594/",
+			"vendor_desc": "",
+			"vendor_icons": [
+				"https://img3.doubanio.com/f/frodo/6fa5caade3ca480ccd95f455ee4d195ee342eb90/pics/vendors/youku.png"
+			],
+			"year": "2026"
+		},
+		"tags": [],
+		"vote_count": 0,
+		"star_time": "2026-05-16 01:21:16"
+	},
+	{
+		"charts": [],
+		"comment": "都注意到夜总会了，还不去盯住。。。另外，为什么总宣扬不服从指挥、无脑冲的主角？",
+		"create_time": "2026-05-15 23:09:29",
+		"id": 4842934978,
+		"is_editable": false,
+		"is_private": false,
+		"platforms": [],
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 2,
+			"value": 2
+		},
+		"sharing_text": "我的评分：★★ 都注意到夜总会了，还不去盯住。。。另外，为什么总宣扬不服从指挥、无脑冲的主角？ https://www.douban.com/doubanapp/dispatch/movie/37335090 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/37335090/interest/4842934978",
+		"status": "done",
+		"subject": {
+			"actors": [
+				{
+					"name": "释小龙"
+				},
+				{
+					"name": "王真儿"
+				},
+				{
+					"name": "刘峰超"
+				},
+				{
+					"name": "刘怡潼"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"card_subtitle": "2026 / 中国大陆 / 动作 犯罪 / 成思毅 / 释小龙 王真儿",
+			"color_scheme": {
+				"_base_color": [
+					0,
+					0.10204081632653068,
+					0.19215686274509805
+				],
+				"_avg_color": [
+					0.046296296296296245,
+					0.16981132075471703,
+					0.41568627450980394
+				],
+				"primary_color_light": "726767",
+				"primary_color_dark": "4c4444",
+				"secondary_color": "f9f4f4",
+				"is_dark": true
+			},
+			"controversy_reason": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/37335090.jpg",
+			"directors": [
+				{
+					"name": "成思毅"
+				}
+			],
+			"genres": [
+				"动作",
+				"犯罪"
+			],
+			"has_linewatch": true,
+			"honor_infos": [],
+			"id": "37335090",
+			"is_released": true,
+			"is_show": false,
+			"null_rating_reason": "",
+			"pic": {
+				"large": "https://img3.doubanio.com/view/photo/m_ratio_poster/public/p2931405407.jpg",
+				"normal": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2931405407.jpg"
+			},
+			"pubdate": [
+				"2026-04-10(中国大陆网络)"
+			],
+			"rating": {
+				"count": 7897,
+				"max": 10,
+				"star_count": 3,
+				"value": 6
+			},
+			"release_date": null,
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/37335090",
+			"subtype": "movie",
+			"title": "追恶",
+			"type": "movie",
+			"uri": "douban://douban.com/movie/37335090",
+			"url": "https://movie.douban.com/subject/37335090/",
+			"vendor_desc": "",
+			"vendor_icons": [
+				"https://img9.doubanio.com/f/frodo/fbc90f355fc45d5d2056e0d88c697f9414b56b44/pics/vendors/tencent.png",
+				"https://img2.doubanio.com/f/frodo/8e1b7f8b48804cf759fc411e75d62c5ffd4f8f42/pics/vendors/migu_video.png",
+				"https://img9.doubanio.com/f/frodo/88a62f5e0cf9981c910e60f4421c3e66aac2c9bc/pics/vendors/bilibili.png"
+			],
+			"year": "2026"
+		},
+		"tags": [],
+		"vote_count": 0,
+		"star_time": "2026-05-15 23:09:29"
+	},
+	{
+		"charts": [],
 		"comment": "",
 		"create_time": "2026-05-13 22:21:58",
 		"id": 4839227215,
