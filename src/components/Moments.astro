@@ -37,7 +37,7 @@ const headingClass =
     <HeadingTag class={headingClass}>{title}</HeadingTag>
 
     <p
-        class="serif-reading-surface text-sm text-[var(--site-color-text-muted)]"
+        class="serif-reading-surface text-sm text-(--site-color-text-muted)"
         data-moments-status="true"
         aria-live="polite"
     >
@@ -45,7 +45,7 @@ const headingClass =
     </p>
 
     <ul
-        class="overflow-hidden rounded-lg border border-[var(--site-color-surface-border-strong)] divide-y divide-[var(--site-color-surface-border-strong)]"
+        class="overflow-hidden rounded-lg border border-(--site-color-surface-border-strong) divide-y divide-(--site-color-surface-border-strong)"
         data-moments-list="true"
         hidden
     ></ul>
@@ -55,7 +55,7 @@ const headingClass =
             href={profileUrl}
             target="_blank"
             rel="noreferrer noopener"
-            class="rounded-md px-1 py-1 text-sm font-semibold text-[var(--site-color-text-muted)] underline-offset-[0.18em] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--site-link-focus)]"
+            class="rounded-md px-1 py-1 text-sm font-semibold text-(--site-color-text-muted) underline-offset-[0.18em] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--site-link-focus)"
             data-external="true"
             data-moments-mastodon-more="true"
         >
