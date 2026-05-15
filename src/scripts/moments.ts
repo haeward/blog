@@ -85,7 +85,6 @@ async function loadMoments(root: HTMLElement): Promise<void> {
     const limit = Number.parseInt(root.dataset.limit || "5", 10);
     const statusNode = root.querySelector("[data-moments-status='true']");
     const listNode = root.querySelector("[data-moments-list='true']");
-    const moreButton = root.querySelector("[data-moments-more='true']");
 
     if (
         !account ||
@@ -101,7 +100,8 @@ async function loadMoments(root: HTMLElement): Promise<void> {
 
     try {
         const statusesUrl = new URL(`https://${domain}/api/v1/accounts/${accountId}/statuses`);
-        statusesUrl.searchParams.set("limit", String(MASTODON_MAX_STATUS_LIMIT));
+        const fetchLimit = Math.min(MASTODON_MAX_STATUS_LIMIT, Math.max(limit, 1));
+        statusesUrl.searchParams.set("limit", String(fetchLimit));
         statusesUrl.searchParams.set("exclude_reblogs", "true");
 
         const statusesResponse = await fetch(statusesUrl.toString(), {
@@ -114,13 +114,13 @@ async function loadMoments(root: HTMLElement): Promise<void> {
 
         const statuses = (await statusesResponse.json()) as MastodonStatus[];
         if (!Array.isArray(statuses) || statuses.length === 0) {
-            setMomentsEmptyState(statusNode, listNode, fallbackHref, moreButton);
+            setMomentsEmptyState(statusNode, listNode, fallbackHref);
             return;
         }
 
-        const availableStatuses = statuses.slice(0, MASTODON_MAX_STATUS_LIMIT);
-        if (availableStatuses.length === 0) {
-            setMomentsEmptyState(statusNode, listNode, fallbackHref, moreButton);
+        const visibleStatuses = statuses.slice(0, limit);
+        if (visibleStatuses.length === 0) {
+            setMomentsEmptyState(statusNode, listNode, fallbackHref);
             return;
         }
 
@@ -137,24 +137,9 @@ async function loadMoments(root: HTMLElement): Promise<void> {
             }),
         };
 
-        let visibleCount = Math.min(limit, availableStatuses.length);
-        const renderVisibleStatuses = () => {
-            const visibleStatuses = availableStatuses.slice(0, visibleCount);
-            listNode.innerHTML = visibleStatuses
-                .map((status) => renderMomentItem(status, formatters, domain))
-                .join("");
-
-            updateMomentsMoreButton(moreButton, availableStatuses.length, visibleCount);
-        };
-
-        if (moreButton instanceof HTMLButtonElement) {
-            moreButton.addEventListener("click", () => {
-                visibleCount = Math.min(visibleCount + limit, availableStatuses.length);
-                renderVisibleStatuses();
-            });
-        }
-
-        renderVisibleStatuses();
+        listNode.innerHTML = visibleStatuses
+            .map((status) => renderMomentItem(status, formatters, domain))
+            .join("");
 
         statusNode.hidden = true;
         listNode.hidden = false;
@@ -165,30 +150,6 @@ async function loadMoments(root: HTMLElement): Promise<void> {
         )}" target="_blank" rel="noreferrer noopener" class="site-link" data-external="true" data-underline="true">Visit Mastodon instead.</a>`;
         listNode.hidden = true;
         listNode.innerHTML = "";
-        hideMomentsMoreButton(moreButton);
-    }
-}
-
-function updateMomentsMoreButton(
-    moreButton: Element | null,
-    totalCount: number,
-    visibleCount: number,
-): void {
-    if (!(moreButton instanceof HTMLButtonElement)) return;
-
-    const remainingCount = totalCount - visibleCount;
-    if (remainingCount <= 0) {
-        moreButton.hidden = true;
-        return;
-    }
-
-    moreButton.textContent = "View more";
-    moreButton.hidden = false;
-}
-
-function hideMomentsMoreButton(moreButton: Element | null): void {
-    if (moreButton instanceof HTMLButtonElement) {
-        moreButton.hidden = true;
     }
 }
 
@@ -196,7 +157,6 @@ function setMomentsEmptyState(
     statusNode: HTMLElement,
     listNode: HTMLUListElement,
     fallbackHref: string,
-    moreButton: Element | null,
 ): void {
     statusNode.hidden = false;
     statusNode.innerHTML = `No recent moments yet. <a href="${escapeAttribute(
@@ -204,7 +164,6 @@ function setMomentsEmptyState(
     )}" target="_blank" rel="noreferrer noopener" class="site-link" data-external="true" data-underline="true">Check Mastodon.</a>`;
     listNode.hidden = true;
     listNode.innerHTML = "";
-    hideMomentsMoreButton(moreButton);
 }
 
 function renderMomentItem(

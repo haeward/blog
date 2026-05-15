@@ -469,20 +469,9 @@ async function run() {
         await page.waitForSelector('[data-moments-tag="true"]:has-text("#Now")');
         await page.waitForSelector('[data-moments-emoji="true"][alt=":blobcatsweat:"]');
         await page.waitForSelector('[data-moments-media="true"][alt="Preview attachment"]');
-        const moreMomentsButton = page.locator('[data-moments-more="true"]');
-        await moreMomentsButton.waitFor({ state: "visible" });
-        const moreMomentsText = (await moreMomentsButton.textContent())?.trim();
-        if (moreMomentsText !== "View more") {
-            fail(`Expected more moments button to use compact copy, received ${moreMomentsText}.`);
-        }
-        await moreMomentsButton.click();
-        const expandedMomentsCount = await page.locator("[data-moments-item='true']").count();
-        if (expandedMomentsCount !== 11) {
-            fail(`Expected /moments to expand to 11 moments, received ${expandedMomentsCount}.`);
-        }
-        if (await moreMomentsButton.isVisible()) {
-            fail("Expected more moments button to hide after all fetched moments render.");
-        }
+        await page.waitForSelector(
+            '[data-moments-mastodon-more="true"][href="https://mas.to/@haeward"]:has-text("View more on Mastodon")',
+        );
 
         await assertOk(page, `${baseUrl}/links/`, "Links");
         await page.waitForSelector('[data-links-section="blogroll"] [data-link-card="true"]');

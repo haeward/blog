@@ -50,14 +50,18 @@ const headingClass =
         hidden
     ></ul>
 
-    <button
-        type="button"
-        class="mx-auto block rounded-md px-3 py-2 text-sm font-semibold text-[var(--site-color-text-muted)] underline-offset-[0.18em] transition-colors duration-200 hover:text-[var(--site-color-text-primary)] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--site-link-focus)]"
-        data-moments-more="true"
-        hidden
-    >
-        View more
-    </button>
+    <div class="flex justify-end">
+        <a
+            href={profileUrl}
+            target="_blank"
+            rel="noreferrer noopener"
+            class="rounded-md px-1 py-1 text-sm font-semibold text-[var(--site-color-text-muted)] underline-offset-[0.18em] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--site-link-focus)]"
+            data-external="true"
+            data-moments-mastodon-more="true"
+        >
+            View more on Mastodon
+        </a>
+    </div>
 </section>
 
 <script>
