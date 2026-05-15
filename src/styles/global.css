@@ -225,6 +225,38 @@ article {
         border-radius: 0.18rem;
     }
 
+    .moments-tag-link {
+        display: inline-flex;
+        max-width: 100%;
+        align-items: baseline;
+        margin-inline: 0.08rem;
+        padding: 0 0.38rem;
+        border: 1px solid var(--site-link-surface-border-strong);
+        border-radius: 0.35rem;
+        color: var(--site-link-text-internal-hover);
+        background-color: var(--site-link-focus-bg);
+        font-size: 0.88em;
+        font-weight: 700;
+        line-height: 1.45;
+        text-decoration: none;
+        transition:
+            color 300ms ease-in-out,
+            background-color 300ms ease-in-out,
+            border-color 300ms ease-in-out;
+    }
+
+    .moments-tag-link:hover,
+    .moments-tag-link:focus-visible {
+        color: var(--site-link-strong-hover);
+        background-color: color-mix(in srgb, var(--site-link) 14%, transparent);
+        border-color: var(--site-link-strong-hover);
+    }
+
+    .moments-tag-link:focus-visible {
+        outline: 2px solid var(--site-link-focus);
+        outline-offset: 2px;
+    }
+
     .site-link-surface:hover,
     .site-link-surface:focus-visible {
         border-color: var(--site-link-surface-border-strong) !important;

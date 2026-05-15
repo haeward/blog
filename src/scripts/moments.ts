@@ -85,6 +85,7 @@ async function loadMoments(root: HTMLElement): Promise<void> {
     const limit = Number.parseInt(root.dataset.limit || "5", 10);
     const statusNode = root.querySelector("[data-moments-status='true']");
     const listNode = root.querySelector("[data-moments-list='true']");
+    const moreButton = root.querySelector("[data-moments-more='true']");
 
     if (
         !account ||
@@ -100,8 +101,7 @@ async function loadMoments(root: HTMLElement): Promise<void> {
 
     try {
         const statusesUrl = new URL(`https://${domain}/api/v1/accounts/${accountId}/statuses`);
-        const fetchLimit = Math.min(MASTODON_MAX_STATUS_LIMIT, Math.max(limit * 2, limit));
-        statusesUrl.searchParams.set("limit", String(fetchLimit));
+        statusesUrl.searchParams.set("limit", String(MASTODON_MAX_STATUS_LIMIT));
         statusesUrl.searchParams.set("exclude_reblogs", "true");
 
         const statusesResponse = await fetch(statusesUrl.toString(), {
@@ -114,13 +114,13 @@ async function loadMoments(root: HTMLElement): Promise<void> {
 
         const statuses = (await statusesResponse.json()) as MastodonStatus[];
         if (!Array.isArray(statuses) || statuses.length === 0) {
-            setMomentsEmptyState(statusNode, listNode, fallbackHref);
+            setMomentsEmptyState(statusNode, listNode, fallbackHref, moreButton);
             return;
         }
 
-        const visibleStatuses = statuses.slice(0, limit);
-        if (visibleStatuses.length === 0) {
-            setMomentsEmptyState(statusNode, listNode, fallbackHref);
+        const availableStatuses = statuses.slice(0, MASTODON_MAX_STATUS_LIMIT);
+        if (availableStatuses.length === 0) {
+            setMomentsEmptyState(statusNode, listNode, fallbackHref, moreButton);
             return;
         }
 
@@ -137,9 +137,24 @@ async function loadMoments(root: HTMLElement): Promise<void> {
             }),
         };
 
-        listNode.innerHTML = visibleStatuses
-            .map((status) => renderMomentItem(status, formatters, domain))
-            .join("");
+        let visibleCount = Math.min(limit, availableStatuses.length);
+        const renderVisibleStatuses = () => {
+            const visibleStatuses = availableStatuses.slice(0, visibleCount);
+            listNode.innerHTML = visibleStatuses
+                .map((status) => renderMomentItem(status, formatters, domain))
+                .join("");
+
+            updateMomentsMoreButton(moreButton, availableStatuses.length, visibleCount);
+        };
+
+        if (moreButton instanceof HTMLButtonElement) {
+            moreButton.addEventListener("click", () => {
+                visibleCount = Math.min(visibleCount + limit, availableStatuses.length);
+                renderVisibleStatuses();
+            });
+        }
+
+        renderVisibleStatuses();
 
         statusNode.hidden = true;
         listNode.hidden = false;
@@ -150,6 +165,30 @@ async function loadMoments(root: HTMLElement): Promise<void> {
         )}" target="_blank" rel="noreferrer noopener" class="site-link" data-external="true" data-underline="true">Visit Mastodon instead.</a>`;
         listNode.hidden = true;
         listNode.innerHTML = "";
+        hideMomentsMoreButton(moreButton);
+    }
+}
+
+function updateMomentsMoreButton(
+    moreButton: Element | null,
+    totalCount: number,
+    visibleCount: number,
+): void {
+    if (!(moreButton instanceof HTMLButtonElement)) return;
+
+    const remainingCount = totalCount - visibleCount;
+    if (remainingCount <= 0) {
+        moreButton.hidden = true;
+        return;
+    }
+
+    moreButton.textContent = "View more";
+    moreButton.hidden = false;
+}
+
+function hideMomentsMoreButton(moreButton: Element | null): void {
+    if (moreButton instanceof HTMLButtonElement) {
+        moreButton.hidden = true;
     }
 }
 
@@ -157,6 +196,7 @@ function setMomentsEmptyState(
     statusNode: HTMLElement,
     listNode: HTMLUListElement,
     fallbackHref: string,
+    moreButton: Element | null,
 ): void {
     statusNode.hidden = false;
     statusNode.innerHTML = `No recent moments yet. <a href="${escapeAttribute(
@@ -164,6 +204,7 @@ function setMomentsEmptyState(
     )}" target="_blank" rel="noreferrer noopener" class="site-link" data-external="true" data-underline="true">Check Mastodon.</a>`;
     listNode.hidden = true;
     listNode.innerHTML = "";
+    hideMomentsMoreButton(moreButton);
 }
 
 function renderMomentItem(
@@ -427,6 +468,13 @@ function renderSafeChildren(
             }
 
             if (tagName === "a") {
+                const momentTagName = getMomentTagName(child);
+                if (momentTagName) {
+                    const href = getMomentTagHref(account, domain, momentTagName);
+                    const text = getMomentLinkText(child) || `#${momentTagName}`;
+                    return `<a href="${escapeAttribute(href)}" target="_blank" rel="noreferrer noopener" class="moments-tag-link" data-external="true" data-moments-tag="true">${renderTextWithEmoji(text, emojiMap)}</a>`;
+                }
+
                 const href = getMomentLinkHref(child, account, domain);
                 const text = getMomentLinkText(child) || href;
                 return `<a href="${escapeAttribute(href)}" target="_blank" rel="noreferrer noopener" class="site-link font-medium" data-external="true" data-underline="true">${renderTextWithEmoji(text, emojiMap)}</a>`;
@@ -457,6 +505,17 @@ function getVisibleLinkText(node: Node): string {
         .map((child) => getVisibleLinkText(child))
         .join("");
     return node.classList.contains("ellipsis") ? `${text}...` : text;
+}
+
+function getMomentTagName(link: Element): string {
+    const href = link.getAttribute("href") || "";
+    const tagNameFromHref = getTagNameFromHref(href);
+    if (tagNameFromHref) return tagNameFromHref;
+
+    const text = getMomentLinkText(link) || (link.textContent || "").replace(/\s+/g, " ").trim();
+    if (!text.startsWith("#")) return "";
+
+    return text.slice(1).split(/\s+/)[0] || "";
 }
 
 function createEmojiMap(emojis?: MastodonEmoji[]): Map<string, MastodonEmoji> {
@@ -517,6 +576,15 @@ function getMomentLinkHref(link: Element, account: MastodonAccount, domain: stri
 
     if (!tagName) return href;
 
+    const accountUrl =
+        typeof account?.url === "string" && account.url
+            ? account.url
+            : `https://${domain}/@${account?.username || account?.acct || ""}`;
+
+    return `${accountUrl.replace(/\/$/, "")}/tagged/${encodeURIComponent(tagName)}`;
+}
+
+function getMomentTagHref(account: MastodonAccount, domain: string, tagName: string): string {
     const accountUrl =
         typeof account?.url === "string" && account.url
             ? account.url
