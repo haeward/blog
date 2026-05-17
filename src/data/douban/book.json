@@ -1,6 +1,93 @@
 [
 	{
 		"charts": [],
+		"comment": "真诚永远打动人，村上春树对跑步时身体和精神的描述细腻和真实。而迈出脚步，是坚持的前提，一步一步，才能走到最后。",
+		"create_time": "2026-05-18 01:09:12",
+		"id": 4830465062,
+		"is_editable": false,
+		"is_private": false,
+		"platforms": [],
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 4,
+			"value": 4
+		},
+		"sharing_text": "我的评分：★★★★ 真诚永远打动人，村上春树对跑步时身体和精神的描述细腻和真实。而迈出脚步，是坚持的前提，一步一步，才能走到最后。 https://www.douban.com/doubanapp/dispatch/book/3369600 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/3369600/interest/4830465062",
+		"status": "done",
+		"subject": {
+			"article_intros": [],
+			"author": [
+				"[日] 村上春树"
+			],
+			"book_subtitle": "",
+			"buy_more_uri": "",
+			"card_subtitle": "[日] 村上春树 / 2009 / 南海出版公司",
+			"color_scheme": {
+				"_base_color": [
+					0.5614657210401891,
+					0.7747252747252747,
+					0.7137254901960784
+				],
+				"_avg_color": [
+					0.5602836879432624,
+					0.20346320346320348,
+					0.9058823529411765
+				],
+				"primary_color_light": "2576a5",
+				"primary_color_dark": "1c5b7f",
+				"secondary_color": "f4f8f9",
+				"is_dark": true
+			},
+			"controversy_reason": "",
+			"cover_url": "https://dou.img.lithub.cc/book/3369600.jpg",
+			"has_ebook": true,
+			"honor_infos": [],
+			"id": "3369600",
+			"intro": "他以文字名满全球。\n他的“蓝调”令万千人神迷忧伤。\n文字是他的符号，“跑者蓝调”何尝不是？\n不再是浮华迷茫，不再是旖旎感伤，不再羚羊挂角无迹可寻——写了几十年“别人”的文字，他第一次只写自己：小说之外、故事之外、文字之外，均是不施雕琢娓娓道来，清淡如云，宁静如水……",
+			"is_released": true,
+			"is_show": false,
+			"min_sale_price": null,
+			"null_rating_reason": "",
+			"other_versions_count": 30,
+			"pages": [
+				"198"
+			],
+			"pic": {
+				"large": "https://img1.doubanio.com/view/subject/l/public/s3507580.jpg",
+				"normal": "https://img1.doubanio.com/view/subject/m/public/s3507580.jpg"
+			},
+			"press": [
+				"南海出版公司"
+			],
+			"pubdate": [
+				"2009-1"
+			],
+			"rating": {
+				"count": 98846,
+				"max": 10,
+				"star_count": 4,
+				"value": 8.2
+			},
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/book/3369600",
+			"subtype": "book",
+			"title": "当我谈跑步时我谈些什么",
+			"type": "book",
+			"uri": "douban://douban.com/book/3369600",
+			"url": "https://book.douban.com/subject/3369600/",
+			"vendor_icons": [
+				"https://img1.doubanio.com/f/frodo/f6f620132e6d8a02d171f03114bbe2339aa8af97/pics/vendors/logo_doubanread@2x.png"
+			],
+			"vendor_original_price": "",
+			"vendor_sale_price": ""
+		},
+		"tags": [],
+		"vote_count": 0,
+		"star_time": "2026-05-18 01:09:12"
+	},
+	{
+		"charts": [],
 		"comment": "",
 		"create_time": "2026-05-11 04:26:49",
 		"id": 3883943218,
