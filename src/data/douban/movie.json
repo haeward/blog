@@ -2,6 +2,140 @@
 	{
 		"charts": [],
 		"comment": "",
+		"create_time": "2026-05-18 22:55:59",
+		"id": 4845640080,
+		"is_editable": false,
+		"is_private": false,
+		"platforms": [],
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 2,
+			"value": 2
+		},
+		"sharing_text": "我的评分：★★ https://www.douban.com/doubanapp/dispatch/movie/25882296 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/25882296/interest/4845640080",
+		"status": "done",
+		"subject": {
+			"actors": [
+				{
+					"name": "赵又廷"
+				},
+				{
+					"name": "冯绍峰"
+				},
+				{
+					"name": "林更新"
+				},
+				{
+					"name": "阮经天"
+				},
+				{
+					"name": "马思纯"
+				},
+				{
+					"name": "刘嘉玲"
+				},
+				{
+					"name": "盛鉴"
+				},
+				{
+					"name": "杨一威"
+				},
+				{
+					"name": "唐古特·宝日夫"
+				},
+				{
+					"name": "张傲月"
+				},
+				{
+					"name": "孙蛟龙"
+				},
+				{
+					"name": "汪汐潮"
+				},
+				{
+					"name": "铁男"
+				},
+				{
+					"name": "李炳雷"
+				},
+				{
+					"name": "许明虎"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"card_subtitle": "2018 / 中国大陆 中国香港 / 动作 悬疑 奇幻 武侠 古装 / 徐克 / 赵又廷 冯绍峰",
+			"color_scheme": {
+				"_base_color": [
+					0.16666666666666666,
+					0.29545454545454547,
+					0.17254901960784313
+				],
+				"_avg_color": [
+					0.10606060606060608,
+					0.32352941176470595,
+					0.4
+				],
+				"primary_color_light": "727250",
+				"primary_color_dark": "4c4c35",
+				"secondary_color": "f9f9f4",
+				"is_dark": true
+			},
+			"controversy_reason": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/25882296.jpg",
+			"directors": [
+				{
+					"name": "徐克"
+				}
+			],
+			"genres": [
+				"动作",
+				"悬疑",
+				"奇幻"
+			],
+			"has_linewatch": true,
+			"honor_infos": [],
+			"id": "25882296",
+			"is_released": true,
+			"is_show": false,
+			"null_rating_reason": "",
+			"pic": {
+				"large": "https://img9.doubanio.com/view/photo/m_ratio_poster/public/p2526405034.jpg",
+				"normal": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2526405034.jpg"
+			},
+			"pubdate": [
+				"2018-07-27(中国大陆)"
+			],
+			"rating": {
+				"count": 279735,
+				"max": 10,
+				"star_count": 3,
+				"value": 6.1
+			},
+			"release_date": null,
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/25882296",
+			"subtype": "movie",
+			"title": "狄仁杰之四大天王",
+			"type": "movie",
+			"uri": "douban://douban.com/movie/25882296",
+			"url": "https://movie.douban.com/subject/25882296/",
+			"vendor_desc": "",
+			"vendor_icons": [
+				"https://img9.doubanio.com/f/frodo/fbc90f355fc45d5d2056e0d88c697f9414b56b44/pics/vendors/tencent.png",
+				"https://img2.doubanio.com/f/frodo/8e1b7f8b48804cf759fc411e75d62c5ffd4f8f42/pics/vendors/migu_video.png",
+				"https://img9.doubanio.com/f/frodo/6c7b857e6b2255201e73bf83732d95d572f3f9f7/pics/vendors/iqiyi.png"
+			],
+			"year": "2018"
+		},
+		"tags": [],
+		"vote_count": 0,
+		"star_time": "2026-05-18 22:55:59"
+	},
+	{
+		"charts": [],
+		"comment": "",
 		"create_time": "2026-05-18 22:54:43",
 		"id": 4845638689,
 		"is_editable": false,
