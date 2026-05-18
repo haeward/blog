@@ -1,6 +1,161 @@
 [
 	{
 		"charts": [],
+		"comment": "一样的套路 + 部分莫名其妙的燃点，还是赛车阶段更具吸引力",
+		"create_time": "2026-05-18 15:08:08",
+		"id": 4845284479,
+		"is_editable": false,
+		"is_private": false,
+		"platforms": [],
+		"rating": {
+			"count": 1,
+			"max": 5,
+			"star_count": 3,
+			"value": 3
+		},
+		"sharing_text": "我的评分：★★★ 一样的套路 + 部分莫名其妙的燃点，还是赛车阶段更具吸引力 https://www.douban.com/doubanapp/dispatch/movie/37311135 来自@豆瓣App",
+		"sharing_url": "https://www.douban.com/doubanapp/dispatch?uri=/subject/37311135/interest/4845284479",
+		"status": "done",
+		"subject": {
+			"actors": [
+				{
+					"name": "沈腾"
+				},
+				{
+					"name": "尹正"
+				},
+				{
+					"name": "黄景瑜"
+				},
+				{
+					"name": "张本煜"
+				},
+				{
+					"name": "魏翔"
+				},
+				{
+					"name": "沙溢"
+				},
+				{
+					"name": "范丞丞"
+				},
+				{
+					"name": "孙艺洲"
+				},
+				{
+					"name": "段奕宏"
+				},
+				{
+					"name": "张新成"
+				},
+				{
+					"name": "胡先煦"
+				},
+				{
+					"name": "李治廷"
+				},
+				{
+					"name": "白宇帆"
+				},
+				{
+					"name": "周政杰"
+				},
+				{
+					"name": "高华阳"
+				},
+				{
+					"name": "刘巴特尔"
+				},
+				{
+					"name": "何澳"
+				},
+				{
+					"name": "贾冰"
+				},
+				{
+					"name": "王安宇"
+				},
+				{
+					"name": "陈永胜"
+				},
+				{
+					"name": "冯绍峰"
+				},
+				{
+					"name": "郝瀚"
+				}
+			],
+			"album_no_interact": false,
+			"article_intros": [],
+			"card_subtitle": "2026 / 中国大陆 / 剧情 喜剧 运动 / 韩寒 / 沈腾 尹正",
+			"color_scheme": {
+				"_base_color": [
+					0.8030303030303031,
+					0.39285714285714285,
+					0.10980392156862745
+				],
+				"_avg_color": [
+					0.9166666666666666,
+					0.375,
+					0.18823529411764706
+				],
+				"primary_color_light": "6a4572",
+				"primary_color_dark": "472e4c",
+				"secondary_color": "f8f4f9",
+				"is_dark": true
+			},
+			"controversy_reason": "",
+			"cover_url": "https://dou.img.lithub.cc/movie/37311135.jpg",
+			"directors": [
+				{
+					"name": "韩寒"
+				}
+			],
+			"genres": [
+				"剧情",
+				"喜剧",
+				"运动"
+			],
+			"has_linewatch": true,
+			"honor_infos": [],
+			"id": "37311135",
+			"is_released": true,
+			"is_show": false,
+			"null_rating_reason": "",
+			"pic": {
+				"large": "https://img9.doubanio.com/view/photo/m_ratio_poster/public/p2929427346.jpg",
+				"normal": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2929427346.jpg"
+			},
+			"pubdate": [
+				"2026-02-17(中国大陆)"
+			],
+			"rating": {
+				"count": 437910,
+				"max": 10,
+				"star_count": 3.5,
+				"value": 7.3
+			},
+			"release_date": null,
+			"sharing_url": "https://www.douban.com/doubanapp/dispatch/movie/37311135",
+			"subtype": "movie",
+			"title": "飞驰人生3",
+			"type": "movie",
+			"uri": "douban://douban.com/movie/37311135",
+			"url": "https://movie.douban.com/subject/37311135/",
+			"vendor_desc": "",
+			"vendor_icons": [
+				"https://img9.doubanio.com/f/frodo/fbc90f355fc45d5d2056e0d88c697f9414b56b44/pics/vendors/tencent.png",
+				"https://img2.doubanio.com/f/frodo/8e1b7f8b48804cf759fc411e75d62c5ffd4f8f42/pics/vendors/migu_video.png",
+				"https://img9.doubanio.com/f/frodo/6c7b857e6b2255201e73bf83732d95d572f3f9f7/pics/vendors/iqiyi.png"
+			],
+			"year": "2026"
+		},
+		"tags": [],
+		"vote_count": 0,
+		"star_time": "2026-05-18 15:08:08"
+	},
+	{
+		"charts": [],
 		"comment": "剧情 bug 太多，最想吐槽的一点：NPC 都这么好的记忆力吗？",
 		"create_time": "2026-05-16 01:21:16",
 		"id": 4843051200,
